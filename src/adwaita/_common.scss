@@ -763,10 +763,14 @@ button,
         color: $b_color; //FIXME: does it work on the dark variant?
       }
 
-      &:hover { @include button(hover, $b_color, white); }
+      &:not(:disabled):not(.disabled) {
+        &.hover,
+        &:hover { @include button(hover, $b_color, white); }
 
-      &:active,
-      &:checked { @include button(active, $b_color, white); }
+        &.active,
+        &:active,
+        &:checked { @include button(active, $b_color, white); }
+      }
 
       &.flat {
         &:disabled {

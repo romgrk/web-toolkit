@@ -179,7 +179,7 @@
     background-color: $c;
 
     @include _shadows(inset 0 1px $_hilight_color, $_button_edge, $_button_shadow);
-    &::after {
+    &::before {
       content: ' ';
       position: absolute;
       width: 100%;
@@ -206,7 +206,7 @@
       background-color: darken($c, 3%);
       @include _shadows(inset 0 1px $c, $_button_edge, $_button_shadow);
     }
-    &::after {
+    &::before {
       opacity: 0;
     }
   }
@@ -238,7 +238,7 @@
     border-color: if($c != $bg_color, _border_color($c), $borders_color);
     background-color: if($variant == 'light', darken($c, 14%), darken($c, 9%));
     @include _shadows(inset 0 1px transparentize($_hilight_color, 1), $_button_edge);
-    &::after {
+    &::before {
       opacity: 0;
     }
 
@@ -260,7 +260,7 @@
     // white with 0 alpha to avoid an ugly transition, since no color means
     // black with 0 alpha
     @include _shadows(inset 0 1px transparentize(white, 1), $_button_edge);
-    &::after {
+    &::before {
       opacity: 0;
     }
   }
@@ -278,7 +278,7 @@
     // white with 0 alpha to avoid an ugly transition, since no color means
     // black with 0 alpha
     @include _shadows(inset 0 1px transparentize(white, 1), $_button_edge);
-    &::after {
+    &::before {
       opacity: 0;
     }
   }
@@ -296,7 +296,7 @@
     text-shadow: none;
     --icon-shadow: none;
     @include _shadows(inset 0 1px transparentize(white, 1), $_blank_edge);
-    &::after {
+    &::before {
       opacity: 0;
     }
   }
@@ -312,7 +312,7 @@
     border-color: if($c != $bg_color, $_bc, $backdrop_borders_color);
     background-color: $_bg;
     @include _shadows(inset 0 1px transparentize(white, 1), $_blank_edge);
-    &::after {
+    &::before {
       opacity: 0;
     }
   }
@@ -333,7 +333,7 @@
     // white with 0 alpha to avoid an ugly transition, since no color means
     // black with 0 alpha
     @include _shadows(inset 0 1px transparentize(white, 1), $_blank_edge);
-    &::after { opacity: 0; }
+    &::before { opacity: 0; }
   }
 
   @else if $t==backdrop-insensitive-active {
@@ -348,7 +348,7 @@
     border-color: if($c != $bg_color, $_bc, $backdrop_borders_color);
     background-color: $_bg;
     @include _shadows(inset 0 1px transparentize(white, 1), $_blank_edge);
-    &::after { opacity: 0; }
+    &::before { opacity: 0; }
   }
 
   @else if $t==osd {
@@ -363,7 +363,7 @@
     background-color: $_bg;
     background-clip: padding-box;
     box-shadow: inset 0 1px transparentize(white, 0.9);
-    &::after { opacity: 0; }
+    &::before { opacity: 0; }
     text-shadow: none;
     --icon-shadow: none;
   }
@@ -379,7 +379,7 @@
     background-color: $_bg;
     background-clip: padding-box;
     box-shadow: inset 0 1px transparentize(white, 0.9);
-    &::after { opacity: 0; }
+    &::before { opacity: 0; }
     text-shadow: none;
     --icon-shadow: none;
   }
@@ -395,7 +395,7 @@
     background-color: $_bg;
     background-clip: padding-box;
     box-shadow: none;
-    &::after { opacity: 0; }
+    &::before { opacity: 0; }
     text-shadow: none;
     --icon-shadow: none;
   }
@@ -409,7 +409,7 @@
     background-color: $osd_insensitive_bg_color;
     background-clip: padding-box;
     box-shadow: none;
-    &::after { opacity: 0; }
+    &::before { opacity: 0; }
     text-shadow: none;
     --icon-shadow: none;
   }
@@ -425,7 +425,7 @@
     background-color: $_bg;
     background-clip: padding-box;
     box-shadow: none;
-    &::after { opacity: 0; }
+    &::before { opacity: 0; }
     text-shadow: none;
     --icon-shadow: none;
   }
@@ -438,7 +438,7 @@
     background-color: transparent;
 
     @include _shadows(inset 0 1px transparentize(white, 1), $_blank_edge);
-    &::after { opacity: 0; }
+    &::before { opacity: 0; }
 
     text-shadow: none;
     --icon-shadow: none;
@@ -446,7 +446,7 @@
   @else if $t==undecorated-hover {
     border-color: transparent;
     box-shadow: none;
-    &::after { opacity: 0; }
+    &::before { opacity: 0; }
     text-shadow: none;
     @if $variant == 'light' {
       background-color: darken($c,14%);
@@ -458,7 +458,7 @@
   @else if $t==undecorated-active {
     border-color: transparent;
     box-shadow: none;
-    &::after { opacity: 0; }
+    &::before { opacity: 0; }
     text-shadow: none;
     @if $variant == 'light' {
       background-color: darken($c,30%);

@@ -508,9 +508,9 @@ button,
   border-bottom-color: #bfb8b1;
   background-color: #f6f5f4;
   box-shadow: inset 0 1px white, 0 1px 2px rgba(0, 0, 0, 0.07); }
-  notebook > header > tabs > arrow::after,
-  button::after,
-  .Button::after {
+  notebook > header > tabs > arrow::before,
+  button::before,
+  .Button::before {
     content: ' ';
     position: absolute;
     width: 100%;
@@ -541,11 +541,11 @@ button,
     background-color: #fdfdfc;
     box-shadow: inset 0 1px #f4f2f1, 0 1px 2px rgba(0, 0, 0, 0.07);
     -gtk-icon-filter: brightness(1.2); }
-    notebook > header > tabs > arrow.hover:not(:disabled):not(.disabled)::after, notebook > header > tabs > arrow:not(:disabled):not(.disabled):hover::after,
-    button.hover:not(:disabled):not(.disabled)::after,
-    button:not(:disabled):not(.disabled):hover::after,
-    .Button.hover:not(:disabled):not(.disabled)::after,
-    .Button:not(:disabled):not(.disabled):hover::after {
+    notebook > header > tabs > arrow.hover:not(:disabled):not(.disabled)::before, notebook > header > tabs > arrow:not(:disabled):not(.disabled):hover::before,
+    button.hover:not(:disabled):not(.disabled)::before,
+    button:not(:disabled):not(.disabled):hover::before,
+    .Button.hover:not(:disabled):not(.disabled)::before,
+    .Button:not(:disabled):not(.disabled):hover::before {
       opacity: 0; }
   notebook > header > tabs > arrow.active:not(:disabled):not(.disabled), notebook > header > tabs > arrow:not(:disabled):not(.disabled):active, notebook > header > tabs > arrow:not(:disabled):not(.disabled):checked,
   button.active:not(:disabled):not(.disabled),
@@ -561,13 +561,13 @@ button,
     text-shadow: none;
     --icon-shadow: none;
     transition-duration: 50ms; }
-    notebook > header > tabs > arrow.active:not(:disabled):not(.disabled)::after, notebook > header > tabs > arrow:not(:disabled):not(.disabled):active::after, notebook > header > tabs > arrow:not(:disabled):not(.disabled):checked::after,
-    button.active:not(:disabled):not(.disabled)::after,
-    button:not(:disabled):not(.disabled):active::after,
-    button:not(:disabled):not(.disabled):checked::after,
-    .Button.active:not(:disabled):not(.disabled)::after,
-    .Button:not(:disabled):not(.disabled):active::after,
-    .Button:not(:disabled):not(.disabled):checked::after {
+    notebook > header > tabs > arrow.active:not(:disabled):not(.disabled)::before, notebook > header > tabs > arrow:not(:disabled):not(.disabled):active::before, notebook > header > tabs > arrow:not(:disabled):not(.disabled):checked::before,
+    button.active:not(:disabled):not(.disabled)::before,
+    button:not(:disabled):not(.disabled):active::before,
+    button:not(:disabled):not(.disabled):checked::before,
+    .Button.active:not(:disabled):not(.disabled)::before,
+    .Button:not(:disabled):not(.disabled):active::before,
+    .Button:not(:disabled):not(.disabled):checked::before {
       opacity: 0; }
   .window-inactive notebook > header > tabs > arrow, .window-inactive button.flat, .window-inactive button, .window-inactive .Button.flat, .window-inactive .Button {
     color: #929595;
@@ -578,14 +578,14 @@ button,
     box-shadow: inset 0 1px rgba(255, 255, 255, 0);
     transition: 200ms ease-out;
     -gtk-icon-filter: none; }
-    .window-inactive notebook > header > tabs > arrow::after, .window-inactive button.flat::after, .window-inactive button::after, .window-inactive .Button.flat::after, .window-inactive .Button::after {
+    .window-inactive notebook > header > tabs > arrow::before, .window-inactive button.flat::before, .window-inactive button::before, .window-inactive .Button.flat::before, .window-inactive .Button::before {
       opacity: 0; }
     .window-inactive notebook > header > tabs > arrow:active, .window-inactive notebook > header > tabs > arrow:checked, .window-inactive button.flat:active, .window-inactive button.flat:checked, .window-inactive button:active, .window-inactive button:checked, .window-inactive .Button.flat:active, .window-inactive .Button.flat:checked, .window-inactive .Button:active, .window-inactive .Button:checked {
       color: #929595;
       border-color: #d5d0cc;
       background-color: #e4e4e0;
       box-shadow: inset 0 1px rgba(255, 255, 255, 0); }
-      .window-inactive notebook > header > tabs > arrow:active::after, .window-inactive notebook > header > tabs > arrow:checked::after, .window-inactive button.flat:active::after, .window-inactive button.flat:checked::after, .window-inactive button:active::after, .window-inactive button:checked::after, .window-inactive .Button.flat:active::after, .window-inactive .Button.flat:checked::after, .window-inactive .Button:active::after, .window-inactive .Button:checked::after {
+      .window-inactive notebook > header > tabs > arrow:active::before, .window-inactive notebook > header > tabs > arrow:checked::before, .window-inactive button.flat:active::before, .window-inactive button.flat:checked::before, .window-inactive button:active::before, .window-inactive button:checked::before, .window-inactive .Button.flat:active::before, .window-inactive .Button.flat:checked::before, .window-inactive .Button:active::before, .window-inactive .Button:checked::before {
         opacity: 0; }
     .window-inactive notebook > header > tabs > arrow:disabled, .window-inactive button.flat:disabled, .window-inactive button:disabled, .window-inactive .Button.flat:disabled, .window-inactive .Button:disabled {
       color: #d4cfca;
@@ -594,14 +594,14 @@ button,
       text-shadow: none;
       --icon-shadow: none;
       box-shadow: inset 0 1px rgba(255, 255, 255, 0); }
-      .window-inactive notebook > header > tabs > arrow:disabled::after, .window-inactive button.flat:disabled::after, .window-inactive button:disabled::after, .window-inactive .Button.flat:disabled::after, .window-inactive .Button:disabled::after {
+      .window-inactive notebook > header > tabs > arrow:disabled::before, .window-inactive button.flat:disabled::before, .window-inactive button:disabled::before, .window-inactive .Button.flat:disabled::before, .window-inactive .Button:disabled::before {
         opacity: 0; }
       .window-inactive notebook > header > tabs > arrow:disabled:active, .window-inactive notebook > header > tabs > arrow:disabled:checked, .window-inactive button.flat:disabled:active, .window-inactive button.flat:disabled:checked, .window-inactive button:disabled:active, .window-inactive button:disabled:checked, .window-inactive .Button.flat:disabled:active, .window-inactive .Button.flat:disabled:checked, .window-inactive .Button:disabled:active, .window-inactive .Button:disabled:checked {
         color: #d4cfca;
         border-color: #d5d0cc;
         background-color: #e4e4e0;
         box-shadow: inset 0 1px rgba(255, 255, 255, 0); }
-        .window-inactive notebook > header > tabs > arrow:disabled:active::after, .window-inactive notebook > header > tabs > arrow:disabled:checked::after, .window-inactive button.flat:disabled:active::after, .window-inactive button.flat:disabled:checked::after, .window-inactive button:disabled:active::after, .window-inactive button:disabled:checked::after, .window-inactive .Button.flat:disabled:active::after, .window-inactive .Button.flat:disabled:checked::after, .window-inactive .Button:disabled:active::after, .window-inactive .Button:disabled:checked::after {
+        .window-inactive notebook > header > tabs > arrow:disabled:active::before, .window-inactive notebook > header > tabs > arrow:disabled:checked::before, .window-inactive button.flat:disabled:active::before, .window-inactive button.flat:disabled:checked::before, .window-inactive button:disabled:active::before, .window-inactive button:disabled:checked::before, .window-inactive .Button.flat:disabled:active::before, .window-inactive .Button.flat:disabled:checked::before, .window-inactive .Button:disabled:active::before, .window-inactive .Button:disabled:checked::before {
           opacity: 0; }
   notebook > header > tabs > arrow:disabled, notebook > header > tabs > arrow.disabled,
   button:disabled,
@@ -614,11 +614,11 @@ button,
     text-shadow: none;
     --icon-shadow: none;
     box-shadow: inset 0 1px rgba(255, 255, 255, 0); }
-    notebook > header > tabs > arrow:disabled::after, notebook > header > tabs > arrow.disabled::after,
-    button:disabled::after,
-    button.disabled::after,
-    .Button:disabled::after,
-    .Button.disabled::after {
+    notebook > header > tabs > arrow:disabled::before, notebook > header > tabs > arrow.disabled::before,
+    button:disabled::before,
+    button.disabled::before,
+    .Button:disabled::before,
+    .Button.disabled::before {
       opacity: 0; }
     notebook > header > tabs > arrow.active:disabled, notebook > header > tabs > arrow:disabled:active, notebook > header > tabs > arrow:disabled:checked, notebook > header > tabs > arrow.disabled.active, notebook > header > tabs > arrow.disabled:active, notebook > header > tabs > arrow.disabled:checked,
     button.active:disabled,
@@ -637,19 +637,19 @@ button,
       border-color: #d5d0cc;
       background-color: #e4e4e0;
       box-shadow: inset 0 1px rgba(255, 255, 255, 0); }
-      notebook > header > tabs > arrow.active:disabled::after, notebook > header > tabs > arrow:disabled:active::after, notebook > header > tabs > arrow:disabled:checked::after, notebook > header > tabs > arrow.disabled.active::after, notebook > header > tabs > arrow.disabled:active::after, notebook > header > tabs > arrow.disabled:checked::after,
-      button.active:disabled::after,
-      button:disabled:active::after,
-      button:disabled:checked::after,
-      button.disabled.active::after,
-      button.disabled:active::after,
-      button.disabled:checked::after,
-      .Button.active:disabled::after,
-      .Button:disabled:active::after,
-      .Button:disabled:checked::after,
-      .Button.disabled.active::after,
-      .Button.disabled:active::after,
-      .Button.disabled:checked::after {
+      notebook > header > tabs > arrow.active:disabled::before, notebook > header > tabs > arrow:disabled:active::before, notebook > header > tabs > arrow:disabled:checked::before, notebook > header > tabs > arrow.disabled.active::before, notebook > header > tabs > arrow.disabled:active::before, notebook > header > tabs > arrow.disabled:checked::before,
+      button.active:disabled::before,
+      button:disabled:active::before,
+      button:disabled:checked::before,
+      button.disabled.active::before,
+      button.disabled:active::before,
+      button.disabled:checked::before,
+      .Button.active:disabled::before,
+      .Button:disabled:active::before,
+      .Button:disabled:checked::before,
+      .Button.disabled.active::before,
+      .Button.disabled:active::before,
+      .Button.disabled:checked::before {
         opacity: 0; }
   button.sidebar-button, notebook > header > tabs > arrow, windowcontrols button, notebook > header > tabs > arrow.flat,
   button.flat,
@@ -660,9 +660,9 @@ button,
     text-shadow: none;
     --icon-shadow: none;
     transition: none; }
-    button.sidebar-button::after, notebook > header > tabs > arrow::after, windowcontrols button::after, notebook > header > tabs > arrow.flat::after,
-    button.flat::after,
-    .Button.flat::after {
+    button.sidebar-button::before, notebook > header > tabs > arrow::before, windowcontrols button::before, notebook > header > tabs > arrow.flat::before,
+    button.flat::before,
+    .Button.flat::before {
       opacity: 0; }
     button.sidebar-button.hover:not(:disabled):not(.disabled), notebook > header > tabs > arrow.hover:not(:disabled):not(.disabled), windowcontrols button.hover:not(:disabled):not(.disabled), button.sidebar-button:not(:disabled):not(.disabled):hover, notebook > header > tabs > arrow:not(:disabled):not(.disabled):hover, windowcontrols button:not(:disabled):not(.disabled):hover,
     button.flat.hover:not(:disabled):not(.disabled),
@@ -675,11 +675,11 @@ button,
       background-color: #d6d1cd;
       transition: all 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
       transition-duration: 500ms; }
-      button.sidebar-button.hover:not(:disabled):not(.disabled)::after, notebook > header > tabs > arrow.hover:not(:disabled):not(.disabled)::after, windowcontrols button.hover:not(:disabled):not(.disabled)::after, button.sidebar-button:not(:disabled):not(.disabled):hover::after, notebook > header > tabs > arrow:not(:disabled):not(.disabled):hover::after, windowcontrols button:not(:disabled):not(.disabled):hover::after,
-      button.flat.hover:not(:disabled):not(.disabled)::after,
-      button.flat:not(:disabled):not(.disabled):hover::after,
-      .Button.flat.hover:not(:disabled):not(.disabled)::after,
-      .Button.flat:not(:disabled):not(.disabled):hover::after {
+      button.sidebar-button.hover:not(:disabled):not(.disabled)::before, notebook > header > tabs > arrow.hover:not(:disabled):not(.disabled)::before, windowcontrols button.hover:not(:disabled):not(.disabled)::before, button.sidebar-button:not(:disabled):not(.disabled):hover::before, notebook > header > tabs > arrow:not(:disabled):not(.disabled):hover::before, windowcontrols button:not(:disabled):not(.disabled):hover::before,
+      button.flat.hover:not(:disabled):not(.disabled)::before,
+      button.flat:not(:disabled):not(.disabled):hover::before,
+      .Button.flat.hover:not(:disabled):not(.disabled)::before,
+      .Button.flat:not(:disabled):not(.disabled):hover::before {
         opacity: 0; }
     button.sidebar-button:not(:disabled):not(.disabled):active, notebook > header > tabs > arrow:not(:disabled):not(.disabled):active, windowcontrols button:not(:disabled):not(.disabled):active, button.sidebar-button:not(:disabled):not(.disabled):checked, notebook > header > tabs > arrow:not(:disabled):not(.disabled):checked, windowcontrols button:not(:disabled):not(.disabled):checked,
     button.flat:not(:disabled):not(.disabled):active,
@@ -691,11 +691,11 @@ button,
       text-shadow: none;
       background-color: #b1a9a0;
       transition: all 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94); }
-      button.sidebar-button:not(:disabled):not(.disabled):active::after, notebook > header > tabs > arrow:not(:disabled):not(.disabled):active::after, windowcontrols button:not(:disabled):not(.disabled):active::after, button.sidebar-button:not(:disabled):not(.disabled):checked::after, notebook > header > tabs > arrow:not(:disabled):not(.disabled):checked::after, windowcontrols button:not(:disabled):not(.disabled):checked::after,
-      button.flat:not(:disabled):not(.disabled):active::after,
-      button.flat:not(:disabled):not(.disabled):checked::after,
-      .Button.flat:not(:disabled):not(.disabled):active::after,
-      .Button.flat:not(:disabled):not(.disabled):checked::after {
+      button.sidebar-button:not(:disabled):not(.disabled):active::before, notebook > header > tabs > arrow:not(:disabled):not(.disabled):active::before, windowcontrols button:not(:disabled):not(.disabled):active::before, button.sidebar-button:not(:disabled):not(.disabled):checked::before, notebook > header > tabs > arrow:not(:disabled):not(.disabled):checked::before, windowcontrols button:not(:disabled):not(.disabled):checked::before,
+      button.flat:not(:disabled):not(.disabled):active::before,
+      button.flat:not(:disabled):not(.disabled):checked::before,
+      .Button.flat:not(:disabled):not(.disabled):active::before,
+      .Button.flat:not(:disabled):not(.disabled):checked::before {
         opacity: 0; }
     button.sidebar-button:backdrop, notebook > header > tabs > arrow:backdrop, windowcontrols button:backdrop, button.sidebar-button:disabled, notebook > header > tabs > arrow:disabled, windowcontrols button:disabled,
     button.flat:backdrop,
@@ -709,13 +709,13 @@ button,
       box-shadow: inset 0 1px rgba(255, 255, 255, 0);
       text-shadow: none;
       --icon-shadow: none; }
-      button.sidebar-button:backdrop::after, notebook > header > tabs > arrow:backdrop::after, windowcontrols button:backdrop::after, button.sidebar-button:disabled::after, notebook > header > tabs > arrow:disabled::after, windowcontrols button:disabled::after,
-      button.flat:backdrop::after,
-      button.flat:disabled::after,
-      button.flat:backdrop:disabled::after,
-      .Button.flat:backdrop::after,
-      .Button.flat:disabled::after,
-      .Button.flat:backdrop:disabled::after {
+      button.sidebar-button:backdrop::before, notebook > header > tabs > arrow:backdrop::before, windowcontrols button:backdrop::before, button.sidebar-button:disabled::before, notebook > header > tabs > arrow:disabled::before, windowcontrols button:disabled::before,
+      button.flat:backdrop::before,
+      button.flat:disabled::before,
+      button.flat:backdrop:disabled::before,
+      .Button.flat:backdrop::before,
+      .Button.flat:disabled::before,
+      .Button.flat:backdrop:disabled::before {
         opacity: 0; }
   notebook > header > tabs > arrow.image-button,
   button.image-button,
@@ -783,8 +783,8 @@ button.osd,
       border-radius: 50%;
       box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2); }
   
-  button.osd::after,
-  .Button.osd::after {
+  button.osd::before,
+  .Button.osd::before {
     opacity: 0; }
   
   button.osd:hover,
@@ -799,8 +799,8 @@ button.osd,
     border: none;
     box-shadow: none; }
     
-    button.osd:hover::after,
-    .Button.osd:hover::after {
+    button.osd:hover::before,
+    .Button.osd:hover::before {
       opacity: 0; }
   
   button.osd:active,
@@ -817,10 +817,10 @@ button.osd,
     border: none;
     box-shadow: none; }
     
-    button.osd:active::after,
-    button.osd:checked::after,
-    .Button.osd:active::after,
-    .Button.osd:checked::after {
+    button.osd:active::before,
+    button.osd:checked::before,
+    .Button.osd:active::before,
+    .Button.osd:checked::before {
       opacity: 0; }
 
 .app-notification button, popover.background.touch-selection button, popover.background.magnifier button, .osd button, .osd .Button {
@@ -832,7 +832,7 @@ button.osd,
   box-shadow: inset 0 1px rgba(255, 255, 255, 0.1);
   text-shadow: none;
   --icon-shadow: none; }
-  .app-notification button::after, popover.background.touch-selection button::after, popover.background.magnifier button::after, .osd button::after, .osd .Button::after {
+  .app-notification button::before, popover.background.touch-selection button::before, popover.background.magnifier button::before, .osd button::before, .osd .Button::before {
     opacity: 0; }
   .app-notification button:hover, popover.background.touch-selection button:hover, popover.background.magnifier button:hover, .osd button:hover, .osd .Button:hover {
     color: white;
@@ -842,7 +842,7 @@ button.osd,
     box-shadow: inset 0 1px rgba(255, 255, 255, 0.1);
     text-shadow: none;
     --icon-shadow: none; }
-    .app-notification button:hover::after, popover.background.touch-selection button:hover::after, popover.background.magnifier button:hover::after, .osd button:hover::after, .osd .Button:hover::after {
+    .app-notification button:hover::before, popover.background.touch-selection button:hover::before, popover.background.magnifier button:hover::before, .osd button:hover::before, .osd .Button:hover::before {
       opacity: 0; }
   .app-notification button:active, popover.background.touch-selection button:active, popover.background.magnifier button:active, .app-notification button:checked, popover.background.touch-selection button:checked, popover.background.magnifier button:checked, .osd button:active:backdrop, .osd button:active, .osd button:checked:backdrop, .osd button:checked, .osd .Button:active:backdrop, .osd .Button:active, .osd .Button:checked:backdrop, .osd .Button:checked {
     color: white;
@@ -852,7 +852,7 @@ button.osd,
     box-shadow: none;
     text-shadow: none;
     --icon-shadow: none; }
-    .app-notification button:active::after, popover.background.touch-selection button:active::after, popover.background.magnifier button:active::after, .app-notification button:checked::after, popover.background.touch-selection button:checked::after, popover.background.magnifier button:checked::after, .osd button:active:backdrop::after, .osd button:active::after, .osd button:checked:backdrop::after, .osd button:checked::after, .osd .Button:active:backdrop::after, .osd .Button:active::after, .osd .Button:checked:backdrop::after, .osd .Button:checked::after {
+    .app-notification button:active::before, popover.background.touch-selection button:active::before, popover.background.magnifier button:active::before, .app-notification button:checked::before, popover.background.touch-selection button:checked::before, popover.background.magnifier button:checked::before, .osd button:active:backdrop::before, .osd button:active::before, .osd button:checked:backdrop::before, .osd button:checked::before, .osd .Button:active:backdrop::before, .osd .Button:active::before, .osd .Button:checked:backdrop::before, .osd .Button:checked::before {
       opacity: 0; }
   .app-notification button:disabled, popover.background.touch-selection button:disabled, popover.background.magnifier button:disabled, .osd button:disabled:backdrop, .osd button:disabled, .osd .Button:disabled:backdrop, .osd .Button:disabled {
     color: #919190;
@@ -862,7 +862,7 @@ button.osd,
     box-shadow: none;
     text-shadow: none;
     --icon-shadow: none; }
-    .app-notification button:disabled::after, popover.background.touch-selection button:disabled::after, popover.background.magnifier button:disabled::after, .osd button:disabled:backdrop::after, .osd button:disabled::after, .osd .Button:disabled:backdrop::after, .osd .Button:disabled::after {
+    .app-notification button:disabled::before, popover.background.touch-selection button:disabled::before, popover.background.magnifier button:disabled::before, .osd button:disabled:backdrop::before, .osd button:disabled::before, .osd .Button:disabled:backdrop::before, .osd .Button:disabled::before {
       opacity: 0; }
   .app-notification button.flat, popover.background.touch-selection button.flat, popover.background.magnifier button.flat, .osd button.flat, .osd .Button.flat {
     border-color: transparent;
@@ -873,7 +873,7 @@ button.osd,
     box-shadow: none;
     text-shadow: 0 1px black;
     --icon-shadow: 0 1px black; }
-    .app-notification button.flat::after, popover.background.touch-selection button.flat::after, popover.background.magnifier button.flat::after, .osd button.flat::after, .osd .Button.flat::after {
+    .app-notification button.flat::before, popover.background.touch-selection button.flat::before, popover.background.magnifier button.flat::before, .osd button.flat::before, .osd .Button.flat::before {
       opacity: 0; }
     .app-notification button.flat:hover, popover.background.touch-selection button.flat:hover, popover.background.magnifier button.flat:hover, .osd button.flat:hover, .osd .Button.flat:hover {
       color: white;
@@ -883,7 +883,7 @@ button.osd,
       box-shadow: inset 0 1px rgba(255, 255, 255, 0.1);
       text-shadow: none;
       --icon-shadow: none; }
-      .app-notification button.flat:hover::after, popover.background.touch-selection button.flat:hover::after, popover.background.magnifier button.flat:hover::after, .osd button.flat:hover::after, .osd .Button.flat:hover::after {
+      .app-notification button.flat:hover::before, popover.background.touch-selection button.flat:hover::before, popover.background.magnifier button.flat:hover::before, .osd button.flat:hover::before, .osd .Button.flat:hover::before {
         opacity: 0; }
     .app-notification button.flat:disabled, popover.background.touch-selection button.flat:disabled, popover.background.magnifier button.flat:disabled, .osd button.flat:disabled, .osd .Button.flat:disabled {
       color: #919190;
@@ -896,7 +896,7 @@ button.osd,
       background-image: none;
       border-color: transparent;
       box-shadow: none; }
-      .app-notification button.flat:disabled::after, popover.background.touch-selection button.flat:disabled::after, popover.background.magnifier button.flat:disabled::after, .osd button.flat:disabled::after, .osd .Button.flat:disabled::after {
+      .app-notification button.flat:disabled::before, popover.background.touch-selection button.flat:disabled::before, popover.background.magnifier button.flat:disabled::before, .osd button.flat:disabled::before, .osd .Button.flat:disabled::before {
         opacity: 0; }
     .app-notification button.flat:active, popover.background.touch-selection button.flat:active, popover.background.magnifier button.flat:active, .app-notification button.flat:checked, popover.background.touch-selection button.flat:checked, popover.background.magnifier button.flat:checked, .osd button.flat:active, .osd button.flat:checked, .osd .Button.flat:active, .osd .Button.flat:checked {
       color: white;
@@ -906,7 +906,7 @@ button.osd,
       box-shadow: none;
       text-shadow: none;
       --icon-shadow: none; }
-      .app-notification button.flat:active::after, popover.background.touch-selection button.flat:active::after, popover.background.magnifier button.flat:active::after, .app-notification button.flat:checked::after, popover.background.touch-selection button.flat:checked::after, popover.background.magnifier button.flat:checked::after, .osd button.flat:active::after, .osd button.flat:checked::after, .osd .Button.flat:active::after, .osd .Button.flat:checked::after {
+      .app-notification button.flat:active::before, popover.background.touch-selection button.flat:active::before, popover.background.magnifier button.flat:active::before, .app-notification button.flat:checked::before, popover.background.touch-selection button.flat:checked::before, popover.background.magnifier button.flat:checked::before, .osd button.flat:active::before, .osd button.flat:checked::before, .osd .Button.flat:active::before, .osd .Button.flat:checked::before {
         opacity: 0; }
 
 
@@ -919,8 +919,8 @@ button.suggested-action,
   background-color: #3584e4;
   box-shadow: inset 0 1px rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.07); }
   
-  button.suggested-action::after,
-  .Button.suggested-action::after {
+  button.suggested-action::before,
+  .Button.suggested-action::before {
     content: ' ';
     position: absolute;
     width: 100%;
@@ -950,26 +950,32 @@ button.suggested-action,
     --icon-shadow: none;
     color: #3584e4; }
     
-    button.suggested-action.flat::after,
-    .Button.suggested-action.flat::after {
+    button.suggested-action.flat::before,
+    .Button.suggested-action.flat::before {
       opacity: 0; }
   
-  button.suggested-action:hover,
-  .Button.suggested-action:hover {
+  button.suggested-action.hover:not(:disabled):not(.disabled),
+  button.suggested-action:not(:disabled):not(.disabled):hover,
+  .Button.suggested-action.hover:not(:disabled):not(.disabled),
+  .Button.suggested-action:not(:disabled):not(.disabled):hover {
     color: white;
     border-color: #1b6acb;
     border-bottom-color: #15539e;
     background-color: #428ce6;
     box-shadow: inset 0 1px #3181e3, 0 1px 2px rgba(0, 0, 0, 0.07); }
     
-    button.suggested-action:hover::after,
-    .Button.suggested-action:hover::after {
+    button.suggested-action.hover:not(:disabled):not(.disabled)::before,
+    button.suggested-action:not(:disabled):not(.disabled):hover::before,
+    .Button.suggested-action.hover:not(:disabled):not(.disabled)::before,
+    .Button.suggested-action:not(:disabled):not(.disabled):hover::before {
       opacity: 0; }
   
-  button.suggested-action:active,
-  button.suggested-action:checked,
-  .Button.suggested-action:active,
-  .Button.suggested-action:checked {
+  button.suggested-action.active:not(:disabled):not(.disabled),
+  button.suggested-action:not(:disabled):not(.disabled):active,
+  button.suggested-action:not(:disabled):not(.disabled):checked,
+  .Button.suggested-action.active:not(:disabled):not(.disabled),
+  .Button.suggested-action:not(:disabled):not(.disabled):active,
+  .Button.suggested-action:not(:disabled):not(.disabled):checked {
     color: white;
     border-color: #1b6acb;
     background-color: #1961b9;
@@ -977,10 +983,12 @@ button.suggested-action,
     text-shadow: none;
     --icon-shadow: none; }
     
-    button.suggested-action:active::after,
-    button.suggested-action:checked::after,
-    .Button.suggested-action:active::after,
-    .Button.suggested-action:checked::after {
+    button.suggested-action.active:not(:disabled):not(.disabled)::before,
+    button.suggested-action:not(:disabled):not(.disabled):active::before,
+    button.suggested-action:not(:disabled):not(.disabled):checked::before,
+    .Button.suggested-action.active:not(:disabled):not(.disabled)::before,
+    .Button.suggested-action:not(:disabled):not(.disabled):active::before,
+    .Button.suggested-action:not(:disabled):not(.disabled):checked::before {
       opacity: 0; }
   
   button.suggested-action.flat:disabled,
@@ -992,8 +1000,8 @@ button.suggested-action,
     --icon-shadow: none;
     color: rgba(53, 132, 228, 0.8); }
     
-    button.suggested-action.flat:disabled::after,
-    .Button.suggested-action.flat:disabled::after {
+    button.suggested-action.flat:disabled::before,
+    .Button.suggested-action.flat:disabled::before {
       opacity: 0; }
   
   button.suggested-action:disabled,
@@ -1005,8 +1013,8 @@ button.suggested-action,
     --icon-shadow: none;
     box-shadow: inset 0 1px rgba(255, 255, 255, 0); }
     
-    button.suggested-action:disabled::after,
-    .Button.suggested-action:disabled::after {
+    button.suggested-action:disabled::before,
+    .Button.suggested-action:disabled::before {
       opacity: 0; }
     
     button.suggested-action:disabled:active,
@@ -1018,10 +1026,10 @@ button.suggested-action,
       background-color: #2f80e3;
       box-shadow: inset 0 1px rgba(255, 255, 255, 0); }
       
-      button.suggested-action:disabled:active::after,
-      button.suggested-action:disabled:checked::after,
-      .Button.suggested-action:disabled:active::after,
-      .Button.suggested-action:disabled:checked::after {
+      button.suggested-action:disabled:active::before,
+      button.suggested-action:disabled:checked::before,
+      .Button.suggested-action:disabled:active::before,
+      .Button.suggested-action:disabled:checked::before {
         opacity: 0; }
   .osd button.suggested-action, .osd .Button.suggested-action {
     color: #eeeeec;
@@ -1032,7 +1040,7 @@ button.suggested-action,
     box-shadow: inset 0 1px rgba(255, 255, 255, 0.1);
     text-shadow: none;
     --icon-shadow: none; }
-    .osd button.suggested-action::after, .osd .Button.suggested-action::after {
+    .osd button.suggested-action::before, .osd .Button.suggested-action::before {
       opacity: 0; }
     .osd button.suggested-action:hover, .osd .Button.suggested-action:hover {
       color: white;
@@ -1042,7 +1050,7 @@ button.suggested-action,
       box-shadow: inset 0 1px rgba(255, 255, 255, 0.1);
       text-shadow: none;
       --icon-shadow: none; }
-      .osd button.suggested-action:hover::after, .osd .Button.suggested-action:hover::after {
+      .osd button.suggested-action:hover::before, .osd .Button.suggested-action:hover::before {
         opacity: 0; }
     .osd button.suggested-action:active:backdrop, .osd button.suggested-action:active, .osd button.suggested-action:checked:backdrop, .osd button.suggested-action:checked, .osd .Button.suggested-action:active:backdrop, .osd .Button.suggested-action:active, .osd .Button.suggested-action:checked:backdrop, .osd .Button.suggested-action:checked {
       color: white;
@@ -1052,7 +1060,7 @@ button.suggested-action,
       box-shadow: none;
       text-shadow: none;
       --icon-shadow: none; }
-      .osd button.suggested-action:active:backdrop::after, .osd button.suggested-action:active::after, .osd button.suggested-action:checked:backdrop::after, .osd button.suggested-action:checked::after, .osd .Button.suggested-action:active:backdrop::after, .osd .Button.suggested-action:active::after, .osd .Button.suggested-action:checked:backdrop::after, .osd .Button.suggested-action:checked::after {
+      .osd button.suggested-action:active:backdrop::before, .osd button.suggested-action:active::before, .osd button.suggested-action:checked:backdrop::before, .osd button.suggested-action:checked::before, .osd .Button.suggested-action:active:backdrop::before, .osd .Button.suggested-action:active::before, .osd .Button.suggested-action:checked:backdrop::before, .osd .Button.suggested-action:checked::before {
         opacity: 0; }
     .osd button.suggested-action:disabled:backdrop, .osd button.suggested-action:disabled, .osd .Button.suggested-action:disabled:backdrop, .osd .Button.suggested-action:disabled {
       color: #919190;
@@ -1062,7 +1070,7 @@ button.suggested-action,
       box-shadow: none;
       text-shadow: none;
       --icon-shadow: none; }
-      .osd button.suggested-action:disabled:backdrop::after, .osd button.suggested-action:disabled::after, .osd .Button.suggested-action:disabled:backdrop::after, .osd .Button.suggested-action:disabled::after {
+      .osd button.suggested-action:disabled:backdrop::before, .osd button.suggested-action:disabled::before, .osd .Button.suggested-action:disabled:backdrop::before, .osd .Button.suggested-action:disabled::before {
         opacity: 0; }
 
 
@@ -1075,8 +1083,8 @@ button.destructive-action,
   background-color: #e01b24;
   box-shadow: inset 0 1px rgba(255, 255, 255, 0.1), 0 1px 2px rgba(0, 0, 0, 0.07); }
   
-  button.destructive-action::after,
-  .Button.destructive-action::after {
+  button.destructive-action::before,
+  .Button.destructive-action::before {
     content: ' ';
     position: absolute;
     width: 100%;
@@ -1106,26 +1114,32 @@ button.destructive-action,
     --icon-shadow: none;
     color: #e01b24; }
     
-    button.destructive-action.flat::after,
-    .Button.destructive-action.flat::after {
+    button.destructive-action.flat::before,
+    .Button.destructive-action.flat::before {
       opacity: 0; }
   
-  button.destructive-action:hover,
-  .Button.destructive-action:hover {
+  button.destructive-action.hover:not(:disabled):not(.disabled),
+  button.destructive-action:not(:disabled):not(.disabled):hover,
+  .Button.destructive-action.hover:not(:disabled):not(.disabled),
+  .Button.destructive-action:not(:disabled):not(.disabled):hover {
     color: white;
     border-color: #b2161d;
     border-bottom-color: #851015;
     background-color: #e5262e;
     box-shadow: inset 0 1px #db1a23, 0 1px 2px rgba(0, 0, 0, 0.07); }
     
-    button.destructive-action:hover::after,
-    .Button.destructive-action:hover::after {
+    button.destructive-action.hover:not(:disabled):not(.disabled)::before,
+    button.destructive-action:not(:disabled):not(.disabled):hover::before,
+    .Button.destructive-action.hover:not(:disabled):not(.disabled)::before,
+    .Button.destructive-action:not(:disabled):not(.disabled):hover::before {
       opacity: 0; }
   
-  button.destructive-action:active,
-  button.destructive-action:checked,
-  .Button.destructive-action:active,
-  .Button.destructive-action:checked {
+  button.destructive-action.active:not(:disabled):not(.disabled),
+  button.destructive-action:not(:disabled):not(.disabled):active,
+  button.destructive-action:not(:disabled):not(.disabled):checked,
+  .Button.destructive-action.active:not(:disabled):not(.disabled),
+  .Button.destructive-action:not(:disabled):not(.disabled):active,
+  .Button.destructive-action:not(:disabled):not(.disabled):checked {
     color: white;
     border-color: #b2161d;
     background-color: #a0131a;
@@ -1133,10 +1147,12 @@ button.destructive-action,
     text-shadow: none;
     --icon-shadow: none; }
     
-    button.destructive-action:active::after,
-    button.destructive-action:checked::after,
-    .Button.destructive-action:active::after,
-    .Button.destructive-action:checked::after {
+    button.destructive-action.active:not(:disabled):not(.disabled)::before,
+    button.destructive-action:not(:disabled):not(.disabled):active::before,
+    button.destructive-action:not(:disabled):not(.disabled):checked::before,
+    .Button.destructive-action.active:not(:disabled):not(.disabled)::before,
+    .Button.destructive-action:not(:disabled):not(.disabled):active::before,
+    .Button.destructive-action:not(:disabled):not(.disabled):checked::before {
       opacity: 0; }
   
   button.destructive-action.flat:disabled,
@@ -1148,8 +1164,8 @@ button.destructive-action,
     --icon-shadow: none;
     color: rgba(224, 27, 36, 0.8); }
     
-    button.destructive-action.flat:disabled::after,
-    .Button.destructive-action.flat:disabled::after {
+    button.destructive-action.flat:disabled::before,
+    .Button.destructive-action.flat:disabled::before {
       opacity: 0; }
   
   button.destructive-action:disabled,
@@ -1161,8 +1177,8 @@ button.destructive-action,
     --icon-shadow: none;
     box-shadow: inset 0 1px rgba(255, 255, 255, 0); }
     
-    button.destructive-action:disabled::after,
-    .Button.destructive-action:disabled::after {
+    button.destructive-action:disabled::before,
+    .Button.destructive-action:disabled::before {
       opacity: 0; }
     
     button.destructive-action:disabled:active,
@@ -1174,10 +1190,10 @@ button.destructive-action,
       background-color: #dc1d27;
       box-shadow: inset 0 1px rgba(255, 255, 255, 0); }
       
-      button.destructive-action:disabled:active::after,
-      button.destructive-action:disabled:checked::after,
-      .Button.destructive-action:disabled:active::after,
-      .Button.destructive-action:disabled:checked::after {
+      button.destructive-action:disabled:active::before,
+      button.destructive-action:disabled:checked::before,
+      .Button.destructive-action:disabled:active::before,
+      .Button.destructive-action:disabled:checked::before {
         opacity: 0; }
   .osd button.destructive-action, .osd .Button.destructive-action {
     color: #eeeeec;
@@ -1188,7 +1204,7 @@ button.destructive-action,
     box-shadow: inset 0 1px rgba(255, 255, 255, 0.1);
     text-shadow: none;
     --icon-shadow: none; }
-    .osd button.destructive-action::after, .osd .Button.destructive-action::after {
+    .osd button.destructive-action::before, .osd .Button.destructive-action::before {
       opacity: 0; }
     .osd button.destructive-action:hover, .osd .Button.destructive-action:hover {
       color: white;
@@ -1198,7 +1214,7 @@ button.destructive-action,
       box-shadow: inset 0 1px rgba(255, 255, 255, 0.1);
       text-shadow: none;
       --icon-shadow: none; }
-      .osd button.destructive-action:hover::after, .osd .Button.destructive-action:hover::after {
+      .osd button.destructive-action:hover::before, .osd .Button.destructive-action:hover::before {
         opacity: 0; }
     .osd button.destructive-action:active:backdrop, .osd button.destructive-action:active, .osd button.destructive-action:checked:backdrop, .osd button.destructive-action:checked, .osd .Button.destructive-action:active:backdrop, .osd .Button.destructive-action:active, .osd .Button.destructive-action:checked:backdrop, .osd .Button.destructive-action:checked {
       color: white;
@@ -1208,7 +1224,7 @@ button.destructive-action,
       box-shadow: none;
       text-shadow: none;
       --icon-shadow: none; }
-      .osd button.destructive-action:active:backdrop::after, .osd button.destructive-action:active::after, .osd button.destructive-action:checked:backdrop::after, .osd button.destructive-action:checked::after, .osd .Button.destructive-action:active:backdrop::after, .osd .Button.destructive-action:active::after, .osd .Button.destructive-action:checked:backdrop::after, .osd .Button.destructive-action:checked::after {
+      .osd button.destructive-action:active:backdrop::before, .osd button.destructive-action:active::before, .osd button.destructive-action:checked:backdrop::before, .osd button.destructive-action:checked::before, .osd .Button.destructive-action:active:backdrop::before, .osd .Button.destructive-action:active::before, .osd .Button.destructive-action:checked:backdrop::before, .osd .Button.destructive-action:checked::before {
         opacity: 0; }
     .osd button.destructive-action:disabled:backdrop, .osd button.destructive-action:disabled, .osd .Button.destructive-action:disabled:backdrop, .osd .Button.destructive-action:disabled {
       color: #919190;
@@ -1218,7 +1234,7 @@ button.destructive-action,
       box-shadow: none;
       text-shadow: none;
       --icon-shadow: none; }
-      .osd button.destructive-action:disabled:backdrop::after, .osd button.destructive-action:disabled::after, .osd .Button.destructive-action:disabled:backdrop::after, .osd .Button.destructive-action:disabled::after {
+      .osd button.destructive-action:disabled:backdrop::before, .osd button.destructive-action:disabled::before, .osd .Button.destructive-action:disabled:backdrop::before, .osd .Button.destructive-action:disabled::before {
         opacity: 0; }
 
 stackswitcher > button > .Label, stackswitcher > .Button > .Label {
@@ -1383,7 +1399,7 @@ modelbutton.flat arrow {
     border-bottom-color: #bfb8b1;
     background-color: #fdfdfc;
     box-shadow: inset 0 1px #f4f2f1, 0 1px 2px rgba(0, 0, 0, 0.07); }
-    .toolbar button:hover::after {
+    .toolbar button:hover::before {
       opacity: 0; }
   .toolbar button:active {
     color: #2e3436;
@@ -1392,7 +1408,7 @@ modelbutton.flat arrow {
     box-shadow: inset 0 1px rgba(255, 255, 255, 0);
     text-shadow: none;
     --icon-shadow: none; }
-    .toolbar button:active::after {
+    .toolbar button:active::before {
       opacity: 0; }
   .toolbar button:disabled {
     color: #929595;
@@ -1401,7 +1417,7 @@ modelbutton.flat arrow {
     text-shadow: none;
     --icon-shadow: none;
     box-shadow: inset 0 1px rgba(255, 255, 255, 0); }
-    .toolbar button:disabled::after {
+    .toolbar button:disabled::before {
       opacity: 0; }
   .toolbar button:backdrop {
     color: #929595;
@@ -1410,7 +1426,7 @@ modelbutton.flat arrow {
     text-shadow: none;
     --icon-shadow: none;
     box-shadow: inset 0 1px rgba(255, 255, 255, 0); }
-    .toolbar button:backdrop::after {
+    .toolbar button:backdrop::before {
       opacity: 0; }
   .toolbar button:backdrop:disabled {
     color: #d4cfca;
@@ -1419,7 +1435,7 @@ modelbutton.flat arrow {
     text-shadow: none;
     --icon-shadow: none;
     box-shadow: inset 0 1px rgba(255, 255, 255, 0); }
-    .toolbar button:backdrop:disabled::after {
+    .toolbar button:backdrop:disabled::before {
       opacity: 0; }
 
 button.color {
@@ -1445,8 +1461,8 @@ list > row button.image-button:not(.flat) {
     border-bottom-color: #bfb8b1;
     background-color: #fdfdfc;
     box-shadow: inset 0 1px #f4f2f1, 0 1px 2px rgba(0, 0, 0, 0.07); }
-    popover.menu box.circular-buttons button.circular.image-button.model:hover::after,
-    list > row button.image-button:not(.flat):hover::after {
+    popover.menu box.circular-buttons button.circular.image-button.model:hover::before,
+    list > row button.image-button:not(.flat):hover::before {
       opacity: 0; }
   popover.menu box.circular-buttons button.circular.image-button.model:active, popover.menu box.circular-buttons button.circular.image-button.model:checked,
   list > row button.image-button:not(.flat):active,
@@ -1457,9 +1473,9 @@ list > row button.image-button:not(.flat) {
     box-shadow: inset 0 1px rgba(255, 255, 255, 0);
     text-shadow: none;
     --icon-shadow: none; }
-    popover.menu box.circular-buttons button.circular.image-button.model:active::after, popover.menu box.circular-buttons button.circular.image-button.model:checked::after,
-    list > row button.image-button:not(.flat):active::after,
-    list > row button.image-button:not(.flat):checked::after {
+    popover.menu box.circular-buttons button.circular.image-button.model:active::before, popover.menu box.circular-buttons button.circular.image-button.model:checked::before,
+    list > row button.image-button:not(.flat):active::before,
+    list > row button.image-button:not(.flat):checked::before {
       opacity: 0; }
 
 /*********
@@ -1572,8 +1588,8 @@ spinbutton {
     border-radius: 0;
     box-shadow: none;
     --icon-shadow: 0 1px black; }
-    .osd spinbutton:not(.vertical) > button.image-button.up:not(.flat)::after,
-    .osd spinbutton:not(.vertical) > button.image-button.down:not(.flat)::after {
+    .osd spinbutton:not(.vertical) > button.image-button.up:not(.flat)::before,
+    .osd spinbutton:not(.vertical) > button.image-button.down:not(.flat)::before {
       opacity: 0; }
     .osd spinbutton:not(.vertical) > button.image-button.up:not(.flat):dir(rtl),
     .osd spinbutton:not(.vertical) > button.image-button.down:not(.flat):dir(rtl) {
@@ -1590,8 +1606,8 @@ spinbutton {
       background-color: rgba(27, 27, 27, 0.7);
       --icon-shadow: 0 1px black;
       box-shadow: none; }
-      .osd spinbutton:not(.vertical) > button.image-button.up:not(.flat):hover::after,
-      .osd spinbutton:not(.vertical) > button.image-button.down:not(.flat):hover::after {
+      .osd spinbutton:not(.vertical) > button.image-button.up:not(.flat):hover::before,
+      .osd spinbutton:not(.vertical) > button.image-button.down:not(.flat):hover::before {
         opacity: 0; }
     .osd spinbutton:not(.vertical) > button.image-button.up:not(.flat):disabled,
     .osd spinbutton:not(.vertical) > button.image-button.down:not(.flat):disabled {
@@ -1604,8 +1620,8 @@ spinbutton {
       border-color: rgba(0, 0, 0, 0.5);
       --icon-shadow: none;
       box-shadow: none; }
-      .osd spinbutton:not(.vertical) > button.image-button.up:not(.flat):disabled::after,
-      .osd spinbutton:not(.vertical) > button.image-button.down:not(.flat):disabled::after {
+      .osd spinbutton:not(.vertical) > button.image-button.up:not(.flat):disabled::before,
+      .osd spinbutton:not(.vertical) > button.image-button.down:not(.flat):disabled::before {
         opacity: 0; }
     .osd spinbutton:not(.vertical) > button.image-button.up:not(.flat):dir(ltr):last-child,
     .osd spinbutton:not(.vertical) > button.image-button.down:not(.flat):dir(ltr):last-child {
@@ -1647,7 +1663,7 @@ spinbutton {
     box-shadow: inset 0 1px rgba(255, 255, 255, 0.1);
     text-shadow: none;
     --icon-shadow: none; }
-    .osd spinbutton.vertical > button:first-child::after {
+    .osd spinbutton.vertical > button:first-child::before {
       opacity: 0; }
     .osd spinbutton.vertical > button:first-child:hover {
       color: white;
@@ -1657,7 +1673,7 @@ spinbutton {
       box-shadow: inset 0 1px rgba(255, 255, 255, 0.1);
       text-shadow: none;
       --icon-shadow: none; }
-      .osd spinbutton.vertical > button:first-child:hover::after {
+      .osd spinbutton.vertical > button:first-child:hover::before {
         opacity: 0; }
     .osd spinbutton.vertical > button:first-child:active {
       color: white;
@@ -1667,7 +1683,7 @@ spinbutton {
       box-shadow: none;
       text-shadow: none;
       --icon-shadow: none; }
-      .osd spinbutton.vertical > button:first-child:active::after {
+      .osd spinbutton.vertical > button:first-child:active::before {
         opacity: 0; }
     .osd spinbutton.vertical > button:first-child:disabled {
       color: #919190;
@@ -1677,7 +1693,7 @@ spinbutton {
       box-shadow: none;
       text-shadow: none;
       --icon-shadow: none; }
-      .osd spinbutton.vertical > button:first-child:disabled::after {
+      .osd spinbutton.vertical > button:first-child:disabled::before {
         opacity: 0; }
   .TreeView spinbutton:not(.vertical) {
     min-height: 0;
@@ -1854,8 +1870,8 @@ searchbar .close {
   min-height: 16px;
   padding: 4px;
   border-radius: 50%; }
-  infobar .close::after,
-  searchbar .close::after {
+  infobar .close::before,
+  searchbar .close::before {
     opacity: 0; }
   infobar .close:hover,
   searchbar .close:hover {
@@ -1864,8 +1880,8 @@ searchbar .close {
     border-bottom-color: #bfb8b1;
     background-color: #fdfdfc;
     box-shadow: inset 0 1px #f4f2f1, 0 1px 2px rgba(0, 0, 0, 0.07); }
-    infobar .close:hover::after,
-    searchbar .close:hover::after {
+    infobar .close:hover::before,
+    searchbar .close:hover::before {
       opacity: 0; }
 
 /*****************
@@ -1888,14 +1904,14 @@ windowcontrols {
       box-shadow: none;
       text-shadow: none;
       background-color: #c8c2bc; }
-      windowcontrols button:hover::after {
+      windowcontrols button:hover::before {
         opacity: 0; }
     windowcontrols button:active, windowcontrols button:checked {
       border-color: transparent;
       box-shadow: none;
       text-shadow: none;
       background-color: #a3998f; }
-      windowcontrols button:active::after, windowcontrols button:checked::after {
+      windowcontrols button:active::before, windowcontrols button:checked::before {
         opacity: 0; }
 
 /***************
@@ -1944,10 +1960,10 @@ headerbar {
       border-color: #d5d0cc;
       background-color: #e4e4e0;
       box-shadow: inset 0 1px rgba(255, 255, 255, 0); }
-      .titlebar:not(headerbar) stackswitcher > button:checked:backdrop::after,
-      .titlebar:not(headerbar) button.toggle:checked:backdrop::after,
-      headerbar stackswitcher > button:checked:backdrop::after,
-      headerbar button.toggle:checked:backdrop::after {
+      .titlebar:not(headerbar) stackswitcher > button:checked:backdrop::before,
+      .titlebar:not(headerbar) button.toggle:checked:backdrop::before,
+      headerbar stackswitcher > button:checked:backdrop::before,
+      headerbar button.toggle:checked:backdrop::before {
         opacity: 0; }
   .tiled .titlebar:not(headerbar), .tiled-top .titlebar:not(headerbar), .tiled-left .titlebar:not(headerbar), .tiled-right .titlebar:not(headerbar), .tiled-bottom .titlebar:not(headerbar), .maximized .titlebar:not(headerbar), .fullscreen .titlebar:not(headerbar), .tiled headerbar, .tiled-top headerbar, .tiled-left headerbar, .tiled-right headerbar, .tiled-bottom headerbar, .maximized headerbar, .fullscreen headerbar {
     border-radius: 0; }
@@ -2287,7 +2303,7 @@ popover.menu {
       border: none;
       outline: none;
       transition: none; }
-      popover.menu box.inline-buttons button.image-button.model::after {
+      popover.menu box.inline-buttons button.image-button.model::before {
         opacity: 0; }
       popover.menu box.inline-buttons button.image-button.model.selected {
         background: image(#e8e6e3); }
@@ -2472,7 +2488,7 @@ notebook > header {
       box-shadow: inset 0 1px rgba(255, 255, 255, 0);
       text-shadow: none;
       --icon-shadow: none; }
-      notebook > header > tabs > arrow:disabled::after {
+      notebook > header > tabs > arrow:disabled::before {
         opacity: 0; }
   notebook > header > tabs > tab {
     transition: outline-width 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94), outline-offset 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
@@ -2657,7 +2673,7 @@ switch {
     border-bottom-color: #bfb8b1;
     background-color: #f6f5f4;
     box-shadow: inset 0 1px white, 0 1px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.07); }
-    switch > slider::after {
+    switch > slider::before {
       content: ' ';
       position: absolute;
       width: 100%;
@@ -2674,7 +2690,7 @@ switch {
     border-bottom-color: #bfb8b1;
     background-color: #fdfdfc;
     box-shadow: inset 0 1px #f4f2f1, 0 1px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.07); }
-    switch:hover > slider::after {
+    switch:hover > slider::before {
       opacity: 0; }
   switch:checked > slider {
     border: 1px solid #185fb4; }
@@ -2685,7 +2701,7 @@ switch {
     text-shadow: none;
     --icon-shadow: none;
     box-shadow: inset 0 1px rgba(255, 255, 255, 0); }
-    switch:disabled > slider::after {
+    switch:disabled > slider::before {
       opacity: 0; }
   row.selected switch {
     outline-color: rgba(255, 255, 255, 0.8);
@@ -2902,7 +2918,7 @@ radio {
     box-shadow: inset 0 1px rgba(255, 255, 255, 0.1);
     text-shadow: none;
     --icon-shadow: none; }
-    .osd check::after, .osd radio::after {
+    .osd check::before, .osd radio::before {
       opacity: 0; }
     .osd check:hover, .osd radio:hover {
       color: #eeeeec;
@@ -2913,7 +2929,7 @@ radio {
       box-shadow: inset 0 1px rgba(255, 255, 255, 0.1);
       text-shadow: none;
       --icon-shadow: none; }
-      .osd check:hover::after, .osd radio:hover::after {
+      .osd check:hover::before, .osd radio:hover::before {
         opacity: 0; }
     .osd check:active, .osd radio:active {
       color: white;
@@ -2923,7 +2939,7 @@ radio {
       box-shadow: none;
       text-shadow: none;
       --icon-shadow: none; }
-      .osd check:active::after, .osd radio:active::after {
+      .osd check:active::before, .osd radio:active::before {
         opacity: 0; }
     .osd check:disabled, .osd radio:disabled {
       color: #919190;
@@ -2933,7 +2949,7 @@ radio {
       box-shadow: none;
       text-shadow: none;
       --icon-shadow: none; }
-      .osd check:disabled::after, .osd radio:disabled::after {
+      .osd check:disabled::before, .osd radio:disabled::before {
         opacity: 0; }
 
 
@@ -3058,7 +3074,7 @@ scale {
       border-bottom-color: #bfb8b1;
       background-color: #fdfdfc;
       box-shadow: inset 0 1px #f4f2f1, 0 1px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.07); }
-      scale > trough > slider:hover::after {
+      scale > trough > slider:hover::before {
         opacity: 0; }
     scale > trough > slider:active {
       border-color: #185fb4; }
@@ -3069,7 +3085,7 @@ scale {
       text-shadow: none;
       --icon-shadow: none;
       box-shadow: inset 0 1px rgba(255, 255, 255, 0); }
-      scale > trough > slider:disabled::after {
+      scale > trough > slider:disabled::before {
         opacity: 0; }
     row.selected scale > trough > slider:disabled, row.selected scale > trough > slider {
       border-color: #185fb4; }
@@ -3084,7 +3100,7 @@ scale {
       --icon-shadow: none;
       border-color: rgba(0, 0, 0, 0.7);
       background-color: #353535; }
-      .osd scale > trough > slider::after {
+      .osd scale > trough > slider::before {
         opacity: 0; }
       .osd scale > trough > slider:hover {
         color: white;
@@ -3095,7 +3111,7 @@ scale {
         text-shadow: none;
         --icon-shadow: none;
         background-color: #353535; }
-        .osd scale > trough > slider:hover::after {
+        .osd scale > trough > slider:hover::before {
           opacity: 0; }
       .osd scale > trough > slider:active {
         color: white;
@@ -3106,7 +3122,7 @@ scale {
         text-shadow: none;
         --icon-shadow: none;
         background-color: #353535; }
-        .osd scale > trough > slider:active::after {
+        .osd scale > trough > slider:active::before {
           opacity: 0; }
       .osd scale > trough > slider:disabled {
         color: #919190;
@@ -3117,7 +3133,7 @@ scale {
         text-shadow: none;
         --icon-shadow: none;
         background-color: #353535; }
-        .osd scale > trough > slider:disabled::after {
+        .osd scale > trough > slider:disabled::before {
           opacity: 0; }
   scale > value {
     color: alpha(currentColor,0.55);
@@ -4260,7 +4276,7 @@ colorswatch {
       border-bottom-color: #bfb8b1;
       background-color: #f6f5f4;
       box-shadow: inset 0 1px white, 0 1px 2px rgba(0, 0, 0, 0.07); }
-      colorswatch#add-color-button > overlay::after {
+      colorswatch#add-color-button > overlay::before {
         content: ' ';
         position: absolute;
         width: 100%;
@@ -4275,7 +4291,7 @@ colorswatch {
       border-bottom-color: #bfb8b1;
       background-color: #fdfdfc;
       box-shadow: inset 0 1px #f4f2f1, 0 1px 2px rgba(0, 0, 0, 0.07); }
-      colorswatch#add-color-button.activatable:hover > overlay::after {
+      colorswatch#add-color-button.activatable:hover > overlay::before {
         opacity: 0; }
   colorswatch:disabled {
     opacity: 0.5; }

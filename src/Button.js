@@ -5,7 +5,19 @@
 import cx from 'classname'
 import Icon from './Icon'
 
-function Button({ children, icon, className, disabled, circular, flat, active, text, image }) {
+function Button({
+  children,
+  icon,
+  className,
+  disabled,
+  circular,
+  flat,
+  active,
+  text,
+  image,
+  primary,
+  danger,
+}) {
   return (
     <button
       className={cx('Button', className, {
@@ -15,6 +27,8 @@ function Button({ children, icon, className, disabled, circular, flat, active, t
         active,
         'text-button': text,
         'image-button': image,
+        'suggested-action': primary,
+        'destructive-action': danger,
       })}
       disabled={disabled}
     >

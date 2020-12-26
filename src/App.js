@@ -69,6 +69,22 @@ function App() {
         <Button>No Icon</Button>
         <Button text icon='list-add-symbolic' circular />
         <Button image icon='list-add-symbolic' circular />
+        <span className='linked'>
+          <Button>1</Button>
+          <Button active>2</Button>
+          <Button>3</Button>
+          <Button>4</Button>
+        </span>
+      </p>
+      <p className='row'>
+        <Button text>Normal</Button>
+        <Button text primary>Primary</Button>
+        <Button text danger>Danger</Button>
+      </p>
+      <p className='row'>
+        <Button className='osd'>
+          OSD Button
+        </Button>
       </p>
 
       <h1>Heading 1</h1>

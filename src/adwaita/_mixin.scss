@@ -1,0 +1,35 @@
+
+@mixin linked_not_left {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+@mixin linked_not_right {
+  border-right-style: none;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+// 1st/last child are at text start/end
+@mixin linked {
+  &:not(:first-child) { @include linked_not_left; }
+  &:not(:last-child) { @include linked_not_right; }
+}
+
+@mixin linked_not_top {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+@mixin linked_not_bottom {
+  border-bottom-style: none;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+@mixin linked_vertical {
+  &:not(:first-child) { @include linked_not_top; }
+
+  &:not(:last-child) { @include linked_not_bottom; }
+}
+

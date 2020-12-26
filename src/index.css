@@ -32,3 +32,11 @@ html, body, #root {
 .row > * {
   margin-right: 1em;
 }
+
+.column {
+  display: flex;
+  flex-direction: column;
+}
+.column > * {
+  margin-bottom: 0.5em;
+}

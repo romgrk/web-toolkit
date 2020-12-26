@@ -18,6 +18,7 @@ function Button({
   image,
   primary,
   danger,
+  ...rest
 }) {
   return (
     <button
@@ -33,6 +34,7 @@ function Button({
         'destructive-action': danger,
       })}
       disabled={disabled}
+      {...rest}
     >
       {icon &&
         (typeof icon === 'string' ?

@@ -3,6 +3,7 @@
  */
 
 
+import { forwardRef } from 'react'
 import cx from 'classname'
 import Icon from './Icon'
 
@@ -16,9 +17,10 @@ function Input({
   error,
   warning,
   progress,
-}) {
+  ...rest
+}, ref) {
   return (
-    <div className={cx('Input', { flat, disabled, error, warning, progress: progress !== undefined })}>
+    <div className={cx('Input', { flat, disabled, error, warning, progress: progress !== undefined })} ref={ref}>
       {icon &&
         <span  className='Input__left'>
           {
@@ -28,7 +30,7 @@ function Input({
           }
         </span>
       }
-      <input type={type} placeholder={placeholder} disabled={disabled} />
+      <input type={type} placeholder={placeholder} disabled={disabled} {...rest} />
       {progress &&
         <div className={cx('Input__progress', progress === true ? 'undeterminate' : undefined)}>
           <span
@@ -50,14 +52,15 @@ function Input({
   )
 }
 
-function Group({ children }) {
+function Group({ children, className }, ref) {
   return (
-    <div className='InputGroup linked'>
+    <div className={cx('InputGroup linked', className)} ref={ref}>
       {children}
     </div>
   )
 }
 
-Input.Group = Group
+const ExportedInput = forwardRef(Input)
+ExportedInput.Group = forwardRef(Group)
 
-export default Input
+export default ExportedInput

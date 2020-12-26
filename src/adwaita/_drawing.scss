@@ -182,6 +182,7 @@
     &::before {
       content: ' ';
       position: absolute;
+      pointer-events: none;
       width: 100%;
       height: 100%;
       top:  0px;
@@ -199,16 +200,14 @@
     border-color: if($c != $bg_color, _border_color($c), $borders_color);
     border-bottom-color: if($c != $bg_color, _border_color($c, true), $alt_borders_color);
     @if $variant == 'light' {
-      background-color: lighten($c,3%);
+      background-color: lighten($c, 1.5%);
       @include _shadows(inset 0 1px darken($c,1%), $_button_edge, $_button_shadow);
     }
     @else {
       background-color: darken($c, 3%);
       @include _shadows(inset 0 1px $c, $_button_edge, $_button_shadow);
     }
-    &::before {
-      opacity: 0;
-    }
+    &::before { opacity: 0; }
   }
 
   @if $t==normal-alt {

@@ -2,10 +2,6 @@
 
 // generic drawing of more complex things
 
-@function image($color) {
-  @return linear-gradient(to bottom, $color, $color);
-}
-
 //
 // Helper mixin for drawing visible focus rings
 //
@@ -180,9 +176,19 @@
     outline-color: if($c != $bg_color, $alt_focus_border_color, $focus_border_color);
     border-color: if($c != $bg_color, _border_color($c), $borders_color);
     border-bottom-color: if($c != $bg_color, _border_color($c, true), $alt_borders_color);
-    background-image: if($variant == 'light', linear-gradient(to top, darken($c, 4%) 2px, $c),
-                                              linear-gradient(to top, darken($c,1%) 2px, $c));
+    background-color: $c;
+
     @include _shadows(inset 0 1px $_hilight_color, $_button_edge, $_button_shadow);
+    &::after {
+      content: ' ';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top:  0px;
+      left: 0px;
+      background: linear-gradient(to top, rgba(black, 0.03), transparent);
+      transition: all 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
   }
 
   @else if $t==hover {
@@ -193,12 +199,15 @@
     border-color: if($c != $bg_color, _border_color($c), $borders_color);
     border-bottom-color: if($c != $bg_color, _border_color($c, true), $alt_borders_color);
     @if $variant == 'light' {
-      background-image: linear-gradient(to top, lighten($c,8%), lighten($c,3%) 1px);
+      background-color: lighten($c,3%);
       @include _shadows(inset 0 1px darken($c,1%), $_button_edge, $_button_shadow);
     }
     @else {
-      background-image: linear-gradient(to top, darken($c,4%) 20%, darken($c, 3%) 90%);
+      background-color: darken($c, 3%);
       @include _shadows(inset 0 1px $c, $_button_edge, $_button_shadow);
+    }
+    &::after {
+      opacity: 0;
     }
   }
 
@@ -227,8 +236,11 @@
   //
     color: $tc;
     border-color: if($c != $bg_color, _border_color($c), $borders_color);
-    background-image: if($variant == 'light', image(darken($c, 14%)), image(darken($c, 9%)));
+    background-color: if($variant == 'light', darken($c, 14%), darken($c, 9%));
     @include _shadows(inset 0 1px transparentize($_hilight_color, 1), $_button_edge);
+    &::after {
+      opacity: 0;
+    }
 
     text-shadow: none;
     --icon-shadow: none;
@@ -242,12 +254,15 @@
 
     color: if($tc != $fg_color, mix($tc, $_bg, 50%), $insensitive_fg_color);
     border-color: if($c != $bg_color, _border_color($c), $insensitive_borders_color);
-    background-image: image($_bg);
+    background-color: $_bg;
     text-shadow: none;
     --icon-shadow: none;
     // white with 0 alpha to avoid an ugly transition, since no color means
     // black with 0 alpha
     @include _shadows(inset 0 1px transparentize(white, 1), $_button_edge);
+    &::after {
+      opacity: 0;
+    }
   }
 
   @else if $t==insensitive-active {
@@ -259,10 +274,13 @@
 
     color: if($c != $bg_color, mix($tc, $_bg, 60%), $insensitive_fg_color);
     border-color: $_bc;
-    background-image: image($_bg);
+    background-color: $_bg;
     // white with 0 alpha to avoid an ugly transition, since no color means
     // black with 0 alpha
     @include _shadows(inset 0 1px transparentize(white, 1), $_button_edge);
+    &::after {
+      opacity: 0;
+    }
   }
 
   @else if $t==backdrop {
@@ -274,10 +292,13 @@
 
     color: if($tc != $fg_color, mix($tc, $_bg, 80%), $backdrop_fg_color);
     border-color: if($c != $bg_color, $_bc, $backdrop_borders_color);
-    background-image: image($_bg);
+    background-color: $_bg;
     text-shadow: none;
     --icon-shadow: none;
     @include _shadows(inset 0 1px transparentize(white, 1), $_blank_edge);
+    &::after {
+      opacity: 0;
+    }
   }
 
   @else if $t==backdrop-active {
@@ -289,8 +310,11 @@
 
     color: if($tc != $fg_color, mix($tc, $_bg, 80%), $backdrop_fg_color);
     border-color: if($c != $bg_color, $_bc, $backdrop_borders_color);
-    background-image: image($_bg);
+    background-color: $_bg;
     @include _shadows(inset 0 1px transparentize(white, 1), $_blank_edge);
+    &::after {
+      opacity: 0;
+    }
   }
 
   @else if $t==backdrop-insensitive {
@@ -303,12 +327,13 @@
 
     color: if($c != $bg_color, mix($tc, $_bg, 35%), $backdrop_insensitive_color);
     border-color: if($c != $bg_color, $_bc, $backdrop_borders_color);
-    background-image: image($_bg);
+    background-color: $_bg;
     text-shadow: none;
     --icon-shadow: none;
     // white with 0 alpha to avoid an ugly transition, since no color means
     // black with 0 alpha
     @include _shadows(inset 0 1px transparentize(white, 1), $_blank_edge);
+    &::after { opacity: 0; }
   }
 
   @else if $t==backdrop-insensitive-active {
@@ -321,8 +346,9 @@
 
     color: if($c != $bg_color, mix($tc, $_bg, 35%), $backdrop_insensitive_color);
     border-color: if($c != $bg_color, $_bc, $backdrop_borders_color);
-    background-image: image($_bg);
+    background-color: $_bg;
     @include _shadows(inset 0 1px transparentize(white, 1), $_blank_edge);
+    &::after { opacity: 0; }
   }
 
   @else if $t==osd {
@@ -334,10 +360,10 @@
     color: $osd_fg_color;
     outline-color: if($c != $bg_color, $alt_focus_border_color, $focus_border_color);
     border-color: $osd_borders_color;
-    background-color: transparent;
-    background-image: image($_bg);
+    background-color: $_bg;
     background-clip: padding-box;
     box-shadow: inset 0 1px transparentize(white, 0.9);
+    &::after { opacity: 0; }
     text-shadow: none;
     --icon-shadow: none;
   }
@@ -350,10 +376,10 @@
 
     color: white;
     border-color: $osd_borders_color;
-    background-color: transparent;
-    background-image: image($_bg);
+    background-color: $_bg;
     background-clip: padding-box;
     box-shadow: inset 0 1px transparentize(white, 0.9);
+    &::after { opacity: 0; }
     text-shadow: none;
     --icon-shadow: none;
   }
@@ -366,10 +392,10 @@
 
     color: white;
     border-color: $osd_borders_color;
-    background-color: transparent;
-    background-image: image($_bg);
+    background-color: $_bg;
     background-clip: padding-box;
     box-shadow: none;
+    &::after { opacity: 0; }
     text-shadow: none;
     --icon-shadow: none;
   }
@@ -380,10 +406,10 @@
   //
     color: $osd_insensitive_fg_color;
     border-color: $osd_borders_color;
-    background-color: transparent;
-    background-image: image($osd_insensitive_bg_color);
+    background-color: $osd_insensitive_bg_color;
     background-clip: padding-box;
     box-shadow: none;
+    &::after { opacity: 0; }
     text-shadow: none;
     --icon-shadow: none;
   }
@@ -396,10 +422,10 @@
 
     color: $osd_fg_color;
     border-color: $osd_borders_color;
-    background-color: transparent;
-    background-image: image($_bg);
+    background-color: $_bg;
     background-clip: padding-box;
     box-shadow: none;
+    &::after { opacity: 0; }
     text-shadow: none;
     --icon-shadow: none;
   }
@@ -410,17 +436,17 @@
   //
     border-color: transparent;
     background-color: transparent;
-    background-image: none;
 
     @include _shadows(inset 0 1px transparentize(white, 1), $_blank_edge);
+    &::after { opacity: 0; }
 
     text-shadow: none;
     --icon-shadow: none;
   }
   @else if $t==undecorated-hover {
     border-color: transparent;
-    background-image: none;
     box-shadow: none;
+    &::after { opacity: 0; }
     text-shadow: none;
     @if $variant == 'light' {
       background-color: darken($c,14%);
@@ -431,8 +457,8 @@
   }
   @else if $t==undecorated-active {
     border-color: transparent;
-    background-image: none;
     box-shadow: none;
+    &::after { opacity: 0; }
     text-shadow: none;
     @if $variant == 'light' {
       background-color: darken($c,30%);

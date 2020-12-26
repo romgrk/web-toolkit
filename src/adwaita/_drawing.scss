@@ -250,13 +250,15 @@
   //
   // insensitive button
   //
+    $_fg: if($tc != $fg_color, mix($tc, $_bg, 50%), $insensitive_fg_color);
     $_bg: if($c != $bg_color, mix($c, $base_color, 85%), $insensitive_bg_color);
 
-    color: if($tc != $fg_color, mix($tc, $_bg, 50%), $insensitive_fg_color);
+    color: $_fg;
     border-color: if($c != $bg_color, _border_color($c), $insensitive_borders_color);
     background-color: $_bg;
     text-shadow: none;
     --icon-shadow: none;
+    --icon-color: #{$_fg};
     // white with 0 alpha to avoid an ugly transition, since no color means
     // black with 0 alpha
     @include _shadows(inset 0 1px transparentize(white, 1), $_button_edge);

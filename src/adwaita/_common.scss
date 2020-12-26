@@ -223,8 +223,12 @@ radio:disabled,
 
   &:not(.colored) {
     svg * {
-      fill: var(--icon-color, black);
+      fill: var(--icon-color, #{$fg_color});
     }
+  }
+
+  svg {
+    transform: scale(0.8);
   }
 }
 
@@ -365,6 +369,7 @@ body {
       }
     }
 
+    &:disabled,
     &.disabled {
       @include entry(insensitive);
       .Icon {
@@ -481,15 +486,16 @@ body {
     &.dnd-active:not(:only-child) {
       + %entry,
       + entry,
-      + button,
-      + menubutton > button,
-      + dropdown > button,
-      + colorbutton > button,
-      + fontbutton > button,
-      + filechooserbutton > button,
-      + filechooserbutton > combobox > box > button.combo,
-      + appchooserbutton > combobox > box > button.combo,
-      + combobox > box > button.combo { border-top-color: $drop_target_color; }
+      + .Input,
+      + .Button,
+      + menubutton > .Button,
+      + dropdown > .Button,
+      + colorbutton > .Button,
+      + fontbutton > .Button,
+      + filechooserbutton > .Button,
+      + filechooserbutton > combobox > box > .Button.combo,
+      + appchooserbutton > combobox > box > .Button.combo,
+      + combobox > box > .Button.combo { border-top-color: $drop_target_color; }
     }
   }
 }
@@ -542,7 +548,6 @@ $_dot_color: if($variant=='light', $selected_bg_color,
 }
 
 %button,
-button,
 .Button
 {
   @at-root %button_basic, & {
@@ -801,7 +806,7 @@ button,
     }
   }
 
-  stackswitcher > & {
+  .StackSwitcher > & {
     // to position the needs attention dot, padding is added to the button
     // child, a .Label needs just lateral padding while an icon needs vertical
     // padding added too.
@@ -811,22 +816,15 @@ button,
       margin: 0 -6px;
     }
 
-    > image {
+    > .Image {
       padding: 3px 6px;
       margin: -3px -6px;
     }
 
     &.needs-attention {
       > .Label,
-      > image { @extend %needs_attention; }
+      > .Image { @extend %needs_attention; }
     }
-  }
-
-  // hide separators
-  &.font{
-    separator { background-color: transparent; }
-    > box { border-spacing: 6px; }
-    > box > box > .Label { font-weight: bold; }
   }
 
   .linked:not(.vertical) > & { @include linked; }
@@ -849,7 +847,7 @@ button,
   animation: needs_attention 150ms ease-in;
 
   background-image: radial-gradient(farthest-side, $_dot_color 96%, transparentize($_dot_color,1 ));
-  background-size: 6px 6px, 6px 6px;
+  background-size: 5px 5px, 5px 5px;
   background-repeat: no-repeat;
 
   @if $variant == 'light' { background-position: right 3px, right 4px; }
@@ -866,16 +864,7 @@ button,
 }
 
 
-%undecorated_button {
-  background-color: transparent;
-  background-image: none;
-  border-color: transparent;
-  box-shadow: inset 0 1px transparentize(white, 1),
-              0 1px transparentize(white, 1);
-  text-shadow: none;
-  --icon-shadow: none;
-}
-
+// TODO validate this
 .linked:not(.vertical) > menubutton,
 .linked:not(.vertical) > dropdown,
 .linked:not(.vertical) > colorbutton,
@@ -892,6 +881,7 @@ button,
   }
 }
 
+// TODO validate this
 .linked.vertical > menubutton,
 .linked.vertical > dropdown,
 .linked.vertical > colorbutton,
@@ -901,44 +891,40 @@ button,
   &:not(:last-child) > button { @include linked_not_bottom; }
 }
 
+// TODO validate this
 /* menu buttons */
-modelbutton.flat {
+.ModelButton.flat {
   min-height: 26px;
   padding-left: 5px;
   padding-right: 5px;
   border-radius: $button_radius;
 
-  @extend %undecorated_button;
+  @include button('undecorated');
 
+  &.hover,
   &:hover { background-color: $menu_selected_color; }
 
+  &.disabled,
   &:disabled {
     color: $insensitive_fg_color;
-
-
   }
 
   &.selected { @extend %selected_items; }
 }
 
-modelbutton.flat arrow {
+.ModelButton.flat .arrow {
   background: none;
   min-width: 16px;
   min-height: 16px;
-  opacity: 0.3; //dim icon
-
+  opacity: 0.3; // dim icon
   &:hover { background: none; }
-
-  &.left { -gtk-icon-source: -gtk-icontheme("go-previous-symbolic"); }
-
-  &.right { -gtk-icon-source: -gtk-icontheme("go-next-symbolic"); }
 }
 
 /* oldstyle toolbar buttons */
 
-.toolbar button {
+.Toolbar button {
   margin: 1px;
-  @extend %undecorated_button;
+  @include button('undecorated');
 
   &:hover { @include button('hover'); }
   &:active { @include button('active'); }
@@ -947,6 +933,7 @@ modelbutton.flat arrow {
   &:backdrop:disabled { @include button('backdrop-insensitive'); }
 }
 
+// TODO validate this
 button.color {
   padding: 4px;
 
@@ -972,8 +959,8 @@ button.color {
 /* list buttons */
 /* tone down as per new designs, see issue #1473 */
 %list_button,
-list > row button.image-button:not(.flat) {
-  @extend %undecorated_button;
+.List > .Row button.image-button:not(.flat) {
+  @include button('undecorated');
   border: 1px solid transparentize($borders_color, .5);
   &:hover { @include button(hover); }
   &:active,
@@ -988,6 +975,7 @@ list > row button.image-button:not(.flat) {
 link {
   color: $link_color;
   text-decoration: underline;
+  cursor: pointer;
 
   &:visited {
     color: $link_visited_color;
@@ -1022,13 +1010,17 @@ link {
 button.link {
   @extend %link;
 
-  &,
-  &:hover,
-  &:active,
-  &:checked {
-    @extend %undecorated_button;
+  @include button(undecorated);
 
-    text-shadow: none;
+  &:not(:disabled):not(.disabled) {
+    &,
+    &:hover,
+    &:active,
+    &:checked {
+      @include button('undecorated');
+
+      text-shadow: none;
+    }
   }
 
   > .Label {
@@ -1040,12 +1032,27 @@ button.link {
 /*****************
  * GtkSpinButton *
  *****************/
-spinbutton {
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+input::-webkit-inner-spin-button, 
+input::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+
+.InputNumber {
   &:not(.vertical) {
     // in this horizontal configuration, the whole spinbutton
     // behaves as the entry, so we extend the entry styling
     // and nuke the style on the internal entry
     @extend %entry;
+    width: 110px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
 
     padding: 0;
     border-spacing: 0;
@@ -1061,22 +1068,30 @@ spinbutton {
       box-shadow: none;
       padding: 6px;
 
-      &:backdrop:disabled { background-color: transparent; }
+      .window-inactive &.disabled,
+      .window-inactive &:disabled {
+        background-color: transparent;
+      }
     }
 
-    > text {
+    > input {
       @extend %spinbutton_horz_entry;
     }
 
     /* :not here just to bump specificity above that of the list button styling */
-    > button.image-button.up:not(.flat),
-    > button.image-button.down:not(.flat) {
+    > button.InputNumber__button.up:not(.flat),
+    > button.InputNumber__button.down:not(.flat) {
+      display: flex;
+      justify-content: center;
+      align-items: center;
       min-height: 16px;
+      height: 100%;
       margin: 0;
       padding-bottom: 0;
       padding-top: 0;
       color: mix($fg_color, $base_color, 90%);
-      background-image: none;
+      background-color: transparent;
+      border-width: 0.5px;
       border-style: none none none solid;
       border-color: transparentize($borders_color, 0.7);
       border-radius: 0;
@@ -1084,35 +1099,38 @@ spinbutton {
 
       &:dir(rtl) { border-style: none solid none none; }
 
-      &:hover {
-        color: $fg_color;
-        background-color: darken($bg_color,5%);
+      &:not(:disabled) {
+        &:focus {
+          outline: none;
+        }
+        &:hover {
+          color: $fg_color;
+          background-color: darken($bg_color,5%);
+        }
+        &:active {
+          background-color: transparentize(black, 0.9);
+          box-shadow: inset 0 2px 3px -1px transparentize(black, 0.8);
+        }
       }
-
       &:disabled {
         color: transparentize($insensitive_fg_color, 0.7);
         background-color: transparent;
       }
 
-      &:active {
-        background-color: transparentize(black, 0.9);
-        box-shadow: inset 0 2px 3px -1px transparentize(black, 0.8);
-      }
-
       &:dir(ltr):last-child { border-radius: 0 $button_radius $button_radius 0; }
-
       &:dir(rtl):first-child { border-radius: $button_radius 0 0 $button_radius; }
     }
   }
 
   // OSD horizontal
+  // TODO validate this
   .osd &:not(.vertical) {
-    > text {
+    > input {
       @extend %spinbutton_horz_entry;
     }
 
-    > button.image-button.up:not(.flat),
-    > button.image-button.down:not(.flat) {
+    > button.InputNumber__button.up:not(.flat),
+    > button.InputNumber__button.down:not(.flat) {
       @include button(undecorated);
 
       color: $osd_fg_color;
@@ -1157,20 +1175,29 @@ spinbutton {
 
     // FIXME: this should not be set at all, but otherwise it gets the wrong
     // color
-    &:disabled { color: $insensitive_fg_color; }
+    // &:disabled { color: $insensitive_fg_color; }
+
+    display: inline-flex;
+    flex-direction: column;
+    min-width: 40px;
+    width: 40px;
 
     &.dnd-active {
       border-color: transparent;
       box-shadow: none;
     }
 
-    > text {
+
+    > input {
       @extend %entry;
 
       min-height: 32px;
       min-width: 32px;
+      width: 100%;
       padding: 0;
       border-radius: 0;
+
+      text-align: center;
 
       &::selection { @extend %selected_items; }
       > block-cursor { @include entry(block_cursor); }
@@ -1179,10 +1206,10 @@ spinbutton {
     > button {
       min-height: 32px;
       min-width: 32px;
+      width: 100%;
       padding: 0;
 
       &.up { @extend %top_button; }
-
       &.down { @extend %bottom_button; }
     }
 
@@ -1200,6 +1227,7 @@ spinbutton {
   }
 
   // OSD vertical
+  // TODO validate this
   .osd &.vertical > button:first-child {
     @include button(osd);
 
@@ -1211,6 +1239,7 @@ spinbutton {
   }
 
   // Misc
+  // TODO validate this
   .TreeView &:not(.vertical) {
     min-height: 0;
     border-style: none;
@@ -1223,6 +1252,9 @@ spinbutton {
   }
 
   font-feature-settings: "tnum";
+  > input {
+    font-feature-settings: "tnum";
+  }
 }
 
 
@@ -1244,7 +1276,7 @@ combobox {
   }
 
   // align menu labels with the button .Label
-  > popover.menu > contents modelbutton {
+  > popover.menu > contents .ModelButton {
     padding-left: 9px;
     padding-right: 9px;
   }
@@ -1494,7 +1526,7 @@ headerbar {
   }
 
   /* Darken switchbuttons for headerbars. issue #1588 */
-  stackswitcher > button:checked,
+  .StackSwitcher > button:checked,
   button.toggle:checked {
 
     background: if($variant == 'light', image(darken($bg_color, 17%)), image(darken($bg_color, 9%)));
@@ -1973,7 +2005,7 @@ popover.menu {
     margin-right: -2px;
   }
 
-  modelbutton {
+  .ModelButton {
     min-height: 30px;
     min-width: 40px;
     padding: 0 $_menu-padding;
@@ -3169,13 +3201,9 @@ levelbar {
 /**********
  * Frames *
  **********/
-frame,
-.frame {
+.Frame {
   border: 1px solid $borders_color;
-}
-
-frame {
-  border-radius: $window_radius;
+  // border-radius: $window_radius;
 
   > .Label {
     margin: 4px;
@@ -3404,7 +3432,7 @@ expander-widget {
 
 .navigation-sidebar,
 placessidebar,
-stackswitcher,
+.StackSwitcher,
 expander-widget {
   &:not(decoration):not(.Window).dnd-active:focus,
   &:not(decoration):not(.Window).dnd-active {
@@ -4040,7 +4068,7 @@ colorchooser .popover.osd { border-radius: 5px; }
 
   button { // +/- buttons on GtkVolumeButton popup
     &:hover {
-      @extend %undecorated_button;
+      @include button('undecorated');
       background-color: transparentize($fg_color,0.9);
       border-radius: 5px;
     }
@@ -4214,9 +4242,9 @@ shortcut > .keycap {
   caret-color: $drop_target_color;
 }
 
-stackswitcher > button.text-button { min-width: 100px; } // FIXME aggregate with buttons
+.StackSwitcher > button.text-button { min-width: 100px; } // FIXME aggregate with buttons
 
-stackswitcher.circular {
+.StackSwitcher.circular {
   border-spacing: 12px;
 
   // FIXME aggregate with buttons

@@ -22,3 +22,5 @@ List of changes made to adapt adwaita.
  - `window` changed to `.Window`
  - `entry` changed to `.Input`
  - `treeview` changed to `.TreeView`
+ - `stackswitcher` changed to `.StackSwitcher`
+ - `spinbutton` changed to `.InputNumber`

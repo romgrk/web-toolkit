@@ -6,7 +6,17 @@
 import cx from 'classname'
 import Icon from './Icon'
 
-function Input({ icon, iconAfter, placeholder, flat, disabled, error, warning, progress }) {
+function Input({
+  type = 'text',
+  icon,
+  iconAfter,
+  placeholder,
+  flat,
+  disabled,
+  error,
+  warning,
+  progress,
+}) {
   return (
     <div className={cx('Input', { flat, disabled, error, warning, progress: progress !== undefined })}>
       {icon &&
@@ -18,7 +28,7 @@ function Input({ icon, iconAfter, placeholder, flat, disabled, error, warning, p
           }
         </span>
       }
-      <input type='text' placeholder={placeholder} disabled={disabled} />
+      <input type={type} placeholder={placeholder} disabled={disabled} />
       {progress &&
         <div className={cx('Input__progress', progress === true ? 'undeterminate' : undefined)}>
           <span

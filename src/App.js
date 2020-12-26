@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import Button from './Button'
 import Icon from './Icon'
 import Input from './Input'
+import InputNumber from './InputNumber'
 import Spinner from './Spinner'
 
 function blur() {
@@ -52,6 +53,14 @@ function App() {
         </div>
       </div>
 
+      <p>
+        <div className='List'>
+          <div className='Row activatable'>Row 1</div>
+          <div className='Row activatable'>Row 2</div>
+          <div className='Row activatable'>Row 3</div>
+        </div>
+      </p>
+
       { /* TBD: IconView */ }
 
       <div className='row'>
@@ -79,11 +88,17 @@ function App() {
           </Input.Group>
         </div>
         <div className='column' style={{ width: 300 }}>
-          <div className='linked vertical'>
-            <Input placeholder='Street' />
-            <Input placeholder='City' />
-            <Input placeholder='Country' />
+          <div className='row'>
+            <div className='linked vertical'>
+              <Input placeholder='Street' />
+              <Input placeholder='City' />
+              <Input placeholder='Country' />
+            </div>
+            <InputNumber value={5} vertical />
+            <InputNumber value={50} vertical disabled />
           </div>
+          <InputNumber />
+          <InputNumber disabled />
         </div>
       </div>
 

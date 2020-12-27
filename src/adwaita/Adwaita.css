@@ -1820,7 +1820,7 @@ input::-webkit-outer-spin-button {
 /************
  * Toolbars *
  ************/
-searchbar > revealer > box, .Toolbar {
+.SearchBar, .Toolbar {
   padding: 4px;
   border-spacing: 4px;
   background-color: #f6f5f4; }
@@ -1853,59 +1853,193 @@ searchbar > revealer > box, .Toolbar {
 .Toolbar.vertical > .separator {
   margin: 3px 1px; }
 
-searchbar > revealer > box {
-  padding: 6px;
-  border-spacing: 6px;
-  border-width: 0 0 1px; }
+/**************
+ * GtkInfoBar *
+ **************/
+.InfoBar {
+  display: block;
+  overflow: hidden;
+  transition: all 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  height: 45px; }
+  .InfoBar.close {
+    height: 0; }
+  .InfoBar > .Box {
+    padding: 8px;
+    border-spacing: 12px; }
+  .InfoBar.info > .Box {
+    border-bottom: 1px solid #88afde;
+    background-color: #c4d7ee; }
+  .InfoBar.info.activatable:hover > .Box {
+    background-color: #d0dff2; }
+  .InfoBar.info > .Box > .Button {
+    color: #2e3436;
+    outline-color: rgba(255, 255, 255, 0.8);
+    border-color: #9cbce3;
+    border-bottom-color: #74a1d8;
+    background-color: #c4d7ee;
+    box-shadow: inset 0 1px rgba(255, 255, 255, 0.5), 0 1px 2px rgba(0, 0, 0, 0.07); }
+    .InfoBar.info > .Box > .Button::before {
+      content: ' ';
+      position: absolute;
+      pointer-events: none;
+      width: 100%;
+      height: 100%;
+      top: 0px;
+      left: 0px;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.03), transparent);
+      transition: all 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+    .InfoBar.info > .Box > .Button.hover, .InfoBar.info > .Box > .Button:hover {
+      color: #2e3436;
+      border-color: #9cbce3;
+      border-bottom-color: #74a1d8;
+      background-color: #cadbf0;
+      box-shadow: inset 0 1px #c0d4ed, 0 1px 2px rgba(0, 0, 0, 0.07); }
+      .InfoBar.info > .Box > .Button.hover::before, .InfoBar.info > .Box > .Button:hover::before {
+        opacity: 0; }
+    .InfoBar.info > .Box > .Button.active, .InfoBar.info > .Box > .Button:active {
+      color: #2e3436;
+      border-color: #9cbce3;
+      background-color: #8cb1df;
+      box-shadow: inset 0 1px rgba(255, 255, 255, 0);
+      text-shadow: none;
+      --icon-shadow: none; }
+      .InfoBar.info > .Box > .Button.active::before, .InfoBar.info > .Box > .Button:active::before {
+        opacity: 0; }
+  .InfoBar.success > .Box {
+    border-bottom: 1px solid #84b399;
+    background-color: #b4d0c0; }
+  .InfoBar.success.activatable:hover > .Box {
+    background-color: #bdd6c8; }
+  .InfoBar.success > .Box > .Button {
+    color: #2e3436;
+    outline-color: rgba(255, 255, 255, 0.8);
+    border-color: #94bca6;
+    border-bottom-color: #75a98c;
+    background-color: #b4d0c0;
+    box-shadow: inset 0 1px rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.07); }
+    .InfoBar.success > .Box > .Button::before {
+      content: ' ';
+      position: absolute;
+      pointer-events: none;
+      width: 100%;
+      height: 100%;
+      top: 0px;
+      left: 0px;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.03), transparent);
+      transition: all 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+    .InfoBar.success > .Box > .Button.hover, .InfoBar.success > .Box > .Button:hover {
+      color: #2e3436;
+      border-color: #94bca6;
+      border-bottom-color: #75a98c;
+      background-color: #b8d3c4;
+      box-shadow: inset 0 1px #b0cebe, 0 1px 2px rgba(0, 0, 0, 0.07); }
+      .InfoBar.success > .Box > .Button.hover::before, .InfoBar.success > .Box > .Button:hover::before {
+        opacity: 0; }
+    .InfoBar.success > .Box > .Button.active, .InfoBar.success > .Box > .Button:active {
+      color: #2e3436;
+      border-color: #94bca6;
+      background-color: #88b59c;
+      box-shadow: inset 0 1px rgba(255, 255, 255, 0);
+      text-shadow: none;
+      --icon-shadow: none; }
+      .InfoBar.success > .Box > .Button.active::before, .InfoBar.success > .Box > .Button:active::before {
+        opacity: 0; }
+  .InfoBar.warning > .Box {
+    border-bottom: 1px solid #dead7d;
+    background-color: #eed3ba; }
+  .InfoBar.warning.activatable:hover > .Box {
+    background-color: #f1dbc6; }
+  .InfoBar.warning > .Box > .Button {
+    color: #2e3436;
+    outline-color: rgba(255, 255, 255, 0.8);
+    border-color: #e4ba91;
+    border-bottom-color: #d9a068;
+    background-color: #eed3ba;
+    box-shadow: inset 0 1px rgba(255, 255, 255, 0.5), 0 1px 2px rgba(0, 0, 0, 0.07); }
+    .InfoBar.warning > .Box > .Button::before {
+      content: ' ';
+      position: absolute;
+      pointer-events: none;
+      width: 100%;
+      height: 100%;
+      top: 0px;
+      left: 0px;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.03), transparent);
+      transition: all 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+    .InfoBar.warning > .Box > .Button.hover, .InfoBar.warning > .Box > .Button:hover {
+      color: #2e3436;
+      border-color: #e4ba91;
+      border-bottom-color: #d9a068;
+      background-color: #efd7c0;
+      box-shadow: inset 0 1px #edd1b6, 0 1px 2px rgba(0, 0, 0, 0.07); }
+      .InfoBar.warning > .Box > .Button.hover::before, .InfoBar.warning > .Box > .Button:hover::before {
+        opacity: 0; }
+    .InfoBar.warning > .Box > .Button.active, .InfoBar.warning > .Box > .Button:active {
+      color: #2e3436;
+      border-color: #e4ba91;
+      background-color: #dfaf81;
+      box-shadow: inset 0 1px rgba(255, 255, 255, 0);
+      text-shadow: none;
+      --icon-shadow: none; }
+      .InfoBar.warning > .Box > .Button.active::before, .InfoBar.warning > .Box > .Button:active::before {
+        opacity: 0; }
+  .InfoBar.danger > .Box {
+    border-bottom: 1px solid #db7070;
+    background-color: #ebadad; }
+  .InfoBar.danger.activatable:hover > .Box {
+    background-color: #eebaba; }
+  .InfoBar.danger > .Box > .Button {
+    color: #2e3436;
+    outline-color: rgba(255, 255, 255, 0.8);
+    border-color: #e08585;
+    border-bottom-color: #d65c5c;
+    background-color: #ebadad;
+    box-shadow: inset 0 1px rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.07); }
+    .InfoBar.danger > .Box > .Button::before {
+      content: ' ';
+      position: absolute;
+      pointer-events: none;
+      width: 100%;
+      height: 100%;
+      top: 0px;
+      left: 0px;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.03), transparent);
+      transition: all 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+    .InfoBar.danger > .Box > .Button.hover, .InfoBar.danger > .Box > .Button:hover {
+      color: #2e3436;
+      border-color: #e08585;
+      border-bottom-color: #d65c5c;
+      background-color: #ecb4b4;
+      box-shadow: inset 0 1px #eaa9a9, 0 1px 2px rgba(0, 0, 0, 0.07); }
+      .InfoBar.danger > .Box > .Button.hover::before, .InfoBar.danger > .Box > .Button:hover::before {
+        opacity: 0; }
+    .InfoBar.danger > .Box > .Button.active, .InfoBar.danger > .Box > .Button:active {
+      color: #2e3436;
+      border-color: #e08585;
+      background-color: #dc7474;
+      box-shadow: inset 0 1px rgba(255, 255, 255, 0);
+      text-shadow: none;
+      --icon-shadow: none; }
+      .InfoBar.danger > .Box > .Button.active::before, .InfoBar.danger > .Box > .Button:active::before {
+        opacity: 0; }
 
-searchbar > revealer > box {
+/****************
+ * GtkSearchBar *
+ ****************/
+.SearchBar {
   border-style: solid;
   border-color: #cdc7c2;
   background-color: #eae7e5; }
-  searchbar > revealer > box:backdrop {
+  .window-inactive .SearchBar {
     border-color: #d5d0cc;
     background-color: #eae8e6;
     box-shadow: none;
     transition: 200ms ease-out; }
 
-/**************
- * GtkInfoBar *
- **************/
-infobar > revealer > box {
-  padding: 8px;
-  border-spacing: 12px; }
-
-infobar.action:hover > revealer > box {
-  background-color: #f4ebe1; }
-
-infobar.info > revealer > box, infobar.question > revealer > box, infobar.warning > revealer > box, infobar.error > revealer > box {
-  border-bottom: 1px solid #d8d4d0;
-  background-color: #f1e6d9; }
-
-infobar .close,
-searchbar .close {
-  border-color: transparent;
-  background-color: transparent;
-  box-shadow: inset 0 1px rgba(255, 255, 255, 0);
-  text-shadow: none;
-  --icon-shadow: none;
-  min-width: 16px;
-  min-height: 16px;
-  padding: 4px;
-  border-radius: 50%; }
-  infobar .close::before,
-  searchbar .close::before {
-    opacity: 0; }
-  infobar .close:hover,
-  searchbar .close:hover {
-    color: #2e3436;
-    border-color: #cdc7c2;
-    border-bottom-color: #bfb8b1;
-    background-color: #f9f9f8;
-    box-shadow: inset 0 1px #f4f2f1, 0 1px 2px rgba(0, 0, 0, 0.07); }
-    infobar .close:hover::before,
-    searchbar .close:hover::before {
-      opacity: 0; }
+.SearchBar {
+  padding: 6px;
+  border-spacing: 6px;
+  border-width: 0 0 1px; }
 
 /*****************
  * Title buttons *

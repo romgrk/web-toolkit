@@ -3,6 +3,7 @@ import Box from './Box'
 import Button from './Button'
 import Dropdown from './Dropdown'
 import Icon, { names as iconNames } from './Icon'
+import InfoBar from './InfoBar'
 import Input from './Input'
 import InputNumber from './InputNumber'
 import Label from './Label'
@@ -33,6 +34,11 @@ function App() {
     <div className="App background">
       <h1>Application</h1>
 
+
+      <Box vertical compact>
+        <DemoInfoBar />
+      </Box>
+      <br/>
 
       <Box horizontal>
         <Box vertical>
@@ -248,6 +254,16 @@ function DemoDropdown() {
   )
 }
 
+function DemoInfoBar() {
+  return (
+    <>
+      <InfoBar closable activatable info>This is an infobar</InfoBar>
+      <InfoBar closable activatable success>This is an infobar</InfoBar>
+      <InfoBar closable activatable warning>This is an infobar</InfoBar>
+      <InfoBar closable activatable danger>This is an infobar</InfoBar>
+    </>
+  )
+}
 function DemoToolbar() {
   return (
     <>

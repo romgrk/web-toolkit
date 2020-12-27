@@ -1460,16 +1460,74 @@ input::-webkit-outer-spin-button {
   }
 }
 
-//searchbar & location-bar
-searchbar > revealer > box {
-  padding: 6px;
-  border-spacing: 6px;
-  @extend %toolbar;
+/**************
+ * GtkInfoBar *
+ **************/
+.InfoBar {
+  display: block;
+  overflow: hidden;
 
-  @extend %darkbar;
+  transition: $button_transition;
 
-  border-width: 0 0 1px;
+  // FIXME: height is hardcoded otherwise the transition
+  // doesnt work :/ We should find a better way to do this
+  height: 45px;
+  &.close {
+    height: 0;
+  }
+
+  > .Box {
+    padding: 8px;
+    border-spacing: 12px;
+  }
+
+  // TODO dark variant
+  $_types:
+    if($variant == 'light',
+      (
+        (info,    desaturate(lighten($info_color,    30%), 20%)),
+        (success, desaturate(lighten($success_color, 25%), 40%)),
+        (warning, desaturate(lighten($warning_color, 35%), 40%)),
+        (danger,  desaturate(lighten($danger_color,  40%), 40%)),
+      )
+      ,
+      (
+        (info,    desaturate(darken($info_color, 10%), 40%)),
+        (success, desaturate(darken($success_color, 10%), 40%)),
+        (warning, desaturate(darken($warning_color, 10%), 40%)),
+        (danger,  desaturate(darken($danger_color, 10%), 40%)),
+      )
+  );
+
+  @each $_type, $_color in $_types {
+    &.#{$_type} {
+      > .Box {
+        border-bottom: 1px solid darken($_color, 15%);
+        background-color: $_color;
+      }
+
+      &.activatable:hover > .Box {
+        background-color: lighten($_color, 3%);
+      }
+
+      > .Box > .Button {
+        @include button('normal', $_color);
+        &.hover,
+        &:hover {
+          @include button('hover', $_color);
+        }
+        &.active,
+        &:active {
+          @include button('active', $_color);
+        }
+      }
+    }
+  }
 }
+
+/****************
+ * GtkSearchBar *
+ ****************/
 
 %darkbar {
   border-style: solid;
@@ -1477,7 +1535,7 @@ searchbar > revealer > box {
   $_bg: mix($bg_color, $borders_color, 70%);
   background-color: $_bg;
 
-  &:backdrop {
+  .window-inactive & {
     border-color: $backdrop_borders_color;
     background-color: $backdrop_dark_fill;
     box-shadow: none;
@@ -1485,44 +1543,15 @@ searchbar > revealer > box {
   }
 }
 
-/**************
- * GtkInfoBar *
- **************/
-infobar {
-  > revealer > box {
-    padding: 8px;
-    border-spacing: 12px;
-  }
-
-  &.action:hover > revealer > box {
-      background-color: if($variant == 'light', desaturate(lighten(invert($selected_bg_color), 47%), 30%),
-                        desaturate(darken(invert($selected_bg_color), 42%), 70%));
-  }
-
-  &.info,
-  &.question,
-  &.warning,
-  &.error {
-    > revealer > box {
-      border-bottom: 1px solid lighten($borders_color, 5%);
-      background-color: if($variant == 'light', desaturate(lighten(invert($selected_bg_color), 45%), 30%),
-                        desaturate(darken(invert($selected_bg_color), 40%), 70%));
-    }
-  }
+// Search bar
+// TODO validate this
+.SearchBar {
+  padding: 6px;
+  border-spacing: 6px;
+  @extend %toolbar;
+  @extend %darkbar;
+  border-width: 0 0 1px;
 }
-
-   //close button for info and searchbar (#3215)
-
-   infobar .close,
-   searchbar .close {
-      @include button(undecorated);
-      min-width: 16px;
-      min-height: 16px;
-      padding: 4px;
-      border-radius: 50%;
-
-      &:hover { @include button(hover); }
-   }
 
 
 /*****************

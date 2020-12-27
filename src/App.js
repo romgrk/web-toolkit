@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import Box from './Box'
 import Button from './Button'
 import Dropdown from './Dropdown'
@@ -211,18 +211,18 @@ function DemoFrame() {
         <button className='MenuBar__item active'>File</button>
         <button className='MenuBar__item'>Edit</button>
         <button className='MenuBar__item'>View</button>
-        <div className='MenuBar__popover popover Menu menu background open'>
-          <div className='contents'>
-            <MenuButton>New</MenuButton>
-            <MenuButton>Open</MenuButton>
-            <MenuButton menu={true}>
-              Other
-            </MenuButton>
-            <div className='separator'/>
-            <MenuButton accelerator='Ctrl+Q'>
-              Quit
-            </MenuButton>
-          </div>
+      </div>
+      <div className='MenuBar__popover popover Menu menu background open' style={{ position: 'relative' }}>
+        <div className='contents'>
+          <MenuButton>New</MenuButton>
+          <MenuButton>Open</MenuButton>
+          <MenuButton menu={true}>
+            Other
+          </MenuButton>
+          <div className='separator'/>
+          <MenuButton accelerator='Ctrl+Q'>
+            Quit
+          </MenuButton>
         </div>
       </div>
       <div className='Toolbar'>

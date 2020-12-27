@@ -38,7 +38,7 @@ function Button({
         'image-button': image,
         'suggested-action': primary,
         'destructive-action': danger,
-      }) + ' ' + className}
+      }) + ' ' + cx(className)}
       disabled={disabled || loading}
       ref={ref}
       {...rest}

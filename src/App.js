@@ -230,6 +230,14 @@ function DemoDropdown() {
         options={options}
         onChange={setValue}
       />
+      <Box horizontal compact className='linked'>
+        <Button icon='list-add' />
+        <Dropdown
+          input
+          value='test'
+          options={[]}
+        />
+      </Box>
     </Box>
   )
 }

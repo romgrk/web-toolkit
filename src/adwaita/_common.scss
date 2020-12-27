@@ -1346,14 +1346,9 @@ input::-webkit-outer-spin-button {
 .Dropdown {
   display: flex;
   flex-direction: row;
-  width: 180px;
+  min-width: 120px;
 
-
-  .Dropdown__trigger.Button {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-
+  &.Button {
     > .Label {
       flex: 1;
       text-align: left;
@@ -1362,18 +1357,11 @@ input::-webkit-outer-spin-button {
       flex: 0;
     }
   }
-  &.open .Dropdown__trigger {
+  &.open {
     background-color: $popover_bg;
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
     border-bottom-color: transparent;
-  }
-
-  &.linked {
-    button:nth-child(2) {
-      &:dir(ltr) { @include linked_not_left; }
-      &:dir(rtl) { @include linked_not_right; }
-    }
   }
 
   // TODO dnd behavior
@@ -1422,34 +1410,6 @@ input::-webkit-outer-spin-button {
     border-bottom: 1px solid $borders_color;
   }
 }
-
-// XXX RESUME HERE
-
-// the combo is a composite widget so the way we do button linking doesn't
-// work, special case needed. See
-// https://bugzilla.gnome.org/show_bug.cgi?id=733979
-
-.linked:not(.vertical) > filechooserbutton > combobox,
-.linked:not(.vertical) > appchooserbutton > combobox,
-.linked:not(.vertical) > combobox {
-  &:dir(ltr) {
-    &:not(:first-child) > box > button.combo { @include linked_not_left; }
-    &:not(:last-child) > box > button.combo { @include linked_not_right; }
-  }
-
-  &:dir(rtl) {
-    &:not(:first-child) > box > button.combo { @include linked_not_right; }
-    &:not(:last-child) > box > button.combo { @include linked_not_left; }
-  }
-}
-
-.linked.vertical > filechooserbutton > combobox,
-.linked.vertical > appchooserbutton > combobox,
-.linked.vertical > combobox {
-  &:not(:first-child) > box > button.combo { @include linked_not_top; }
-  &:not(:last-child) > box > button.combo { @include linked_not_bottom; }
-}
-
 
 /************
  * Toolbars *

@@ -209,7 +209,6 @@ class Dropdown extends React.Component {
     const {
       size,
       className,
-      triggerClassName,
       disabled,
       loading,
       input,
@@ -223,9 +222,9 @@ class Dropdown extends React.Component {
     let trigger
 
     if (!input) {
-      const buttonClassName = cx('Dropdown__trigger Box horizontal', triggerClassName, {
+      const buttonClassName = cx('Dropdown Box horizontal', className, size, {
+        open,
         hover: open,
-        'no-outline': open,
       })
       trigger =
         <Button
@@ -243,7 +242,8 @@ class Dropdown extends React.Component {
     }
     else {
       const { inputValue } = this.state
-      const inputClassName = cx('Dropdown__trigger', triggerClassName, {
+      const inputClassName = cx('Dropdown', className, size, {
+        open,
         hover: open,
       })
       trigger =
@@ -304,13 +304,11 @@ class Dropdown extends React.Component {
         </div>
       </div>
 
-    const containerClassName = cx('Dropdown', className, size, { open })
-
     return (
-      <div className={containerClassName}>
+      <>
         {trigger}
         {createPortal(popover, this.domNode)}
-      </div>
+      </>
     )
   }
 }

@@ -25,6 +25,29 @@ $popover_radius: $button_radius + 4;
 }
 
 /***************
+ * Scrollbars  *
+ ***************/
+
+*::-webkit-scrollbar {
+  width: 10px;
+}
+*::-webkit-scrollbar-track {
+  background-color: transparent;
+  padding: 0 5px;
+}
+*::-webkit-scrollbar-thumb {
+  background-color: #bbb;
+  border-radius: 5px;
+  margin: 0 2px;
+}
+*::-webkit-scrollbar-thumb:hover {
+  background-color: #999;
+}
+*::-webkit-scrollbar-thumb:active {
+  background-color: #888;
+}
+
+/***************
  * Base States *
  ***************/
 .background {
@@ -225,7 +248,7 @@ radio:disabled,
 
   &.title {
     color: mix($fg_color, $bg_color, 50%);
-    font-weight: bold;
+    font-weight: 700;
   }
 }
 
@@ -2084,8 +2107,6 @@ $_menu-padding: 12px; // inner menuitem padding
   }
 
   .title {
-    font-weight: bold;
-    // font-size: 0.8em;
     padding: 4px $_menu-padding; // this will fall apart with font sizing
     text-align: left;
   }

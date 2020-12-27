@@ -1825,6 +1825,15 @@ searchbar > revealer > box, .Toolbar {
   border-spacing: 4px;
   background-color: #f6f5f4; }
 
+.Toolbar.horizontal {
+  display: flex;
+  flex-direction: row; }
+
+.Toolbar.vertical {
+  display: flex;
+  flex-direction: column;
+  width: 38px; }
+
 .osd .Toolbar {
   background-color: transparent; }
 
@@ -1836,11 +1845,13 @@ searchbar > revealer > box, .Toolbar {
   .Toolbar.osd.left, .Toolbar.osd.right, .Toolbar.osd.top, .Toolbar.osd.bottom {
     border-radius: 0; }
 
-.Toolbar.horizontal > separator {
-  margin: 4px 0; }
+.Toolbar.horizontal > .separator {
+  display: inline-block;
+  min-height: 28px;
+  margin: 0 3px; }
 
-.Toolbar.vertical > separator {
-  margin: 0 4px; }
+.Toolbar.vertical > .separator {
+  margin: 3px 1px; }
 
 searchbar > revealer > box {
   padding: 6px;
@@ -3792,6 +3803,9 @@ levelbar > trough > block {
  **********/
 .Frame {
   border: 1px solid #cdc7c2; }
+  .Frame.inline {
+    display: inline-block;
+    width: min-content; }
   .Frame > .Label {
     margin: 4px; }
 
@@ -3843,6 +3857,7 @@ scrolledwindow > junction {
 
 .separator {
   border-bottom: 1px solid #d8d4d0;
+  border-right: 1px solid #d8d4d0;
   min-width: 1px;
   min-height: 1px; }
 

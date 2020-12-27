@@ -6,7 +6,9 @@ import Icon, { names as iconNames } from './Icon'
 import Input from './Input'
 import InputNumber from './InputNumber'
 import Label from './Label'
+import Separator from './Separator'
 import Spinner from './Spinner'
+import Toolbar from './Toolbar'
 
 function blur() {
   document.body.classList.add('window-inactive');
@@ -31,8 +33,12 @@ function App() {
     <div className="App background">
       <h1>Application</h1>
 
+
       <Box horizontal>
-        <DemoDropdown />
+        <Box vertical>
+          <DemoDropdown />
+          <DemoToolbar />
+        </Box>
         <DemoFrame />
         <DemoMenu />
       </Box>
@@ -242,6 +248,33 @@ function DemoDropdown() {
   )
 }
 
+function DemoToolbar() {
+  return (
+    <>
+      <div className='Frame'>
+        <Toolbar horizontal>
+          <Button icon='document-new' />
+          <Button icon='document-edit' />
+          <Separator />
+          <Button icon='go-first' />
+          <Button icon='go-jump' />
+          <Button icon='go-last' />
+        </Toolbar>
+      </div>
+      <div className='Frame inline'>
+        <Toolbar vertical>
+          <Button icon='document-new' />
+          <Button icon='document-edit' />
+          <Separator />
+          <Button icon='go-first' />
+          <Button icon='go-jump' />
+          <Button icon='go-last' />
+        </Toolbar>
+      </div>
+    </>
+  )
+}
+
 function DemoFrame() {
   return (
     <div className='Frame' style={{ height: 160, marginBottom: '1em' }}>
@@ -262,10 +295,6 @@ function DemoFrame() {
             Quit
           </MenuButton>
         </div>
-      </div>
-      <div className='Toolbar'>
-        <Button>One</Button>
-        <Button>Two</Button>
       </div>
     </div>
   )

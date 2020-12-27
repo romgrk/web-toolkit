@@ -25,6 +25,7 @@ function Button({
   danger,
   ...rest
 }, ref) {
+  const isImageButton = image !== undefined ? image : Boolean(!children)
   return (
     <button
       className={cx('Button', {
@@ -35,7 +36,7 @@ function Button({
         active,
         hover,
         'text-button': text,
-        'image-button': image,
+        'image-button': isImageButton,
         'suggested-action': primary,
         'destructive-action': danger,
       }) + ' ' + cx(className)}

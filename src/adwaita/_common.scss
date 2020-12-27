@@ -1423,6 +1423,16 @@ input::-webkit-outer-spin-button {
 .Toolbar {
   @extend %toolbar;
 
+  &.horizontal {
+    display: flex;
+    flex-direction: row;
+  }
+  &.vertical {
+    display: flex;
+    flex-direction: column;
+    width: 38px;
+  }
+
   // on OSD
   .osd & { background-color: transparent; }
 
@@ -1440,8 +1450,14 @@ input::-webkit-outer-spin-button {
   }
 
   // toolbar separators
-  &.horizontal > separator { margin: 4px 0; }
-  &.vertical > separator { margin: 0 4px; }
+  &.horizontal > .separator {
+    display: inline-block;
+    min-height: 28px;
+    margin: 0 3px;
+  }
+  &.vertical > .separator {
+    margin: 3px 1px;
+  }
 }
 
 //searchbar & location-bar
@@ -3364,6 +3380,11 @@ levelbar {
   border: 1px solid $borders_color;
   // border-radius: $window_radius;
 
+  &.inline {
+    display: inline-block;
+    width: min-content;
+  }
+
   > .Label {
     margin: 4px;
   }
@@ -3416,6 +3437,7 @@ scrolledwindow {
 .separator {
   // background-color: lighten($borders_color, 5%);
   border-bottom: 1px solid lighten($borders_color, 5%);
+  border-right: 1px solid lighten($borders_color, 5%);
   min-width: 1px;
   min-height: 1px;
 }

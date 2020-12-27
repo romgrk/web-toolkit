@@ -1,4 +1,10 @@
 
+@mixin flex_center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 @mixin linked_not_left {
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;

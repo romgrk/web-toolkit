@@ -172,15 +172,33 @@ function App() {
   );
 }
 
-function MenuButton({ children, radio, name, value, accelerator }) {
+function MenuButton({
+  children,
+  radio,
+  checkbox,
+  name,
+  value,
+  accelerator,
+  icon,
+  menu,
+}) {
   return (
     <button className='ModelButton flat Menu__button'>
+      {checkbox !== undefined &&
+        <Icon name='emblem-ok' className='Menu__icon' />
+      }
       {radio &&
-        <Icon name='radio' />
+        <Icon name='radio' className='Menu__icon' />
       }
       <span className='Label Menu__button__text'>{children}</span>
       {accelerator &&
         <span className='Label Menu__button__accelerator'>{accelerator}</span>
+      }
+      {icon &&
+        <Icon name={icon} className='Menu__iconAfter' />
+      }
+      {menu &&
+        <Icon name='go-next' className='Menu__iconAfter submenu' />
       }
     </button>
   )
@@ -195,16 +213,11 @@ function DemoFrame() {
         <button className='MenuBar__item'>View</button>
         <div className='MenuBar__popover popover Menu menu background open'>
           <div className='contents'>
-            <MenuButton>
-              New
+            <MenuButton>New</MenuButton>
+            <MenuButton>Open</MenuButton>
+            <MenuButton menu={true}>
+              Other
             </MenuButton>
-            <MenuButton>
-              Open
-            </MenuButton>
-            <button className='ModelButton flat Menu__button'>
-              <span className='Label'>Other</span>
-              <Icon name='go-next' className='arrow right' />
-            </button>
             <div className='separator'/>
             <MenuButton accelerator='Ctrl+Q'>
               Quit
@@ -223,7 +236,7 @@ function DemoFrame() {
 function DemoMenu() {
   return (
     <div>
-      <div className='popover background menu open'>
+      <div className='popover background menu icons open' style={{ position: 'relative' }}>
         <div className='arrow up'    style={{ left: 100 }} />
         <div className='contents'>
           <Box horizontal className='circular-buttons' space='around'>
@@ -233,7 +246,7 @@ function DemoMenu() {
           <div className='separator' />
           <MenuButton accelerator='Ctrl+N'>Open in New Window</MenuButton>
           <div className='separator' />
-          <Box horizontal className='inline-buttons' align>
+          <Box horizontal className='Menu__item inline-buttons' align>
             <Label className='Box__fill'>Edit</Label>
             <Box horizontal compact>
               <Button flat image icon='edit-cut' />
@@ -241,6 +254,12 @@ function DemoMenu() {
               <Button flat image icon='edit-paste' />
             </Box>
           </Box>
+          <div className='separator' />
+          <MenuButton checkbox={true}>Pin</MenuButton>
+          <MenuButton>Select Labels...</MenuButton>
+          <MenuButton menu={<div>Some menu</div>}>
+            Share
+          </MenuButton>
           <div className='separator' />
           <Label className='title'>Size</Label>
           <MenuButton radio name='size' value='small'>Small</MenuButton>

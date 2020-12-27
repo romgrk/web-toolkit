@@ -15,12 +15,6 @@ $menu_margin: $menu_radius; //margin around menuitems & sidebar items
 $window_radius: $button_radius + 3;
 $popover_radius: $button_radius + 4;
 
-%flex_center {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 /***************
  * Selections  *
  ***************/
@@ -50,6 +44,10 @@ $popover_radius: $button_radius + 4;
 .large-icons {
   --icon-size: 32px;
 }
+
+/***************
+ * Layout      *
+ ***************/
 
 .Box {
   &.horizontal {
@@ -252,7 +250,7 @@ radio:disabled,
  ****************/
 
 .Icon {
-  @extend %flex_center;
+  @include flex_center;
   display: inline-flex;
 
   &:not(.colored) {
@@ -342,7 +340,7 @@ radio:disabled,
     }
 
     // icons inside the entry
-    .Input__left, .Input__right { @extend %flex_center; }
+    .Input__left, .Input__right { @include flex_center; }
     .Input__left { margin-right: 6px; }
     .Input__right { margin-left: 6px; }
 
@@ -914,14 +912,6 @@ $_dot_color: if($variant=='light', $selected_bg_color,
   }
 
   &.selected { @extend %selected_items; }
-}
-
-.ModelButton.flat .arrow {
-  background: none;
-  min-width: 16px;
-  min-height: 16px;
-  opacity: 0.3; // dim icon
-  &:hover { background: none; }
 }
 
 /* oldstyle toolbar buttons */
@@ -1959,15 +1949,13 @@ columnview.view,
   }
 
   > .contents {
+    padding: 8px 0;
+
     background-color: $_popover_bg;
     background-clip: padding-box;
     border: 1px solid $_popover_border;
-    box-shadow: 0 1px 3px 2px rgba(black, 0.08);
-  }
-
-  > .contents {
-    padding: 8px 0;
     border-radius: $popover_radius;
+    box-shadow: 0 1px 3px 2px rgba(black, 0.08);
 
     > .list,
     > .view,
@@ -1980,32 +1968,14 @@ columnview.view,
 
     .list .separator { margin: 0; }
   }
-
-  .osd &,
-  &.touch-selection
-  {
-    background-color: transparent;
-
-    > arrow,
-    > .contents {
-      @extend %osd;
-
-      border: 1px solid transparentize(white, 0.9);
-      box-shadow: none;
-    }
-  }
-
-  &.touch-selection {
-    button { @extend %osd_button; }
-  }
 }
 
 /**********************
  * Popover Base Menus *
  **********************/
 
-$_menu-padding: 12px; //inner menuitem padding
-//global $menu-margin for outside menuitems
+$_menu-padding: 12px; // inner menuitem padding
+// global $menu-margin for outside menuitems
 
 .popover.menu {
   padding: 0;
@@ -2034,16 +2004,9 @@ $_menu-padding: 12px; //inner menuitem padding
   .Box.inline-buttons {
     padding: 0 $_menu-padding;
 
-    /* .Button {
-     *   @include button(undecorated);
-     *   min-height: 30px;
-     *   min-width: 30px;
-     *   padding: 0;
-     *   border: none;
-     *   outline: none;
-     *   transition: none;
-     *   &.selected { background: image($menu_selected_color); }
-     * }  */
+    .Button {
+      transition: none;
+    }  
   }
 
   .Box.circular-buttons {
@@ -2059,7 +2022,6 @@ $_menu-padding: 12px; //inner menuitem padding
       }
     }
   }
-
 
   check,
   radio {
@@ -2088,7 +2050,12 @@ $_menu-padding: 12px; //inner menuitem padding
     margin-right: -2px;
   }
 
-  .ModelButton {
+  .Menu__button {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border: none;
+
     min-height: 30px;
     min-width: 40px;
     padding: 0 $_menu-padding;
@@ -2108,13 +2075,6 @@ $_menu-padding: 12px; //inner menuitem padding
       outline: none;
     }
   }
-
-  .Menu__button {
-    display: flex;
-    flex-direction: row;
-    border: none;
-    align-items: center;
-  }
   .Menu__button__text {
     flex: 1;
   }
@@ -2128,6 +2088,25 @@ $_menu-padding: 12px; //inner menuitem padding
     // font-size: 0.8em;
     padding: 4px $_menu-padding; // this will fall apart with font sizing
     text-align: left;
+  }
+
+  &.icons {
+    .Menu__item, .Menu__button, .title {
+      position: relative;
+      padding-left: $_menu-padding + 20px;
+    }
+
+    .Menu__icon {
+      position: absolute;
+      height: 100%;
+      top: 0;
+      left: 8px;
+      opacity: 0.6;
+    }
+  }
+
+  .Menu__iconAfter.submenu {
+    opacity: 0.3;
   }
 }
 

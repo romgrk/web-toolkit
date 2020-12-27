@@ -44,13 +44,6 @@ button {
   font-size: inherit;
   font-family: inherit; }
 
-.InputNumber.vertical > input .Input__left, .InputNumber:not(.vertical) .Input__left, .InputNumber.vertical > input .Input__right, .InputNumber:not(.vertical) .Input__right,
-.Input .Input__left,
-.Input .Input__right, .Icon {
-  display: flex;
-  justify-content: center;
-  align-items: center; }
-
 /***************
  * Selections  *
  ***************/
@@ -74,6 +67,9 @@ button {
 .large-icons {
   --icon-size: 32px; }
 
+/***************
+ * Layout      *
+ ***************/
 .Box.horizontal {
   display: flex;
   flex-direction: row; }
@@ -232,9 +228,7 @@ headerbar .subtitle, .InputNumber.vertical > input > input::placeholder, .InputN
   opacity: 0.55;
   text-shadow: none; }
 
-.osd .scale-popup, .app-notification, .osd .popover > arrow,
-.osd .popover > .contents, .popover.touch-selection > arrow,
-.popover.touch-selection > .contents,
+.osd .scale-popup, .app-notification,
 .osd {
   color: #eeeeec;
   border: none;
@@ -247,6 +241,9 @@ headerbar .subtitle, .InputNumber.vertical > input > input::placeholder, .InputN
  * Icons        *
  ****************/
 .Icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   display: inline-flex; }
   .Icon:not(.colored) svg * {
     fill: var(--icon-color, #2e3436); }
@@ -322,6 +319,12 @@ headerbar .subtitle, .InputNumber.vertical > input > input::placeholder, .InputN
       .InputNumber.vertical > input > input::placeholder, .InputNumber:not(.vertical) > input::placeholder,
       .Input > input::placeholder {
         user-select: none; }
+    .InputNumber.vertical > input .Input__left, .InputNumber:not(.vertical) .Input__left, .InputNumber.vertical > input .Input__right, .InputNumber:not(.vertical) .Input__right,
+    .Input .Input__left,
+    .Input .Input__right {
+      display: flex;
+      justify-content: center;
+      align-items: center; }
     .InputNumber.vertical > input .Input__left, .InputNumber:not(.vertical) .Input__left,
     .Input .Input__left {
       margin-right: 6px; }
@@ -805,7 +808,7 @@ row.selected button.sidebar-button:not(:active):not(:checked):not(:hover):not(di
     .Button.osd:checked::before {
       opacity: 0; }
 
-.app-notification button, .popover.touch-selection button, .osd .Button {
+.app-notification button, .osd .Button {
   color: #eeeeec;
   outline-color: rgba(53, 132, 228, 0.5);
   border-color: rgba(0, 0, 0, 0.7);
@@ -814,9 +817,9 @@ row.selected button.sidebar-button:not(:active):not(:checked):not(:hover):not(di
   box-shadow: inset 0 1px rgba(255, 255, 255, 0.1);
   text-shadow: none;
   --icon-shadow: none; }
-  .app-notification button::before, .popover.touch-selection button::before, .osd .Button::before {
+  .app-notification button::before, .osd .Button::before {
     opacity: 0; }
-  .app-notification button:hover, .popover.touch-selection button:hover, .osd .Button:hover {
+  .app-notification button:hover, .osd .Button:hover {
     color: white;
     border-color: rgba(0, 0, 0, 0.7);
     background-color: rgba(27, 27, 27, 0.7);
@@ -824,9 +827,9 @@ row.selected button.sidebar-button:not(:active):not(:checked):not(:hover):not(di
     box-shadow: inset 0 1px rgba(255, 255, 255, 0.1);
     text-shadow: none;
     --icon-shadow: none; }
-    .app-notification button:hover::before, .popover.touch-selection button:hover::before, .osd .Button:hover::before {
+    .app-notification button:hover::before, .osd .Button:hover::before {
       opacity: 0; }
-  .app-notification button:active, .popover.touch-selection button:active, .app-notification button:checked, .popover.touch-selection button:checked, .osd .Button:active:backdrop, .osd .Button:active, .osd .Button:checked:backdrop, .osd .Button:checked {
+  .app-notification button:active, .app-notification button:checked, .osd .Button:active:backdrop, .osd .Button:active, .osd .Button:checked:backdrop, .osd .Button:checked {
     color: white;
     border-color: rgba(0, 0, 0, 0.7);
     background-color: rgba(2, 2, 2, 0.7);
@@ -834,9 +837,9 @@ row.selected button.sidebar-button:not(:active):not(:checked):not(:hover):not(di
     box-shadow: none;
     text-shadow: none;
     --icon-shadow: none; }
-    .app-notification button:active::before, .popover.touch-selection button:active::before, .app-notification button:checked::before, .popover.touch-selection button:checked::before, .osd .Button:active:backdrop::before, .osd .Button:active::before, .osd .Button:checked:backdrop::before, .osd .Button:checked::before {
+    .app-notification button:active::before, .app-notification button:checked::before, .osd .Button:active:backdrop::before, .osd .Button:active::before, .osd .Button:checked:backdrop::before, .osd .Button:checked::before {
       opacity: 0; }
-  .app-notification button:disabled, .popover.touch-selection button:disabled, .osd .Button:disabled:backdrop, .osd .Button:disabled {
+  .app-notification button:disabled, .osd .Button:disabled:backdrop, .osd .Button:disabled {
     color: #919190;
     border-color: rgba(0, 0, 0, 0.7);
     background-color: rgba(71, 71, 71, 0.5);
@@ -844,9 +847,9 @@ row.selected button.sidebar-button:not(:active):not(:checked):not(:hover):not(di
     box-shadow: none;
     text-shadow: none;
     --icon-shadow: none; }
-    .app-notification button:disabled::before, .popover.touch-selection button:disabled::before, .osd .Button:disabled:backdrop::before, .osd .Button:disabled::before {
+    .app-notification button:disabled::before, .osd .Button:disabled:backdrop::before, .osd .Button:disabled::before {
       opacity: 0; }
-  .app-notification button.flat, .popover.touch-selection button.flat, .osd .Button.flat {
+  .app-notification button.flat, .osd .Button.flat {
     border-color: transparent;
     background-color: transparent;
     box-shadow: inset 0 1px rgba(255, 255, 255, 0);
@@ -855,9 +858,9 @@ row.selected button.sidebar-button:not(:active):not(:checked):not(:hover):not(di
     box-shadow: none;
     text-shadow: 0 1px black;
     --icon-shadow: 0 1px black; }
-    .app-notification button.flat::before, .popover.touch-selection button.flat::before, .osd .Button.flat::before {
+    .app-notification button.flat::before, .osd .Button.flat::before {
       opacity: 0; }
-    .app-notification button.flat:hover, .popover.touch-selection button.flat:hover, .osd .Button.flat:hover {
+    .app-notification button.flat:hover, .osd .Button.flat:hover {
       color: white;
       border-color: rgba(0, 0, 0, 0.7);
       background-color: rgba(27, 27, 27, 0.7);
@@ -865,9 +868,9 @@ row.selected button.sidebar-button:not(:active):not(:checked):not(:hover):not(di
       box-shadow: inset 0 1px rgba(255, 255, 255, 0.1);
       text-shadow: none;
       --icon-shadow: none; }
-      .app-notification button.flat:hover::before, .popover.touch-selection button.flat:hover::before, .osd .Button.flat:hover::before {
+      .app-notification button.flat:hover::before, .osd .Button.flat:hover::before {
         opacity: 0; }
-    .app-notification button.flat:disabled, .popover.touch-selection button.flat:disabled, .osd .Button.flat:disabled {
+    .app-notification button.flat:disabled, .osd .Button.flat:disabled {
       color: #919190;
       border-color: rgba(0, 0, 0, 0.7);
       background-color: rgba(71, 71, 71, 0.5);
@@ -878,9 +881,9 @@ row.selected button.sidebar-button:not(:active):not(:checked):not(:hover):not(di
       background-image: none;
       border-color: transparent;
       box-shadow: none; }
-      .app-notification button.flat:disabled::before, .popover.touch-selection button.flat:disabled::before, .osd .Button.flat:disabled::before {
+      .app-notification button.flat:disabled::before, .osd .Button.flat:disabled::before {
         opacity: 0; }
-    .app-notification button.flat:active, .popover.touch-selection button.flat:active, .app-notification button.flat:checked, .popover.touch-selection button.flat:checked, .osd .Button.flat:active, .osd .Button.flat:checked {
+    .app-notification button.flat:active, .app-notification button.flat:checked, .osd .Button.flat:active, .osd .Button.flat:checked {
       color: white;
       border-color: rgba(0, 0, 0, 0.7);
       background-color: rgba(2, 2, 2, 0.7);
@@ -888,7 +891,7 @@ row.selected button.sidebar-button:not(:active):not(:checked):not(:hover):not(di
       box-shadow: none;
       text-shadow: none;
       --icon-shadow: none; }
-      .app-notification button.flat:active::before, .popover.touch-selection button.flat:active::before, .app-notification button.flat:checked::before, .popover.touch-selection button.flat:checked::before, .osd .Button.flat:active::before, .osd .Button.flat:checked::before {
+      .app-notification button.flat:active::before, .app-notification button.flat:checked::before, .osd .Button.flat:active::before, .osd .Button.flat:checked::before {
         opacity: 0; }
 
 
@@ -1290,7 +1293,7 @@ stacksidebar row.needs-attention > .Label, .StackSwitcher > .Button.needs-attent
   .ModelButton.flat::before {
     opacity: 0; }
   .ModelButton.flat.hover, .ModelButton.flat:hover {
-    background-color: #e8e6e3; }
+    background-color: #efedec; }
   .ModelButton.flat.active, .ModelButton.flat:active {
     border-color: transparent;
     box-shadow: none;
@@ -1300,14 +1303,6 @@ stacksidebar row.needs-attention > .Label, .StackSwitcher > .Button.needs-attent
       opacity: 0; }
   .ModelButton.flat.disabled, .ModelButton.flat:disabled {
     color: #929595; }
-
-.ModelButton.flat .arrow {
-  background: none;
-  min-width: 16px;
-  min-height: 16px;
-  opacity: 0.3; }
-  .ModelButton.flat .arrow:hover {
-    background: none; }
 
 /* oldstyle toolbar buttons */
 .Toolbar button {
@@ -1724,7 +1719,7 @@ input::-webkit-outer-spin-button {
       .Dropdown__menu .list > row.selected {
         outline-color: rgba(255, 255, 255, 0.8);
         color: black;
-        background-color: #e8e6e3; }
+        background-color: #efedec; }
   .Dropdown__menu > popover.menu > .contents .ModelButton {
     padding-left: 9px;
     padding-right: 9px; }
@@ -2271,13 +2266,12 @@ columnview.view > header > button, columnview.IconView > header > button,
         border-right-width: 0;
         border-left-color: #ffffff; }
   .popover > .contents {
+    padding: 8px 0;
     background-color: #ffffff;
     background-clip: padding-box;
     border: 1px solid rgba(0, 0, 0, 0.23);
+    border-radius: 9px;
     box-shadow: 0 1px 3px 2px rgba(0, 0, 0, 0.08); }
-  .popover > .contents {
-    padding: 8px 0;
-    border-radius: 9px; }
     .popover > .contents > .list,
     .popover > .contents > .view,
     .popover > .contents > .IconView,
@@ -2288,13 +2282,6 @@ columnview.view > header > button, columnview.IconView > header > button,
       margin: 3px; }
     .popover > .contents .list .separator {
       margin: 0; }
-  .osd .popover, .popover.touch-selection {
-    background-color: transparent; }
-    .osd .popover > arrow,
-    .osd .popover > .contents, .popover.touch-selection > arrow,
-    .popover.touch-selection > .contents {
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      box-shadow: none; }
 
 /**********************
  * Popover Base Menus *
@@ -2315,24 +2302,16 @@ columnview.view > header > button, columnview.IconView > header > button,
   .popover.menu.background .separator {
     margin: 6px 0; }
   .popover.menu .Box.inline-buttons {
-    padding: 0 12px;
-    /* .Button {
-     *   @include button(undecorated);
-     *   min-height: 30px;
-     *   min-width: 30px;
-     *   padding: 0;
-     *   border: none;
-     *   outline: none;
-     *   transition: none;
-     *   &.selected { background: image($menu_selected_color); }
-     * }  */ }
+    padding: 0 12px; }
+    .popover.menu .Box.inline-buttons .Button {
+      transition: none; }
   .popover.menu .Box.circular-buttons {
     padding: 12px 12px 6px; }
     .popover.menu .Box.circular-buttons .Button.circular {
       padding: 11px; }
       .popover.menu .Box.circular-buttons .Button.circular:focus {
-        background-color: #e8e6e3;
-        border-color: #e8e6e3; }
+        background-color: #efedec;
+        border-color: #efedec; }
   .popover.menu check,
   .popover.menu radio {
     transform: scale(0.8);
@@ -2369,24 +2348,23 @@ columnview.view > header > button, columnview.IconView > header > button,
   .popover.menu check.right {
     margin-left: 6px;
     margin-right: -2px; }
-  .popover.menu .ModelButton {
+  .popover.menu .Menu__button {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border: none;
     min-height: 30px;
     min-width: 40px;
     padding: 0 12px;
     border-radius: 0;
     text-align: left; }
-    .popover.menu .ModelButton.selected {
+    .popover.menu .Menu__button.selected {
       color: black;
-      background-color: #e8e6e3; }
-    .popover.menu .ModelButton.selected:active {
+      background-color: #efedec; }
+    .popover.menu .Menu__button.selected:active {
       background-color: #d6d1cd; }
-    .popover.menu .ModelButton:focus {
+    .popover.menu .Menu__button:focus {
       outline: none; }
-  .popover.menu .Menu__button {
-    display: flex;
-    flex-direction: row;
-    border: none;
-    align-items: center; }
   .popover.menu .Menu__button__text {
     flex: 1; }
   .popover.menu .Menu__button__accelerator {
@@ -2396,6 +2374,17 @@ columnview.view > header > button, columnview.IconView > header > button,
     font-weight: bold;
     padding: 4px 12px;
     text-align: left; }
+  .popover.menu.icons .Menu__item, .popover.menu.icons .Menu__button, .popover.menu.icons .title {
+    position: relative;
+    padding-left: 32px; }
+  .popover.menu.icons .Menu__icon {
+    position: absolute;
+    height: 100%;
+    top: 0;
+    left: 8px;
+    opacity: 0.6; }
+  .popover.menu .Menu__iconAfter.submenu {
+    opacity: 0.3; }
 
 .MenuBar {
   padding: 0px;
@@ -2419,7 +2408,7 @@ columnview.view > header > button, columnview.IconView > header > button,
       border-bottom: 3px solid #3584e4; }
     .MenuBar > .MenuBar__item.focus, .MenuBar > .MenuBar__item:focus {
       outline: none;
-      background-color: #e8e6e3; }
+      background-color: #efedec; }
     .MenuBar > .MenuBar__item.selected {
       box-shadow: inset 0 -3px #3584e4;
       color: #1b6acb; }
@@ -4034,7 +4023,7 @@ calendar {
   padding: 6px 12px; }
 
 .Window.assistant .sidebar > .Label.highlight {
-  background-color: #e8e6e3;
+  background-color: #efedec;
   border-radius: 5px; }
 
 filechooser .dialog-action-box {
@@ -4078,11 +4067,11 @@ stacksidebar row {
   stacksidebar row.needs-attention > .Label {
     background-size: 6px 6px, 0 0; }
   stacksidebar row.selected {
-    background-color: #e8e6e3;
+    background-color: #efedec;
     border-radius: 5px;
     color: #2e3436; }
   stacksidebar row.selected:hover:dir(ltr), stacksidebar row.selected:hover:dir(rtl) {
-    background-color: #ddd9d5; }
+    background-color: #e4e1de; }
   stacksidebar row:focus:focus-visible {
     outline-width: 0;
     background-color: #3584e4;
@@ -4106,12 +4095,12 @@ separator.sidebar {
     border-radius: 5px;
     margin: 0 5px 2px; }
     .navigation-sidebar > row:hover, .navigation-sidebar > row:focus-visible:focus-within {
-      background-color: #ddd9d5; }
+      background-color: #e4e1de; }
     .navigation-sidebar > row.selected {
-      background-color: #e8e6e3;
+      background-color: #efedec;
       color: inherit; }
       .navigation-sidebar > row.selected:hover {
-        background-color: #ddd9d5; }
+        background-color: #e4e1de; }
       .navigation-sidebar > row.selected:focus-visible:focus-within {
         outline-width: 0;
         color: #ffffff;
@@ -4599,7 +4588,7 @@ emoji-completion-row:hover {
 
 emoji-completion-row emoji:focus,
 emoji-completion-row emoji:hover {
-  background-color: #e8e6e3; }
+  background-color: #efedec; }
 
 popover.entry-completion > .contents {
   padding: 0; }

@@ -426,7 +426,7 @@ $popover_radius: $button_radius + 4;
 
     &:focus-within {
       @include entry(focus);
-      > input::placeholder {
+      > .Input__area > input::placeholder {
         opacity: 0; /* We hide placeholders on focus */
       }
     }

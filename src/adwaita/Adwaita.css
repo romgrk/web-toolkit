@@ -417,8 +417,8 @@ headerbar .subtitle, .InputNumber.vertical > input > .Input__area > input::place
       background-color: transparent;
       border-color: transparent;
       border-radius: 0; }
-    .InputNumber.vertical > input:focus-within > input::placeholder, .InputNumber:focus-within:not(.vertical) > input::placeholder,
-    .Input:focus-within > input::placeholder {
+    .InputNumber.vertical > input:focus-within > .Input__area > input::placeholder, .InputNumber:focus-within:not(.vertical) > .Input__area > input::placeholder,
+    .Input:focus-within > .Input__area > input::placeholder {
       opacity: 0;
       /* We hide placeholders on focus */ }
     .InputNumber.vertical > input:disabled, .InputNumber:disabled:not(.vertical), .InputNumber.vertical > input.disabled, .disabled.InputNumber:not(.vertical),

@@ -44,3 +44,19 @@ button {
   font-family: inherit;
 }
 
+
+.text-info {
+  color: $selected_bg_color;
+}
+.text-success {
+  color: $success_color;
+}
+.text-warning {
+  color: $warning_color;
+}
+.text-danger {
+  color: $destructive_color;
+}
+.text-muted {
+  color: $insensitive_fg_color;
+}

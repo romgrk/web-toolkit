@@ -14,37 +14,7 @@ import Icon from './Icon'
 import Input from './Input'
 import Label from './Label'
 import Separator from './Separator'
-import Spinner from './Spinner'
 
-
-function Item({ icon, children, className, selected, ...rest }) {
-  const itemClassName = 'Dropdown__item ModelButton flat Box horizontal align'
-    + (selected ? ' selected' : '')
-    + (className ? ' ' + className : '')
-
-  return (
-    <button className={itemClassName} {...rest} role='option' aria-selected={selected}>
-      {icon &&
-        <span className='Dropdown__item__icon'>
-          <Icon name={icon} />
-        </span>
-      }
-      <Label className='Dropdown__item__label Box__fill'>
-        {children}
-      </Label>
-    </button>
-  )
-}
-
-function wrapLabel(label) {
-  if (typeof label !== 'string')
-    return label
-  return (
-    <Label align='left' fill='width' ellipsis>
-      {label}
-    </Label>
-  )
-}
 
 class Dropdown extends React.Component {
   static propTypes = {
@@ -53,10 +23,16 @@ class Dropdown extends React.Component {
     size: prop.oneOf(['small', 'medium', 'large']),
     align: prop.oneOf(['left', 'right']),
     label: prop.node,
-    children: prop.node,
+    options: prop.arrayOf(prop.shape({
+      value: prop.any.isRequired,
+      label: prop.node.isRequired,
+      data: prop.object,
+    })),
     disabled: prop.bool,
     loading: prop.bool,
     open: prop.bool,
+    filterKey: prop.string,
+    filter: prop.func,
     onClose: prop.func,
     onOpen: prop.func,
   }
@@ -86,6 +62,7 @@ class Dropdown extends React.Component {
       selectedOption: undefined,
       open: false,
       position: { top: 0, left: 0 },
+      inputValue: '',
     }
   }
 
@@ -140,6 +117,15 @@ class Dropdown extends React.Component {
     }
   }
 
+  onInputBlur = () => {
+    setTimeout(this.close, 200)
+  }
+
+  onInputChange = inputValue => {
+    console.log(inputValue)
+    this.setState({ inputValue })
+  }
+
   onToggle = ev => {
     if (this.state.open)
       this.close()
@@ -167,8 +153,8 @@ class Dropdown extends React.Component {
     else
       this.setState({ open: false })
 
-    if (this.props.input && this.trigger) {
-      this.trigger.value = ''
+    if (this.props.input && this.state.inputValue) {
+      this.setState({ inputValue: '' })
     }
   }
 
@@ -191,14 +177,32 @@ class Dropdown extends React.Component {
     this.close()
   }
 
-  onBlurInput = () => {
-    setTimeout(this.close, 200)
-  }
-
   getValue() {
     if (this.isControlled())
       return this.props.value
     return this.state.value
+  }
+
+  getOptions() {
+    const { options, filterKey, filter } = this.props
+    const { inputValue } = this.state
+
+    if (!inputValue)
+      return options
+
+    const needle = inputValue.toLowerCase()
+
+    return options.filter(o => {
+      const optionValue = 
+        filterKey ?
+          o.data[filterKey] :
+        filter ?
+          filter(o) :
+        typeof o.label === 'string' ?
+          o.label :
+          o.value
+      return String(optionValue).toLowerCase().includes(needle)
+    })
   }
 
   render() {
@@ -209,13 +213,12 @@ class Dropdown extends React.Component {
       disabled,
       loading,
       input,
-      options,
     } = this.props
     const { position } = this.state
     const open = this.isOpen()
     const value = this.getValue()
     const label =
-      this.props.label || options.find(o => o.value === value)?.label || value
+      this.props.label || this.props.options.find(o => o.value === value)?.label || value
 
     let trigger
 
@@ -239,17 +242,19 @@ class Dropdown extends React.Component {
         </Button>
     }
     else {
+      const { inputValue } = this.state
       const inputClassName = cx('Dropdown__trigger', triggerClassName, {
         hover: open,
-        'no-outline': open,
       })
       trigger =
         <Input
           className={inputClassName}
           loading={loading}
           disabled={disabled}
+          value={inputValue}
           onFocus={this.open}
-          onBlur={this.onBlurInput}
+          onBlur={this.onInputBlur}
+          onChange={this.onInputChange}
           iconAfter='pan-down'
           ref={ref => ref && (this.trigger = ref)}
         >
@@ -257,20 +262,28 @@ class Dropdown extends React.Component {
         </Input>
     }
 
+    const options = this.getOptions()
     const actualChildren =
       options.map(o =>
-        <Item
+        <DropdownButton
           key={o.value}
           selected={String(o.value) === String(value)}
           onClick={() => this.select(o.value, o)}
         >
           {o.label}
-        </Item>
+        </DropdownButton>
+      )
+
+    if (actualChildren.length === 0)
+      actualChildren.push(
+        <DropdownItem className='text-muted'>
+          No option found
+        </DropdownItem>
       )
 
     /* const transformedChildren =
      *   React.Children.map(children, child =>
-     *     child.type !== Item ? child :
+     *     child.type !== DropdownButton ? child :
      *       React.cloneElement(
      *         child,
      *         {
@@ -302,7 +315,61 @@ class Dropdown extends React.Component {
   }
 }
 
-Dropdown.Item = Item
+function DropdownButton({ icon, children, className, selected, ...rest }) {
+  const itemClassName = 'Dropdown__item ModelButton flat Box horizontal align'
+    + (selected ? ' selected' : '')
+    + (className ? ' ' + className : '')
+
+  return (
+    <button className={itemClassName} {...rest} role='option' aria-selected={selected}>
+      {icon &&
+        <span className='Dropdown__item__icon'>
+          <Icon name={icon} />
+        </span>
+      }
+      <Label className='Dropdown__item__label Box__fill'>
+        {children}
+      </Label>
+    </button>
+  )
+}
+
+function DropdownItem({ icon, children, className, ...rest }) {
+  const itemClassName = 'Dropdown__item ModelItem Box horizontal align'
+    + (className ? ' ' + className : '')
+
+  return (
+    <div className={itemClassName} {...rest}>
+      {icon &&
+        <span className='Dropdown__item__icon'>
+          <Icon name={icon} />
+        </span>
+      }
+      <Label className='Dropdown__item__label Box__fill'>
+        {children}
+      </Label>
+    </div>
+  )
+}
+
+
+// Exports
+
+Dropdown.Item = DropdownItem
+Dropdown.Button = DropdownButton
 Dropdown.Separator = Separator
 
 export default Dropdown
+
+
+// Helpers
+
+function wrapLabel(label) {
+  if (typeof label !== 'string')
+    return label
+  return (
+    <Label align='left' fill='width' ellipsis>
+      {label}
+    </Label>
+  )
+}

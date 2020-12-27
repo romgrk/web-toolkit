@@ -44,6 +44,21 @@ button {
   font-size: inherit;
   font-family: inherit; }
 
+.text-info {
+  color: #3584e4; }
+
+.text-success {
+  color: #33d17a; }
+
+.text-warning {
+  color: #f57900; }
+
+.text-danger {
+  color: #e01b24; }
+
+.text-muted {
+  color: #929595; }
+
 /***************
  * Selections  *
  ***************/
@@ -1348,10 +1363,13 @@ stacksidebar row.needs-attention > .Label, .StackSwitcher > .Button.needs-attent
   border-bottom-right-radius: 0; }
 
 /* menu buttons */
+.ModelItem,
 .ModelButton.flat {
   min-height: 26px;
   padding-left: 5px;
-  padding-right: 5px;
+  padding-right: 5px; }
+
+.ModelButton.flat {
   border-color: transparent;
   background-color: transparent;
   box-shadow: inset 0 1px rgba(255, 255, 255, 0);
@@ -1771,7 +1789,7 @@ input::-webkit-outer-spin-button {
       text-align: left; }
     .Dropdown .Dropdown__trigger.Button > .Icon {
       flex: 0; }
-  .Dropdown.open .Dropdown__trigger.Button {
+  .Dropdown.open .Dropdown__trigger {
     background-color: #ffffff;
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
@@ -1790,14 +1808,16 @@ input::-webkit-outer-spin-button {
   border-top-left-radius: 0;
   border-top-right-radius: 0; }
 
-.Dropdown__menu.popover > .contents .ModelButton {
+.Dropdown__menu.popover > .contents .Dropdown__item {
   padding-left: 9px;
-  padding-right: 9px; }
-  .Dropdown__menu.popover > .contents .ModelButton.selected {
-    font-weight: 700;
-    outline-color: rgba(255, 255, 255, 0.8);
-    color: black;
-    background-color: #efedec; }
+  padding-right: 9px;
+  padding: 0 12px; }
+
+.Dropdown__menu.popover > .contents .ModelButton.selected {
+  font-weight: 700;
+  outline-color: rgba(255, 255, 255, 0.8);
+  color: black;
+  background-color: #efedec; }
 
 .Dropdown__menu.popover .list {
   margin: 8px 0; }
@@ -2429,6 +2449,7 @@ columnview.view > header > button, columnview.IconView > header > button,
   .popover.menu check.right {
     margin-left: 6px;
     margin-right: -2px; }
+  .popover.menu .Menu__item,
   .popover.menu .Menu__button {
     display: flex;
     flex-direction: row;
@@ -2439,13 +2460,13 @@ columnview.view > header > button, columnview.IconView > header > button,
     padding: 0 12px;
     border-radius: 0;
     text-align: left; }
-    .popover.menu .Menu__button.selected {
-      color: black;
-      background-color: #efedec; }
-    .popover.menu .Menu__button.selected:active {
-      background-color: #d6d1cd; }
-    .popover.menu .Menu__button:focus {
-      outline: none; }
+  .popover.menu .Menu__button.selected {
+    color: black;
+    background-color: #efedec; }
+  .popover.menu .Menu__button.selected:active {
+    background-color: #d6d1cd; }
+  .popover.menu .Menu__button:focus {
+    outline: none; }
   .popover.menu .Menu__button__text {
     flex: 1; }
   .popover.menu .Menu__button__accelerator {

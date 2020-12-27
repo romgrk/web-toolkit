@@ -5,7 +5,9 @@
 
 import { useState, useRef, forwardRef } from 'react'
 import cx from 'classname'
+
 import Icon from './Icon'
+import Spinner from './Spinner'
 
 function useForceUpdate(){
     const [_, setValue] = useState(0)
@@ -15,11 +17,12 @@ function useForceUpdate(){
 function Input({
   type = 'text',
   className,
-  icon,
+  loading,
+  icon: iconValue,
   iconAfter,
   placeholder,
   flat,
-  disabled,
+  disabled: disabledValue,
   error,
   warning,
   progress,
@@ -28,20 +31,23 @@ function Input({
   ...rest
 }, ref) {
 
+  const icon = iconValue || (loading ? <Spinner /> : undefined)
+  const disabled = disabledValue || loading
+
   const forceUpdate = useForceUpdate()
   const inputRef = useRef()
   const isControlled = typeof rest.value === 'string'
   const value = isControlled ? rest.value : (inputRef.current?.value || rest.defaultValue || '')
+  console.log({ value }, rest.value)
 
   const inputClassName =
     cx('Input', { flat, disabled, error, warning, progress: progress !== undefined })
     + ' ' + cx(className)
 
   const onInputChange = ev => {
-    if (isControlled)
-      onChange && onChange(ev.targer.value, ev)
-    else
+    if (!isControlled)
       forceUpdate()
+    onChange && onChange(ev.target.value, ev)
   }
 
   return (

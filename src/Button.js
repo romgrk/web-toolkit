@@ -4,13 +4,16 @@
 
 import { forwardRef } from 'react'
 import cx from 'classname'
+
 import Icon from './Icon'
+import Spinner from './Spinner'
 
 function Button({
   children,
   icon,
   className,
   disabled,
+  loading,
   circular,
   flat,
   link,
@@ -36,10 +39,13 @@ function Button({
         'suggested-action': primary,
         'destructive-action': danger,
       }) + ' ' + className}
-      disabled={disabled}
+      disabled={disabled || loading}
       ref={ref}
       {...rest}
     >
+      {loading &&
+        <Spinner />
+      }
       {icon &&
         (typeof icon === 'string' ?
           <Icon name={icon} /> : icon)

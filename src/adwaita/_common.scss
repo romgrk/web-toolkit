@@ -12,6 +12,8 @@ $focus_transition: outline-width 200ms $ease-out-quad, outline-offset 200ms $eas
 $button_radius: 5px;
 $menu_radius: 5px;
 $menu_margin: $menu_radius; //margin around menuitems & sidebar items
+$menu_padding: 12px; // inner menuitem padding
+// global $menu-margin for outside menuitems // XXX define this
 $window_radius: $button_radius + 3;
 $popover_radius: $button_radius + 4;
 
@@ -960,11 +962,13 @@ $_dot_color: if($variant=='light', $selected_bg_color,
 
 // TODO validate this
 /* menu buttons */
+.ModelItem,
 .ModelButton.flat {
   min-height: 26px;
   padding-left: 5px;
   padding-right: 5px;
-
+}
+.ModelButton.flat {
   @include button('undecorated');
 
   // border-radius: $button_radius;
@@ -1358,7 +1362,7 @@ input::-webkit-outer-spin-button {
       flex: 0;
     }
   }
-  &.open .Dropdown__trigger.Button {
+  &.open .Dropdown__trigger {
     background-color: $popover_bg;
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
@@ -1389,10 +1393,13 @@ input::-webkit-outer-spin-button {
     border-top-right-radius: 0;
   }
 
-  > .contents .ModelButton {
+  > .contents .Dropdown__item {
     // align menu labels with the button .Label
     padding-left: 9px;
     padding-right: 9px;
+    padding: 0 $menu_padding;
+  }
+  > .contents .ModelButton {
 
     &.selected {
       font-weight: 700;
@@ -2060,9 +2067,6 @@ columnview.view,
  * Popover Base Menus *
  **********************/
 
-$_menu-padding: 12px; // inner menuitem padding
-// global $menu-margin for outside menuitems
-
 .popover.menu {
   padding: 0;
 
@@ -2088,7 +2092,7 @@ $_menu-padding: 12px; // inner menuitem padding
   }
 
   .Box.inline-buttons {
-    padding: 0 $_menu-padding;
+    padding: 0 $menu_padding;
 
     .Button {
       transition: none;
@@ -2096,7 +2100,7 @@ $_menu-padding: 12px; // inner menuitem padding
   }
 
   .Box.circular-buttons {
-    padding: $_menu-padding $_menu-padding 6px;
+    padding: $menu_padding $menu_padding 6px;
 
     .Button.circular {
       @extend %list_button;
@@ -2136,6 +2140,7 @@ $_menu-padding: 12px; // inner menuitem padding
     margin-right: -2px;
   }
 
+  .Menu__item,
   .Menu__button {
     display: flex;
     flex-direction: row;
@@ -2144,10 +2149,11 @@ $_menu-padding: 12px; // inner menuitem padding
 
     min-height: 30px;
     min-width: 40px;
-    padding: 0 $_menu-padding;
+    padding: 0 $menu_padding;
     border-radius: 0;
     text-align: left;
-
+  }
+  .Menu__button {
     &.selected {
       color: $text-color;
       background-color: $menu_selected_color;
@@ -2166,18 +2172,18 @@ $_menu-padding: 12px; // inner menuitem padding
   }
   .Menu__button__accelerator {
     color: rgba($text_color, 0.55);
-    margin-left: $_menu-padding;
+    margin-left: $menu_padding;
   }
 
   .title {
-    padding: 4px $_menu-padding; // this will fall apart with font sizing
+    padding: 4px $menu_padding; // this will fall apart with font sizing
     text-align: left;
   }
 
   &.icons {
     .Menu__item, .Menu__button, .title {
       position: relative;
-      padding-left: $_menu-padding + 20px;
+      padding-left: $menu_padding + 20px;
     }
 
     .Menu__icon {

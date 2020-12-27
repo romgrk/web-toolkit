@@ -43,10 +43,6 @@ $popover_radius: $button_radius + 4;
   }
 }
 
-dnd {
-  color: $fg-color;
-}
-
 .normal-icons {
   --icon-size: 16px;
 }
@@ -54,6 +50,39 @@ dnd {
 .large-icons {
   --icon-size: 32px;
 }
+
+.Box {
+  &.horizontal {
+    display: flex;
+    flex-direction: row;
+    &:not(.compact) > *:not(:last-child) {
+      margin-right: 1em;
+    }
+  }
+  &.vertical {
+    display: flex;
+    flex-direction: column;
+    &:not(.compact) > *:not(:last-child) {
+      margin-bottom: 1em;
+    }
+  }
+  &.inline {
+    display: inline-flex;
+  }
+  &.align {
+    align-items: center;
+  }
+  &.space-around {
+    justify-content: space-around;
+  }
+  &.space-between {
+    justify-content: space-between;
+  }
+}
+.Box__fill {
+  flex: 1;
+}
+
 
 /*
    These wildcard seems unavoidable, need to investigate.
@@ -195,6 +224,11 @@ radio:disabled,
    color: $error_color;
    &.disabled { color: transparentize($error_color,0.5); }
   }
+
+  &.title {
+    color: mix($fg_color, $bg_color, 50%);
+    font-weight: bold;
+  }
 }
 
 .dim-label {
@@ -255,47 +289,6 @@ radio:disabled,
   }
 }
 
-/**********************
- * General Typography *
- **********************/
-
-.title-large {
-   font-weight: 300;
-   font-size: 24pt;
-}
-h1 {
-   font-weight: 800;
-   font-size: 20pt;
-}
-h2 {
-   font-weight: 800;
-   font-size: 15pt;
-}
-h3 {
-   font-weight: 700;
-   font-size: 15pt;
-}
-h4 {
-   font-weight: 700;
-   font-size: 13pt;
-}
-body {
-   font-weight: 400;
-   font-size: 11pt;
-}
-.heading {
-   font-weight: 700;
-   font-size: 11pt;
-}
-.caption-heading {
-   font-weight: 700;
-   font-size: 9pt;
-}
-.caption {
-   font-weight: 400;
-   font-size: 9pt;
-}
-
 /****************
  * Text Entries *
  ****************/
@@ -343,6 +336,7 @@ body {
       }
       &::placeholder {
         @extend .dim-label;
+        user-select: none;
       }
       &::selection { @extend %selected_items; }
     }
@@ -455,7 +449,7 @@ body {
   // .dnd-active .linked:not(.vertical) + &,
   // .dnd-active .linked:not(.vertical) + button,
   // .dnd-active .linked:not(.vertical) + menubutton > button,
-  // .dnd-active .linked:not(.vertical) + dropdown > button,
+  // .dnd-active .linked:not(.vertical) + .Dropdown > button,
   // .dnd-active .linked:not(.vertical) + colorbutton > button,
   // .dnd-active .linked:not(.vertical) + fontbutton > button,
   // .dnd-active .linked:not(.vertical) + filechooserbutton > button,
@@ -489,7 +483,7 @@ body {
       + .Input,
       + .Button,
       + menubutton > .Button,
-      + dropdown > .Button,
+      + .Dropdown > .Button,
       + colorbutton > .Button,
       + fontbutton > .Button,
       + filechooserbutton > .Button,
@@ -563,6 +557,8 @@ $_dot_color: if($variant=='light', $selected_bg_color,
     border: 1px solid;
     border-radius: $button_radius;
     transition: $button_transition;
+
+    user-select: none;
 
     @include button(normal);
 
@@ -689,7 +685,7 @@ $_dot_color: if($variant=='light', $selected_bg_color,
     min-width: 26px;
     min-height: 32px;
 
-    &.image-button { 
+    &.image-button {
       min-width: 30px;
       &:only-child {
         margin: 4px;
@@ -866,7 +862,7 @@ $_dot_color: if($variant=='light', $selected_bg_color,
 
 // TODO validate this
 .linked:not(.vertical) > menubutton,
-.linked:not(.vertical) > dropdown,
+.linked:not(.vertical) > .Dropdown,
 .linked:not(.vertical) > colorbutton,
 .linked:not(.vertical) > fontbutton,
 .linked:not(.vertical) > filechooserbutton {
@@ -883,7 +879,7 @@ $_dot_color: if($variant=='light', $selected_bg_color,
 
 // TODO validate this
 .linked.vertical > menubutton,
-.linked.vertical > dropdown,
+.linked.vertical > .Dropdown,
 .linked.vertical > colorbutton,
 .linked.vertical > fontbutton,
 .linked.vertical > filechooserbutton {
@@ -902,7 +898,15 @@ $_dot_color: if($variant=='light', $selected_bg_color,
   @include button('undecorated');
 
   &.hover,
-  &:hover { background-color: $menu_selected_color; }
+  &:hover {
+    background-color: $menu_selected_color;
+    // @include button(undecorated-hover);
+  }
+
+  &.active,
+  &:active {
+    @include button(undecorated-active);
+  }
 
   &.disabled,
   &:disabled {
@@ -959,7 +963,7 @@ button.color {
 /* list buttons */
 /* tone down as per new designs, see issue #1473 */
 %list_button,
-.List > .Row button.image-button:not(.flat) {
+.list > .Row button.image-button:not(.flat) {
   @include button('undecorated');
   border: 1px solid transparentize($borders_color, .5);
   &:hover { @include button(hover); }
@@ -1036,10 +1040,10 @@ button.link {
 input[type="number"] {
   -moz-appearance: textfield;
 }
-input::-webkit-inner-spin-button, 
-input::-webkit-outer-spin-button { 
-  -webkit-appearance: none; 
-  margin: 0; 
+input::-webkit-inner-spin-button,
+input::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 
 .InputNumber {
@@ -1261,24 +1265,30 @@ input::-webkit-outer-spin-button {
 /**************
  * ComboBoxes *
  **************/
-dropdown > popover.menu.background > contents { padding: 0; } //allow search entries with no margin
+.Dropdown > popover.menu.background > .contents { padding: 0; } //allow search entries with no margin
 
-dropdown > button > box {
+.Dropdown > button > box {
   border-spacing: 6px;
 }
 
-dropdown,
-combobox {
-  arrow {
-    -gtk-icon-source: -gtk-icontheme('pan-down-symbolic');
-    min-height: 16px;
-    min-width: 16px;
-  }
+.Dropdown {
+  display: flex;
+  flex-direction: row;
+  width: 180px;
 
-  // align menu labels with the button .Label
-  > popover.menu > contents .ModelButton {
-    padding-left: 9px;
-    padding-right: 9px;
+  &:not(.input) {
+    .Button {
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      > .Label {
+        flex: 1;
+        text-align: left;
+      }
+      > .Icon {
+        flex: 0;
+      }
+    }
   }
 
   &.linked {
@@ -1293,35 +1303,41 @@ combobox {
 
     button.combo { @extend %button_basic_drop_active; }
   }
+}
 
-  // newstyle
-  popover {
-   margin-top: 6px;
-   padding: 0;
+// newstyle
+.Dropdown__menu {
+  margin-top: 6px;
+  padding: 0;
 
-   listview {
+  .list {
+    margin: 8px 0;
 
-      margin: 8px 0;
+    &>row {
+      padding: 8px;
 
-      &>row {
-         padding: 8px;
-
-         &.selected {
-           outline-color: $alt_focus_border_color;
-           color: $text-color;
-           background-color: $menu_selected_color;
-         }
+      &.selected {
+        outline-color: $alt_focus_border_color;
+        color: $text-color;
+        background-color: $menu_selected_color;
       }
-   }
-
-    // drodowns with searchboxes on top
-    .dropdown-searchbar {
-      padding: 6px;
-      border-bottom: 1px solid $borders_color;
     }
+  }
+
+  // align menu labels with the button .Label
+  > popover.menu > .contents .ModelButton {
+    padding-left: 9px;
+    padding-right: 9px;
+  }
+
+  // drodowns with searchboxes on top
+  .dropdown-searchbar {
+    padding: 6px;
+    border-bottom: 1px solid $borders_color;
   }
 }
 
+// XXX RESUME HERE
 
 // the combo is a composite widget so the way we do button linking doesn't
 // work, special case needed. See
@@ -1358,8 +1374,7 @@ combobox {
   background-color: $bg_color;
 }
 
-.toolbar,
-toolbar {
+.Toolbar {
   @extend %toolbar;
 
   // on OSD
@@ -1862,47 +1877,117 @@ columnview.view,
  * Popovers   *
  ***************/
 
-popover.background {
+.popover {
+  $_popover_border: if($variant=='light', transparentize(black, 0.77), transparentize($borders_color, 0.1));
+  $_popover_bg: $menu_color;
+
+  position: absolute;
+  z-index: 2;
   background-color: transparent;
-  font: initial; // Decouple the font of popovers from their entry/.TextView
 
-  > arrow,
-  > contents {
-    $_popover_border: if($variant=='light', transparentize(black, 0.77), transparentize($borders_color, 0.1));
+  &:not(.open) {
+    pointer-events: none;
+    opacity: 0;
+  }
 
-    background-color: $menu_color;
+  > .arrow {
+    --arrow-size: 10px;
+
+    position: absolute;
+    z-index: 2;
+    width: 0;
+    height: 0;
+    background-color: transparent;
+
+    &::after,
+    &::before {
+      content: ' ';
+      position: absolute;
+      top:  0;
+      left: 0;
+      border: var(--arrow-size) solid transparent;
+    }
+
+    &.up {
+      top: calc(-1 * var(--arrow-size) + 1px);
+      &::before {
+        top: -1px;
+        border-top-width: 0;
+        border-bottom-color: $_popover_border;
+      }
+      &::after {
+        border-top-width: 0;
+        border-bottom-color: $_popover_bg;
+      }
+    }
+    &.down {
+      top: calc(-1 * var(--arrow-size) + 1px);
+      &::before {
+        top: 1px;
+        border-bottom-width: 0;
+        border-top-color: $_popover_border;
+      }
+      &::after {
+        border-bottom-width: 0;
+        border-top-color: $_popover_bg;
+      }
+    }
+    &.left {
+      left: calc(-1 * var(--arrow-size) + 1px);
+      &::before {
+        left: -1px;
+        border-left-width: 0;
+        border-right-color: $_popover_border;
+      }
+      &::after {
+        border-left-width: 0;
+        border-right-color: $_popover_bg;
+      }
+    }
+    &.right {
+      left: calc(-1 * var(--arrow-size) + 1px);
+      &::before {
+        left: 1px;
+        border-right-width: 0;
+        border-left-color: $_popover_border;
+      }
+      &::after {
+        border-right-width: 0;
+        border-left-color: $_popover_bg;
+      }
+    }
+  }
+
+  > .contents {
+    background-color: $_popover_bg;
     background-clip: padding-box;
     border: 1px solid $_popover_border;
-    box-shadow: 0 1px 2px transparentize(black, 0.7);
+    box-shadow: 0 1px 3px 2px rgba(black, 0.08);
   }
 
-  &:backdrop {
-    background-color: transparent;
-  }
-
-  > contents {
-    padding: 8px;
+  > .contents {
+    padding: 8px 0;
     border-radius: $popover_radius;
 
-    > list,
+    > .list,
     > .view,
-    > toolbar {
+    > .Toolbar {
       border-style: none;
       background-color: transparent;
     }
 
-    separator { margin: 3px; }
+    .separator { margin: 3px; }
 
-    list separator { margin: 0; }
+    .list .separator { margin: 0; }
   }
 
   .osd &,
-  &.touch-selection,
-  &.magnifier {
+  &.touch-selection
+  {
     background-color: transparent;
 
     > arrow,
-    > contents {
+    > .contents {
       @extend %osd;
 
       border: 1px solid transparentize(white, 0.9);
@@ -1910,14 +1995,9 @@ popover.background {
     }
   }
 
-  &.touch-selection,
-  &.magnifier {
+  &.touch-selection {
     button { @extend %osd_button; }
   }
-}
-
-magnifier {
-  background-color: $base_color;
 }
 
 /**********************
@@ -1927,30 +2007,49 @@ magnifier {
 $_menu-padding: 12px; //inner menuitem padding
 //global $menu-margin for outside menuitems
 
-popover.menu {
+.popover.menu {
   padding: 0;
 
-  box.inline-buttons {
-    padding: 0 $_menu-padding;
-
-    button.image-button.model {
-      @include button(undecorated);
-
-      min-height: 30px;
-      min-width: 30px;
-      padding: 0;
-      border: none;
-      outline: none;
-      transition: none;
-
-      &.selected { background: image($menu_selected_color); }
-    }
+  &.background > .contents {
+    background-color: $menu_color;
+  }
+  &.MenuBar__popover > .contents {
+    border-top-left-radius:  0;
+    border-top-right-radius: 0;
+    border-top: none;
   }
 
-  box.circular-buttons {
+  & > .contents {
+    display: flex;
+    flex-direction: column;
+  }
+
+  & .separator {
+    margin: 3px 0;
+  }
+  &.background .separator {
+    margin: 6px 0;
+  }
+
+  .Box.inline-buttons {
+    padding: 0 $_menu-padding;
+
+    /* .Button {
+     *   @include button(undecorated);
+     *   min-height: 30px;
+     *   min-width: 30px;
+     *   padding: 0;
+     *   border: none;
+     *   outline: none;
+     *   transition: none;
+     *   &.selected { background: image($menu_selected_color); }
+     * }  */
+  }
+
+  .Box.circular-buttons {
     padding: $_menu-padding $_menu-padding 6px;
 
-    button.circular.image-button.model {
+    .Button.circular {
       @extend %list_button;
 
       padding: 11px;
@@ -1961,22 +2060,6 @@ popover.menu {
     }
   }
 
-  & > arrow,
-  &.background > contents {
-    background-color: $menu_color;
-    padding: $menu-margin;
-  }
-
-  &.background separator {
-    margin: 6px 0;
-  }
-
-  accelerator {
-    color: gtkalpha(currentColor,0.55);
-
-    &:dir(ltr) { margin-left: $_menu-padding; }
-    &:dir(rtl) { margin-right: $_menu-padding; }
-  }
 
   check,
   radio {
@@ -2009,7 +2092,8 @@ popover.menu {
     min-height: 30px;
     min-width: 40px;
     padding: 0 $_menu-padding;
-    border-radius: $menu-margin;
+    border-radius: 0;
+    text-align: left;
 
     &.selected {
       color: $text-color;
@@ -2020,22 +2104,63 @@ popover.menu {
       //color: $selected_fg_color;
       background-color: darken($bg_color,14%); // matching buttons
     }
+    &:focus {
+      outline: none;
+    }
   }
 
-  .Label.title {
+  .Menu__button {
+    display: flex;
+    flex-direction: row;
+    border: none;
+    align-items: center;
+  }
+  .Menu__button__text {
+    flex: 1;
+  }
+  .Menu__button__accelerator {
+    color: rgba($text_color, 0.55);
+    margin-left: $_menu-padding;
+  }
+
+  .title {
     font-weight: bold;
-    padding: 4px ($_menu-padding + 20px); //this will fall apart with font sizing
+    // font-size: 0.8em;
+    padding: 4px $_menu-padding; // this will fall apart with font sizing
+    text-align: left;
   }
 }
 
 // initial styling for popover menu and bar
-menubar {
+.MenuBar {
   padding: 0px;
   box-shadow: inset 0 -1px transparentize(black, 0.9);
 
-  > item {
+  > .MenuBar__item {
+    @include button('undecorated');
+    color: $text_color;
+
     min-height: 16px;
-    padding: 4px 8px;
+    padding: 1px 8px;
+    border-width: 0;
+    border-top: 3px solid transparent;
+    border-bottom: 3px solid transparent;
+    // line-height: 16px;
+
+    &:hover,
+    &.hover,
+    &:active,
+    &.active {
+      color: $selected_bg_color;
+      border-bottom: 3px solid $selected_bg_color;
+    }
+
+    &.focus,
+    &:focus {
+      outline: none;
+      background-color: $menu_selected_color;
+    }
+
 
     &.selected { //Seems like it :hover even with keyboard focus
       box-shadow: inset 0 -3px $selected_bg_color;
@@ -2048,16 +2173,21 @@ menubar {
     }
   }
 
-  & > item popover.menu.background > contents {
+  > .MenuBar__item popover.menu.background > .contents {
     padding: $menu-margin;
   }
   //nested submenus
-  & > item popover.menu popover.menu {
+  > .MenuBar__item popover.menu popover.menu {
     padding: 0 0 4px 0;
   }
-  & > item popover.menu.background popover.menu.background > contents {
+  > .MenuBar__item popover.menu.background popover.menu.background > .contents {
     margin: 0;
     border-radius: $popover_radius; //including top
+  }
+}
+.MenuBar__popover {
+  > .contents {
+    padding-top: 0;
   }
 }
 
@@ -2433,7 +2563,7 @@ switch {
 
     @include button(normal, $edge: $shadow_color);
   }
-  
+
   > image { color: transparent; } /* only show i / o for the accessible theme */
 
   &:hover > slider {
@@ -2542,7 +2672,7 @@ radio {
       }
     }
   }
-  
+
   @if $variant == 'light' {
     // the borders of the light variant versions of checks and radios are too similar in luminosity to the selected background
     // color, hence we need special casing.
@@ -3254,8 +3384,9 @@ scrolledwindow {
 }
 
 //vbox and hbox separators
-separator {
-  background: lighten($borders_color, 5%);
+.separator {
+  // background-color: lighten($borders_color, 5%);
+  border-bottom: 1px solid lighten($borders_color, 5%);
   min-width: 1px;
   min-height: 1px;
 }
@@ -4279,7 +4410,7 @@ shortcut > .keycap {
  * Emoji *
  ********/
 
-popover.emoji-picker > contents {
+popover.emoji-picker > .contents {
   padding: 0;
 }
 
@@ -4341,7 +4472,7 @@ emoji-completion-row emoji:hover {
   background-color: $menu_selected_color;
 }
 
-popover.entry-completion > contents {
+popover.entry-completion > .contents {
   padding: 0;
 }
 

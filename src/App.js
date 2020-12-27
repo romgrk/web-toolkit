@@ -1,8 +1,11 @@
 import { useEffect } from 'react'
+import Box from './Box'
 import Button from './Button'
-import Icon from './Icon'
+import Dropdown from './Dropdown'
+import Icon, { names as iconNames } from './Icon'
 import Input from './Input'
 import InputNumber from './InputNumber'
+import Label from './Label'
 import Spinner from './Spinner'
 
 function blur() {
@@ -28,30 +31,10 @@ function App() {
     <div className="App background">
       <h1>Application</h1>
 
-      <div className='Frame' style={{ height: 160, marginBottom: '1em' }}>
-        <div className='Menu'>
-          <button className='Menu__item'>File</button>
-          <button className='Menu__item'>Edit</button>
-          <button className='Menu__item'>View</button>
-          <div className='Menu__content'>
-            <button className='ModelButton flat Menu__button'>New</button>
-            <button className='ModelButton flat Menu__button'>Open</button>
-            <button className='ModelButton flat Menu__button'>
-              Other
-              <Icon name='go-next' className='arrow right' />
-            </button>
-            <div className='separator'/>
-            <button className='ModelButton flat Menu__button'>
-              <span className='Label'>Quit</span>
-              <span className='Accelerator'>Ctrl+Q</span>
-            </button>
-          </div>
-        </div>
-        <div className='Toolbar'>
-          <Button>One</Button>
-          <Button>Two</Button>
-        </div>
-      </div>
+      <Box horizontal>
+        <DemoFrame />
+        <DemoMenu />
+      </Box>
 
       <p>
         <div className='List'>
@@ -99,6 +82,15 @@ function App() {
           </div>
           <InputNumber />
           <InputNumber disabled />
+          <Dropdown
+            value={'Left'}
+            options={['Left', 'Middle', 'Right']}
+          />
+          <Dropdown
+            input
+            value={'Left'}
+            options={['Left', 'Middle', 'Right']}
+          />
         </div>
       </div>
 
@@ -167,8 +159,99 @@ function App() {
         </div>
       </p>
 
+      <p>
+        {iconNames.map(name =>
+          <Box horizontal inline style={{ width: 250 }}>
+            <Icon name={name} />
+            {name}
+          </Box>
+        )}
+      </p>
+
     </div>
   );
+}
+
+function MenuButton({ children, radio, name, value, accelerator }) {
+  return (
+    <button className='ModelButton flat Menu__button'>
+      {radio &&
+        <Icon name='radio' />
+      }
+      <span className='Label Menu__button__text'>{children}</span>
+      {accelerator &&
+        <span className='Label Menu__button__accelerator'>{accelerator}</span>
+      }
+    </button>
+  )
+}
+
+function DemoFrame() {
+  return (
+    <div className='Frame' style={{ height: 160, marginBottom: '1em' }}>
+      <div className='MenuBar'>
+        <button className='MenuBar__item active'>File</button>
+        <button className='MenuBar__item'>Edit</button>
+        <button className='MenuBar__item'>View</button>
+        <div className='MenuBar__popover popover Menu menu background open'>
+          <div className='contents'>
+            <MenuButton>
+              New
+            </MenuButton>
+            <MenuButton>
+              Open
+            </MenuButton>
+            <button className='ModelButton flat Menu__button'>
+              <span className='Label'>Other</span>
+              <Icon name='go-next' className='arrow right' />
+            </button>
+            <div className='separator'/>
+            <MenuButton accelerator='Ctrl+Q'>
+              Quit
+            </MenuButton>
+          </div>
+        </div>
+      </div>
+      <div className='Toolbar'>
+        <Button>One</Button>
+        <Button>Two</Button>
+      </div>
+    </div>
+  )
+}
+
+function DemoMenu() {
+  return (
+    <div>
+      <div className='popover background menu open'>
+        <div className='arrow up'    style={{ left: 100 }} />
+        <div className='contents'>
+          <Box horizontal className='circular-buttons' space='around'>
+            <Button circular icon='printer' />
+            <Button circular icon='emblem-shared' />
+          </Box>
+          <div className='separator' />
+          <MenuButton accelerator='Ctrl+N'>Open in New Window</MenuButton>
+          <div className='separator' />
+          <Box horizontal className='inline-buttons' align>
+            <Label className='Box__fill'>Edit</Label>
+            <Box horizontal compact>
+              <Button flat image icon='edit-cut' />
+              <Button flat image icon='edit-copy' />
+              <Button flat image icon='edit-paste' />
+            </Box>
+          </Box>
+          <div className='separator' />
+          <Label className='title'>Size</Label>
+          <MenuButton radio name='size' value='small'>Small</MenuButton>
+          <MenuButton radio name='size' value='medium'>Medium</MenuButton>
+          <MenuButton radio name='size' value='large'>Large</MenuButton>
+          <div className='separator' />
+          <MenuButton accelerator='Delete'>Move to Trash</MenuButton>
+        </div>
+      </div>
+    </div>
+  )
 }
 
 export default App;

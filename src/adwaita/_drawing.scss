@@ -450,10 +450,10 @@
     &::before { opacity: 0; }
     text-shadow: none;
     @if $variant == 'light' {
-      background-color: darken($c,14%);
+      background-color: darken($c, 8%);
     }
     @else {
-      background-color: darken($c,10%);
+      background-color: darken($c, 10%);
     }
   }
   @else if $t==undecorated-active {

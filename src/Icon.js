@@ -1119,4 +1119,6 @@ function Icon({ className, name }) {
   )
 }
 
+export const names = Object.keys(icons)
+
 export default Icon

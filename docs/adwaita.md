@@ -24,3 +24,6 @@ List of changes made to adapt adwaita.
  - `treeview` changed to `.TreeView`
  - `stackswitcher` changed to `.StackSwitcher`
  - `spinbutton` changed to `.InputNumber`
+ - `dropdown` changed to `.Dropdown`
+ - `toolbar` changed to `.Toolbar`
+ - `menubar` changed to `.Menu`

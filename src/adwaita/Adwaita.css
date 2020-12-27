@@ -1,6 +1,49 @@
 /***************************
  * Check and Radio buttons *
  ***************************/
+/**********************
+ * General Typography *
+ **********************/
+.title-large {
+  font-weight: 300;
+  font-size: 24pt; }
+
+h1 {
+  font-weight: 800;
+  font-size: 20pt; }
+
+h2 {
+  font-weight: 800;
+  font-size: 15pt; }
+
+h3 {
+  font-weight: 700;
+  font-size: 15pt; }
+
+h4 {
+  font-weight: 700;
+  font-size: 13pt; }
+
+html, body {
+  font-weight: 400;
+  font-size: 11pt; }
+
+.heading {
+  font-weight: 700;
+  font-size: 11pt; }
+
+.caption-heading {
+  font-weight: 700;
+  font-size: 9pt; }
+
+.caption {
+  font-weight: 400;
+  font-size: 9pt; }
+
+button {
+  font-size: inherit;
+  font-family: inherit; }
+
 .InputNumber.vertical > input .Input__left, .InputNumber:not(.vertical) .Input__left, .InputNumber.vertical > input .Input__right, .InputNumber:not(.vertical) .Input__right,
 .Input .Input__left,
 .Input .Input__right, .Icon {
@@ -25,14 +68,38 @@
     text-shadow: none;
     --icon-shadow: none; }
 
-dnd {
-  color: #2e3436; }
-
 .normal-icons {
   --icon-size: 16px; }
 
 .large-icons {
   --icon-size: 32px; }
+
+.Box.horizontal {
+  display: flex;
+  flex-direction: row; }
+  .Box.horizontal:not(.compact) > *:not(:last-child) {
+    margin-right: 1em; }
+
+.Box.vertical {
+  display: flex;
+  flex-direction: column; }
+  .Box.vertical:not(.compact) > *:not(:last-child) {
+    margin-bottom: 1em; }
+
+.Box.inline {
+  display: inline-flex; }
+
+.Box.align {
+  align-items: center; }
+
+.Box.space-around {
+  justify-content: space-around; }
+
+.Box.space-between {
+  justify-content: space-between; }
+
+.Box__fill {
+  flex: 1; }
 
 /*
    These wildcard seems unavoidable, need to investigate.
@@ -155,16 +222,19 @@ radio:disabled,
   .Label.error.disabled {
     color: rgba(204, 0, 0, 0.5); }
 
+.Label.title {
+  color: #929595;
+  font-weight: bold; }
+
 .dim-label, .titlebar:not(headerbar) .subtitle,
 headerbar .subtitle, .InputNumber.vertical > input > input::placeholder, .InputNumber:not(.vertical) > input::placeholder,
 .Input > input::placeholder, .Label.separator {
   opacity: 0.55;
   text-shadow: none; }
 
-.osd .scale-popup, .app-notification, .osd popover.background > arrow,
-.osd popover.background > contents, popover.background.touch-selection > arrow,
-popover.background.touch-selection > contents, popover.background.magnifier > arrow,
-popover.background.magnifier > contents,
+.osd .scale-popup, .app-notification, .osd .popover > arrow,
+.osd .popover > .contents, .popover.touch-selection > arrow,
+.popover.touch-selection > .contents,
 .osd {
   color: #eeeeec;
   border: none;
@@ -200,45 +270,6 @@ popover.background.magnifier > contents,
     opacity: 0.5; }
   .Spinner.hidden {
     opacity: 0; }
-
-/**********************
- * General Typography *
- **********************/
-.title-large {
-  font-weight: 300;
-  font-size: 24pt; }
-
-h1 {
-  font-weight: 800;
-  font-size: 20pt; }
-
-h2 {
-  font-weight: 800;
-  font-size: 15pt; }
-
-h3 {
-  font-weight: 700;
-  font-size: 15pt; }
-
-h4 {
-  font-weight: 700;
-  font-size: 13pt; }
-
-body {
-  font-weight: 400;
-  font-size: 11pt; }
-
-.heading {
-  font-weight: 700;
-  font-size: 11pt; }
-
-.caption-heading {
-  font-weight: 700;
-  font-size: 9pt; }
-
-.caption {
-  font-weight: 400;
-  font-size: 9pt; }
 
 /****************
  * Text Entries *
@@ -288,6 +319,9 @@ body {
       .InputNumber.vertical > input > input:focus, .InputNumber:not(.vertical) > input:focus,
       .Input > input:focus {
         outline: none; }
+      .InputNumber.vertical > input > input::placeholder, .InputNumber:not(.vertical) > input::placeholder,
+      .Input > input::placeholder {
+        user-select: none; }
     .InputNumber.vertical > input .Input__left, .InputNumber:not(.vertical) .Input__left,
     .Input .Input__left {
       margin-right: 6px; }
@@ -443,8 +477,8 @@ body {
   .linked.vertical > .dnd-active.InputNumber:not(:only-child):not(.vertical) + .Button,
   .InputNumber.vertical.linked > input.dnd-active:not(:only-child) + menubutton > .Button,
   .linked.vertical > .dnd-active.InputNumber:not(:only-child):not(.vertical) + menubutton > .Button,
-  .InputNumber.vertical.linked > input.dnd-active:not(:only-child) + dropdown > .Button,
-  .linked.vertical > .dnd-active.InputNumber:not(:only-child):not(.vertical) + dropdown > .Button,
+  .InputNumber.vertical.linked > input.dnd-active:not(:only-child) + .Dropdown > .Button,
+  .linked.vertical > .dnd-active.InputNumber:not(:only-child):not(.vertical) + .Dropdown > .Button,
   .InputNumber.vertical.linked > input.dnd-active:not(:only-child) + colorbutton > .Button,
   .linked.vertical > .dnd-active.InputNumber:not(:only-child):not(.vertical) + colorbutton > .Button,
   .InputNumber.vertical.linked > input.dnd-active:not(:only-child) + fontbutton > .Button,
@@ -457,7 +491,7 @@ body {
   .linked.vertical > .Input.dnd-active:not(:only-child) + .Input,
   .linked.vertical > .Input.dnd-active:not(:only-child) + .Button,
   .linked.vertical > .Input.dnd-active:not(:only-child) + menubutton > .Button,
-  .linked.vertical > .Input.dnd-active:not(:only-child) + dropdown > .Button,
+  .linked.vertical > .Input.dnd-active:not(:only-child) + .Dropdown > .Button,
   .linked.vertical > .Input.dnd-active:not(:only-child) + colorbutton > .Button,
   .linked.vertical > .Input.dnd-active:not(:only-child) + fontbutton > .Button,
   .linked.vertical > .Input.dnd-active:not(:only-child) + filechooserbutton > .Button,
@@ -508,6 +542,7 @@ notebook > header > tabs > arrow, windowcontrols button,
   border: 1px solid;
   border-radius: 5px;
   transition: all 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  user-select: none;
   color: #2e3436;
   outline-color: rgba(53, 132, 228, 0.5);
   border-color: #cdc7c2;
@@ -518,6 +553,7 @@ notebook > header > tabs > arrow, windowcontrols button,
   .Button::before {
     content: ' ';
     position: absolute;
+    pointer-events: none;
     width: 100%;
     height: 100%;
     top: 0px;
@@ -539,7 +575,7 @@ notebook > header > tabs > arrow, windowcontrols button,
     color: #2e3436;
     border-color: #cdc7c2;
     border-bottom-color: #bfb8b1;
-    background-color: #fdfdfc;
+    background-color: #f9f9f8;
     box-shadow: inset 0 1px #f4f2f1, 0 1px 2px rgba(0, 0, 0, 0.07);
     -gtk-icon-filter: brightness(1.2); }
     notebook > header > tabs > arrow.hover:not(:disabled):not(.disabled)::before, windowcontrols button.hover:not(:disabled):not(.disabled)::before, notebook > header > tabs > arrow:not(:disabled):not(.disabled):hover::before, windowcontrols button:not(:disabled):not(.disabled):hover::before,
@@ -646,7 +682,7 @@ notebook > header > tabs > arrow, windowcontrols button,
       border-color: transparent;
       box-shadow: none;
       text-shadow: none;
-      background-color: #d6d1cd;
+      background-color: #e4e1de;
       transition: all 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
       transition-duration: 500ms; }
       button.sidebar-button.hover:not(:disabled):not(.disabled)::before, notebook > header > tabs > arrow.hover:not(:disabled):not(.disabled)::before, windowcontrols button.hover:not(:disabled):not(.disabled)::before, button.sidebar-button:not(:disabled):not(.disabled):hover::before, notebook > header > tabs > arrow:not(:disabled):not(.disabled):hover::before, windowcontrols button:not(:disabled):not(.disabled):hover::before,
@@ -696,8 +732,7 @@ notebook > header > tabs > arrow, windowcontrols button,
     .Button.text-button.image-button .Label {
       padding-left: 8px;
       padding-right: 8px; }
-  dropdown.dnd-active button.combo,
-  combobox.dnd-active button.combo, notebook > header > tabs > arrow.dnd-active, windowcontrols button.dnd-active,
+  .Dropdown.dnd-active button.combo, notebook > header > tabs > arrow.dnd-active, windowcontrols button.dnd-active,
   .Button.dnd-active {
     color: #2ec27e;
     border-color: #2ec27e;
@@ -770,7 +805,7 @@ row.selected button.sidebar-button:not(:active):not(:checked):not(:hover):not(di
     .Button.osd:checked::before {
       opacity: 0; }
 
-.app-notification button, popover.background.touch-selection button, popover.background.magnifier button, .osd .Button {
+.app-notification button, .popover.touch-selection button, .osd .Button {
   color: #eeeeec;
   outline-color: rgba(53, 132, 228, 0.5);
   border-color: rgba(0, 0, 0, 0.7);
@@ -779,9 +814,9 @@ row.selected button.sidebar-button:not(:active):not(:checked):not(:hover):not(di
   box-shadow: inset 0 1px rgba(255, 255, 255, 0.1);
   text-shadow: none;
   --icon-shadow: none; }
-  .app-notification button::before, popover.background.touch-selection button::before, popover.background.magnifier button::before, .osd .Button::before {
+  .app-notification button::before, .popover.touch-selection button::before, .osd .Button::before {
     opacity: 0; }
-  .app-notification button:hover, popover.background.touch-selection button:hover, popover.background.magnifier button:hover, .osd .Button:hover {
+  .app-notification button:hover, .popover.touch-selection button:hover, .osd .Button:hover {
     color: white;
     border-color: rgba(0, 0, 0, 0.7);
     background-color: rgba(27, 27, 27, 0.7);
@@ -789,9 +824,9 @@ row.selected button.sidebar-button:not(:active):not(:checked):not(:hover):not(di
     box-shadow: inset 0 1px rgba(255, 255, 255, 0.1);
     text-shadow: none;
     --icon-shadow: none; }
-    .app-notification button:hover::before, popover.background.touch-selection button:hover::before, popover.background.magnifier button:hover::before, .osd .Button:hover::before {
+    .app-notification button:hover::before, .popover.touch-selection button:hover::before, .osd .Button:hover::before {
       opacity: 0; }
-  .app-notification button:active, popover.background.touch-selection button:active, popover.background.magnifier button:active, .app-notification button:checked, popover.background.touch-selection button:checked, popover.background.magnifier button:checked, .osd .Button:active:backdrop, .osd .Button:active, .osd .Button:checked:backdrop, .osd .Button:checked {
+  .app-notification button:active, .popover.touch-selection button:active, .app-notification button:checked, .popover.touch-selection button:checked, .osd .Button:active:backdrop, .osd .Button:active, .osd .Button:checked:backdrop, .osd .Button:checked {
     color: white;
     border-color: rgba(0, 0, 0, 0.7);
     background-color: rgba(2, 2, 2, 0.7);
@@ -799,9 +834,9 @@ row.selected button.sidebar-button:not(:active):not(:checked):not(:hover):not(di
     box-shadow: none;
     text-shadow: none;
     --icon-shadow: none; }
-    .app-notification button:active::before, popover.background.touch-selection button:active::before, popover.background.magnifier button:active::before, .app-notification button:checked::before, popover.background.touch-selection button:checked::before, popover.background.magnifier button:checked::before, .osd .Button:active:backdrop::before, .osd .Button:active::before, .osd .Button:checked:backdrop::before, .osd .Button:checked::before {
+    .app-notification button:active::before, .popover.touch-selection button:active::before, .app-notification button:checked::before, .popover.touch-selection button:checked::before, .osd .Button:active:backdrop::before, .osd .Button:active::before, .osd .Button:checked:backdrop::before, .osd .Button:checked::before {
       opacity: 0; }
-  .app-notification button:disabled, popover.background.touch-selection button:disabled, popover.background.magnifier button:disabled, .osd .Button:disabled:backdrop, .osd .Button:disabled {
+  .app-notification button:disabled, .popover.touch-selection button:disabled, .osd .Button:disabled:backdrop, .osd .Button:disabled {
     color: #919190;
     border-color: rgba(0, 0, 0, 0.7);
     background-color: rgba(71, 71, 71, 0.5);
@@ -809,9 +844,9 @@ row.selected button.sidebar-button:not(:active):not(:checked):not(:hover):not(di
     box-shadow: none;
     text-shadow: none;
     --icon-shadow: none; }
-    .app-notification button:disabled::before, popover.background.touch-selection button:disabled::before, popover.background.magnifier button:disabled::before, .osd .Button:disabled:backdrop::before, .osd .Button:disabled::before {
+    .app-notification button:disabled::before, .popover.touch-selection button:disabled::before, .osd .Button:disabled:backdrop::before, .osd .Button:disabled::before {
       opacity: 0; }
-  .app-notification button.flat, popover.background.touch-selection button.flat, popover.background.magnifier button.flat, .osd .Button.flat {
+  .app-notification button.flat, .popover.touch-selection button.flat, .osd .Button.flat {
     border-color: transparent;
     background-color: transparent;
     box-shadow: inset 0 1px rgba(255, 255, 255, 0);
@@ -820,9 +855,9 @@ row.selected button.sidebar-button:not(:active):not(:checked):not(:hover):not(di
     box-shadow: none;
     text-shadow: 0 1px black;
     --icon-shadow: 0 1px black; }
-    .app-notification button.flat::before, popover.background.touch-selection button.flat::before, popover.background.magnifier button.flat::before, .osd .Button.flat::before {
+    .app-notification button.flat::before, .popover.touch-selection button.flat::before, .osd .Button.flat::before {
       opacity: 0; }
-    .app-notification button.flat:hover, popover.background.touch-selection button.flat:hover, popover.background.magnifier button.flat:hover, .osd .Button.flat:hover {
+    .app-notification button.flat:hover, .popover.touch-selection button.flat:hover, .osd .Button.flat:hover {
       color: white;
       border-color: rgba(0, 0, 0, 0.7);
       background-color: rgba(27, 27, 27, 0.7);
@@ -830,9 +865,9 @@ row.selected button.sidebar-button:not(:active):not(:checked):not(:hover):not(di
       box-shadow: inset 0 1px rgba(255, 255, 255, 0.1);
       text-shadow: none;
       --icon-shadow: none; }
-      .app-notification button.flat:hover::before, popover.background.touch-selection button.flat:hover::before, popover.background.magnifier button.flat:hover::before, .osd .Button.flat:hover::before {
+      .app-notification button.flat:hover::before, .popover.touch-selection button.flat:hover::before, .osd .Button.flat:hover::before {
         opacity: 0; }
-    .app-notification button.flat:disabled, popover.background.touch-selection button.flat:disabled, popover.background.magnifier button.flat:disabled, .osd .Button.flat:disabled {
+    .app-notification button.flat:disabled, .popover.touch-selection button.flat:disabled, .osd .Button.flat:disabled {
       color: #919190;
       border-color: rgba(0, 0, 0, 0.7);
       background-color: rgba(71, 71, 71, 0.5);
@@ -843,9 +878,9 @@ row.selected button.sidebar-button:not(:active):not(:checked):not(:hover):not(di
       background-image: none;
       border-color: transparent;
       box-shadow: none; }
-      .app-notification button.flat:disabled::before, popover.background.touch-selection button.flat:disabled::before, popover.background.magnifier button.flat:disabled::before, .osd .Button.flat:disabled::before {
+      .app-notification button.flat:disabled::before, .popover.touch-selection button.flat:disabled::before, .osd .Button.flat:disabled::before {
         opacity: 0; }
-    .app-notification button.flat:active, popover.background.touch-selection button.flat:active, popover.background.magnifier button.flat:active, .app-notification button.flat:checked, popover.background.touch-selection button.flat:checked, popover.background.magnifier button.flat:checked, .osd .Button.flat:active, .osd .Button.flat:checked {
+    .app-notification button.flat:active, .popover.touch-selection button.flat:active, .app-notification button.flat:checked, .popover.touch-selection button.flat:checked, .osd .Button.flat:active, .osd .Button.flat:checked {
       color: white;
       border-color: rgba(0, 0, 0, 0.7);
       background-color: rgba(2, 2, 2, 0.7);
@@ -853,7 +888,7 @@ row.selected button.sidebar-button:not(:active):not(:checked):not(:hover):not(di
       box-shadow: none;
       text-shadow: none;
       --icon-shadow: none; }
-      .app-notification button.flat:active::before, popover.background.touch-selection button.flat:active::before, popover.background.magnifier button.flat:active::before, .app-notification button.flat:checked::before, popover.background.touch-selection button.flat:checked::before, popover.background.magnifier button.flat:checked::before, .osd .Button.flat:active::before, .osd .Button.flat:checked::before {
+      .app-notification button.flat:active::before, .popover.touch-selection button.flat:active::before, .app-notification button.flat:checked::before, .popover.touch-selection button.flat:checked::before, .osd .Button.flat:active::before, .osd .Button.flat:checked::before {
         opacity: 0; }
 
 
@@ -868,6 +903,7 @@ row.selected button.sidebar-button:not(:active):not(:checked):not(:hover):not(di
   .Button.suggested-action::before {
     content: ' ';
     position: absolute;
+    pointer-events: none;
     width: 100%;
     height: 100%;
     top: 0px;
@@ -900,7 +936,7 @@ row.selected button.sidebar-button:not(:active):not(:checked):not(:hover):not(di
     color: white;
     border-color: #1b6acb;
     border-bottom-color: #15539e;
-    background-color: #428ce6;
+    background-color: #3c88e5;
     box-shadow: inset 0 1px #3181e3, 0 1px 2px rgba(0, 0, 0, 0.07); }
     
     .Button.suggested-action.hover:not(:disabled):not(.disabled)::before,
@@ -1009,6 +1045,7 @@ row.selected button.sidebar-button:not(:active):not(:checked):not(:hover):not(di
   .Button.destructive-action::before {
     content: ' ';
     position: absolute;
+    pointer-events: none;
     width: 100%;
     height: 100%;
     top: 0px;
@@ -1041,7 +1078,7 @@ row.selected button.sidebar-button:not(:active):not(:checked):not(:hover):not(di
     color: white;
     border-color: #b2161d;
     border-bottom-color: #851015;
-    background-color: #e5262e;
+    background-color: #e41f28;
     box-shadow: inset 0 1px #db1a23, 0 1px 2px rgba(0, 0, 0, 0.07); }
     
     .Button.destructive-action.hover:not(:disabled):not(.disabled)::before,
@@ -1189,7 +1226,7 @@ stacksidebar row.needs-attention > .Label, .StackSwitcher > .Button.needs-attent
     background-position: left 3px, left 4px; }
 
 .linked:not(.vertical) > menubutton:dir(ltr):not(:first-child) > button,
-.linked:not(.vertical) > dropdown:dir(ltr):not(:first-child) > button,
+.linked:not(.vertical) > .Dropdown:dir(ltr):not(:first-child) > button,
 .linked:not(.vertical) > colorbutton:dir(ltr):not(:first-child) > button,
 .linked:not(.vertical) > fontbutton:dir(ltr):not(:first-child) > button,
 .linked:not(.vertical) > filechooserbutton:dir(ltr):not(:first-child) > button {
@@ -1197,7 +1234,7 @@ stacksidebar row.needs-attention > .Label, .StackSwitcher > .Button.needs-attent
   border-bottom-left-radius: 0; }
 
 .linked:not(.vertical) > menubutton:dir(ltr):not(:last-child) > button,
-.linked:not(.vertical) > dropdown:dir(ltr):not(:last-child) > button,
+.linked:not(.vertical) > .Dropdown:dir(ltr):not(:last-child) > button,
 .linked:not(.vertical) > colorbutton:dir(ltr):not(:last-child) > button,
 .linked:not(.vertical) > fontbutton:dir(ltr):not(:last-child) > button,
 .linked:not(.vertical) > filechooserbutton:dir(ltr):not(:last-child) > button {
@@ -1206,7 +1243,7 @@ stacksidebar row.needs-attention > .Label, .StackSwitcher > .Button.needs-attent
   border-bottom-right-radius: 0; }
 
 .linked:not(.vertical) > menubutton:dir(rtl):not(:first-child) > button,
-.linked:not(.vertical) > dropdown:dir(rtl):not(:first-child) > button,
+.linked:not(.vertical) > .Dropdown:dir(rtl):not(:first-child) > button,
 .linked:not(.vertical) > colorbutton:dir(rtl):not(:first-child) > button,
 .linked:not(.vertical) > fontbutton:dir(rtl):not(:first-child) > button,
 .linked:not(.vertical) > filechooserbutton:dir(rtl):not(:first-child) > button {
@@ -1215,7 +1252,7 @@ stacksidebar row.needs-attention > .Label, .StackSwitcher > .Button.needs-attent
   border-bottom-right-radius: 0; }
 
 .linked:not(.vertical) > menubutton:dir(rtl):not(:last-child) > button,
-.linked:not(.vertical) > dropdown:dir(rtl):not(:last-child) > button,
+.linked:not(.vertical) > .Dropdown:dir(rtl):not(:last-child) > button,
 .linked:not(.vertical) > colorbutton:dir(rtl):not(:last-child) > button,
 .linked:not(.vertical) > fontbutton:dir(rtl):not(:last-child) > button,
 .linked:not(.vertical) > filechooserbutton:dir(rtl):not(:last-child) > button {
@@ -1223,7 +1260,7 @@ stacksidebar row.needs-attention > .Label, .StackSwitcher > .Button.needs-attent
   border-bottom-left-radius: 0; }
 
 .linked.vertical > menubutton:not(:first-child) > button,
-.linked.vertical > dropdown:not(:first-child) > button,
+.linked.vertical > .Dropdown:not(:first-child) > button,
 .linked.vertical > colorbutton:not(:first-child) > button,
 .linked.vertical > fontbutton:not(:first-child) > button,
 .linked.vertical > filechooserbutton:not(:first-child) > button {
@@ -1231,7 +1268,7 @@ stacksidebar row.needs-attention > .Label, .StackSwitcher > .Button.needs-attent
   border-top-right-radius: 0; }
 
 .linked.vertical > menubutton:not(:last-child) > button,
-.linked.vertical > dropdown:not(:last-child) > button,
+.linked.vertical > .Dropdown:not(:last-child) > button,
 .linked.vertical > colorbutton:not(:last-child) > button,
 .linked.vertical > fontbutton:not(:last-child) > button,
 .linked.vertical > filechooserbutton:not(:last-child) > button {
@@ -1254,6 +1291,13 @@ stacksidebar row.needs-attention > .Label, .StackSwitcher > .Button.needs-attent
     opacity: 0; }
   .ModelButton.flat.hover, .ModelButton.flat:hover {
     background-color: #e8e6e3; }
+  .ModelButton.flat.active, .ModelButton.flat:active {
+    border-color: transparent;
+    box-shadow: none;
+    text-shadow: none;
+    background-color: #b1a9a0; }
+    .ModelButton.flat.active::before, .ModelButton.flat:active::before {
+      opacity: 0; }
   .ModelButton.flat.disabled, .ModelButton.flat:disabled {
     color: #929595; }
 
@@ -1279,7 +1323,7 @@ stacksidebar row.needs-attention > .Label, .StackSwitcher > .Button.needs-attent
     color: #2e3436;
     border-color: #cdc7c2;
     border-bottom-color: #bfb8b1;
-    background-color: #fdfdfc;
+    background-color: #f9f9f8;
     box-shadow: inset 0 1px #f4f2f1, 0 1px 2px rgba(0, 0, 0, 0.07); }
     .Toolbar button:hover::before {
       opacity: 0; }
@@ -1334,39 +1378,39 @@ button.color {
 
 /* list buttons */
 /* tone down as per new designs, see issue #1473 */
-popover.menu box.circular-buttons button.circular.image-button.model,
-.List > .Row button.image-button:not(.flat) {
+.popover.menu .Box.circular-buttons .Button.circular,
+.list > .Row button.image-button:not(.flat) {
   border-color: transparent;
   background-color: transparent;
   box-shadow: inset 0 1px rgba(255, 255, 255, 0);
   text-shadow: none;
   --icon-shadow: none;
   border: 1px solid rgba(205, 199, 194, 0.5); }
-  popover.menu box.circular-buttons button.circular.image-button.model::before,
-  .List > .Row button.image-button:not(.flat)::before {
+  .popover.menu .Box.circular-buttons .Button.circular::before,
+  .list > .Row button.image-button:not(.flat)::before {
     opacity: 0; }
-  popover.menu box.circular-buttons button.circular.image-button.model:hover,
-  .List > .Row button.image-button:not(.flat):hover {
+  .popover.menu .Box.circular-buttons .Button.circular:hover,
+  .list > .Row button.image-button:not(.flat):hover {
     color: #2e3436;
     border-color: #cdc7c2;
     border-bottom-color: #bfb8b1;
-    background-color: #fdfdfc;
+    background-color: #f9f9f8;
     box-shadow: inset 0 1px #f4f2f1, 0 1px 2px rgba(0, 0, 0, 0.07); }
-    popover.menu box.circular-buttons button.circular.image-button.model:hover::before,
-    .List > .Row button.image-button:not(.flat):hover::before {
+    .popover.menu .Box.circular-buttons .Button.circular:hover::before,
+    .list > .Row button.image-button:not(.flat):hover::before {
       opacity: 0; }
-  popover.menu box.circular-buttons button.circular.image-button.model:active, popover.menu box.circular-buttons button.circular.image-button.model:checked,
-  .List > .Row button.image-button:not(.flat):active,
-  .List > .Row button.image-button:not(.flat):checked {
+  .popover.menu .Box.circular-buttons .Button.circular:active, .popover.menu .Box.circular-buttons .Button.circular:checked,
+  .list > .Row button.image-button:not(.flat):active,
+  .list > .Row button.image-button:not(.flat):checked {
     color: #2e3436;
     border-color: #cdc7c2;
     background-color: #d6d1cd;
     box-shadow: inset 0 1px rgba(255, 255, 255, 0);
     text-shadow: none;
     --icon-shadow: none; }
-    popover.menu box.circular-buttons button.circular.image-button.model:active::before, popover.menu box.circular-buttons button.circular.image-button.model:checked::before,
-    .List > .Row button.image-button:not(.flat):active::before,
-    .List > .Row button.image-button:not(.flat):checked::before {
+    .popover.menu .Box.circular-buttons .Button.circular:active::before, .popover.menu .Box.circular-buttons .Button.circular:checked::before,
+    .list > .Row button.image-button:not(.flat):active::before,
+    .list > .Row button.image-button:not(.flat):checked::before {
       opacity: 0; }
 
 /*********
@@ -1641,55 +1685,50 @@ input::-webkit-outer-spin-button {
 /**************
  * ComboBoxes *
  **************/
-dropdown > popover.menu.background > contents {
+.Dropdown > popover.menu.background > .contents {
   padding: 0; }
 
-dropdown > button > box {
+.Dropdown > button > box {
   border-spacing: 6px; }
 
-dropdown arrow,
-combobox arrow {
-  -gtk-icon-source: -gtk-icontheme("pan-down-symbolic");
-  min-height: 16px;
-  min-width: 16px; }
+.Dropdown {
+  display: flex;
+  flex-direction: row;
+  width: 180px; }
+  .Dropdown:not(.input) .Button {
+    width: 100%;
+    display: flex;
+    flex-direction: row; }
+    .Dropdown:not(.input) .Button > .Label {
+      flex: 1;
+      text-align: left; }
+    .Dropdown:not(.input) .Button > .Icon {
+      flex: 0; }
+  .Dropdown.linked button:nth-child(2):dir(ltr) {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0; }
+  .Dropdown.linked button:nth-child(2):dir(rtl) {
+    border-right-style: none;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0; }
+  .Dropdown.dnd-active {
+    box-shadow: none; }
 
-dropdown > popover.menu > contents .ModelButton,
-combobox > popover.menu > contents .ModelButton {
-  padding-left: 9px;
-  padding-right: 9px; }
-
-dropdown.linked button:nth-child(2):dir(ltr),
-combobox.linked button:nth-child(2):dir(ltr) {
-  border-top-left-radius: 0;
-  border-bottom-left-radius: 0; }
-
-dropdown.linked button:nth-child(2):dir(rtl),
-combobox.linked button:nth-child(2):dir(rtl) {
-  border-right-style: none;
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 0; }
-
-dropdown.dnd-active,
-combobox.dnd-active {
-  box-shadow: none; }
-
-dropdown popover,
-combobox popover {
+.Dropdown__menu {
   margin-top: 6px;
   padding: 0; }
-  dropdown popover listview,
-  combobox popover listview {
+  .Dropdown__menu .list {
     margin: 8px 0; }
-    dropdown popover listview > row,
-    combobox popover listview > row {
+    .Dropdown__menu .list > row {
       padding: 8px; }
-      dropdown popover listview > row.selected,
-      combobox popover listview > row.selected {
+      .Dropdown__menu .list > row.selected {
         outline-color: rgba(255, 255, 255, 0.8);
         color: black;
         background-color: #e8e6e3; }
-  dropdown popover .dropdown-searchbar,
-  combobox popover .dropdown-searchbar {
+  .Dropdown__menu > popover.menu > .contents .ModelButton {
+    padding-left: 9px;
+    padding-right: 9px; }
+  .Dropdown__menu .dropdown-searchbar {
     padding: 6px;
     border-bottom: 1px solid #cdc7c2; }
 
@@ -1735,34 +1774,26 @@ combobox popover {
 /************
  * Toolbars *
  ************/
-searchbar > revealer > box, .toolbar,
-toolbar {
+searchbar > revealer > box, .Toolbar {
   padding: 4px;
   border-spacing: 4px;
   background-color: #f6f5f4; }
 
-.osd .toolbar, .osd toolbar {
+.osd .Toolbar {
   background-color: transparent; }
 
-.toolbar.osd,
-toolbar.osd {
+.Toolbar.osd {
   padding: 13px;
   border: none;
   border-radius: 5px;
   background-color: rgba(53, 53, 53, 0.7); }
-  .toolbar.osd.left, .toolbar.osd.right, .toolbar.osd.top, .toolbar.osd.bottom,
-  toolbar.osd.left,
-  toolbar.osd.right,
-  toolbar.osd.top,
-  toolbar.osd.bottom {
+  .Toolbar.osd.left, .Toolbar.osd.right, .Toolbar.osd.top, .Toolbar.osd.bottom {
     border-radius: 0; }
 
-.toolbar.horizontal > separator,
-toolbar.horizontal > separator {
+.Toolbar.horizontal > separator {
   margin: 4px 0; }
 
-.toolbar.vertical > separator,
-toolbar.vertical > separator {
+.Toolbar.vertical > separator {
   margin: 0 4px; }
 
 searchbar > revealer > box {
@@ -1813,7 +1844,7 @@ searchbar .close {
     color: #2e3436;
     border-color: #cdc7c2;
     border-bottom-color: #bfb8b1;
-    background-color: #fdfdfc;
+    background-color: #f9f9f8;
     box-shadow: inset 0 1px #f4f2f1, 0 1px 2px rgba(0, 0, 0, 0.07); }
     infobar .close:hover::before,
     searchbar .close:hover::before {
@@ -1838,7 +1869,7 @@ windowcontrols {
       border-color: transparent;
       box-shadow: none;
       text-shadow: none;
-      background-color: #c8c2bc; }
+      background-color: #d6d1cd; }
       windowcontrols button:hover::before {
         opacity: 0; }
     windowcontrols button:active, windowcontrols button:checked {
@@ -2183,152 +2214,228 @@ columnview.view > header > button, columnview.IconView > header > button,
 /***************
  * Popovers   *
  ***************/
-popover.background {
-  background-color: transparent;
-  font: initial; }
-  popover.background > arrow,
-  popover.background > contents {
+.popover {
+  position: absolute;
+  z-index: 2;
+  background-color: transparent; }
+  .popover:not(.open) {
+    pointer-events: none;
+    opacity: 0; }
+  .popover > .arrow {
+    --arrow-size: 10px;
+    position: absolute;
+    z-index: 2;
+    width: 0;
+    height: 0;
+    background-color: transparent; }
+    .popover > .arrow::after, .popover > .arrow::before {
+      content: ' ';
+      position: absolute;
+      top: 0;
+      left: 0;
+      border: var(--arrow-size) solid transparent; }
+    .popover > .arrow.up {
+      top: calc(-1 * var(--arrow-size) + 1px); }
+      .popover > .arrow.up::before {
+        top: -1px;
+        border-top-width: 0;
+        border-bottom-color: rgba(0, 0, 0, 0.23); }
+      .popover > .arrow.up::after {
+        border-top-width: 0;
+        border-bottom-color: #ffffff; }
+    .popover > .arrow.down {
+      top: calc(-1 * var(--arrow-size) + 1px); }
+      .popover > .arrow.down::before {
+        top: 1px;
+        border-bottom-width: 0;
+        border-top-color: rgba(0, 0, 0, 0.23); }
+      .popover > .arrow.down::after {
+        border-bottom-width: 0;
+        border-top-color: #ffffff; }
+    .popover > .arrow.left {
+      left: calc(-1 * var(--arrow-size) + 1px); }
+      .popover > .arrow.left::before {
+        left: -1px;
+        border-left-width: 0;
+        border-right-color: rgba(0, 0, 0, 0.23); }
+      .popover > .arrow.left::after {
+        border-left-width: 0;
+        border-right-color: #ffffff; }
+    .popover > .arrow.right {
+      left: calc(-1 * var(--arrow-size) + 1px); }
+      .popover > .arrow.right::before {
+        left: 1px;
+        border-right-width: 0;
+        border-left-color: rgba(0, 0, 0, 0.23); }
+      .popover > .arrow.right::after {
+        border-right-width: 0;
+        border-left-color: #ffffff; }
+  .popover > .contents {
     background-color: #ffffff;
     background-clip: padding-box;
     border: 1px solid rgba(0, 0, 0, 0.23);
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3); }
-  popover.background:backdrop {
-    background-color: transparent; }
-  popover.background > contents {
-    padding: 8px;
+    box-shadow: 0 1px 3px 2px rgba(0, 0, 0, 0.08); }
+  .popover > .contents {
+    padding: 8px 0;
     border-radius: 9px; }
-    popover.background > contents > list,
-    popover.background > contents > .view,
-    popover.background > contents > .IconView,
-    popover.background > contents > toolbar {
+    .popover > .contents > .list,
+    .popover > .contents > .view,
+    .popover > .contents > .IconView,
+    .popover > .contents > .Toolbar {
       border-style: none;
       background-color: transparent; }
-    popover.background > contents separator {
+    .popover > .contents .separator {
       margin: 3px; }
-    popover.background > contents list separator {
+    .popover > .contents .list .separator {
       margin: 0; }
-  .osd popover.background, popover.background.touch-selection, popover.background.magnifier {
+  .osd .popover, .popover.touch-selection {
     background-color: transparent; }
-    .osd popover.background > arrow,
-    .osd popover.background > contents, popover.background.touch-selection > arrow,
-    popover.background.touch-selection > contents, popover.background.magnifier > arrow,
-    popover.background.magnifier > contents {
+    .osd .popover > arrow,
+    .osd .popover > .contents, .popover.touch-selection > arrow,
+    .popover.touch-selection > .contents {
       border: 1px solid rgba(255, 255, 255, 0.1);
       box-shadow: none; }
-
-magnifier {
-  background-color: #ffffff; }
 
 /**********************
  * Popover Base Menus *
  **********************/
-popover.menu {
+.popover.menu {
   padding: 0; }
-  popover.menu box.inline-buttons {
-    padding: 0 12px; }
-    popover.menu box.inline-buttons button.image-button.model {
-      border-color: transparent;
-      background-color: transparent;
-      box-shadow: inset 0 1px rgba(255, 255, 255, 0);
-      text-shadow: none;
-      --icon-shadow: none;
-      min-height: 30px;
-      min-width: 30px;
-      padding: 0;
-      border: none;
-      outline: none;
-      transition: none; }
-      popover.menu box.inline-buttons button.image-button.model::before {
-        opacity: 0; }
-      popover.menu box.inline-buttons button.image-button.model.selected {
-        background: image(#e8e6e3); }
-  popover.menu box.circular-buttons {
+  .popover.menu.background > .contents {
+    background-color: #ffffff; }
+  .popover.menu.MenuBar__popover > .contents {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-top: none; }
+  .popover.menu > .contents {
+    display: flex;
+    flex-direction: column; }
+  .popover.menu .separator {
+    margin: 3px 0; }
+  .popover.menu.background .separator {
+    margin: 6px 0; }
+  .popover.menu .Box.inline-buttons {
+    padding: 0 12px;
+    /* .Button {
+     *   @include button(undecorated);
+     *   min-height: 30px;
+     *   min-width: 30px;
+     *   padding: 0;
+     *   border: none;
+     *   outline: none;
+     *   transition: none;
+     *   &.selected { background: image($menu_selected_color); }
+     * }  */ }
+  .popover.menu .Box.circular-buttons {
     padding: 12px 12px 6px; }
-    popover.menu box.circular-buttons button.circular.image-button.model {
+    .popover.menu .Box.circular-buttons .Button.circular {
       padding: 11px; }
-      popover.menu box.circular-buttons button.circular.image-button.model:focus {
+      .popover.menu .Box.circular-buttons .Button.circular:focus {
         background-color: #e8e6e3;
         border-color: #e8e6e3; }
-  popover.menu > arrow, popover.menu.background > contents {
-    background-color: #ffffff;
-    padding: 5px; }
-  popover.menu.background separator {
-    margin: 6px 0; }
-  popover.menu accelerator {
-    color: alpha(currentColor,0.55); }
-    popover.menu accelerator:dir(ltr) {
-      margin-left: 12px; }
-    popover.menu accelerator:dir(rtl) {
-      margin-right: 12px; }
-  popover.menu check,
-  popover.menu radio {
+  .popover.menu check,
+  .popover.menu radio {
     transform: scale(0.8);
     border-width: 1.2px;
     border-color: transparent;
     box-shadow: none;
     background-image: image(transparent);
     color: black; }
-    popover.menu check:hover,
-    popover.menu radio:hover {
+    .popover.menu check:hover,
+    .popover.menu radio:hover {
       transform: scale(0.8);
       border-width: 1.2px;
       color: black;
       box-shadow: none;
       background-image: image(transparent); }
-    popover.menu check:active,
-    popover.menu radio:active {
+    .popover.menu check:active,
+    .popover.menu radio:active {
       transform: scale(0.8);
       border-width: 1.2px;
       color: black;
       box-shadow: none;
       background-image: image(transparent); }
-  popover.menu radio {
+  .popover.menu radio {
     border-color: #cdc7c2; }
-    popover.menu radio:active {
+    .popover.menu radio:active {
       border-color: rgba(205, 199, 194, 0.5); }
-  popover.menu arrow.left,
-  popover.menu radio.left,
-  popover.menu check.left {
+  .popover.menu arrow.left,
+  .popover.menu radio.left,
+  .popover.menu check.left {
     margin-left: -2px;
     margin-right: 6px; }
-  popover.menu arrow.right,
-  popover.menu radio.right,
-  popover.menu check.right {
+  .popover.menu arrow.right,
+  .popover.menu radio.right,
+  .popover.menu check.right {
     margin-left: 6px;
     margin-right: -2px; }
-  popover.menu .ModelButton {
+  .popover.menu .ModelButton {
     min-height: 30px;
     min-width: 40px;
     padding: 0 12px;
-    border-radius: 5px; }
-    popover.menu .ModelButton.selected {
+    border-radius: 0;
+    text-align: left; }
+    .popover.menu .ModelButton.selected {
       color: black;
       background-color: #e8e6e3; }
-    popover.menu .ModelButton.selected:active {
+    .popover.menu .ModelButton.selected:active {
       background-color: #d6d1cd; }
-  popover.menu .Label.title {
+    .popover.menu .ModelButton:focus {
+      outline: none; }
+  .popover.menu .Menu__button {
+    display: flex;
+    flex-direction: row;
+    border: none;
+    align-items: center; }
+  .popover.menu .Menu__button__text {
+    flex: 1; }
+  .popover.menu .Menu__button__accelerator {
+    color: rgba(0, 0, 0, 0.55);
+    margin-left: 12px; }
+  .popover.menu .title {
     font-weight: bold;
-    padding: 4px 32px; }
+    padding: 4px 12px;
+    text-align: left; }
 
-menubar {
+.MenuBar {
   padding: 0px;
   box-shadow: inset 0 -1px rgba(0, 0, 0, 0.1); }
-  menubar > item {
+  .MenuBar > .MenuBar__item {
+    border-color: transparent;
+    background-color: transparent;
+    box-shadow: inset 0 1px rgba(255, 255, 255, 0);
+    text-shadow: none;
+    --icon-shadow: none;
+    color: black;
     min-height: 16px;
-    padding: 4px 8px; }
-    menubar > item.selected {
+    padding: 1px 8px;
+    border-width: 0;
+    border-top: 3px solid transparent;
+    border-bottom: 3px solid transparent; }
+    .MenuBar > .MenuBar__item::before {
+      opacity: 0; }
+    .MenuBar > .MenuBar__item:hover, .MenuBar > .MenuBar__item.hover, .MenuBar > .MenuBar__item:active, .MenuBar > .MenuBar__item.active {
+      color: #3584e4;
+      border-bottom: 3px solid #3584e4; }
+    .MenuBar > .MenuBar__item.focus, .MenuBar > .MenuBar__item:focus {
+      outline: none;
+      background-color: #e8e6e3; }
+    .MenuBar > .MenuBar__item.selected {
       box-shadow: inset 0 -3px #3584e4;
       color: #1b6acb; }
-    menubar > item:disabled {
+    .MenuBar > .MenuBar__item:disabled {
       color: #929595;
       box-shadow: none; }
-  menubar > item popover.menu.background > contents {
+  .MenuBar > .MenuBar__item popover.menu.background > .contents {
     padding: 5px; }
-  menubar > item popover.menu popover.menu {
+  .MenuBar > .MenuBar__item popover.menu popover.menu {
     padding: 0 0 4px 0; }
-  menubar > item popover.menu.background popover.menu.background > contents {
+  .MenuBar > .MenuBar__item popover.menu.background popover.menu.background > .contents {
     margin: 0;
     border-radius: 9px; }
+
+.MenuBar__popover > .contents {
+  padding-top: 0; }
 
 /*************
  * Notebooks *
@@ -2611,6 +2718,7 @@ switch {
     switch > slider::before {
       content: ' ';
       position: absolute;
+      pointer-events: none;
       width: 100%;
       height: 100%;
       top: 0px;
@@ -2623,7 +2731,7 @@ switch {
     color: #2e3436;
     border-color: #cdc7c2;
     border-bottom-color: #bfb8b1;
-    background-color: #fdfdfc;
+    background-color: #f9f9f8;
     box-shadow: inset 0 1px #f4f2f1, 0 1px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.07); }
     switch:hover > slider::before {
       opacity: 0; }
@@ -3008,7 +3116,7 @@ scale {
       color: #2e3436;
       border-color: #cdc7c2;
       border-bottom-color: #bfb8b1;
-      background-color: #fdfdfc;
+      background-color: #f9f9f8;
       box-shadow: inset 0 1px #f4f2f1, 0 1px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.07); }
       scale > trough > slider:hover::before {
         opacity: 0; }
@@ -3693,8 +3801,8 @@ scrolledwindow > junction {
   scrolledwindow > junction:dir(rtl) {
     background: #cdc7c2, linear-gradient(to bottom, transparent 1px, #cecece 1px), linear-gradient(to left, transparent 1px, #cecece 1px); }
 
-separator {
-  background: #d8d4d0;
+.separator {
+  border-bottom: 1px solid #d8d4d0;
   min-width: 1px;
   min-height: 1px; }
 
@@ -4212,6 +4320,7 @@ colorswatch {
       colorswatch#add-color-button > overlay::before {
         content: ' ';
         position: absolute;
+        pointer-events: none;
         width: 100%;
         height: 100%;
         top: 0px;
@@ -4222,7 +4331,7 @@ colorswatch {
       color: #2e3436;
       border-color: #cdc7c2;
       border-bottom-color: #bfb8b1;
-      background-color: #fdfdfc;
+      background-color: #f9f9f8;
       box-shadow: inset 0 1px #f4f2f1, 0 1px 2px rgba(0, 0, 0, 0.07); }
       colorswatch#add-color-button.activatable:hover > overlay::before {
         opacity: 0; }
@@ -4442,7 +4551,7 @@ shortcut > .keycap {
 /*********
  * Emoji *
  ********/
-popover.emoji-picker > contents {
+popover.emoji-picker > .contents {
   padding: 0; }
 
 .emoji-searchbar {
@@ -4492,7 +4601,7 @@ emoji-completion-row emoji:focus,
 emoji-completion-row emoji:hover {
   background-color: #e8e6e3; }
 
-popover.entry-completion > contents {
+popover.entry-completion > .contents {
   padding: 0; }
 
 statusbar {

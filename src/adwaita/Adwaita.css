@@ -82,12 +82,6 @@ button {
     text-shadow: none;
     --icon-shadow: none; }
 
-.normal-icons {
-  --icon-size: 16px; }
-
-.large-icons {
-  --icon-size: 32px; }
-
 /***************
  * Layout      *
  ***************/
@@ -117,20 +111,6 @@ button {
 
 .Box__fill {
   flex: 1; }
-
-/*
-   These wildcard seems unavoidable, need to investigate.
-   Wildcards are bad and troublesome, use them with care,
-   or better, just don't.
-   Every time a wildcard is used a kitten dies, painfully.
-*/
-spinner:disabled,
-arrow:disabled,
-scrollbar:disabled,
-check:disabled,
-radio:disabled,
-.TreeView.expander:disabled {
-  -gtk-icon-filter: opacity(0.5); }
 
 .view, .IconView,
 .TextView > textarea {
@@ -216,6 +196,9 @@ radio:disabled,
     border-spacing: 8px;
     margin: 12px; }
 
+/****************
+ * Labels       *
+ ****************/
 .Label {
   outline: 0 solid transparent;
   outline-offset: 4px; }
@@ -243,9 +226,33 @@ radio:disabled,
   color: #929595;
   font-weight: 700; }
 
+.Label.align-left {
+  text-align: left; }
+
+.Label.align-center {
+  text-align: center; }
+
+.Label.align-right {
+  text-align: right; }
+
+.Label.ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap; }
+
+.Label.fill {
+  width: 100%;
+  height: 100%; }
+
+.Label.fill-width {
+  width: 100%; }
+
+.Label.fill-height {
+  height: 100%; }
+
 .dim-label, .titlebar:not(headerbar) .subtitle,
-headerbar .subtitle, .InputNumber.vertical > input > input::placeholder, .InputNumber:not(.vertical) > input::placeholder,
-.Input > input::placeholder, .Label.separator {
+headerbar .subtitle, .InputNumber.vertical > input > .Input__area > input::placeholder, .InputNumber:not(.vertical) > .Input__area > input::placeholder,
+.Input > .Input__area > input::placeholder, .Label.separator {
   opacity: 0.55;
   text-shadow: none; }
 
@@ -261,6 +268,12 @@ headerbar .subtitle, .InputNumber.vertical > input > input::placeholder, .InputN
 /****************
  * Icons        *
  ****************/
+.normal-icons {
+  --icon-size: 16px; }
+
+.large-icons {
+  --icon-size: 32px; }
+
 .Icon {
   display: flex;
   justify-content: center;
@@ -329,17 +342,45 @@ headerbar .subtitle, .InputNumber.vertical > input > input::placeholder, .InputN
       outline-color: rgba(53, 132, 228, 0.5);
       outline-width: 2px;
       outline-offset: -2px; }
-    .InputNumber.vertical > input > input, .InputNumber:not(.vertical) > input,
-    .Input > input {
-      width: 100%;
-      border: none;
-      background: none; }
-      .InputNumber.vertical > input > input:focus, .InputNumber:not(.vertical) > input:focus,
-      .Input > input:focus {
-        outline: none; }
-      .InputNumber.vertical > input > input::placeholder, .InputNumber:not(.vertical) > input::placeholder,
-      .Input > input::placeholder {
-        user-select: none; }
+    .InputNumber.vertical > input > .Input__area, .InputNumber:not(.vertical) > .Input__area,
+    .Input > .Input__area {
+      position: relative;
+      flex: 1;
+      height: 100%;
+      overflow: hidden; }
+      .InputNumber.vertical > input > .Input__area > input, .InputNumber:not(.vertical) > .Input__area > input,
+      .Input > .Input__area > input {
+        width: 100%;
+        height: 100%;
+        border: none;
+        background: none; }
+        .InputNumber.vertical > input > .Input__area > input:focus, .InputNumber:not(.vertical) > .Input__area > input:focus,
+        .Input > .Input__area > input:focus {
+          outline: none; }
+        .InputNumber.vertical > input > .Input__area > input::placeholder, .InputNumber:not(.vertical) > .Input__area > input::placeholder,
+        .Input > .Input__area > input::placeholder {
+          user-select: none; }
+      .InputNumber.vertical > input > .Input__area > .Input__children, .InputNumber:not(.vertical) > .Input__area > .Input__children,
+      .Input > .Input__area > .Input__children {
+        position: absolute;
+        pointer-events: none;
+        top: 0px;
+        left: 0px;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        justify-content: flex-start;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap; }
+      .InputNumber.vertical > input > .Input__area > input:focus + .Input__children, .InputNumber:not(.vertical) > .Input__area > input:focus + .Input__children,
+      .Input > .Input__area > input:focus + .Input__children {
+        opacity: 0.5; }
+      .InputNumber.vertical > input > .Input__area > input:not(.empty) + .Input__children, .InputNumber:not(.vertical) > .Input__area > input:not(.empty) + .Input__children,
+      .Input > .Input__area > input:not(.empty) + .Input__children {
+        opacity: 0; }
     .InputNumber.vertical > input .Input__left, .InputNumber:not(.vertical) .Input__left, .InputNumber.vertical > input .Input__right, .InputNumber:not(.vertical) .Input__right,
     .Input .Input__left,
     .Input .Input__right {
@@ -354,7 +395,7 @@ headerbar .subtitle, .InputNumber.vertical > input > input::placeholder, .InputN
       margin-left: 6px; }
     .window-inactive .InputNumber.vertical > input.flat, .InputNumber.vertical > input.flat, .flat.InputNumber:not(.vertical),
     .Input.flat:focus-within, .window-inactive .Input.flat,
-    .Input.flat:disabled,
+    .Input.flat:disabled, .window-inactive .Input.flat:disabled,
     .Input.flat {
       min-height: 0;
       padding: 2px;
@@ -453,7 +494,7 @@ headerbar .subtitle, .InputNumber.vertical > input > input::placeholder, .InputN
     display: inline-block;
     pointer-events: none;
     width: calc(100% - 2 * var(--input-padding, 8px));
-    height: calc(100% - 3px);
+    height: calc(100% - 1px);
     top: 0px;
     left: var(--input-padding); }
     .InputNumber.vertical > input .Input__progress .Input__progress__bar, .InputNumber:not(.vertical) .Input__progress .Input__progress__bar,
@@ -466,7 +507,7 @@ headerbar .subtitle, .InputNumber.vertical > input > input::placeholder, .InputN
       border-style: solid; }
     .InputNumber.vertical > input .Input__progress.undeterminate, .InputNumber:not(.vertical) .Input__progress.undeterminate,
     .Input .Input__progress.undeterminate {
-      height: calc(100% - 2px);
+      height: calc(100% - 1px);
       width: var(--progress-undeterminate-width);
       animation: move_along_width 2.5s infinite; }
   .InputNumber.vertical.linked:not(.vertical) > input:not(:first-child), .linked:not(.vertical) > .InputNumber:not(:first-child):not(.vertical), .linked:not(.vertical) > .Input:not(:first-child) {
@@ -573,6 +614,12 @@ notebook > header > tabs > arrow, windowcontrols button,
   border-bottom-color: #bfb8b1;
   background-color: #f6f5f4;
   box-shadow: inset 0 1px white, 0 1px 2px rgba(0, 0, 0, 0.07); }
+  notebook > header > tabs > arrow, windowcontrols button, notebook > header > tabs > arrow > .Label, windowcontrols button > .Label,
+  .Button,
+  .Button > .Label {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap; }
   notebook > header > tabs > arrow::before, windowcontrols button::before,
   .Button::before {
     content: ' ';
@@ -756,7 +803,7 @@ notebook > header > tabs > arrow, windowcontrols button,
     .Button.text-button.image-button .Label {
       padding-left: 8px;
       padding-right: 8px; }
-  .Dropdown.dnd-active button.combo, notebook > header > tabs > arrow.dnd-active, windowcontrols button.dnd-active,
+  notebook > header > tabs > arrow.dnd-active, windowcontrols button.dnd-active,
   .Button.dnd-active {
     color: #2ec27e;
     border-color: #2ec27e;
@@ -1305,15 +1352,18 @@ stacksidebar row.needs-attention > .Label, .StackSwitcher > .Button.needs-attent
   min-height: 26px;
   padding-left: 5px;
   padding-right: 5px;
-  border-radius: 5px;
   border-color: transparent;
   background-color: transparent;
   box-shadow: inset 0 1px rgba(255, 255, 255, 0);
   text-shadow: none;
-  --icon-shadow: none; }
+  --icon-shadow: none;
+  border: none;
+  border-radius: 0;
+  text-align: left; }
   .ModelButton.flat::before {
     opacity: 0; }
-  .ModelButton.flat.hover, .ModelButton.flat:hover {
+  .ModelButton.flat.focus, .ModelButton.flat:focus, .ModelButton.flat.hover, .ModelButton.flat:hover {
+    outline: none;
     background-color: #efedec; }
   .ModelButton.flat.active, .ModelButton.flat:active {
     border-color: transparent;
@@ -1437,20 +1487,20 @@ link {
   color: #1b6acb;
   text-decoration: underline;
   cursor: pointer; }
-  button.link:visited,
-  link:visited {
+  button.link:not(:disabled):not(.disabled):visited,
+  link:not(:disabled):not(.disabled):visited {
     color: #15539e; }
-    *.selected button.link:visited, *.selected link:visited {
+    *.selected button.link:not(:disabled):not(.disabled):visited, *.selected link:not(:disabled):not(.disabled):visited {
       color: #a1bad8; }
-  button.link:hover,
-  link:hover {
+  button.link:not(:disabled):not(.disabled):hover,
+  link:not(:disabled):not(.disabled):hover {
     color: #3584e4; }
-    *.selected button.link:hover, *.selected link:hover {
+    *.selected button.link:not(:disabled):not(.disabled):hover, *.selected link:not(:disabled):not(.disabled):hover {
       color: #ebf3fc; }
-  button.link:active,
-  link:active {
+  button.link:not(:disabled):not(.disabled):active,
+  link:not(:disabled):not(.disabled):active {
     color: #1b6acb; }
-    *.selected button.link:active, *.selected link:active {
+    *.selected button.link:not(:disabled):not(.disabled):active, *.selected link:not(:disabled):not(.disabled):active {
       color: #d1e1f5; }
   button.link:disabled,
   link:disabled {
@@ -1701,25 +1751,31 @@ input::-webkit-outer-spin-button {
 /**************
  * ComboBoxes *
  **************/
-.Dropdown > popover.menu.background > .contents {
+.Dropdown__menu.popover.menu.background > .contents {
   padding: 0; }
-
-.Dropdown > button > box {
-  border-spacing: 6px; }
 
 .Dropdown {
   display: flex;
   flex-direction: row;
-  width: 180px; }
-  .Dropdown:not(.input) .Button {
+  width: 180px;
+  /* &.dnd-active { // FIXME: untested
+   *   box-shadow: none;
+   *   button.combo { @extend %button_basic_drop_active; }
+   * } */ }
+  .Dropdown .Dropdown__trigger.Button {
     width: 100%;
     display: flex;
     flex-direction: row; }
-    .Dropdown:not(.input) .Button > .Label {
+    .Dropdown .Dropdown__trigger.Button > .Label {
       flex: 1;
       text-align: left; }
-    .Dropdown:not(.input) .Button > .Icon {
+    .Dropdown .Dropdown__trigger.Button > .Icon {
       flex: 0; }
+  .Dropdown.open .Dropdown__trigger.Button {
+    background-color: #ffffff;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    border-bottom-color: transparent; }
   .Dropdown.linked button:nth-child(2):dir(ltr) {
     border-top-left-radius: 0;
     border-bottom-left-radius: 0; }
@@ -1727,26 +1783,30 @@ input::-webkit-outer-spin-button {
     border-right-style: none;
     border-top-right-radius: 0;
     border-bottom-right-radius: 0; }
-  .Dropdown.dnd-active {
-    box-shadow: none; }
 
-.Dropdown__menu {
-  margin-top: 6px;
-  padding: 0; }
-  .Dropdown__menu .list {
-    margin: 8px 0; }
-    .Dropdown__menu .list > row {
-      padding: 8px; }
-      .Dropdown__menu .list > row.selected {
-        outline-color: rgba(255, 255, 255, 0.8);
-        color: black;
-        background-color: #efedec; }
-  .Dropdown__menu > popover.menu > .contents .ModelButton {
-    padding-left: 9px;
-    padding-right: 9px; }
-  .Dropdown__menu .dropdown-searchbar {
-    padding: 6px;
-    border-bottom: 1px solid #cdc7c2; }
+.Dropdown__menu.popover > .contents {
+  padding-top: 0;
+  border-top: none;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0; }
+
+.Dropdown__menu.popover > .contents .ModelButton {
+  padding-left: 9px;
+  padding-right: 9px; }
+  .Dropdown__menu.popover > .contents .ModelButton.selected {
+    font-weight: 700;
+    outline-color: rgba(255, 255, 255, 0.8);
+    color: black;
+    background-color: #efedec; }
+
+.Dropdown__menu.popover .list {
+  margin: 8px 0; }
+  .Dropdown__menu.popover .list > .row {
+    padding: 8px; }
+
+.Dropdown__menu.popover .dropdown-searchbar {
+  padding: 6px;
+  border-bottom: 1px solid #cdc7c2; }
 
 .linked:not(.vertical) > filechooserbutton > combobox:dir(ltr):not(:first-child) > box > button.combo,
 .linked:not(.vertical) > appchooserbutton > combobox:dir(ltr):not(:first-child) > box > button.combo,
@@ -4441,7 +4501,7 @@ tooltip.csd {
 .view.selected:focus, .view.selected,
 .TextView > textarea.selected:focus,
 .TextView > textarea.selected, .TextView > textarea::selection, .selected.IconView:focus, .selected.IconView, .Flowbox > .Flowbox__child.selected, .Grid > .Grid__child.selected,
-.Input > input::selection, .ModelButton.flat.selected, .InputNumber:not(.vertical) > input::selection, .InputNumber.vertical > input > input::selection, .InputNumber.vertical > input::selection, columnview.view.selected:focus, columnview.view.selected, columnview.selected.IconView,
+.Input > .Input__area > input::selection, .ModelButton.flat.selected, .InputNumber:not(.vertical) > .Input__area > input::selection, .InputNumber.vertical > input > .Input__area > input::selection, .InputNumber.vertical > input::selection, columnview.view.selected:focus, columnview.view.selected, columnview.selected.IconView,
 .TreeView.view.selected:focus,
 .TreeView.view.selected,
 .TreeView.selected.IconView, row.selected, calendar > grid > .Label.day-number.selected {
@@ -4449,14 +4509,14 @@ tooltip.csd {
   .Label.selected, .view.selected:focus, .view.selected,
   .TextView > textarea.selected:focus,
   .TextView > textarea.selected, .TextView > textarea::selection, .selected.IconView:focus, .selected.IconView, .Flowbox > .Flowbox__child.selected, .Grid > .Grid__child.selected,
-  .Input > input::selection, .ModelButton.flat.selected, .InputNumber:not(.vertical) > input::selection, .InputNumber.vertical > input > input::selection, .InputNumber.vertical > input::selection, columnview.view.selected:focus, columnview.view.selected, columnview.selected.IconView,
+  .Input > .Input__area > input::selection, .ModelButton.flat.selected, .InputNumber:not(.vertical) > .Input__area > input::selection, .InputNumber.vertical > input > .Input__area > input::selection, .InputNumber.vertical > input::selection, columnview.view.selected:focus, columnview.view.selected, columnview.selected.IconView,
   .TreeView.view.selected:focus,
   .TreeView.view.selected,
   .TreeView.selected.IconView, row.selected, calendar > grid > .Label.day-number.selected {
     color: #ffffff; }
     .Label.disabled::selection, .Label.selected:disabled, .view.selected:disabled,
     .TextView > textarea.selected:disabled, .TextView > textarea:disabled::selection, .selected.IconView:disabled, .Flowbox > .Flowbox__child.selected:disabled, .Grid > .Grid__child.selected:disabled,
-    .Input > input:disabled::selection, .ModelButton.flat.selected:disabled, .InputNumber:not(.vertical) > input:disabled::selection, .InputNumber.vertical > input > input:disabled::selection, .InputNumber.vertical > input:disabled::selection, columnview.view.selected:disabled, columnview.selected.IconView:disabled,
+    .Input > .Input__area > input:disabled::selection, .ModelButton.flat.selected:disabled, .InputNumber:not(.vertical) > .Input__area > input:disabled::selection, .InputNumber.vertical > input > .Input__area > input:disabled::selection, .InputNumber.vertical > input:disabled::selection, columnview.view.selected:disabled, columnview.selected.IconView:disabled,
     .TreeView.view.selected:disabled,
     .TreeView.selected.IconView:disabled, row.selected:disabled, calendar > grid > .Label.day-number.selected:disabled {
       color: #9ac2f2; }

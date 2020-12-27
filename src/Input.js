@@ -3,12 +3,18 @@
  */
 
 
-import { forwardRef } from 'react'
+import { useState, useRef, forwardRef } from 'react'
 import cx from 'classname'
 import Icon from './Icon'
 
+function useForceUpdate(){
+    const [_, setValue] = useState(0)
+    return () => setValue(value => ++value)
+}
+
 function Input({
   type = 'text',
+  className,
   icon,
   iconAfter,
   placeholder,
@@ -17,10 +23,29 @@ function Input({
   error,
   warning,
   progress,
+  children,
+  onChange,
   ...rest
 }, ref) {
+
+  const forceUpdate = useForceUpdate()
+  const inputRef = useRef()
+  const isControlled = typeof rest.value === 'string'
+  const value = isControlled ? rest.value : (inputRef.current?.value || rest.defaultValue || '')
+
+  const inputClassName =
+    cx('Input', { flat, disabled, error, warning, progress: progress !== undefined })
+    + ' ' + cx(className)
+
+  const onInputChange = ev => {
+    if (isControlled)
+      onChange && onChange(ev.targer.value, ev)
+    else
+      forceUpdate()
+  }
+
   return (
-    <div className={cx('Input', { flat, disabled, error, warning, progress: progress !== undefined })} ref={ref}>
+    <div className={inputClassName} ref={ref}>
       {icon &&
         <span  className='Input__left'>
           {
@@ -30,7 +55,22 @@ function Input({
           }
         </span>
       }
-      <input type={type} placeholder={placeholder} disabled={disabled} {...rest} />
+      <div className='Input__area'>
+        <input
+          type={type}
+          placeholder={placeholder}
+          disabled={disabled}
+          className={value === '' ? 'empty' : undefined}
+          ref={inputRef}
+          onChange={onInputChange}
+          {...rest}
+        />
+        {children &&
+          <div className='Input__children'>
+            {children}
+          </div>
+        }
+      </div>
       {progress &&
         <div className={cx('Input__progress', progress === true ? 'undeterminate' : undefined)}>
           <span

@@ -2,6 +2,7 @@
  * Button.js
  */
 
+import { forwardRef } from 'react'
 import cx from 'classname'
 import Icon from './Icon'
 
@@ -14,26 +15,29 @@ function Button({
   flat,
   link,
   active,
+  hover,
   text,
   image,
   primary,
   danger,
   ...rest
-}) {
+}, ref) {
   return (
     <button
-      className={cx('Button', className, {
+      className={cx('Button', {
         disabled,
         circular,
         flat,
         link,
         active,
+        hover,
         'text-button': text,
         'image-button': image,
         'suggested-action': primary,
         'destructive-action': danger,
-      })}
+      }) + ' ' + className}
       disabled={disabled}
+      ref={ref}
       {...rest}
     >
       {icon &&
@@ -45,4 +49,4 @@ function Button({
   )
 }
 
-export default Button
+export default forwardRef(Button)

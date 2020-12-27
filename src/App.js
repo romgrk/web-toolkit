@@ -32,6 +32,7 @@ function App() {
       <h1>Application</h1>
 
       <Box horizontal>
+        <DemoDropdown />
         <DemoFrame />
         <DemoMenu />
       </Box>
@@ -82,15 +83,6 @@ function App() {
           </div>
           <InputNumber />
           <InputNumber disabled />
-          <Dropdown
-            value={'Left'}
-            options={['Left', 'Middle', 'Right']}
-          />
-          <Dropdown
-            input
-            value={'Left'}
-            options={['Left', 'Middle', 'Right']}
-          />
         </div>
       </div>
 
@@ -201,6 +193,44 @@ function MenuButton({
         <Icon name='go-next' className='Menu__iconAfter submenu' />
       }
     </button>
+  )
+}
+
+function DemoDropdown() {
+  const [value, setValue] = useState(2)
+  const [users, setUsers] = useState([])
+  const options = users.map(u =>
+    ({
+      value: u.id,
+      label: u.name
+    })
+  )
+
+  useEffect(() => {
+    setTimeout(() => {
+      fetch('https://jsonplaceholder.typicode.com/users')
+      .then(r => r.json())
+      .then(setUsers)
+    }, 1000)
+  }, [])
+
+
+  return (
+    <Box vertical>
+      <Dropdown
+        value={value}
+        loading={users.length === 0}
+        options={options}
+        onChange={setValue}
+      />
+      <Dropdown
+        input
+        value={value}
+        loading={users.length === 0}
+        options={options}
+        onChange={setValue}
+      />
+    </Box>
   )
 }
 

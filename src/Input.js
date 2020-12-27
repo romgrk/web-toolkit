@@ -50,8 +50,13 @@ function Input({
     onChange && onChange(ev.target.value, ev)
   }
 
+  const onClickContainer = ev => {
+    if (ev.target !== inputRef.current)
+      inputRef.current?.focus()
+  }
+
   return (
-    <div className={inputClassName} ref={ref}>
+    <div className={inputClassName} ref={ref} onClick={onClickContainer}>
       {icon &&
         <span  className='Input__left'>
           {

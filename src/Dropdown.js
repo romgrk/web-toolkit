@@ -122,7 +122,6 @@ class Dropdown extends React.Component {
   }
 
   onInputChange = inputValue => {
-    console.log(inputValue)
     this.setState({ inputValue })
   }
 

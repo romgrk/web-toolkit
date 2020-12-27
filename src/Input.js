@@ -38,7 +38,6 @@ function Input({
   const inputRef = useRef()
   const isControlled = typeof rest.value === 'string'
   const value = isControlled ? rest.value : (inputRef.current?.value || rest.defaultValue || '')
-  console.log({ value }, rest.value)
 
   const inputClassName =
     cx('Input', { flat, disabled, error, warning, progress: progress !== undefined })

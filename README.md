@@ -9,8 +9,8 @@ strangely.  And maybe Apple too, but they're not in the OSS business so I avoid 
 
 ## Screenshots
 
-![demo-1](./static/demo-1.png)
-![demo-2](./static/demo-2.png)
+![demo-1](https://raw.githubusercontent.com/romgrk/web-toolkit/master/static/demo-1.png)
+![demo-2](https://raw.githubusercontent.com/romgrk/web-toolkit/master/static/demo-2.png)
 
 ## Roadmap
 

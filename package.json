@@ -1,6 +1,7 @@
 {
   "name": "web-toolkit",
   "version": "0.1.0",
+  "repository": "https://github.com/romgrk/web-toolkit",
   "dependencies": {
     "@popperjs/core": "^2.6.0",
     "@testing-library/jest-dom": "^5.11.4",

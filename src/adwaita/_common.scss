@@ -1179,7 +1179,7 @@ input::-webkit-outer-spin-button {
     // behaves as the entry, so we extend the entry styling
     // and nuke the style on the internal entry
     @extend %entry;
-    width: 110px;
+    width: 100px;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -1237,11 +1237,12 @@ input::-webkit-outer-spin-button {
         }
         &:hover {
           color: $fg_color;
-          background-color: darken($bg_color,5%);
+          background-color: rgba(black, 0.03);
+          box-shadow: 0 -1px darken($bg_color, 5%);
         }
         &:active {
-          background-color: transparentize(black, 0.9);
-          box-shadow: inset 0 2px 3px -1px transparentize(black, 0.8);
+          background-color: rgba(black, 0.1);
+          box-shadow: inset 0 2px 2px 0px rgba(black, 0.08);
         }
       }
       &:disabled {

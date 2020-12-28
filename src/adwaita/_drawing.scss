@@ -10,7 +10,7 @@
 // If $within is true, use focus-within instead of focus:focus-visible
 // $method: Method to use for the focus ring (outline, before, after)
 //
-@mixin focus-ring($target: null, $width: 2px, $offset: -$width, $outer: false, $focus-state: 'focus:focus-visible', $fc: $focus_border_color, $method: 'outline', $scale: 1.05) {
+@mixin focus-ring($target: null, $width: 2px, $offset: -$width, $outer: false, $focus-state: 'focus:focus-visible', $fc: $focus_border_color, $method: 'outline', $scale: 1.03) {
 
   // Draw using the outline property
   // Note: outline doesn't respect the border-radius

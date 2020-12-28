@@ -11,6 +11,7 @@ import Box from './Box'
 function HeaderBar({
   className,
   children,
+  titlebar,
   ...rest
 }) {
   return (
@@ -19,6 +20,7 @@ function HeaderBar({
         cx(
           'HeaderBar',
           className,
+          { titlebar }
         )
       }
       {...rest}

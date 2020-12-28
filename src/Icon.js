@@ -1106,14 +1106,14 @@ const icons = {
   'zoom-out': ZoomOutSymbolic,
 }
 
-function Icon({ className, name }) {
+function Icon({ className, name, ...rest }) {
   const element = icons[name]
 
   if (!element)
     throw new Error('Icon: invalid name: ' + name)
 
   return (
-    <span className={cx('Icon', className)}>
+    <span className={cx('Icon', className)} {...rest}>
       {React.createElement(element)}
     </span>
   )

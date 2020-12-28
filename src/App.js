@@ -32,16 +32,58 @@ function App() {
    *   }
    * }, []) */
   return (
-    <div className="App background">
+    <div className="App background Box vertical compact">
+
+      <HeaderBar titlebar>
+        <Button icon='system-search' />
+        <div className='linked'>
+          <Button icon='go-first' active />
+          <Button icon='go-last' active />
+        </div>
+        <HeaderBar.Title subtitle='This is an header bar' fill>
+          Header bar
+        </HeaderBar.Title>
+        <Input icon='system-search' placeholder='Search...' />
+        <span className='StackSwitcher linked'>
+          <Button text>Editor</Button>
+          <Button text active>Build</Button>
+          <Button text className='needs-attention'>
+            <span className='Label'>Settings</span>
+          </Button>
+        </span>
+        <HeaderBar.Controls>
+          <Button icon='window-close' />
+        </HeaderBar.Controls>
+      </HeaderBar>
+
+      <AppContent />
+    </div>
+  );
+}
+
+function AppContent() {
+  return (
+    <div className='App__content Box__fill'>
       <h1>Application</h1>
 
       <Box vertical compact>
         <HeaderBar>
           <Button icon='system-search' />
+          <div className='linked'>
+            <Button icon='go-first' active />
+            <Button icon='go-last' active />
+          </div>
           <HeaderBar.Title subtitle='This is an header bar' fill>
             Header bar
           </HeaderBar.Title>
           <Button icon='emblem-system' />
+          <span className='StackSwitcher linked'>
+            <Button text>Editor</Button>
+            <Button text active>Build</Button>
+            <Button text className='needs-attention'>
+              <span className='Label'>Settings</span>
+            </Button>
+          </span>
           <HeaderBar.Controls>
             <Button icon='window-close' />
           </HeaderBar.Controls>
@@ -176,14 +218,15 @@ function App() {
       <p>
         {iconNames.map(name =>
           <Box horizontal inline style={{ width: 250 }}>
-            <Icon name={name} />
-            {name}
+            <Icon name={name} style={{ transform: 'scale(1.5)' }}/>
+            <Label muted>
+              {name}
+            </Label>
           </Box>
         )}
       </p>
-
     </div>
-  );
+  )
 }
 
 function MenuButton({

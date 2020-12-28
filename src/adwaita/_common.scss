@@ -1644,6 +1644,7 @@ input::-webkit-outer-spin-button {
     transition: $backdrop_transition;
   }
 
+  // FIXME: this is a hack to make the inner box fill the bar
   > .Box {
     min-height: 46px;
   }
@@ -1656,7 +1657,6 @@ input::-webkit-outer-spin-button {
   .title:not(:only-child) {
     margin-bottom: 0.15em;
   }
-
   .subtitle {
     font-size: smaller;
     padding-left: 12px;
@@ -1665,19 +1665,37 @@ input::-webkit-outer-spin-button {
     @extend .dim-label;
   }
 
-  /* Darken switchbuttons for headerbars. issue #1588 */
-  .StackSwitcher > button:checked,
-  button.toggle:checked {
-
-    background: if($variant == 'light', image(darken($bg_color, 17%)), image(darken($bg_color, 9%)));
+  .Button:not(:disabled):not(.disabled).active {
     border-color: darken($borders_color, 3%);
     border-top-color: darken($borders_color, 8%);
-    &:backdrop {
-      @include button(backdrop-active);
-    }
   }
 
+  // TODO remove this?
+  // add vertical margins to common widget on the .HeaderBar to avoid them spanning the whole height
+  // entry,
+  // spinbutton,
+  // separator:not(.sidebar),
+  // button,
+  // menubutton {
+  //   margin-top: 6px;
+  //   margin-bottom: 6px;
+  // }
+
+  // // Reset margins for buttons inside menubutton
+  // menubutton > button {
+  //   margin-top: 0px;
+  //   margin-bottom: 0px;
+  // }
+
+  // switch {
+  //   margin-top: 10px;
+  //   margin-bottom: 10px;
+  // }
+
+
   // squared corners when the .Window is maximized, tiled, or fullscreen
+  &.titlebar,
+  &.no-round-corner,
   .tiled &,
   .tiled-top &,
   .tiled-left &,
@@ -1685,33 +1703,12 @@ input::-webkit-outer-spin-button {
   .tiled-bottom &,
   .maximized &,
   .fullscreen & {
-    &:backdrop, & {
+    .window-inctive &, & {
       border-radius: 0;
     }
   }
 
-  &.default-decoration {
-    min-height: 28px;
-    padding: 4px;
-
-    .control-buttons {
-      button,
-      menubutton {
-        min-height: 26px;
-        min-width: 26px;
-        margin: 0;
-        padding: 0;
-      }
-
-      menubutton button {
-        min-height: 20px;
-        min-width: 20px;
-        margin: 0;
-        padding: 4px;
-      }
-    }
-  }
-
+  // TODO validate this
   .solid-csd & {
     &:backdrop, & {
       &:dir(rtl), &:dir(ltr) { // specificity bump
@@ -1726,48 +1723,6 @@ input::-webkit-outer-spin-button {
 }
 
 // TODO RESUME HERE
-
-.HeaderBar {
-  > windowhandle > box {
-    &,
-    > box.start,
-    > box.end {
-      border-spacing: 6px;
-    }
-  }
-
-  // add vertical margins to common widget on the .HeaderBar to avoid them spanning the whole height
-  entry,
-  spinbutton,
-  separator:not(.sidebar),
-  button,
-  menubutton {
-    margin-top: 6px;
-    margin-bottom: 6px;
-  }
-
-  // Reset margins for buttons inside menubutton
-  menubutton > button {
-    margin-top: 0px;
-    margin-bottom: 0px;
-  }
-
-  switch {
-    margin-top: 10px;
-    margin-bottom: 10px;
-  }
-
-  &.titlebar .HeaderBar:not(.titlebar) {
-    // Drop the background of non-titlebar nested headerbars. This is needed to
-    // work around .HeaderBar sliding animation issues without refactoring
-    // Adwaita's support of titlebars and headerbars as it may break
-    // applications.
-    // See https://gitlab.gnome.org/GNOME/gtk/issues/1264 for more information.
-    background: none;
-    box-shadow: none;
-  }
-}
-
 
 .titlebar:not(.HeaderBar) {
   .Window.csd > & {

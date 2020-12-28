@@ -2106,8 +2106,7 @@ input::-webkit-outer-spin-button {
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
   background: #f1f0ee linear-gradient(to top, #dfdcd8, #f4f2f1);
-  box-shadow: inset 0 1px rgba(255, 255, 255, 0.8), inset 0 -2px 2px rgba(0, 0, 0, 0.02);
-  /* Darken switchbuttons for headerbars. issue #1588 */ }
+  box-shadow: inset 0 1px rgba(255, 255, 255, 0.8), inset 0 -2px 2px rgba(0, 0, 0, 0.02); }
   .window-inactive .titlebar:not(.HeaderBar), .window-inactive .HeaderBar {
     border-color: #d5d0cc;
     background-color: #f6f5f4;
@@ -2130,77 +2129,20 @@ input::-webkit-outer-spin-button {
     font-size: smaller;
     padding-left: 12px;
     padding-right: 12px; }
-  .titlebar:not(.HeaderBar) .StackSwitcher > button:checked,
-  .titlebar:not(.HeaderBar) button.toggle:checked,
-  .HeaderBar .StackSwitcher > button:checked,
-  .HeaderBar button.toggle:checked {
-    background: image(#cfcac4);
+  .titlebar:not(.HeaderBar) .Button.active:not(:disabled):not(.disabled),
+  .HeaderBar .Button.active:not(:disabled):not(.disabled) {
     border-color: #c6bfb9;
     border-top-color: #bab3ab; }
-    .titlebar:not(.HeaderBar) .StackSwitcher > button:checked:backdrop,
-    .titlebar:not(.HeaderBar) button.toggle:checked:backdrop,
-    .HeaderBar .StackSwitcher > button:checked:backdrop,
-    .HeaderBar button.toggle:checked:backdrop {
-      color: #929595;
-      border-color: #d5d0cc;
-      background-color: #e4e4e0;
-      box-shadow: inset 0 1px rgba(255, 255, 255, 0); }
-      .titlebar:not(.HeaderBar) .StackSwitcher > button:checked:backdrop::before,
-      .titlebar:not(.HeaderBar) button.toggle:checked:backdrop::before,
-      .HeaderBar .StackSwitcher > button:checked:backdrop::before,
-      .HeaderBar button.toggle:checked:backdrop::before {
-        opacity: 0; }
-  .tiled .titlebar:not(.HeaderBar), .tiled-top .titlebar:not(.HeaderBar), .tiled-left .titlebar:not(.HeaderBar), .tiled-right .titlebar:not(.HeaderBar), .tiled-bottom .titlebar:not(.HeaderBar), .maximized .titlebar:not(.HeaderBar), .fullscreen .titlebar:not(.HeaderBar), .tiled .HeaderBar, .tiled-top .HeaderBar, .tiled-left .HeaderBar, .tiled-right .HeaderBar, .tiled-bottom .HeaderBar, .maximized .HeaderBar, .fullscreen .HeaderBar {
+  .titlebar:not(.HeaderBar),
+  .HeaderBar.titlebar,
+  .HeaderBar.no-round-corner, .tiled .HeaderBar, .tiled-top .HeaderBar, .tiled-left .HeaderBar, .tiled-right .HeaderBar, .tiled-bottom .HeaderBar, .maximized .HeaderBar, .fullscreen .HeaderBar {
     border-radius: 0; }
-  .default-decoration.titlebar:not(.HeaderBar),
-  .HeaderBar.default-decoration {
-    min-height: 28px;
-    padding: 4px; }
-    .default-decoration.titlebar:not(.HeaderBar) .control-buttons button,
-    .default-decoration.titlebar:not(.HeaderBar) .control-buttons menubutton,
-    .HeaderBar.default-decoration .control-buttons button,
-    .HeaderBar.default-decoration .control-buttons menubutton {
-      min-height: 26px;
-      min-width: 26px;
-      margin: 0;
-      padding: 0; }
-    .default-decoration.titlebar:not(.HeaderBar) .control-buttons menubutton button,
-    .HeaderBar.default-decoration .control-buttons menubutton button {
-      min-height: 20px;
-      min-width: 20px;
-      margin: 0;
-      padding: 4px; }
   .solid-csd .titlebar:dir(rtl):not(.HeaderBar), .solid-csd .titlebar:dir(ltr):not(.HeaderBar), .solid-csd .HeaderBar:backdrop:dir(rtl), .solid-csd .HeaderBar:backdrop:dir(ltr), .solid-csd .HeaderBar:dir(rtl), .solid-csd .HeaderBar:dir(ltr) {
     margin-left: -1px;
     margin-right: -1px;
     margin-top: -1px;
     border-radius: 0;
     box-shadow: none; }
-
-.HeaderBar > windowhandle > box,
-.HeaderBar > windowhandle > box > box.start,
-.HeaderBar > windowhandle > box > box.end {
-  border-spacing: 6px; }
-
-.HeaderBar entry,
-.HeaderBar spinbutton,
-.HeaderBar separator:not(.sidebar),
-.HeaderBar button,
-.HeaderBar menubutton {
-  margin-top: 6px;
-  margin-bottom: 6px; }
-
-.HeaderBar menubutton > button {
-  margin-top: 0px;
-  margin-bottom: 0px; }
-
-.HeaderBar switch {
-  margin-top: 10px;
-  margin-bottom: 10px; }
-
-.HeaderBar.titlebar .HeaderBar:not(.titlebar) {
-  background: none;
-  box-shadow: none; }
 
 .Window.csd > .titlebar:not(.HeaderBar) {
   padding: 0;

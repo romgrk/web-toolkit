@@ -2326,8 +2326,8 @@ $_treeview_backdrop_borders_color: if($variant=='light',mix($backdrop_borders_co
  *************/
 .Notebook {
   $_notebook_header_bg: $dark_fill;
-  $_notebook_hover: lighten($_notebook_header_bg, 6%);
-  $_notebook_tab_margin: 4px;
+  $_notebook_hover: lighten($_notebook_header_bg, 5%);
+  $_notebook_tab_margin: 6px;
 
   display: flex;
   &.top {
@@ -2387,7 +2387,7 @@ $_treeview_backdrop_borders_color: if($variant=='light',mix($backdrop_borders_co
   /* Tabs */
 
   .Notebook__tabs > .Notebook__tab {
-    transition: $focus_transition;
+    transition: none;
     padding: 3px 12px;
     min-height: 30px;
     min-width: 30px;
@@ -2433,16 +2433,18 @@ $_treeview_backdrop_borders_color: if($variant=='light',mix($backdrop_borders_co
   &.top,
   &.bottom {
     .Notebook__tab {
-      margin-left:  $_notebook_tab_margin;
-      margin-right: $_notebook_tab_margin;
+      &:not(:last-of-type) {
+        margin-right: $_notebook_tab_margin;
+      }
       &.reorderable { border-style: none solid; }
     }
   }
   &.left,
   &.right {
     .Notebook__tab {
-      margin-top:    $_notebook_tab_margin;
-      margin-bottom: $_notebook_tab_margin;
+      &:not(:last-of-type) {
+        margin-bottom: $_notebook_tab_margin;
+      }
       &.reorderable { border-style: solid none; }
 
       width: 100%;

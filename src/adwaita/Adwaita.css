@@ -2740,7 +2740,7 @@ pathbar > button.slider-button {
         padding-top: 4px;
         padding-bottom: 4px; }
   .Notebook .Notebook__tabs > .Notebook__tab {
-    transition: all 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transition: none;
     padding: 3px 12px;
     min-height: 30px;
     min-width: 30px;
@@ -2761,12 +2761,12 @@ pathbar > button.slider-button {
       outline-offset: -2px; }
     .Notebook .Notebook__tabs > .Notebook__tab:hover {
       color: #2e3436;
-      background-color: #efedec; }
+      background-color: #edebe9; }
     .Notebook .Notebook__tabs > .Notebook__tab.selected {
       color: #2e3436;
-      background-color: #efedec; }
+      background-color: #edebe9; }
     .Notebook .Notebook__tabs > .Notebook__tab.selected:hover {
-      background-color: #f4f2f1; }
+      background-color: #f1f0ee; }
   .Notebook.top .Notebook__tabs > .Notebook__tab:hover {
     box-shadow: inset 0 -3px #c8c2bc; }
   .Notebook.top .Notebook__tabs > .Notebook__tab.selected {
@@ -2783,16 +2783,15 @@ pathbar > button.slider-button {
     box-shadow: inset 3px 0 #c8c2bc; }
   .Notebook.right .Notebook__tabs > .Notebook__tab.selected {
     box-shadow: inset 3px 0 #3584e4; }
-  .Notebook.top .Notebook__tab, .Notebook.bottom .Notebook__tab {
-    margin-left: 4px;
-    margin-right: 4px; }
-    .Notebook.top .Notebook__tab.reorderable, .Notebook.bottom .Notebook__tab.reorderable {
-      border-style: none solid; }
+  .Notebook.top .Notebook__tab:not(:last-of-type), .Notebook.bottom .Notebook__tab:not(:last-of-type) {
+    margin-right: 6px; }
+  .Notebook.top .Notebook__tab.reorderable, .Notebook.bottom .Notebook__tab.reorderable {
+    border-style: none solid; }
   .Notebook.left .Notebook__tab, .Notebook.right .Notebook__tab {
-    margin-top: 4px;
-    margin-bottom: 4px;
     width: 100%;
     justify-content: start; }
+    .Notebook.left .Notebook__tab:not(:last-of-type), .Notebook.right .Notebook__tab:not(:last-of-type) {
+      margin-bottom: 6px; }
     .Notebook.left .Notebook__tab.reorderable, .Notebook.right .Notebook__tab.reorderable {
       border-style: solid none; }
     .Notebook.left .Notebook__tab > .Label, .Notebook.right .Notebook__tab > .Label {
@@ -2816,10 +2815,10 @@ pathbar > button.slider-button {
       opacity: 0; }
     .Notebook .Notebook__tab button:hover {
       color: #2e3436;
-      border-color: #e3e1de;
-      border-bottom-color: #ccc7c2;
-      background-color: #fefefe;
-      box-shadow: inset 0 1px #f8f8f7, 0 1px 2px rgba(0, 0, 0, 0.07);
+      border-color: #e1dedb;
+      border-bottom-color: #cac5bf;
+      background-color: #fcfbfb;
+      box-shadow: inset 0 1px #f6f5f4, 0 1px 2px rgba(0, 0, 0, 0.07);
       opacity: 1;
       border-color: #c1bab3; }
       .Notebook .Notebook__tab button:hover::before {
@@ -2843,15 +2842,15 @@ pathbar > button.slider-button {
       .Notebook .Notebook__arrow:disabled::before {
         opacity: 0; }
   .Notebook.top .Notebook__arrow:first-child, .Notebook.bottom .Notebook__arrow:first-child {
-    margin-right: -4px; }
+    margin-right: -6px; }
   .Notebook.top .Notebook__arrow:last-child, .Notebook.bottom .Notebook__arrow:last-child {
-    margin-left: -4px; }
+    margin-left: -6px; }
   .Notebook.left .Notebook__arrow, .Notebook.right .Notebook__arrow {
     width: 100%; }
     .Notebook.left .Notebook__arrow:first-child, .Notebook.right .Notebook__arrow:first-child {
-      margin-bottom: -4px; }
+      margin-bottom: -6px; }
     .Notebook.left .Notebook__arrow:last-child, .Notebook.right .Notebook__arrow:last-child {
-      margin-top: -4px; }
+      margin-top: -6px; }
   .Notebook.bottom .Notebook__arrow, .Notebook.top .Notebook__arrow {
     padding-left: 4px;
     padding-right: 4px; }

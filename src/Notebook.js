@@ -9,6 +9,8 @@ import cx from 'classname'
 import Button from './Button'
 import Label from './Label'
 
+const noop = () => {}
+
 function Notebook({
   children,
   className,
@@ -57,7 +59,7 @@ function Notebook({
               })}
               role='button'
               tabIndex='0'
-              onClick={() => isControlled ? onChange(i) : setActivePage(i)}
+              onClick={() => setPage(i)}
             >
               <Label>
                 {page.label}
@@ -67,7 +69,7 @@ function Notebook({
                   small
                   icon='window-close'
                   tabIndex='-1'
-                  onClick={() => onClose(i)}
+                  onClick={ev => (ev.stopPropagation(), onClose(i))}
                 />
               }
             </div>
@@ -112,6 +114,8 @@ Notebook.propTypes = {
 Notebook.defaultProps = {
   position: 'top',
   arrows: false,
+  onChange: noop,
+  onClose: noop,
 }
 
 export default Notebook

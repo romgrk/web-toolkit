@@ -258,24 +258,30 @@ function DemoInput() {
         </div>
         <div className='column' style={{ width: 300 }}>
           <div className='row'>
-            <div className='linked vertical'>
+            <div className='linked vertical' style={{ minWidth: 130 }}>
               <Input placeholder='Street' />
               <Input placeholder='City' />
               <Input placeholder='Country' />
             </div>
             <InputNumber value={5} vertical />
             <InputNumber value={50} vertical disabled />
+            <Box vertical>
+              <InputNumber />
+              <InputNumber disabled />
+            </Box>
           </div>
-          <InputNumber />
-          <InputNumber disabled />
           <Box horizontal>
             <Switch defaultValue={true} />
             <Switch defaultValue={true} labels />
-            <Switch defaultValue={false} labels />
+            <Switch disabled defaultValue={true} />
           </Box>
-          <Switch defaultValue={false} />
-          <Switch disabled defaultValue={true} />
-          <Switch disabled defaultValue={false} />
+          <Box horizontal>
+            <Switch defaultValue={false} />
+            <Switch defaultValue={false} labels />
+            <Switch disabled defaultValue={false} />
+          </Box>
+          <Box horizontal>
+          </Box>
         </div>
       </div>
 

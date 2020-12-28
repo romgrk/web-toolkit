@@ -93,6 +93,16 @@ button {
 /***************
  * Utils       *
  ***************/
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0; }
+
 .user-select-none {
   user-select: none; }
 
@@ -178,12 +188,28 @@ button {
   border-color: #cdc7c2;
   background-color: #ffffff; }
   .TextView > textarea {
-    outline: 0 solid transparent;
-    outline-offset: 4px; }
+    position: relative;
+    outline: none;
+    overflow: visible; }
+  .TextView > textarea::after {
+    content: '';
+    position: absolute;
+    pointer-events: none;
+    z-index: 2;
+    display: inline-block;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 2px solid transparent;
+    border-radius: inherit;
+    transform: translate(-2px, -2px) scale(1.05);
+    transition: all 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94); }
   .TextView > textarea:focus-within {
-    outline-color: rgba(53, 132, 228, 0.5);
-    outline-width: 2px;
-    outline-offset: -2px; }
+    outline: none; }
+  .TextView > textarea:focus-within::after {
+    border: 2px solid rgba(53, 132, 228, 0.5);
+    transform: translate(-2px, -2px) scale(0.99); }
 
 .TextView.dnd-active {
   caret-color: #2ec27e; }
@@ -211,7 +237,7 @@ button {
 
 .Flowbox > .Flowbox__child {
   padding: 3px;
-  transition: outline-width 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94), outline-offset 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+  transition: all 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94); }
   .Flowbox > .Flowbox__child {
     outline: 0 solid transparent;
     outline-offset: 4px; }
@@ -224,7 +250,7 @@ button {
 
 .Grid > .Grid__child {
   padding: 3px;
-  transition: outline-width 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94), outline-offset 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+  transition: all 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94); }
   .Grid > .Grid__child {
     outline: 0 solid transparent;
     outline-offset: 4px; }
@@ -381,13 +407,31 @@ button {
     background-color: #ffffff; }
     .InputNumber.vertical > .Input__area > input, .InputNumber:not(.vertical),
     .Input {
-      outline: 0 solid transparent;
-      outline-offset: 4px; }
+      position: relative;
+      outline: none;
+      overflow: visible; }
+    .InputNumber.vertical > .Input__area > input::after, .InputNumber:not(.vertical)::after,
+    .Input::after {
+      content: '';
+      position: absolute;
+      pointer-events: none;
+      z-index: 2;
+      display: inline-block;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 2px solid transparent;
+      border-radius: inherit;
+      transform: translate(-2px, -2px) scale(1.05);
+      transition: all 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94); }
     .InputNumber.vertical > .Input__area > input:focus-within, .InputNumber:focus-within:not(.vertical),
     .Input:focus-within {
-      outline-color: rgba(53, 132, 228, 0.5);
-      outline-width: 2px;
-      outline-offset: -2px; }
+      outline: none; }
+    .InputNumber.vertical > .Input__area > input:focus-within::after, .InputNumber:focus-within:not(.vertical)::after,
+    .Input:focus-within::after {
+      border: 2px solid rgba(53, 132, 228, 0.5);
+      transform: translate(-2px, -2px) scale(0.99); }
     .InputNumber.vertical > .Input__area > input > .Input__area, .InputNumber:not(.vertical) > .Input__area,
     .Input > .Input__area {
       position: relative;
@@ -468,13 +512,31 @@ button {
       border-color: #cc0000; }
       .InputNumber.vertical > .Input__area > input.error, .error.InputNumber:not(.vertical),
       .Input.error {
-        outline: 0 solid transparent;
-        outline-offset: 4px; }
+        position: relative;
+        outline: none;
+        overflow: visible; }
+      .InputNumber.vertical > .Input__area > input.error::after, .error.InputNumber:not(.vertical)::after,
+      .Input.error::after {
+        content: '';
+        position: absolute;
+        pointer-events: none;
+        z-index: 2;
+        display: inline-block;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border: 2px solid transparent;
+        border-radius: inherit;
+        transform: translate(-2px, -2px) scale(1.05);
+        transition: all 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94); }
       .InputNumber.vertical > .Input__area > input.error:focus-within, .error.InputNumber:focus-within:not(.vertical),
       .Input.error:focus-within {
-        outline-color: rgba(204, 0, 0, 0.5);
-        outline-width: 2px;
-        outline-offset: -2px; }
+        outline: none; }
+      .InputNumber.vertical > .Input__area > input.error:focus-within::after, .error.InputNumber:focus-within:not(.vertical)::after,
+      .Input.error:focus-within::after {
+        border: 2px solid rgba(204, 0, 0, 0.5);
+        transform: translate(-2px, -2px) scale(0.99); }
       .InputNumber.vertical > .Input__area > input.error input, .error.InputNumber:not(.vertical) input,
       .Input.error input {
         color: #ac0a0b; }
@@ -486,13 +548,31 @@ button {
       border-color: #f57900; }
       .InputNumber.vertical > .Input__area > input.warning, .warning.InputNumber:not(.vertical),
       .Input.warning {
-        outline: 0 solid transparent;
-        outline-offset: 4px; }
+        position: relative;
+        outline: none;
+        overflow: visible; }
+      .InputNumber.vertical > .Input__area > input.warning::after, .warning.InputNumber:not(.vertical)::after,
+      .Input.warning::after {
+        content: '';
+        position: absolute;
+        pointer-events: none;
+        z-index: 2;
+        display: inline-block;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border: 2px solid transparent;
+        border-radius: inherit;
+        transform: translate(-2px, -2px) scale(1.05);
+        transition: all 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94); }
       .InputNumber.vertical > .Input__area > input.warning:focus-within, .warning.InputNumber:focus-within:not(.vertical),
       .Input.warning:focus-within {
-        outline-color: rgba(245, 121, 0, 0.5);
-        outline-width: 2px;
-        outline-offset: -2px; }
+        outline: none; }
+      .InputNumber.vertical > .Input__area > input.warning:focus-within::after, .warning.InputNumber:focus-within:not(.vertical)::after,
+      .Input.warning:focus-within::after {
+        border: 2px solid rgba(245, 121, 0, 0.5);
+        transform: translate(-2px, -2px) scale(0.99); }
       .InputNumber.vertical > .Input__area > input.warning input, .warning.InputNumber:not(.vertical) input,
       .Input.warning input {
         color: #cd6b0b; }
@@ -652,7 +732,7 @@ editablelabel > stack > text {
   padding: 4px 9px;
   border: 1px solid;
   border-radius: 5px;
-  transition: all 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition: all 150ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
   user-select: none;
   color: #2e3436;
   outline-color: rgba(53, 132, 228, 0.5);
@@ -679,13 +759,31 @@ editablelabel > stack > text {
     transition: all 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94); }
   .Notebook .Notebook__arrow, .control-buttons button,
   .Button {
-    outline: 0 solid transparent;
-    outline-offset: 4px; }
+    position: relative;
+    outline: none;
+    overflow: visible; }
+  .Notebook .Notebook__arrow::after, .control-buttons button::after,
+  .Button::after {
+    content: '';
+    position: absolute;
+    pointer-events: none;
+    z-index: 2;
+    display: inline-block;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 2px solid transparent;
+    border-radius: inherit;
+    transform: translate(-2px, -2px) scale(1.05);
+    transition: all 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94); }
   .Notebook .Notebook__arrow:focus:focus-visible, .control-buttons button:focus:focus-visible,
   .Button:focus:focus-visible {
-    outline-color: rgba(53, 132, 228, 0.5);
-    outline-width: 2px;
-    outline-offset: -2px; }
+    outline: none; }
+  .Notebook .Notebook__arrow:focus:focus-visible::after, .control-buttons button:focus:focus-visible::after,
+  .Button:focus:focus-visible::after {
+    border: 2px solid rgba(53, 132, 228, 0.5);
+    transform: translate(-2px, -2px) scale(0.99); }
   .Notebook .Notebook__arrow.hover:not(:disabled):not(.disabled), .control-buttons button.hover:not(:disabled):not(.disabled), .Notebook .Notebook__arrow:not(:disabled):not(.disabled):hover, .control-buttons button:not(:disabled):not(.disabled):hover,
   .Button.hover:not(:disabled):not(.disabled),
   .Button:not(:disabled):not(.disabled):hover {
@@ -800,7 +898,7 @@ editablelabel > stack > text {
       box-shadow: none;
       text-shadow: none;
       background-color: #e4e1de;
-      transition: all 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      transition: all 150ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
       transition-duration: 500ms; }
       button.sidebar-button.hover:not(:disabled):not(.disabled)::before, .Notebook .Notebook__arrow.hover:not(:disabled):not(.disabled)::before, .control-buttons button.hover:not(:disabled):not(.disabled)::before, button.sidebar-button:not(:disabled):not(.disabled):hover::before, .Notebook .Notebook__arrow:not(:disabled):not(.disabled):hover::before, .control-buttons button:not(:disabled):not(.disabled):hover::before,
       .Button.flat.hover:not(:disabled):not(.disabled)::before,
@@ -813,7 +911,7 @@ editablelabel > stack > text {
       box-shadow: none;
       text-shadow: none;
       background-color: #b1a9a0;
-      transition: all 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+      transition: all 150ms cubic-bezier(0.25, 0.46, 0.45, 0.94); }
       button.sidebar-button:not(:disabled):not(.disabled):active::before, .Notebook .Notebook__arrow:not(:disabled):not(.disabled):active::before, .control-buttons button:not(:disabled):not(.disabled):active::before, button.sidebar-button:not(:disabled):not(.disabled):checked::before, .Notebook .Notebook__arrow:not(:disabled):not(.disabled):checked::before, .control-buttons button:not(:disabled):not(.disabled):checked::before,
       .Button.flat:not(:disabled):not(.disabled):active::before,
       .Button.flat:not(:disabled):not(.disabled):checked::before {
@@ -1637,7 +1735,7 @@ input::-webkit-outer-spin-button {
       border-color: rgba(205, 199, 194, 0.3);
       border-radius: 0;
       box-shadow: none;
-      transition: all 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+      transition: all 150ms cubic-bezier(0.25, 0.46, 0.45, 0.94); }
       .InputNumber:not(.vertical) > button.InputNumber__button.up:not(.flat):dir(rtl),
       .InputNumber:not(.vertical) > button.InputNumber__button.down:not(.flat):dir(rtl) {
         border-style: none solid none none; }
@@ -1724,6 +1822,29 @@ input::-webkit-outer-spin-button {
     .InputNumber.vertical.dnd-active {
       border-color: transparent;
       box-shadow: none; }
+    .InputNumber.vertical > .Input__area {
+      position: relative;
+      outline: none;
+      overflow: visible; }
+    .InputNumber.vertical > .Input__area::after {
+      content: '';
+      position: absolute;
+      pointer-events: none;
+      z-index: 2;
+      display: inline-block;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 2px solid transparent;
+      border-radius: inherit;
+      transform: translate(-2px, -2px) scale(1.05);
+      transition: all 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+    .InputNumber.vertical > .Input__area:focus-within {
+      outline: none; }
+    .InputNumber.vertical > .Input__area:focus-within::after {
+      border: 2px solid rgba(53, 132, 228, 0.5);
+      transform: translate(-2px, -2px) scale(0.99); }
     .InputNumber.vertical > .Input__area > input {
       min-height: 32px;
       min-width: 32px;
@@ -1900,7 +2021,7 @@ input::-webkit-outer-spin-button {
 .InfoBar {
   display: block;
   overflow: hidden;
-  transition: all 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition: all 150ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
   height: 45px; }
   .InfoBar.close {
     height: 0; }
@@ -2618,7 +2739,7 @@ pathbar > button.slider-button {
         padding-top: 4px;
         padding-bottom: 4px; }
   .Notebook .Notebook__tabs > .Notebook__tab {
-    transition: outline-width 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94), outline-offset 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transition: all 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
     padding: 3px 12px;
     min-height: 30px;
     min-width: 30px;
@@ -2684,7 +2805,7 @@ pathbar > button.slider-button {
     min-width: 16px;
     min-height: 16px;
     opacity: 0.3;
-    transition: all 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+    transition: all 150ms cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
     border-color: transparent;
     background-color: transparent;
     box-shadow: inset 0 1px rgba(255, 255, 255, 0);
@@ -2756,113 +2877,84 @@ pathbar > button.slider-button {
     flex: 1;
     background-color: #ffffff; }
 
-/**************
- * Scrollbars *
- **************/
-scrollbar {
-  background-color: #cecece;
-  transition: 300ms cubic-bezier(0.25, 0.46, 0.45, 0.94); }
-  scrollbar.top {
-    border-bottom: 1px solid #cdc7c2; }
-  scrollbar.bottom {
-    border-top: 1px solid #cdc7c2; }
-  scrollbar.left {
-    border-right: 1px solid #cdc7c2; }
-  scrollbar.right {
-    border-left: 1px solid #cdc7c2; }
-  scrollbar > range > trough > slider {
-    min-width: 6px;
-    min-height: 6px;
-    margin: -1px;
-    border: 4px solid transparent;
-    border-radius: 8px;
-    background-clip: padding-box;
-    background-color: #7e8182; }
-    scrollbar > range > trough > slider:hover {
-      background-color: #565b5c; }
-    scrollbar > range > trough > slider:hover:active {
-      background-color: #1b6acb; }
-    scrollbar > range > trough > slider:disabled {
-      background-color: transparent; }
-  scrollbar > range.fine-tune > trough > slider {
-    min-width: 4px;
-    min-height: 4px; }
-  scrollbar > range.fine-tune.horizontal > trough > slider {
-    border-width: 5px 4px; }
-  scrollbar > range.fine-tune.vertical > trough > slider {
-    border-width: 4px 5px; }
-  scrollbar.overlay-indicator:not(.dragging):not(.hovering) {
-    border-color: transparent;
-    opacity: 0.4;
-    background-color: transparent; }
-    scrollbar.overlay-indicator:not(.dragging):not(.hovering) > range > trough > slider {
-      margin: 0;
-      min-width: 3px;
-      min-height: 3px;
-      background-color: #2e3436;
-      border: 1px solid white; }
-    scrollbar.overlay-indicator.horizontal:not(.dragging):not(.hovering) > range > trough > slider {
-      margin: 0 2px;
-      min-width: 40px; }
-    scrollbar.overlay-indicator.vertical:not(.dragging):not(.hovering) > range > trough > slider {
-      margin: 2px 0;
-      min-height: 40px; }
-  scrollbar.overlay-indicator.dragging, scrollbar.overlay-indicator.hovering {
-    opacity: 0.8; }
-  scrollbar.horizontal > range > trough > slider {
-    min-width: 40px; }
-  scrollbar.vertical > range > trough > slider {
-    min-height: 40px; }
-
-.TreeView ~ scrollbar.vertical {
-  border-top: 1px solid #cdc7c2;
-  margin-top: -1px; }
-
 /**********
  * Switch *
  **********/
-switch {
+.Switch {
+  --switch-size: 20px;
   font-weight: bold;
-  font-size: smaller;
-  border: 1px solid #cdc7c2;
-  border-radius: 14px;
-  color: #2e3436;
-  background-color: #e1dedb;
-  text-shadow: 0 1px rgba(0, 0, 0, 0.1);
-  transition: outline-width 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94), outline-offset 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  /* only show i / o for the accessible theme */ }
-  switch {
-    outline: 0 solid transparent;
-    outline-offset: 4px; }
-  switch:focus:focus-visible {
-    outline-color: rgba(53, 132, 228, 0.5);
-    outline-width: 2px;
-    outline-offset: 0; }
-  switch:checked {
+  font-size: smaller; }
+  .Switch input {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+    top: -9999px;
+    left: -9999px; }
+  .Switch label {
+    position: relative;
+    display: inline-block;
+    width: calc(2 * var(--switch-size));
+    height: calc(1 * var(--switch-size));
+    border: 1px solid #cdc7c2;
+    border-radius: 14px;
+    color: rgba(46, 52, 54, 0.2);
+    background-color: #e1dedb;
+    text-shadow: 0 1px rgba(0, 0, 0, 0.1);
+    transition: all 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+  .Switch input + label {
+    position: relative;
+    outline: none;
+    overflow: visible; }
+  .Switch input + label::before {
+    content: '';
+    position: absolute;
+    pointer-events: none;
+    z-index: 2;
+    display: inline-block;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 2px solid transparent;
+    border-radius: inherit;
+    transform: translate(-2px, -2px) scale(1.08);
+    transition: all 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+  .Switch input:focus:focus-visible + label {
+    outline: none; }
+  .Switch input:focus:focus-visible + label::before {
+    border: 2px solid rgba(53, 132, 228, 0.5);
+    transform: translate(-2px, -2px) scale(1.03); }
+  .Switch input:checked + label {
     color: #ffffff;
     border-color: #185fb4;
     background-color: #3584e4;
     text-shadow: 0 1px rgba(24, 95, 180, 0.5), 0 0 2px rgba(255, 255, 255, 0.6); }
-  switch:disabled {
+  .Switch input:disabled + label {
     color: #929595;
     border-color: #cdc7c2;
     background-color: #faf9f8;
     text-shadow: none; }
-  switch > slider {
-    margin: -1px;
-    min-width: 24px;
-    min-height: 24px;
+  .Switch label::after {
+    content: '';
+    position: absolute;
+    display: inline-block;
+    top: 0px;
+    left: 0px;
+    margin: -1px -1px;
+    width: calc(var(--switch-size) - 2px);
+    height: calc(var(--switch-size) - 2px);
     border: 1px solid;
     border-color: #cdc7c2;
     border-radius: 50%;
-    transition: all 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transition: all 150ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
     color: #2e3436;
     outline-color: rgba(53, 132, 228, 0.5);
     border-color: #cdc7c2;
     border-bottom-color: #bfb8b1;
     background-color: #f6f5f4;
     box-shadow: inset 0 1px white, 0 1px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.07); }
-    switch > slider::before {
+    .Switch label::after::before {
       content: ' ';
       position: absolute;
       pointer-events: none;
@@ -2872,19 +2964,19 @@ switch {
       left: 0px;
       background: linear-gradient(to top, rgba(0, 0, 0, 0.03), transparent);
       transition: all 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94); }
-  switch > image {
-    color: transparent; }
-  switch:hover > slider {
+  .Switch label:hover::after {
     color: #2e3436;
-    border-color: #cdc7c2;
-    border-bottom-color: #bfb8b1;
-    background-color: #f9f9f8;
-    box-shadow: inset 0 1px #f4f2f1, 0 1px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.07); }
-    switch:hover > slider::before {
+    border-color: #e8e6e3;
+    border-bottom-color: #d1ccc7;
+    background-color: white;
+    box-shadow: inset 0 1px #fdfcfc, 0 1px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.07);
+    border-color: #cdc7c2; }
+    .Switch label:hover::after::before {
       opacity: 0; }
-  switch:checked > slider {
-    border: 1px solid #185fb4; }
-  switch:disabled > slider {
+  .Switch input:checked + label::after {
+    border: 1px solid #185fb4;
+    transform: translateX(100%); }
+  .Switch input:disabled + label::after {
     color: #929595;
     border-color: #d5d0cc;
     background-color: #faf9f8;
@@ -2892,13 +2984,22 @@ switch {
     --icon-shadow: none;
     --icon-color: #929595;
     box-shadow: inset 0 1px rgba(255, 255, 255, 0); }
-    switch:disabled > slider::before {
+    .Switch input:disabled + label::after::before {
       opacity: 0; }
-  row.selected switch {
+  .Switch label > span {
+    font-size: 10px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%); }
+    .Switch label > span:first-child {
+      left: 3px; }
+    .Switch label > span:last-child {
+      right: 3px; }
+  row.selected .Switch {
     outline-color: rgba(255, 255, 255, 0.8);
     box-shadow: none;
     border-color: #185fb4; }
-    row.selected switch > slider:checked, row.selected switch > slider {
+    row.selected .Switch > slider:checked, row.selected .Switch > slider {
       border-color: #185fb4; }
 
 /*************************
@@ -3027,7 +3128,7 @@ switch {
 checkbutton {
   border-spacing: 4px;
   border-radius: 5px;
-  transition: outline-width 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94), outline-offset 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+  transition: all 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94); }
   checkbutton {
     outline: 0 solid transparent;
     outline-offset: 4px; }
@@ -3217,7 +3318,7 @@ scale {
     outline-width: 2px;
     outline-offset: 10px; }
   scale > trough {
-    transition: outline-width 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94), outline-offset 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+    transition: all 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94); }
     scale > trough > fill,
     scale > trough > highlight {
       margin: -1px; }
@@ -3257,7 +3358,7 @@ scale {
     box-shadow: inset 0 1px white, 0 1px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.07);
     border: 1px solid #b8b0a8;
     border-radius: 100%;
-    transition: all 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transition: all 150ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
     transition-property: background, border, box-shadow; }
     scale > trough > slider:hover {
       color: #2e3436;
@@ -4095,7 +4196,7 @@ expander-widget:focus:focus-visible > box > title {
   outline-offset: -2px; }
 
 expander-widget > box > title {
-  transition: outline-width 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94), outline-offset 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition: all 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
   border-radius: 5px; }
   expander-widget > box > title:hover > expander {
     color: #748489; }
@@ -4403,7 +4504,7 @@ tooltip {
  * Color Chooser *
  *****************/
 colorswatch {
-  transition: outline-width 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94), outline-offset 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+  transition: all 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94); }
   colorswatch {
     outline: 0 solid transparent;
     outline-offset: 6px; }
@@ -4499,7 +4600,7 @@ colorswatch {
       border-radius: 4.5px; }
 
 plane {
-  transition: outline-width 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94), outline-offset 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+  transition: all 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94); }
   plane {
     outline: 0 solid transparent;
     outline-offset: 6px; }

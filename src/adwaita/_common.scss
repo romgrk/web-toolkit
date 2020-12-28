@@ -7,8 +7,8 @@ $height: 30px;
 $ease-out-quad: cubic-bezier(0.25, 0.46, 0.45, 0.94);
 $asset_suffix: if($variant=='dark', '-dark', '');
 $backdrop_transition: 200ms ease-out;
-$button_transition: all 200ms $ease-out-quad;
-$focus_transition: outline-width 200ms $ease-out-quad, outline-offset 200ms $ease-out-quad;
+$button_transition: all 150ms $ease-out-quad;
+$focus_transition: all 200ms $ease-out-quad;
 $button_radius: 5px;
 $menu_radius: 5px;
 $menu_margin: $menu_radius; //margin around menuitems & sidebar items
@@ -52,6 +52,17 @@ $popover_radius: $button_radius + 4;
 /***************
  * Utils       *
  ***************/
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  border: 0;
+}
 
 .user-select-none {
   user-select: none;
@@ -160,7 +171,7 @@ $popover_radius: $button_radius + 4;
 
     @include entry(normal);
 
-    @include focus-ring($focus-state: 'focus-within');
+    @include focus-ring($focus-state: 'focus-within', $method: 'after');
 
     &::selection { @extend %selected_items; }
   }
@@ -403,9 +414,7 @@ $popover_radius: $button_radius + 4;
     transition: all 200ms $ease-out-quad;
 
     @include entry(normal);
-
-    @include focus-ring($focus-state: 'focus-within');
-
+    @include focus-ring($focus-state: 'focus-within', $method: 'after');
 
     > .Input__area {
       position: relative;
@@ -485,7 +494,9 @@ $popover_radius: $button_radius + 4;
 
         border-color: $e_color;
 
-        @include focus-ring($focus-state: 'focus-within', $fc: transparentize($e_color, 0.5));
+        @include focus-ring(
+          $fc: transparentize($e_color, 0.5),
+          $focus-state: 'focus-within', $method: 'after');
 
         &:focus-within { @include entry(focus, $e_color); }
 
@@ -674,7 +685,7 @@ $_dot_color: if($variant=='light', $selected_bg_color,
 
     @include button(normal);
 
-    @include focus-ring();
+    @include focus-ring($method: 'after');
 
     &:not(:disabled):not(.disabled) {
       &.hover,
@@ -1162,6 +1173,7 @@ input::-webkit-outer-spin-button {
 }
 
 .InputNumber {
+
   &:not(.vertical) {
     // in this horizontal configuration, the whole spinbutton
     // behaves as the entry, so we extend the entry styling
@@ -1307,6 +1319,9 @@ input::-webkit-outer-spin-button {
       box-shadow: none;
     }
 
+    > .Input__area {
+      @include focus-ring($focus-state: 'focus-within', $method: 'after');
+    }
 
     > .Input__area > input {
       @extend %entry;
@@ -1708,7 +1723,7 @@ input::-webkit-outer-spin-button {
   //   margin-bottom: 0px;
   // }
 
-  // switch {
+  // .Switch {
   //   margin-top: 10px;
   //   margin-bottom: 10px;
   // }
@@ -2546,125 +2561,63 @@ $_treeview_backdrop_borders_color: if($variant=='light',mix($backdrop_borders_co
 }
 
 
-/**************
- * Scrollbars *
- **************/
-scrollbar {
-  $_slider_min_length: 40px;
-
-  background-color: $scrollbar_bg_color;
-  transition: 300ms $ease-out-quad;
-
-  // scrollbar border
-  &.top { border-bottom: 1px solid $borders_color; }
-  &.bottom { border-top: 1px solid $borders_color; }
-  &.left { border-right: 1px solid $borders_color; }
-  &.right { border-left: 1px solid $borders_color; }
-
-  > range > trough > slider {
-    min-width: 6px;
-    min-height: 6px;
-    margin: -1px;
-    border: 4px solid transparent;
-    border-radius: 8px;
-    background-clip: padding-box;
-    background-color: $scrollbar_slider_color;
-
-    &:hover { background-color: $scrollbar_slider_hover_color; }
-
-    &:hover:active { background-color: $scrollbar_slider_active_color; }
-
-    &:disabled { background-color: transparent; }
-  }
-
-  > range.fine-tune {
-    > trough > slider {
-      min-width: 4px;
-      min-height: 4px;
-    }
-
-    &.horizontal > trough > slider { border-width: 5px 4px; }
-    &.vertical > trough > slider { border-width: 4px 5px; }
-  }
-
-  &.overlay-indicator {
-    &:not(.dragging):not(.hovering) {
-      border-color: transparent;
-      opacity: 0.4;
-      background-color: transparent;
-
-      > range > trough > slider {
-        margin: 0;
-        min-width: 3px;
-        min-height: 3px;
-        background-color: $fg_color;
-        border: 1px solid if($variant == 'light', white, black);
-      }
-
-      &.horizontal {
-        > range > trough > slider {
-          margin: 0 2px;
-          min-width: $_slider_min_length;
-        }
-      }
-
-      &.vertical {
-        > range > trough > slider {
-          margin: 2px 0;
-          min-height: $_slider_min_length;
-        }
-      }
-    }
-
-    &.dragging,
-    &.hovering { opacity: 0.8; }
-  }
-
-  &.horizontal > range > trough > slider { min-width: $_slider_min_length; }
-  &.vertical > range > trough > slider { min-height: $_slider_min_length; }
-}
-
-.TreeView ~ scrollbar.vertical {
-  border-top: 1px solid $borders_color;
-  margin-top: -1px;
-}
-
 /**********
  * Switch *
  **********/
-switch {
+.Switch {
+  --switch-size: 20px;
+
   font-weight: bold;
   font-size: smaller;
 
-  // similar to the .scale
-  border: 1px solid $borders_color;
-  border-radius: 14px;
-  color: $fg_color;
-  background-color: $dark_fill;
-  text-shadow: 0 1px transparentize(black, 0.9);
-  transition: $focus_transition;
+  & input {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+    top: -9999px;
+    left: -9999px;
+  }
 
-  @include focus-ring($offset: 0, $outer: true);
-
-  &:checked {
+  & label {
+    position: relative;
+    display: inline-block;
+    width:  calc(2 * var(--switch-size));
+    height: calc(1 * var(--switch-size));
+    // similar to the .scale
+    border: 1px solid $borders_color;
+    border-radius: 14px;
+    color: rgba($fg_color, 0.2);
+    background-color: $dark_fill;
+    text-shadow: 0 1px transparentize(black, 0.9);
+    transition: $focus_transition;
+  }
+  & input {
+    @include focus-ring($target: ' + label', $offset: 0, $outer: true, $method: 'before');
+  }
+  & input:checked + label {
     color: $selected_fg_color;
     border-color: $switch_borders_color;
     background-color: $switch_bg_color;
     text-shadow: 0 1px transparentize($switch_borders_color, 0.5),
                  0 0 2px transparentize(white, 0.4);
   }
-
-  &:disabled {
+  & input:disabled + label {
     color: $insensitive_fg_color;
     border-color: $borders_color;
     background-color: $insensitive_bg_color;
     text-shadow: none;
   }
 
-  > slider {
-    margin: -1px;
-    min-width: 24px;
-    min-height: 24px;
+  & label::after {
+    content: '';
+    position: absolute;
+    display: inline-block;
+    top:  0px;
+    left: 0px;
+    margin: -1px -1px;
+    width:  calc(var(--switch-size) - 2px);
+    height: calc(var(--switch-size) - 2px);
     border: 1px solid;
     border-color: $borders_color;
     border-radius: 50%;
@@ -2672,16 +2625,28 @@ switch {
 
     @include button(normal, $edge: $shadow_color);
   }
-
-  > image { color: transparent; } /* only show i / o for the accessible theme */
-
-  &:hover > slider {
-    @include button(hover, $edge: $shadow_color);
+  & label:hover::after {
+    @include button(hover, $c: lighten($bg_color, 6%), $edge: $shadow_color);
+    border-color: $borders_color;
   }
+  & input:checked + label::after {
+    border: 1px solid $switch_borders_color;
+    transform: translateX(100%);
+  }
+  & input:disabled + label::after { @include button(insensitive); }
 
-  &:checked > slider { border: 1px solid $switch_borders_color; }
-
-  &:disabled > slider { @include button(insensitive); }
+  & label > span {
+    font-size: 10px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    &:first-child {
+      left: 3px;
+    }
+    &:last-child {
+      right: 3px;
+    }
+  }
 
 
   row.selected & {

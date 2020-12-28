@@ -14,6 +14,7 @@ import Notebook from './Notebook'
 import Popover from './Popover'
 import Separator from './Separator'
 import Spinner from './Spinner'
+import Switch from './Switch'
 import Table from './Table'
 import Toolbar from './Toolbar'
 
@@ -86,10 +87,15 @@ function AppContent() {
     <div className='App__content Box__fill'>
       <h1>Application</h1>
 
+      <DemoInput />
+      <br/>
+
       <DemoNotebook />
       <br/>
 
-      <DemoPopover />
+      <Box horizontal>
+        <DemoPopover />
+      </Box>
       <br/>
 
       <Box horizontal>
@@ -113,84 +119,6 @@ function AppContent() {
           <div className='Row activatable'>Row 2</div>
           <div className='Row activatable'>Row 3</div>
         </div>
-      </p>
-
-      <div className='row'>
-        <div className='column' style={{ width: 300 }}>
-          <Input
-            icon='folder-saved-search'
-            iconAfter='edit-clear'
-            placeholder='Text input...'
-          />
-          <Input
-            icon={<Spinner />}
-            iconAfter='edit-clear'
-            placeholder='Disabled'
-            disabled
-          />
-          <Input placeholder='Flat' flat />
-          <Input placeholder='Warning' warning />
-          <Input placeholder='Error' error />
-          <Input placeholder='Progress' progress={50} />
-          <Input placeholder='Progress' progress />
-          <Input.Group>
-            <Button icon='window-close' />
-            <Input placeholder='Progress' progress />
-            <Button icon='window-close' />
-          </Input.Group>
-        </div>
-        <div className='column' style={{ width: 300 }}>
-          <div className='row'>
-            <div className='linked vertical'>
-              <Input placeholder='Street' />
-              <Input placeholder='City' />
-              <Input placeholder='Country' />
-            </div>
-            <InputNumber value={5} vertical />
-            <InputNumber value={50} vertical disabled />
-          </div>
-          <InputNumber />
-          <InputNumber disabled />
-        </div>
-      </div>
-
-      <p className='row'>
-        <Button text>Normal</Button>
-        <Button text hover>Hover</Button>
-        <Button text disabled>Disabled</Button>
-        <Button text active>Active</Button>
-        <Button text active disabled>Disabled</Button>
-        <Button text flat>Flat</Button>
-        <Button text flat disabled>Flat</Button>
-        <Button text link>Link</Button>
-      </p>
-      <p className='row'>
-        <Button icon='list-add'>Icon</Button>
-        <Button>No Icon</Button>
-        <Button text icon='list-add' circular />
-        <Button image icon='list-add' circular />
-        <span className='linked'>
-          <Button>1</Button>
-          <Button active>2</Button>
-          <Button>3</Button>
-          <Button>4</Button>
-        </span>
-      </p>
-      <p className='row'>
-        <Button text>Normal</Button>
-        <Button text primary>Primary</Button>
-        <Button text danger>Danger</Button>
-      </p>
-      <p className='row'>
-        <Button className='osd'>
-          OSD Button
-        </Button>
-        <span className='StackSwitcher linked'>
-          <Button text>Page 1</Button>
-          <Button text active>Page 2</Button>
-          <Button text>Page 3</Button>
-          <Button text className='needs-attention'><span className='Label'>Page 4</span></Button>
-        </span>
       </p>
 
       <p className='row'>
@@ -288,18 +216,108 @@ function DemoPopover({}) {
   const toggle = () => setOpen(!open)
 
   return (
-    <Box horizontal>
-      <Popover
-        open={open}
-        content={<ComplexMenu />}
-        onOpen={toggle}
-        onClose={toggle}
-      >
-        <Button icon='emblem-system'>
-          Settings
+    <Popover
+      open={open}
+      content={<ComplexMenu />}
+      onOpen={toggle}
+      onClose={toggle}
+    >
+      <Button icon='emblem-system'>
+        Settings
+      </Button>
+    </Popover>
+  )
+}
+
+function DemoInput() {
+  return (
+    <>
+      <div className='row'>
+        <div className='column' style={{ width: 300 }}>
+          <Input
+            icon='folder-saved-search'
+            iconAfter='edit-clear'
+            placeholder='Text input...'
+          />
+          <Input
+            icon={<Spinner />}
+            iconAfter='edit-clear'
+            placeholder='Disabled'
+            disabled
+          />
+          <Input placeholder='Flat' flat />
+          <Input placeholder='Warning' warning />
+          <Input placeholder='Error' error />
+          <Input placeholder='Progress' progress={50} />
+          <Input placeholder='Progress' progress />
+          <Input.Group>
+            <Button icon='window-close' />
+            <Input placeholder='Progress' progress />
+            <Button icon='window-close' />
+          </Input.Group>
+        </div>
+        <div className='column' style={{ width: 300 }}>
+          <div className='row'>
+            <div className='linked vertical'>
+              <Input placeholder='Street' />
+              <Input placeholder='City' />
+              <Input placeholder='Country' />
+            </div>
+            <InputNumber value={5} vertical />
+            <InputNumber value={50} vertical disabled />
+          </div>
+          <InputNumber />
+          <InputNumber disabled />
+          <Box horizontal>
+            <Switch defaultValue={true} />
+            <Switch defaultValue={true} labels />
+            <Switch defaultValue={false} labels />
+          </Box>
+          <Switch defaultValue={false} />
+          <Switch disabled defaultValue={true} />
+          <Switch disabled defaultValue={false} />
+        </div>
+      </div>
+
+      <p className='row'>
+        <Button text>Normal</Button>
+        <Button text hover>Hover</Button>
+        <Button text disabled>Disabled</Button>
+        <Button text active>Active</Button>
+        <Button text active disabled>Disabled</Button>
+        <Button text flat>Flat</Button>
+        <Button text flat disabled>Flat</Button>
+        <Button text link>Link</Button>
+      </p>
+      <p className='row'>
+        <Button icon='list-add'>Icon</Button>
+        <Button>No Icon</Button>
+        <Button text icon='list-add' circular />
+        <Button image icon='list-add' circular />
+        <span className='linked'>
+          <Button>1</Button>
+          <Button active>2</Button>
+          <Button>3</Button>
+          <Button>4</Button>
+        </span>
+      </p>
+      <p className='row'>
+        <Button text>Normal</Button>
+        <Button text primary>Primary</Button>
+        <Button text danger>Danger</Button>
+      </p>
+      <p className='row'>
+        <Button className='osd'>
+          OSD Button
         </Button>
-      </Popover>
-    </Box>
+        <span className='StackSwitcher linked'>
+          <Button text>Page 1</Button>
+          <Button text active>Page 2</Button>
+          <Button text>Page 3</Button>
+          <Button text className='needs-attention'><span className='Label'>Page 4</span></Button>
+        </span>
+      </p>
+    </>
   )
 }
 

@@ -8,17 +8,56 @@
 // If $target is specified, the focus ring is applied to the specified child element.
 // If $outer is true, the focus ring extends outward. Otherwise, it extends inward.
 // If $within is true, use focus-within instead of focus:focus-visible
+// $method: Method to use for the focus ring (outline, before, after)
 //
-@mixin focus-ring($target: null, $width: 2px, $offset: -$width, $outer: false, $focus-state: 'focus:focus-visible', $fc: $focus_border_color) {
-  & #{$target} {
-    outline: 0 solid transparent;
-    outline-offset: if($outer, $offset + 4px, $offset + $width + 4px);
+@mixin focus-ring($target: null, $width: 2px, $offset: -$width, $outer: false, $focus-state: 'focus:focus-visible', $fc: $focus_border_color, $method: 'outline', $scale: 1.05) {
+
+  // Draw using the outline property
+  // Note: outline doesn't respect the border-radius
+  @if $method == 'outline' {
+    & #{$target} {
+      outline: 0 solid transparent;
+      outline-offset: if($outer, $offset + 4px, $offset + $width + 4px);
+    }
+
+    &:#{$focus-state} #{$target} {
+      outline-color: $fc;
+      outline-width: $width;
+      outline-offset: $offset;
+    }
   }
 
-  &:#{$focus-state} #{$target} {
-    outline-color: $fc;
-    outline-width: $width;
-    outline-offset: $offset;
+  // Draw using a ::before or ::after element
+  @if $method == 'before' or $method == 'after' {
+    &#{$target} {
+      position: relative;
+      outline: none;
+      overflow: visible;
+    }
+
+    &#{$target}::#{$method} {
+      content: '';
+      position: absolute;
+      pointer-events: none;
+      z-index: 2;
+      display: inline-block;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: $width solid transparent;
+      border-radius: inherit;
+      transform: translate(-2px, -2px) scale(if($outer, $scale + 0.03, $scale));
+      transition: $focus_transition;
+    }
+
+    &:#{$focus-state}#{$target} {
+      outline: none;
+    }
+    &:#{$focus-state}#{$target}::#{$method} {
+      border: $width solid $fc;
+      transform: translate(-2px, -2px) scale(if($outer, 1.03, 0.99));
+    }
   }
 }
 

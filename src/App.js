@@ -8,6 +8,8 @@ import InfoBar from './InfoBar'
 import Input from './Input'
 import InputNumber from './InputNumber'
 import Label from './Label'
+import Menu from './Menu'
+import Popover from './Popover'
 import Separator from './Separator'
 import Spinner from './Spinner'
 import Table from './Table'
@@ -41,8 +43,8 @@ function App() {
           <Button icon='go-first' active />
           <Button icon='go-last' active />
         </div>
-        <HeaderBar.Title subtitle='This is an header bar' fill>
-          Header bar
+        <HeaderBar.Title fill>
+          Web Toolkit Demo
         </HeaderBar.Title>
         <Input icon='system-search' placeholder='Search...' />
         <span className='StackSwitcher linked'>
@@ -77,6 +79,19 @@ function AppContent() {
     <div className='App__content Box__fill'>
       <h1>Application</h1>
 
+      <DemoPopover />
+      <br/>
+
+      <Box horizontal>
+        <Box vertical>
+          <DemoDropdown users={users} />
+          <DemoToolbar />
+        </Box>
+        <DemoFrame />
+        <DemoMenu />
+      </Box>
+      <br/>
+
       <Box vertical compact>
         <HeaderBar>
           <Button icon='system-search' />
@@ -104,17 +119,7 @@ function AppContent() {
       <br/>
 
       <DemoTable users={users} />
-
       <br/>
-
-      <Box horizontal>
-        <Box vertical>
-          <DemoDropdown users={users} />
-          <DemoToolbar />
-        </Box>
-        <DemoFrame />
-        <DemoMenu />
-      </Box>
 
       <p>
         <div className='List'>
@@ -244,35 +249,23 @@ function AppContent() {
   )
 }
 
-function MenuButton({
-  children,
-  radio,
-  checkbox,
-  name,
-  value,
-  accelerator,
-  icon,
-  menu,
-}) {
+function DemoPopover({}) {
+  const [open, setOpen] = useState(true)
+  const toggle = () => setOpen(!open)
+
   return (
-    <button className='ModelButton flat Menu__button'>
-      {checkbox !== undefined &&
-        <Icon name='emblem-ok' className='Menu__icon' />
-      }
-      {radio &&
-        <Icon name='radio' className='Menu__icon' />
-      }
-      <span className='Label Menu__button__text'>{children}</span>
-      {accelerator &&
-        <span className='Label Menu__button__accelerator'>{accelerator}</span>
-      }
-      {icon &&
-        <Icon name={icon} className='Menu__iconAfter' />
-      }
-      {menu &&
-        <Icon name='go-next' className='Menu__iconAfter submenu' />
-      }
-    </button>
+    <Box horizontal>
+      <Popover
+        open={open}
+        content={<ComplexMenu />}
+        onOpen={toggle}
+        onClose={toggle}
+      >
+        <Button icon='emblem-system'>
+          Settings
+        </Button>
+      </Popover>
+    </Box>
   )
 }
 
@@ -373,6 +366,7 @@ function DemoInfoBar() {
     </>
   )
 }
+
 function DemoToolbar() {
   return (
     <>
@@ -408,57 +402,64 @@ function DemoFrame() {
         <button className='MenuBar__item'>Edit</button>
         <button className='MenuBar__item'>View</button>
       </div>
-      <div className='MenuBar__popover popover Menu menu background open' style={{ position: 'relative' }}>
-        <div className='contents'>
-          <MenuButton>New</MenuButton>
-          <MenuButton>Open</MenuButton>
-          <MenuButton menu={true}>
-            Other
-          </MenuButton>
-          <div className='separator'/>
-          <MenuButton accelerator='Ctrl+Q'>
-            Quit
-          </MenuButton>
+      <div className='MenuBar__popover popover Menu menu open' style={{ position: 'relative' }}>
+        <div className='popover__container'>
+          <Menu>
+            <Menu.Button>New</Menu.Button>
+            <Menu.Button>Open</Menu.Button>
+            <Menu.Button menu={true}>
+              Other
+            </Menu.Button>
+            <Menu.Separator />
+            <Menu.Button accelerator='Ctrl+Q'>
+              Quit
+            </Menu.Button>
+          </Menu>
         </div>
       </div>
     </div>
   )
 }
 
+function ComplexMenu() {
+  return (
+    <Menu icons>
+      <Menu.CircularButtons>
+        <Button circular icon='printer' />
+        <Button circular icon='emblem-shared' />
+      </Menu.CircularButtons>
+      <Menu.Separator />
+      <Menu.Button accelerator='Ctrl+N'>Open in New Window</Menu.Button>
+      <Menu.Separator />
+      <Menu.InlineButtons label='Edit'>
+        <Button flat image icon='edit-cut' />
+        <Button flat image icon='edit-copy' />
+        <Button flat image icon='edit-paste' />
+      </Menu.InlineButtons>
+      <Menu.Separator />
+      <Menu.Button checkbox={true}>Pin</Menu.Button>
+      <Menu.Button>Select Labels...</Menu.Button>
+      <Menu.Button menu={<div>Some menu</div>}>
+        Share
+      </Menu.Button>
+      <Menu.Separator />
+      <Label className='title'>Size</Label>
+      <Menu.Button radio name='size' value='small'>Small</Menu.Button>
+      <Menu.Button radio name='size' value='medium'>Medium</Menu.Button>
+      <Menu.Button radio name='size' value='large'>Large</Menu.Button>
+      <Menu.Separator />
+      <Menu.Button accelerator='Delete'>Move to Trash</Menu.Button>
+    </Menu>
+  )
+}
+
 function DemoMenu() {
   return (
     <div>
-      <div className='popover background menu icons open' style={{ position: 'relative' }}>
-        <div className='arrow up'    style={{ left: 100 }} />
-        <div className='contents'>
-          <Box horizontal className='circular-buttons' space='around'>
-            <Button circular icon='printer' />
-            <Button circular icon='emblem-shared' />
-          </Box>
-          <div className='separator' />
-          <MenuButton accelerator='Ctrl+N'>Open in New Window</MenuButton>
-          <div className='separator' />
-          <Box horizontal className='Menu__item inline-buttons' align>
-            <Label className='Box__fill'>Edit</Label>
-            <Box horizontal compact>
-              <Button flat image icon='edit-cut' />
-              <Button flat image icon='edit-copy' />
-              <Button flat image icon='edit-paste' />
-            </Box>
-          </Box>
-          <div className='separator' />
-          <MenuButton checkbox={true}>Pin</MenuButton>
-          <MenuButton>Select Labels...</MenuButton>
-          <MenuButton menu={<div>Some menu</div>}>
-            Share
-          </MenuButton>
-          <div className='separator' />
-          <Label className='title'>Size</Label>
-          <MenuButton radio name='size' value='small'>Small</MenuButton>
-          <MenuButton radio name='size' value='medium'>Medium</MenuButton>
-          <MenuButton radio name='size' value='large'>Large</MenuButton>
-          <div className='separator' />
-          <MenuButton accelerator='Delete'>Move to Trash</MenuButton>
+      <div className='popover menu bottom arrow arrow-top open' style={{ position: 'relative' }}>
+        <div className='arrow top' style={{ left: 100, top: -19 }} />
+        <div className='popover__container'>
+          <ComplexMenu />
         </div>
       </div>
     </div>

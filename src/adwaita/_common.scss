@@ -592,7 +592,7 @@ $popover_radius: $button_radius + 4;
 }
 
 // TODO validate this
-.TreeView .Input {
+.table .Input {
   &:focus-within {
     &:dir(rtl), &:dir(ltr) { // specificity bump hack
       background-color: $base_color;
@@ -1365,7 +1365,7 @@ input::-webkit-outer-spin-button {
 /**************
  * ComboBoxes *
  **************/
-.Dropdown__menu.popover.menu.background > .contents { padding: 0; } //allow search entries with no margin
+.Dropdown__menu.popover.menu.background > .popover__container { padding: 0; } //allow search entries with no margin
 
 .Dropdown {
   display: flex;
@@ -1398,20 +1398,20 @@ input::-webkit-outer-spin-button {
 // newstyle
 .Dropdown__menu.popover {
 
-  > .contents {
+  > .popover__container {
     padding-top: 0;
     border-top: none;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
   }
 
-  > .contents .Dropdown__item {
+  > .popover__container .Dropdown__item {
     // align menu labels with the button .Label
     padding-left: 9px;
     padding-right: 9px;
     padding: 0 $menu_padding;
   }
-  > .contents .ModelButton {
+  > .popover__container .ModelButton {
 
     &.selected {
       font-weight: 700;
@@ -1716,7 +1716,7 @@ input::-webkit-outer-spin-button {
     box-shadow: none;
   }
 
-  separator { background-color: $borders_color; }  // FIXME: use darker border?
+  .separator { background-color: $borders_color; }  // FIXME: use darker border?
 
   @extend %titlebar;
 }
@@ -1755,15 +1755,13 @@ pathbar > button {
 
 
 /**************
- * Tree Views *
+ * Tables     *
  **************/
 
 $_treeview_borders_color: if($variant=='light',mix($borders_color, $base_color,80%),mix($fg_color, $base_color, 20%));
 $_treeview_backdrop_borders_color: if($variant=='light',mix($backdrop_borders_color, $base_color, 80%),mix($backdrop_fg_color, $base_color, 20%));
 
-.table,
-columnview.view,
-.TreeView.view {
+.table {
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -1977,8 +1975,15 @@ columnview.view,
 /***************
  * Popovers   *
  ***************/
+// popover
+// -> arrow
+// -> popover__container
+//    -> .Menu
+//    -> ...
 
 .popover {
+  --arrow-size: 10px;
+
   position: absolute;
   z-index: 2;
   background-color: transparent;
@@ -1988,9 +1993,11 @@ columnview.view,
     opacity: 0;
   }
 
-  > .arrow {
-    --arrow-size: 10px;
+  &.arrow > .popover__container {
+    margin-top: var(--arrow-size);
+  }
 
+  > .arrow {
     position: absolute;
     z-index: 2;
     width: 0;
@@ -2006,8 +2013,11 @@ columnview.view,
       border: var(--arrow-size) solid transparent;
     }
 
-    &.up {
+
+    &.top {
       top: calc(-1 * var(--arrow-size) + 1px);
+      margin-top: var(--arrow-size);
+      margin-left: calc(-1 * var(--arrow-size));
       &::before {
         top: -1px;
         border-top-width: 0;
@@ -2018,8 +2028,10 @@ columnview.view,
         border-bottom-color: $popover_bg;
       }
     }
-    &.down {
+    &.bottom {
       top: calc(-1 * var(--arrow-size) + 1px);
+      margin-bottom: var(--arrow-size);
+      margin-left: calc(-1 * var(--arrow-size));
       &::before {
         top: 1px;
         border-bottom-width: 0;
@@ -2056,7 +2068,7 @@ columnview.view,
     }
   }
 
-  > .contents {
+  > .popover__container {
     padding: 8px 0;
 
     background-color: $popover_bg;
@@ -2065,16 +2077,13 @@ columnview.view,
     border-radius: $popover_radius;
     box-shadow: 0 1px 3px 2px rgba(black, 0.08);
 
+    // TODO validate this
     > .list,
     > .view,
     > .Toolbar {
       border-style: none;
       background-color: transparent;
     }
-
-    .separator { margin: 3px; }
-
-    .list .separator { margin: 0; }
   }
 }
 
@@ -2084,25 +2093,20 @@ columnview.view,
 
 .popover.menu {
   padding: 0;
-
-  &.background > .contents {
+  > .popover__container {
+    display: flex;
+    flex-direction: column;
     background-color: $menu_color;
   }
-  &.MenuBar__popover > .contents {
+  &.MenuBar__popover > .popover__container {
     border-top-left-radius:  0;
     border-top-right-radius: 0;
     border-top: none;
   }
+}
 
-  & > .contents {
-    display: flex;
-    flex-direction: column;
-  }
-
-  & .separator {
-    margin: 3px 0;
-  }
-  &.background .separator {
+.Menu {
+  .separator {
     margin: 6px 0;
   }
 
@@ -2111,7 +2115,7 @@ columnview.view,
 
     .Button {
       transition: none;
-    }  
+    }
   }
 
   .Box.circular-buttons {
@@ -2123,9 +2127,47 @@ columnview.view,
       padding: 11px;
       &:focus {
          background-color: $menu_selected_color;
-         border-color: $menu_selected_color;
+      }
+      &:active {
+        @include button('active');
       }
     }
+  }
+
+  .Menu__item,
+  .Menu__button {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border: none;
+
+    min-height: 30px;
+    min-width: 40px;
+    width: 100%;
+    padding: 0 $menu_padding;
+    border-radius: 0;
+    text-align: left;
+  }
+  .Menu__button {
+    &.selected {
+      color: $text-color;
+      background-color: $menu_selected_color;
+    }
+    &.selected:active {
+      //@extend %selected_items;
+      //color: $selected_fg_color;
+      background-color: darken($bg_color,14%); // matching buttons
+    }
+    &:focus {
+      outline: none;
+    }
+  }
+  .Menu__button__text {
+    flex: 1;
+  }
+  .Menu__button__accelerator {
+    color: rgba($text_color, 0.55);
+    margin-left: $menu_padding;
   }
 
   check,
@@ -2155,43 +2197,10 @@ columnview.view,
     margin-right: -2px;
   }
 
-  .Menu__item,
-  .Menu__button {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    border: none;
-
-    min-height: 30px;
-    min-width: 40px;
-    padding: 0 $menu_padding;
-    border-radius: 0;
-    text-align: left;
-  }
-  .Menu__button {
-    &.selected {
-      color: $text-color;
-      background-color: $menu_selected_color;
-    }
-    &.selected:active {
-      //@extend %selected_items;
-      //color: $selected_fg_color;
-      background-color: darken($bg_color,14%); // matching buttons
-    }
-    &:focus {
-      outline: none;
-    }
-  }
-  .Menu__button__text {
-    flex: 1;
-  }
-  .Menu__button__accelerator {
-    color: rgba($text_color, 0.55);
-    margin-left: $menu_padding;
-  }
 
   .title {
     padding: 4px $menu_padding; // this will fall apart with font sizing
+    width: 100%;
     text-align: left;
   }
 
@@ -2215,7 +2224,11 @@ columnview.view,
   }
 }
 
-// initial styling for popover menu and bar
+
+/***********
+ * MenuBar *
+ **********/
+
 .MenuBar {
   padding: 0px;
   box-shadow: inset 0 -1px transparentize(black, 0.9);
@@ -2257,20 +2270,20 @@ columnview.view,
     }
   }
 
-  > .MenuBar__item popover.menu.background > .contents {
+  > .MenuBar__item popover.menu.background > .popover__container {
     padding: $menu-margin;
   }
   //nested submenus
   > .MenuBar__item popover.menu popover.menu {
     padding: 0 0 4px 0;
   }
-  > .MenuBar__item popover.menu.background popover.menu.background > .contents {
+  > .MenuBar__item popover.menu.background popover.menu.background > .popover__container {
     margin: 0;
     border-radius: $popover_radius; //including top
   }
 }
 .MenuBar__popover {
-  > .contents {
+  > .popover__container {
     padding-top: 0;
   }
 }
@@ -4500,7 +4513,7 @@ shortcut > .keycap {
  * Emoji *
  ********/
 
-popover.emoji-picker > .contents {
+popover.emoji-picker > .popover__container {
   padding: 0;
 }
 
@@ -4562,7 +4575,7 @@ emoji-completion-row emoji:hover {
   background-color: $menu_selected_color;
 }
 
-popover.entry-completion > .contents {
+popover.entry-completion > .popover__container {
   padding: 0;
 }
 

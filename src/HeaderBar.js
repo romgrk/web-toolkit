@@ -3,7 +3,6 @@
  */
 
 
-import { useState } from 'react'
 import cx from 'classname'
 
 import Box from './Box'

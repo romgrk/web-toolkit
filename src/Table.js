@@ -1,7 +1,7 @@
 import React from 'react'
 import { useTable, useBlockLayout } from 'react-table'
 import { FixedSizeList } from 'react-window'
-import getScrollbarWidth from 'scrollbar-size'
+// import getScrollbarWidth from 'scrollbar-size'
 import AutoSizer from 'react-virtualized-auto-sizer'
 import cx from 'classname'
 
@@ -14,7 +14,7 @@ function Table({ className, columns, data, ...rest }) {
     []
   )
 
-  const scrollbarWidth = getScrollbarWidth()
+  // const scrollbarWidth = getScrollbarWidth()
 
   const {
     getTableProps,

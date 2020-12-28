@@ -1630,37 +1630,37 @@ button.color {
  * Links *
  *********/
 button.link,
-link {
+.link {
   color: #1b6acb;
   text-decoration: underline;
   cursor: pointer; }
-  button.link:not(:disabled):not(.disabled):visited,
-  link:not(:disabled):not(.disabled):visited {
+  
+  .link:not(:disabled):not(.disabled):visited {
     color: #15539e; }
-    *.selected button.link:not(:disabled):not(.disabled):visited, *.selected link:not(:disabled):not(.disabled):visited {
+    *.selected .link:not(:disabled):not(.disabled):visited {
       color: #a1bad8; }
-  button.link:not(:disabled):not(.disabled):hover,
-  link:not(:disabled):not(.disabled):hover {
+  
+  .link:not(:disabled):not(.disabled):hover {
     color: #3584e4; }
-    *.selected button.link:not(:disabled):not(.disabled):hover, *.selected link:not(:disabled):not(.disabled):hover {
+    *.selected .link:not(:disabled):not(.disabled):hover {
       color: #ebf3fc; }
-  button.link:not(:disabled):not(.disabled):active,
-  link:not(:disabled):not(.disabled):active {
+  
+  .link:not(:disabled):not(.disabled):active {
     color: #1b6acb; }
-    *.selected button.link:not(:disabled):not(.disabled):active, *.selected link:not(:disabled):not(.disabled):active {
+    *.selected .link:not(:disabled):not(.disabled):active {
       color: #d1e1f5; }
-  button.link:disabled,
-  link:disabled {
+  
+  .link:disabled {
     color: rgba(115, 115, 115, 0.8); }
-  button.selected.link, *.selected button.link,
-  link.selected, *.selected link {
+  
+  .link.selected, *.selected .link {
     color: #d1e1f5; }
 
-link {
+.link {
   outline: 0 solid transparent;
   outline-offset: 4px; }
 
-link:focus:focus-visible {
+.link:focus:focus-visible {
   outline-color: rgba(53, 132, 228, 0.5);
   outline-width: 2px;
   outline-offset: -2px; }
@@ -2255,6 +2255,13 @@ input::-webkit-outer-spin-button {
     background-image: none;
     box-shadow: inset 0 1px rgba(255, 255, 255, 0.8);
     transition: 200ms ease-out; }
+  .titlebar:not(.HeaderBar),
+  .HeaderBar.titlebar {
+    background: #edebe9 linear-gradient(to top, #dad6d2, #efedec);
+    box-shadow: inset 0 1px rgba(255, 255, 255, 0.8), inset 0 -2px 2px rgba(0, 0, 0, 0.02);
+    background: none;
+    background-color: #e6e3e0;
+    box-shadow: none; }
   .titlebar:not(.HeaderBar) > .Box,
   .HeaderBar > .Box {
     min-height: 46px; }

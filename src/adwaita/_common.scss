@@ -1100,7 +1100,7 @@ button.color {
  *********/
 
 %link,
-link {
+.link {
   color: $link_color;
   text-decoration: underline;
   cursor: pointer;
@@ -1133,7 +1133,7 @@ link {
   *.selected & { color: mix($selected_fg_color, $link_color, 80%); }
 }
 
-link {
+.link {
   @include focus-ring();
 }
 
@@ -1681,6 +1681,14 @@ input::-webkit-outer-spin-button {
     transition: $backdrop_transition;
   }
 
+  &.titlebar {
+    @include headerbar_fill(darken($headerbar_bg_color, 2%));
+    background: none;
+    background-color: darken($headerbar_bg_color, 5%);
+    box-shadow: none;
+  }
+
+
   // FIXME: this is a hack to make the inner box fill the bar
   > .Box {
     min-height: 46px;
@@ -1728,7 +1736,6 @@ input::-webkit-outer-spin-button {
   //   margin-top: 10px;
   //   margin-bottom: 10px;
   // }
-
 
   // squared corners when the .Window is maximized, tiled, or fullscreen
   &.titlebar,

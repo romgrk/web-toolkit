@@ -84,7 +84,13 @@ function AppContent() {
 
 
   return (
-    <div className='App__content Box__fill'>
+    <div className='App__content Box__fill' style={{ position: 'relative' }}>
+      <div style={{ position: 'absolute', top: '2em', right: '2em' }}>
+        <a href='https://github.com/romgrk/web-toolkit' className='link'>
+          Go to Github
+        </a>
+      </div>
+
       <h1>Application</h1>
 
       <DemoInput />

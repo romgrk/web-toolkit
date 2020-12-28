@@ -2135,14 +2135,8 @@ input::-webkit-outer-spin-button {
     border-top-color: #bab3ab; }
   .titlebar:not(.HeaderBar),
   .HeaderBar.titlebar,
-  .HeaderBar.no-round-corner, .tiled .HeaderBar, .tiled-top .HeaderBar, .tiled-left .HeaderBar, .tiled-right .HeaderBar, .tiled-bottom .HeaderBar, .maximized .HeaderBar, .fullscreen .HeaderBar {
+  .HeaderBar.no-round-corner, .maximized .HeaderBar, .fullscreen .HeaderBar {
     border-radius: 0; }
-  .solid-csd .titlebar:dir(rtl):not(.HeaderBar), .solid-csd .titlebar:dir(ltr):not(.HeaderBar), .solid-csd .HeaderBar:backdrop:dir(rtl), .solid-csd .HeaderBar:backdrop:dir(ltr), .solid-csd .HeaderBar:dir(rtl), .solid-csd .HeaderBar:dir(ltr) {
-    margin-left: -1px;
-    margin-right: -1px;
-    margin-top: -1px;
-    border-radius: 0;
-    box-shadow: none; }
 
 .Window.csd > .titlebar:not(.HeaderBar) {
   padding: 0;

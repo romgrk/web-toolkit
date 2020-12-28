@@ -1696,34 +1696,15 @@ input::-webkit-outer-spin-button {
   // squared corners when the .Window is maximized, tiled, or fullscreen
   &.titlebar,
   &.no-round-corner,
-  .tiled &,
-  .tiled-top &,
-  .tiled-left &,
-  .tiled-right &,
-  .tiled-bottom &,
   .maximized &,
   .fullscreen & {
     .window-inctive &, & {
       border-radius: 0;
     }
   }
-
-  // TODO validate this
-  .solid-csd & {
-    &:backdrop, & {
-      &:dir(rtl), &:dir(ltr) { // specificity bump
-        margin-left: -1px;
-        margin-right: -1px;
-        margin-top: -1px;
-        border-radius: 0;
-        box-shadow: none;
-      }
-    }
-  }
 }
 
-// TODO RESUME HERE
-
+// TODO validate this
 .titlebar:not(.HeaderBar) {
   .Window.csd > & {
     // in csd we assume every titlebar is a .HeaderBar so reset anything, this is needed for split toolbars cases

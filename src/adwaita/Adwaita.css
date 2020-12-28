@@ -2988,6 +2988,7 @@ pathbar > button.slider-button {
       opacity: 0; }
   .Switch label > span {
     font-size: 10px;
+    user-select: none;
     position: absolute;
     top: 50%;
     transform: translateY(-50%); }

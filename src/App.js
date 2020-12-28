@@ -10,6 +10,7 @@ import InputNumber from './InputNumber'
 import Label from './Label'
 import Separator from './Separator'
 import Spinner from './Spinner'
+import Table from './Table'
 import Toolbar from './Toolbar'
 
 function blur() {
@@ -62,6 +63,16 @@ function App() {
 }
 
 function AppContent() {
+  const [users, setUsers] = useState([])
+  useEffect(() => {
+    setTimeout(() => {
+      fetch('https://jsonplaceholder.typicode.com/users')
+      .then(r => r.json())
+      .then(setUsers)
+    }, 1000)
+  }, [])
+
+
   return (
     <div className='App__content Box__fill'>
       <h1>Application</h1>
@@ -92,9 +103,13 @@ function AppContent() {
       </Box>
       <br/>
 
+      <DemoTable users={users} />
+
+      <br/>
+
       <Box horizontal>
         <Box vertical>
-          <DemoDropdown />
+          <DemoDropdown users={users} />
           <DemoToolbar />
         </Box>
         <DemoFrame />
@@ -261,24 +276,65 @@ function MenuButton({
   )
 }
 
-function DemoDropdown() {
+function DemoTable({ users }) {
+  const columns = [
+    {
+      Header: 'Row Index',
+      accessor: (row, i) => i,
+      width: 50,
+    },
+    {
+      Header: 'Name',
+      columns: [
+        {
+          Header: 'Username',
+          accessor: 'username',
+        },
+        {
+          Header: 'Full Name',
+          accessor: 'name',
+        },
+      ],
+    },
+    {
+      Header: 'Info',
+      columns: [
+        {
+          Header: 'Phone',
+          accessor: 'phone',
+          width: 150,
+        },
+        {
+          Header: 'Website',
+          accessor: 'website',
+        },
+        {
+          Header: 'Address',
+          accessor: row =>
+            `${row.address.street}${row.address.suite ? ' ' + row.address.suite : ''}, ${row.address.city}`,
+        },
+      ],
+    },
+  ]
+
+  return (
+    <div style={{ height: 200 }}>
+      <Table
+        columns={columns}
+        data={users}
+      />
+    </div>
+  )
+}
+
+function DemoDropdown({ users }) {
   const [value, setValue] = useState(2)
-  const [users, setUsers] = useState([])
   const options = users.map(u =>
     ({
       value: u.id,
       label: u.name
     })
   )
-
-  useEffect(() => {
-    setTimeout(() => {
-      fetch('https://jsonplaceholder.typicode.com/users')
-      .then(r => r.json())
-      .then(setUsers)
-    }, 1000)
-  }, [])
-
 
   return (
     <Box vertical>

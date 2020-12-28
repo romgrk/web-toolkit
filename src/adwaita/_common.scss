@@ -1725,6 +1725,7 @@ input::-webkit-outer-spin-button {
  * Pathbars *
  ************/
 
+// TODO validate this
 pathbar > button {
   &.text-button, &.image-button, & {
     padding-left: 4px;
@@ -1759,15 +1760,21 @@ pathbar > button {
 
 $_treeview_borders_color: if($variant=='light',mix($borders_color, $base_color,80%),mix($fg_color, $base_color, 20%));
 $_treeview_backdrop_borders_color: if($variant=='light',mix($backdrop_borders_color, $base_color, 80%),mix($backdrop_fg_color, $base_color, 20%));
+
+.table,
 columnview.view,
 .TreeView.view {
-  border-left-color:  $_treeview_borders_color; // this is actually the tree lines color,
-  border-top-color: $_treeview_borders_color;                         // while this is the grid lines color, better then nothing
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+
+  border: 1px solid $_treeview_borders_color;
+  background-color: $background_low;
 
   @include focus-ring();
 
-  > .SelectionArea { @extend .SelectionArea; } // to avoid borders being overridden by the previously set props
-
+  // TODO validate this
   &.selected {
     &:focus, & {
       border-radius: 0;
@@ -1777,7 +1784,8 @@ columnview.view,
     }
   }
 
-  &:disabled {
+  // TODO validate this
+  &.disabled {
     color: $insensitive_fg_color;
 
     &.selected {
@@ -1786,20 +1794,75 @@ columnview.view,
     }
   }
 
+  .window-inactive & {
+    border-left-color: $_treeview_backdrop_borders_color;
+    border-top: $_treeview_backdrop_borders_color;
+  }
+
+  .table__header {
+    flex: 0;
+  }
+  .table__body {
+    flex: 1;
+  }
+  .table__body > div {
+    width: 100%;
+    margin: 0;
+  }
+
+  .th {
+    @extend %column_header_button;
+
+    color: $fg_color_title;
+    background-color: $base_color;
+    font-weight: bold;
+    text-shadow: none;
+    box-shadow: none;
+    cursor: default;
+
+    &:first-child {
+      border-left: none;
+    }
+
+    &:hover {
+      @extend %column_header_button;
+
+      color: mix($fg_color_title, $fg_color, 50%);
+      box-shadow: none;
+      transition: none; //I shouldn't need this
+    }
+
+    &:active {
+      @extend %column_header_button;
+
+      color: $fg_color;
+      transition: none; //I shouldn't need this
+    }
+  }
+  .td {
+    padding: 4px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    height: 28px;
+  }
+  .td:not(:last-child) {
+    border-right: 1px solid $_treeview_borders_color;
+  }
+
+  // TODO validate this
+  > .SelectionArea { @extend .SelectionArea; } // to avoid borders being overridden by the previously set props
+
+  // TODO validate this
   &.separator {
     min-height: 2px;
     color: $_treeview_borders_color;
   }
 
-  &:backdrop {
-    border-left-color: $_treeview_backdrop_borders_color;
-    border-top: $_treeview_backdrop_borders_color;
-  }
-
+  // TODO validate this
   &.dnd-active {
     box-shadow: none;
   }
-
   > dndtarget.dnd-active {
     border-style: solid none;
     border-width: 1px;
@@ -1810,6 +1873,7 @@ columnview.view,
     &.before { border-bottom-style: none; }
   }
 
+  // TODO validate this
   &.expander {
     // GtkTreeView uses the larger of the expander’s min-width and min-height
     min-width: 16px;
@@ -1831,6 +1895,7 @@ columnview.view,
     &:checked { -gtk-icon-source: -gtk-icontheme('pan-down-symbolic'); }
   }
 
+  // TODO validate this
   &.progressbar { // progress bar in treeviews
     @if $variant == light { color: $base_color; }
 
@@ -1860,6 +1925,7 @@ columnview.view,
     }
   }
 
+  // TODO validate this
   &.trough { // progress bar trough in treeviews
     background-color: transparentize($fg_color,0.9);
 
@@ -1873,37 +1939,10 @@ columnview.view,
     }
   }
 
-  > header {
-    > button {
-      $_column_header_color: mix($fg_color, $base_color, 50%);
 
-      @extend %column_header_button;
-
-      color: $_column_header_color;
-      background-color: $base_color;
-      font-weight: bold;
-      text-shadow: none;
-      box-shadow: none;
-
-      &:hover {
-        @extend %column_header_button;
-
-        color: mix($_column_header_color, $fg_color, 50%);
-        box-shadow: none;
-        transition: none; //I shouldn't need this
-      }
-
-      &:active {
-        @extend %column_header_button;
-
-        color: $fg_color;
-        transition: none; //I shouldn't need this
-      }
-    }
-  }
-
+  // TODO validate this
   button.dnd,
-  header.button.dnd { // for treeview-like derive widgets
+  .table__header.button.dnd { // for treeview-like derive widgets
     &:active, &.selected, &:hover, & {
       padding: 0 6px;
       color: $base_color;
@@ -1916,13 +1955,12 @@ columnview.view,
       transition: none;
     }
   }
-
-  acceleditor > .Label { background-color: $selected_bg_color; } // see tests/testaccel to test
 }
 
 %column_header_button {
-  padding: 0 6px;
+  padding: 0 4px;
   background-image: none;
+  border-width: 1px;
   border-style: none none solid solid;
   border-color: $_treeview_borders_color;
   border-radius: 0;

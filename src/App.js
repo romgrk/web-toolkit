@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import Box from './Box'
 import Button from './Button'
 import Dropdown from './Dropdown'
+import HeaderBar from './HeaderBar'
 import Icon, { names as iconNames } from './Icon'
 import InfoBar from './InfoBar'
 import Input from './Input'
@@ -34,8 +35,17 @@ function App() {
     <div className="App background">
       <h1>Application</h1>
 
-
       <Box vertical compact>
+        <HeaderBar>
+          <Button icon='system-search' />
+          <HeaderBar.Title subtitle='This is an header bar' fill>
+            Header bar
+          </HeaderBar.Title>
+          <Button icon='emblem-system' />
+          <HeaderBar.Controls>
+            <Button icon='window-close' />
+          </HeaderBar.Controls>
+        </HeaderBar>
         <DemoInfoBar />
       </Box>
       <br/>

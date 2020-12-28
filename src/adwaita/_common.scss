@@ -70,15 +70,21 @@ $popover_radius: $button_radius + 4;
   &.horizontal {
     display: flex;
     flex-direction: row;
-    &:not(.compact) > *:not(:last-child) {
+    & > *:not(:last-child) {
       margin-right: 1em;
+    }
+    &.compact > *:not(:last-child) {
+      margin-right: 0;
     }
   }
   &.vertical {
     display: flex;
     flex-direction: column;
-    &:not(.compact) > *:not(:last-child) {
+    & > *:not(:last-child) {
       margin-bottom: 1em;
+    }
+    &.compact > *:not(:last-child) {
+      margin-bottom: 0;
     }
   }
   &.inline {
@@ -87,11 +93,28 @@ $popover_radius: $button_radius + 4;
   &.align {
     align-items: center;
   }
+  &.justify {
+    justify-content: center;
+  }
   &.space-around {
     justify-content: space-around;
   }
   &.space-between {
     justify-content: space-between;
+  }
+
+  &.fill {
+    display: inline-flex;
+    width: 100%;
+    height: 100%;
+  }
+  &.fill-width {
+    display: inline-flex;
+    width: 100%;
+  }
+  &.fill-height {
+    display: inline-flex;
+    height: 100%;
   }
 }
 .Box__fill {
@@ -458,7 +481,7 @@ $popover_radius: $button_radius + 4;
       }
     }
 
-    .Icon { // entry icons colors
+    *:not(.InputNumber__button) .Icon { // entry icons colors
       --icon-color: #{mix($fg_color, $base_color, 80%)};
       &:hover {
         --icon-color: #{$fg_color};
@@ -1154,7 +1177,7 @@ input::-webkit-outer-spin-button {
       }
     }
 
-    > input {
+    > .Input__area > input {
       @extend %spinbutton_horz_entry;
     }
 
@@ -1176,6 +1199,7 @@ input::-webkit-outer-spin-button {
       border-color: transparentize($borders_color, 0.7);
       border-radius: 0;
       box-shadow: none;
+      transition: $button_transition;
 
       &:dir(rtl) { border-style: none solid none none; }
 
@@ -1205,7 +1229,7 @@ input::-webkit-outer-spin-button {
   // OSD horizontal
   // TODO validate this
   .osd &:not(.vertical) {
-    > input {
+    > .Input__area > input {
       @extend %spinbutton_horz_entry;
     }
 
@@ -1268,7 +1292,7 @@ input::-webkit-outer-spin-button {
     }
 
 
-    > input {
+    > .Input__area > input {
       @extend %entry;
 
       min-height: 32px;
@@ -1558,7 +1582,8 @@ input::-webkit-outer-spin-button {
  * Title buttons *
  *****************/
 
-windowcontrols {
+// TODO validate this
+.control-buttons {
   border-spacing: 6px;
 
   &:not(.empty) {
@@ -1575,7 +1600,6 @@ windowcontrols {
 
   button {
     @extend %button_basic;
-
     @extend %button_basic_flat;
 
 
@@ -1584,12 +1608,14 @@ windowcontrols {
     margin: 0 2px;
     min-width: 0;
     min-height: 0;
-    &:hover {
-      //special case hover colors inside a headerbar
-      @include button(undecorated-hover,$c:darken($headerbar_bg_color,10%));
+    &:not(:disabled):not(.disabled) {
+      &:hover {
+        //special case hover colors inside a .HeaderBar
+        @include button(hover, $c:darken($headerbar_bg_color,10%));
+      }
+      &:active,
+      &:checked { @include button(undecorated-active,$c:darken($headerbar_bg_color,10%)); }
     }
-    &:active,
-    &:checked { @include button(undecorated-active,$c:darken($headerbar_bg_color,10%)); }
   }
 }
 
@@ -1598,17 +1624,18 @@ windowcontrols {
  * Header bars *
  ***************/
 %titlebar,
-headerbar {
+.HeaderBar {
   padding: 0 6px;
   min-height: 46px;
-  border-width: 0 0 1px;
+  border-width: 1px;
   border-style: solid;
   border-color: $alt_borders_color;
-  border-radius: 0;
+  border-top-left-radius: $window_radius;
+  border-top-right-radius: $window_radius;
 
-  @include headerbar_fill(darken($bg_color, 10%));
+  @include headerbar_fill($headerbar_bg_color);
 
-  &:backdrop {
+  .window-inactive & {
     border-color: $backdrop_borders_color;
     background-color: $bg_color;
     background-image: none;
@@ -1617,10 +1644,17 @@ headerbar {
     transition: $backdrop_transition;
   }
 
+  > .Box {
+    min-height: 46px;
+  }
+
   .title {
     padding-left: 12px;
     padding-right: 12px;
     font-weight: bold;
+  }
+  .title:not(:only-child) {
+    margin-bottom: 0.15em;
   }
 
   .subtitle {
@@ -1660,7 +1694,7 @@ headerbar {
     min-height: 28px;
     padding: 4px;
 
-    windowcontrols {
+    .control-buttons {
       button,
       menubutton {
         min-height: 26px;
@@ -1693,7 +1727,7 @@ headerbar {
 
 // TODO RESUME HERE
 
-headerbar {
+.HeaderBar {
   > windowhandle > box {
     &,
     > box.start,
@@ -1702,7 +1736,7 @@ headerbar {
     }
   }
 
-  // add vertical margins to common widget on the headerbar to avoid them spanning the whole height
+  // add vertical margins to common widget on the .HeaderBar to avoid them spanning the whole height
   entry,
   spinbutton,
   separator:not(.sidebar),
@@ -1723,9 +1757,9 @@ headerbar {
     margin-bottom: 10px;
   }
 
-  &.titlebar headerbar:not(.titlebar) {
+  &.titlebar .HeaderBar:not(.titlebar) {
     // Drop the background of non-titlebar nested headerbars. This is needed to
-    // work around headerbar sliding animation issues without refactoring
+    // work around .HeaderBar sliding animation issues without refactoring
     // Adwaita's support of titlebars and headerbars as it may break
     // applications.
     // See https://gitlab.gnome.org/GNOME/gtk/issues/1264 for more information.
@@ -1735,9 +1769,9 @@ headerbar {
 }
 
 
-.titlebar:not(headerbar) {
+.titlebar:not(.HeaderBar) {
   .Window.csd > & {
-    // in csd we assume every titlebar is a headerbar so reset anything, this is needed for split toolbars cases
+    // in csd we assume every titlebar is a .HeaderBar so reset anything, this is needed for split toolbars cases
     padding: 0;
     background-color: transparent;
     background-image: none;

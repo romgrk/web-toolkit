@@ -9,9 +9,11 @@ function Box({
   className,
   inline,
   compact,
+  fill,
   horizontal,
   vertical,
   align,
+  justify,
   space,
   ...rest
 }) {
@@ -21,7 +23,8 @@ function Box({
         'Box',
         className,
         space ? `space-${space}` : undefined,
-        { inline, compact, vertical, horizontal, align }
+        typeof fill === 'string' ? `fill-${fill}` : fill ? 'fill' : undefined,
+        { inline, compact, vertical, horizontal, align, justify }
       )}
       {...rest}
     >

@@ -103,14 +103,18 @@ button {
 .Box.horizontal {
   display: flex;
   flex-direction: row; }
-  .Box.horizontal:not(.compact) > *:not(:last-child) {
+  .Box.horizontal > *:not(:last-child) {
     margin-right: 1em; }
+  .Box.horizontal.compact > *:not(:last-child) {
+    margin-right: 0; }
 
 .Box.vertical {
   display: flex;
   flex-direction: column; }
-  .Box.vertical:not(.compact) > *:not(:last-child) {
+  .Box.vertical > *:not(:last-child) {
     margin-bottom: 1em; }
+  .Box.vertical.compact > *:not(:last-child) {
+    margin-bottom: 0; }
 
 .Box.inline {
   display: inline-flex; }
@@ -118,11 +122,27 @@ button {
 .Box.align {
   align-items: center; }
 
+.Box.justify {
+  justify-content: center; }
+
 .Box.space-around {
   justify-content: space-around; }
 
 .Box.space-between {
   justify-content: space-between; }
+
+.Box.fill {
+  display: inline-flex;
+  width: 100%;
+  height: 100%; }
+
+.Box.fill-width {
+  display: inline-flex;
+  width: 100%; }
+
+.Box.fill-height {
+  display: inline-flex;
+  height: 100%; }
 
 .Box__fill {
   flex: 1; }
@@ -265,8 +285,8 @@ button {
 .Label.fill-height {
   height: 100%; }
 
-.dim-label, .titlebar:not(headerbar) .subtitle,
-headerbar .subtitle, .InputNumber.vertical > input > .Input__area > input::placeholder, .InputNumber:not(.vertical) > .Input__area > input::placeholder,
+.dim-label, .titlebar:not(.HeaderBar) .subtitle,
+.HeaderBar .subtitle, .InputNumber.vertical > .Input__area > input > .Input__area > input::placeholder, .InputNumber:not(.vertical) > .Input__area > input::placeholder,
 .Input > .Input__area > input::placeholder, .Label.separator {
   opacity: 0.55;
   text-shadow: none; }
@@ -328,11 +348,11 @@ headerbar .subtitle, .InputNumber.vertical > input > .Input__area > input::place
   100% {
     left: var(--input-padding); } }
 
-.InputNumber.vertical > input, .InputNumber:not(.vertical),
+.InputNumber.vertical > .Input__area > input, .InputNumber:not(.vertical),
 .Input {
   --input-padding: 8px;
   --progress-undeterminate-width: 50px; }
-  .InputNumber.vertical > input, .InputNumber:not(.vertical),
+  .InputNumber.vertical > .Input__area > input, .InputNumber:not(.vertical),
   .Input {
     position: relative;
     display: inline-flex;
@@ -348,34 +368,34 @@ headerbar .subtitle, .InputNumber.vertical > input > .Input__area > input::place
     color: black;
     border-color: #cdc7c2;
     background-color: #ffffff; }
-    .InputNumber.vertical > input, .InputNumber:not(.vertical),
+    .InputNumber.vertical > .Input__area > input, .InputNumber:not(.vertical),
     .Input {
       outline: 0 solid transparent;
       outline-offset: 4px; }
-    .InputNumber.vertical > input:focus-within, .InputNumber:focus-within:not(.vertical),
+    .InputNumber.vertical > .Input__area > input:focus-within, .InputNumber:focus-within:not(.vertical),
     .Input:focus-within {
       outline-color: rgba(53, 132, 228, 0.5);
       outline-width: 2px;
       outline-offset: -2px; }
-    .InputNumber.vertical > input > .Input__area, .InputNumber:not(.vertical) > .Input__area,
+    .InputNumber.vertical > .Input__area > input > .Input__area, .InputNumber:not(.vertical) > .Input__area,
     .Input > .Input__area {
       position: relative;
       flex: 1;
       height: 100%;
       overflow: hidden; }
-      .InputNumber.vertical > input > .Input__area > input, .InputNumber:not(.vertical) > .Input__area > input,
+      .InputNumber.vertical > .Input__area > input > .Input__area > input, .InputNumber:not(.vertical) > .Input__area > input,
       .Input > .Input__area > input {
         width: 100%;
         height: 100%;
         border: none;
         background: none; }
-        .InputNumber.vertical > input > .Input__area > input:focus, .InputNumber:not(.vertical) > .Input__area > input:focus,
+        .InputNumber.vertical > .Input__area > input > .Input__area > input:focus, .InputNumber:not(.vertical) > .Input__area > input:focus,
         .Input > .Input__area > input:focus {
           outline: none; }
-        .InputNumber.vertical > input > .Input__area > input::placeholder, .InputNumber:not(.vertical) > .Input__area > input::placeholder,
+        .InputNumber.vertical > .Input__area > input > .Input__area > input::placeholder, .InputNumber:not(.vertical) > .Input__area > input::placeholder,
         .Input > .Input__area > input::placeholder {
           user-select: none; }
-      .InputNumber.vertical > input > .Input__area > .Input__children, .InputNumber:not(.vertical) > .Input__area > .Input__children,
+      .InputNumber.vertical > .Input__area > input > .Input__area > .Input__children, .InputNumber:not(.vertical) > .Input__area > .Input__children,
       .Input > .Input__area > .Input__children {
         position: absolute;
         pointer-events: none;
@@ -390,25 +410,25 @@ headerbar .subtitle, .InputNumber.vertical > input > .Input__area > input::place
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap; }
-      .InputNumber.vertical > input > .Input__area > input:focus + .Input__children, .InputNumber:not(.vertical) > .Input__area > input:focus + .Input__children,
+      .InputNumber.vertical > .Input__area > input > .Input__area > input:focus + .Input__children, .InputNumber:not(.vertical) > .Input__area > input:focus + .Input__children,
       .Input > .Input__area > input:focus + .Input__children {
         opacity: 0.5; }
-      .InputNumber.vertical > input > .Input__area > input:not(.empty) + .Input__children, .InputNumber:not(.vertical) > .Input__area > input:not(.empty) + .Input__children,
+      .InputNumber.vertical > .Input__area > input > .Input__area > input:not(.empty) + .Input__children, .InputNumber:not(.vertical) > .Input__area > input:not(.empty) + .Input__children,
       .Input > .Input__area > input:not(.empty) + .Input__children {
         opacity: 0; }
-    .InputNumber.vertical > input .Input__left, .InputNumber:not(.vertical) .Input__left, .InputNumber.vertical > input .Input__right, .InputNumber:not(.vertical) .Input__right,
+    .InputNumber.vertical > .Input__area > input .Input__left, .InputNumber:not(.vertical) .Input__left, .InputNumber.vertical > .Input__area > input .Input__right, .InputNumber:not(.vertical) .Input__right,
     .Input .Input__left,
     .Input .Input__right {
       display: flex;
       justify-content: center;
       align-items: center; }
-    .InputNumber.vertical > input .Input__left, .InputNumber:not(.vertical) .Input__left,
+    .InputNumber.vertical > .Input__area > input .Input__left, .InputNumber:not(.vertical) .Input__left,
     .Input .Input__left {
       margin-right: 6px; }
-    .InputNumber.vertical > input .Input__right, .InputNumber:not(.vertical) .Input__right,
+    .InputNumber.vertical > .Input__area > input .Input__right, .InputNumber:not(.vertical) .Input__right,
     .Input .Input__right {
       margin-left: 6px; }
-    .window-inactive .InputNumber.vertical > input.flat, .InputNumber.vertical > input.flat, .flat.InputNumber:not(.vertical),
+    .InputNumber.vertical > .Input__area > input.flat, .flat.InputNumber:not(.vertical),
     .Input.flat:focus-within, .window-inactive .Input.flat,
     .Input.flat:disabled, .window-inactive .Input.flat:disabled,
     .Input.flat {
@@ -417,70 +437,70 @@ headerbar .subtitle, .InputNumber.vertical > input > .Input__area > input::place
       background-color: transparent;
       border-color: transparent;
       border-radius: 0; }
-    .InputNumber.vertical > input:focus-within > .Input__area > input::placeholder, .InputNumber:focus-within:not(.vertical) > .Input__area > input::placeholder,
+    .InputNumber.vertical > .Input__area > input:focus-within > .Input__area > input::placeholder, .InputNumber:focus-within:not(.vertical) > .Input__area > input::placeholder,
     .Input:focus-within > .Input__area > input::placeholder {
       opacity: 0;
       /* We hide placeholders on focus */ }
-    .InputNumber.vertical > input:disabled, .InputNumber:disabled:not(.vertical), .InputNumber.vertical > input.disabled, .disabled.InputNumber:not(.vertical),
+    .InputNumber.vertical > .Input__area > input:disabled, .InputNumber:disabled:not(.vertical), .InputNumber.vertical > .Input__area > input.disabled, .disabled.InputNumber:not(.vertical),
     .Input:disabled,
     .Input.disabled {
       color: #929595;
       border-color: #cdc7c2;
       background-color: #faf9f8;
       box-shadow: none; }
-      .InputNumber.vertical > input:disabled .Icon, .InputNumber:disabled:not(.vertical) .Icon, .InputNumber.vertical > input.disabled .Icon, .disabled.InputNumber:not(.vertical) .Icon,
+      .InputNumber.vertical > .Input__area > input:disabled .Icon, .InputNumber:disabled:not(.vertical) .Icon, .InputNumber.vertical > .Input__area > input.disabled .Icon, .disabled.InputNumber:not(.vertical) .Icon,
       .Input:disabled .Icon,
       .Input.disabled .Icon {
         opacity: 0.7; }
-    .InputNumber.vertical > input.error, .error.InputNumber:not(.vertical),
+    .InputNumber.vertical > .Input__area > input.error, .error.InputNumber:not(.vertical),
     .Input.error {
       border-color: #cc0000; }
-      .InputNumber.vertical > input.error, .error.InputNumber:not(.vertical),
+      .InputNumber.vertical > .Input__area > input.error, .error.InputNumber:not(.vertical),
       .Input.error {
         outline: 0 solid transparent;
         outline-offset: 4px; }
-      .InputNumber.vertical > input.error:focus-within, .error.InputNumber:focus-within:not(.vertical),
+      .InputNumber.vertical > .Input__area > input.error:focus-within, .error.InputNumber:focus-within:not(.vertical),
       .Input.error:focus-within {
         outline-color: rgba(204, 0, 0, 0.5);
         outline-width: 2px;
         outline-offset: -2px; }
-      .InputNumber.vertical > input.error input, .error.InputNumber:not(.vertical) input,
+      .InputNumber.vertical > .Input__area > input.error input, .error.InputNumber:not(.vertical) input,
       .Input.error input {
         color: #ac0a0b; }
-        .InputNumber.vertical > input.error input::selection, .error.InputNumber:not(.vertical) input::selection,
+        .InputNumber.vertical > .Input__area > input.error input::selection, .error.InputNumber:not(.vertical) input::selection,
         .Input.error input::selection {
           background-color: #cc0000; }
-    .InputNumber.vertical > input.warning, .warning.InputNumber:not(.vertical),
+    .InputNumber.vertical > .Input__area > input.warning, .warning.InputNumber:not(.vertical),
     .Input.warning {
       border-color: #f57900; }
-      .InputNumber.vertical > input.warning, .warning.InputNumber:not(.vertical),
+      .InputNumber.vertical > .Input__area > input.warning, .warning.InputNumber:not(.vertical),
       .Input.warning {
         outline: 0 solid transparent;
         outline-offset: 4px; }
-      .InputNumber.vertical > input.warning:focus-within, .warning.InputNumber:focus-within:not(.vertical),
+      .InputNumber.vertical > .Input__area > input.warning:focus-within, .warning.InputNumber:focus-within:not(.vertical),
       .Input.warning:focus-within {
         outline-color: rgba(245, 121, 0, 0.5);
         outline-width: 2px;
         outline-offset: -2px; }
-      .InputNumber.vertical > input.warning input, .warning.InputNumber:not(.vertical) input,
+      .InputNumber.vertical > .Input__area > input.warning input, .warning.InputNumber:not(.vertical) input,
       .Input.warning input {
         color: #cd6b0b; }
-        .InputNumber.vertical > input.warning input::selection, .warning.InputNumber:not(.vertical) input::selection,
+        .InputNumber.vertical > .Input__area > input.warning input::selection, .warning.InputNumber:not(.vertical) input::selection,
         .Input.warning input::selection {
           background-color: #f57900; }
-    .InputNumber.vertical > input .Icon, .InputNumber:not(.vertical) .Icon,
-    .Input .Icon {
+    .InputNumber.vertical > .Input__area > input *:not(.InputNumber__button) .Icon, .InputNumber:not(.vertical) *:not(.InputNumber__button) .Icon,
+    .Input *:not(.InputNumber__button) .Icon {
       --icon-color: #585d5e; }
-      .InputNumber.vertical > input .Icon:hover, .InputNumber:not(.vertical) .Icon:hover,
-      .Input .Icon:hover {
+      .InputNumber.vertical > .Input__area > input *:not(.InputNumber__button) .Icon:hover, .InputNumber:not(.vertical) *:not(.InputNumber__button) .Icon:hover,
+      .Input *:not(.InputNumber__button) .Icon:hover {
         --icon-color: #2e3436; }
-      .InputNumber.vertical > input .Icon:active, .InputNumber:not(.vertical) .Icon:active,
-      .Input .Icon:active {
+      .InputNumber.vertical > .Input__area > input *:not(.InputNumber__button) .Icon:active, .InputNumber:not(.vertical) *:not(.InputNumber__button) .Icon:active,
+      .Input *:not(.InputNumber__button) .Icon:active {
         --icon-color: #3584e4; }
-    .dnd-active .InputNumber.vertical > input, .dnd-active .InputNumber:not(.vertical), .dnd-active .Input:focus-within, .dnd-active .Input {
+    .dnd-active .InputNumber.vertical > .Input__area > input, .dnd-active .InputNumber:not(.vertical), .dnd-active .Input:focus-within, .dnd-active .Input {
       border-color: #2ec27e;
       box-shadow: inset 0 0 0 1px #2ec27e; }
-    .osd .InputNumber.vertical > input, .osd .InputNumber:not(.vertical), .osd .Input {
+    .osd .InputNumber.vertical > .Input__area > input, .osd .InputNumber:not(.vertical), .osd .Input {
       color: white;
       border-color: rgba(0, 0, 0, 0.7);
       background-color: rgba(0, 0, 0, 0.5);
@@ -488,14 +508,14 @@ headerbar .subtitle, .InputNumber.vertical > input > .Input__area > input::place
       box-shadow: none;
       text-shadow: 0 1px black;
       --icon-shadow: 0 1px black; }
-      .osd .InputNumber.vertical > input:focus-within, .osd .InputNumber:focus-within:not(.vertical), .osd .Input:focus-within {
+      .osd .InputNumber.vertical > .Input__area > input:focus-within, .osd .InputNumber:focus-within:not(.vertical), .osd .Input:focus-within {
         color: white;
         border-color: #3584e4;
         background-color: rgba(0, 0, 0, 0.5);
         background-clip: padding-box;
         text-shadow: 0 1px black;
         --icon-shadow: 0 1px black; }
-      .osd .InputNumber.vertical > input:disabled, .osd .InputNumber:disabled:not(.vertical), .osd .Input:disabled {
+      .osd .InputNumber.vertical > .Input__area > input:disabled, .osd .InputNumber:disabled:not(.vertical), .osd .Input:disabled {
         color: #919190;
         border-color: rgba(0, 0, 0, 0.7);
         background-color: rgba(71, 71, 71, 0.5);
@@ -503,7 +523,7 @@ headerbar .subtitle, .InputNumber.vertical > input > .Input__area > input::place
         box-shadow: none;
         text-shadow: none;
         --icon-shadow: none; }
-  .InputNumber.vertical > input .Input__progress, .InputNumber:not(.vertical) .Input__progress,
+  .InputNumber.vertical > .Input__area > input .Input__progress, .InputNumber:not(.vertical) .Input__progress,
   .Input .Input__progress {
     position: absolute;
     display: inline-block;
@@ -512,7 +532,7 @@ headerbar .subtitle, .InputNumber.vertical > input > .Input__area > input::place
     height: calc(100% - 1px);
     top: 0px;
     left: var(--input-padding); }
-    .InputNumber.vertical > input .Input__progress .Input__progress__bar, .InputNumber:not(.vertical) .Input__progress .Input__progress__bar,
+    .InputNumber.vertical > .Input__area > input .Input__progress .Input__progress__bar, .InputNumber:not(.vertical) .Input__progress .Input__progress__bar,
     .Input .Input__progress .Input__progress__bar {
       display: inline-block;
       width: 100%;
@@ -520,53 +540,53 @@ headerbar .subtitle, .InputNumber.vertical > input > .Input__area > input::place
       border-width: 0 0 2px;
       border-color: #3584e4;
       border-style: solid; }
-    .InputNumber.vertical > input .Input__progress.undeterminate, .InputNumber:not(.vertical) .Input__progress.undeterminate,
+    .InputNumber.vertical > .Input__area > input .Input__progress.undeterminate, .InputNumber:not(.vertical) .Input__progress.undeterminate,
     .Input .Input__progress.undeterminate {
       height: calc(100% - 1px);
       width: var(--progress-undeterminate-width);
       animation: move_along_width 2.5s infinite; }
-  .InputNumber.vertical.linked:not(.vertical) > input:not(:first-child), .linked:not(.vertical) > .InputNumber:not(:first-child):not(.vertical), .linked:not(.vertical) > .Input:not(:first-child) {
+  .InputNumber.vertical > .Input__area.linked:not(.vertical) > input:not(:first-child), .linked:not(.vertical) > .InputNumber:not(:first-child):not(.vertical), .linked:not(.vertical) > .Input:not(:first-child) {
     border-top-left-radius: 0;
     border-bottom-left-radius: 0; }
-  .InputNumber.vertical.linked:not(.vertical) > input:not(:last-child), .linked:not(.vertical) > .InputNumber:not(:last-child):not(.vertical), .linked:not(.vertical) > .Input:not(:last-child) {
+  .InputNumber.vertical > .Input__area.linked:not(.vertical) > input:not(:last-child), .linked:not(.vertical) > .InputNumber:not(:last-child):not(.vertical), .linked:not(.vertical) > .Input:not(:last-child) {
     border-right-style: none;
     border-top-right-radius: 0;
     border-bottom-right-radius: 0; }
-  .InputNumber.vertical.linked > input:not(:first-child), .linked.vertical > .InputNumber:not(:first-child):not(.vertical), .linked.vertical > .Input:not(:first-child) {
+  .InputNumber.vertical > .Input__area.linked.vertical > input:not(:first-child), .linked.vertical > .InputNumber:not(:first-child):not(.vertical), .linked.vertical > .Input:not(:first-child) {
     border-top-left-radius: 0;
     border-top-right-radius: 0; }
-  .InputNumber.vertical.linked > input:not(:last-child), .linked.vertical > .InputNumber:not(:last-child):not(.vertical), .linked.vertical > .Input:not(:last-child) {
+  .InputNumber.vertical > .Input__area.linked.vertical > input:not(:last-child), .linked.vertical > .InputNumber:not(:last-child):not(.vertical), .linked.vertical > .Input:not(:last-child) {
     border-bottom-style: none;
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0; }
-  .InputNumber.vertical.linked > input:not(:disabled) + entry:not(:disabled), .linked.vertical > .InputNumber:not(:disabled):not(.vertical) + entry:not(:disabled), .InputNumber.vertical.linked > input:not(:disabled) + input:not(:disabled), .InputNumber.vertical.linked > .InputNumber:not(:disabled):not(.vertical) + input:not(:disabled), .InputNumber.vertical.linked > input:not(:disabled) + .InputNumber:not(:disabled):not(.vertical), .linked.vertical > .InputNumber:not(:disabled):not(.vertical) + .InputNumber:not(:disabled):not(.vertical), .linked.vertical > .Input:not(:disabled) + entry:not(:disabled), .InputNumber.vertical.linked > .Input:not(:disabled) + input:not(:disabled), .linked.vertical > .Input:not(:disabled) + .InputNumber:not(:disabled):not(.vertical) {
+  .InputNumber.vertical > .Input__area.linked.vertical > input:not(:disabled) + entry:not(:disabled), .linked.vertical > .InputNumber:not(:disabled):not(.vertical) + entry:not(:disabled), .InputNumber.vertical > .Input__area.linked.vertical > input:not(:disabled) + input:not(:disabled), .InputNumber.vertical > .Input__area.linked.vertical > .InputNumber:not(:disabled):not(.vertical) + input:not(:disabled), .InputNumber.vertical > .Input__area.linked.vertical > input:not(:disabled) + .InputNumber:not(:disabled):not(.vertical), .linked.vertical > .InputNumber:not(:disabled):not(.vertical) + .InputNumber:not(:disabled):not(.vertical), .linked.vertical > .Input:not(:disabled) + entry:not(:disabled), .InputNumber.vertical > .Input__area.linked.vertical > .Input:not(:disabled) + input:not(:disabled), .linked.vertical > .Input:not(:disabled) + .InputNumber:not(:disabled):not(.vertical) {
     border-top-color: #f0eeed; }
-  .InputNumber.vertical.linked > input:disabled + input:disabled, .InputNumber.vertical.linked > .InputNumber:disabled:not(.vertical) + input:disabled, .InputNumber.vertical.linked > input:disabled + .InputNumber:disabled:not(.vertical), .linked.vertical > .InputNumber:disabled:not(.vertical) + .InputNumber:disabled:not(.vertical), .InputNumber.vertical.linked > input:disabled + entry:disabled, .linked.vertical > .InputNumber:disabled:not(.vertical) + entry:disabled, .InputNumber.vertical.linked > .Input:disabled + input:disabled, .linked.vertical > .Input:disabled + .InputNumber:disabled:not(.vertical), .linked.vertical > .Input:disabled + entry:disabled {
+  .InputNumber.vertical > .Input__area.linked.vertical > input:disabled + input:disabled, .InputNumber.vertical > .Input__area.linked.vertical > .InputNumber:disabled:not(.vertical) + input:disabled, .InputNumber.vertical > .Input__area.linked.vertical > input:disabled + .InputNumber:disabled:not(.vertical), .linked.vertical > .InputNumber:disabled:not(.vertical) + .InputNumber:disabled:not(.vertical), .InputNumber.vertical > .Input__area.linked.vertical > input:disabled + entry:disabled, .linked.vertical > .InputNumber:disabled:not(.vertical) + entry:disabled, .InputNumber.vertical > .Input__area.linked.vertical > .Input:disabled + input:disabled, .linked.vertical > .Input:disabled + .InputNumber:disabled:not(.vertical), .linked.vertical > .Input:disabled + entry:disabled {
     border-top-color: #f0eeed; }
-  .InputNumber.vertical.linked > input + input.dnd-active:not(:only-child), .InputNumber.vertical.linked > .InputNumber:not(.vertical) + input.dnd-active:not(:only-child), .InputNumber.vertical.linked > input + .dnd-active.InputNumber:not(:only-child):not(.vertical), .linked.vertical > .InputNumber:not(.vertical) + .dnd-active.InputNumber:not(:only-child):not(.vertical),
-  .InputNumber.vertical.linked > input + entry.dnd-active:not(:only-child),
-  .linked.vertical > .InputNumber:not(.vertical) + entry.dnd-active:not(:only-child), .InputNumber.vertical.linked > .Input + input.dnd-active:not(:only-child), .linked.vertical > .Input + .dnd-active.InputNumber:not(:only-child):not(.vertical),
+  .InputNumber.vertical > .Input__area.linked.vertical > input + input.dnd-active:not(:only-child), .InputNumber.vertical > .Input__area.linked.vertical > .InputNumber:not(.vertical) + input.dnd-active:not(:only-child), .InputNumber.vertical > .Input__area.linked.vertical > input + .dnd-active.InputNumber:not(:only-child):not(.vertical), .linked.vertical > .InputNumber:not(.vertical) + .dnd-active.InputNumber:not(:only-child):not(.vertical),
+  .InputNumber.vertical > .Input__area.linked.vertical > input + entry.dnd-active:not(:only-child),
+  .linked.vertical > .InputNumber:not(.vertical) + entry.dnd-active:not(:only-child), .InputNumber.vertical > .Input__area.linked.vertical > .Input + input.dnd-active:not(:only-child), .linked.vertical > .Input + .dnd-active.InputNumber:not(:only-child):not(.vertical),
   .linked.vertical > .Input + entry.dnd-active:not(:only-child) {
     border-top-color: #2ec27e; }
-  .InputNumber.vertical.linked > input.dnd-active:not(:only-child) + input, .InputNumber.vertical.linked > .dnd-active.InputNumber:not(:only-child):not(.vertical) + input, .InputNumber.vertical.linked > input.dnd-active:not(:only-child) + .InputNumber:not(.vertical), .linked.vertical > .dnd-active.InputNumber:not(:only-child):not(.vertical) + .InputNumber:not(.vertical),
-  .InputNumber.vertical.linked > input.dnd-active:not(:only-child) + entry,
+  .InputNumber.vertical > .Input__area.linked.vertical > input.dnd-active:not(:only-child) + input, .InputNumber.vertical > .Input__area.linked.vertical > .dnd-active.InputNumber:not(:only-child):not(.vertical) + input, .InputNumber.vertical > .Input__area.linked.vertical > input.dnd-active:not(:only-child) + .InputNumber:not(.vertical), .linked.vertical > .dnd-active.InputNumber:not(:only-child):not(.vertical) + .InputNumber:not(.vertical),
+  .InputNumber.vertical > .Input__area.linked.vertical > input.dnd-active:not(:only-child) + entry,
   .linked.vertical > .dnd-active.InputNumber:not(:only-child):not(.vertical) + entry,
-  .InputNumber.vertical.linked > input.dnd-active:not(:only-child) + .Input,
+  .InputNumber.vertical > .Input__area.linked.vertical > input.dnd-active:not(:only-child) + .Input,
   .linked.vertical > .dnd-active.InputNumber:not(:only-child):not(.vertical) + .Input,
-  .InputNumber.vertical.linked > input.dnd-active:not(:only-child) + .Button,
+  .InputNumber.vertical > .Input__area.linked.vertical > input.dnd-active:not(:only-child) + .Button,
   .linked.vertical > .dnd-active.InputNumber:not(:only-child):not(.vertical) + .Button,
-  .InputNumber.vertical.linked > input.dnd-active:not(:only-child) + menubutton > .Button,
+  .InputNumber.vertical > .Input__area.linked.vertical > input.dnd-active:not(:only-child) + menubutton > .Button,
   .linked.vertical > .dnd-active.InputNumber:not(:only-child):not(.vertical) + menubutton > .Button,
-  .InputNumber.vertical.linked > input.dnd-active:not(:only-child) + .Dropdown > .Button,
+  .InputNumber.vertical > .Input__area.linked.vertical > input.dnd-active:not(:only-child) + .Dropdown > .Button,
   .linked.vertical > .dnd-active.InputNumber:not(:only-child):not(.vertical) + .Dropdown > .Button,
-  .InputNumber.vertical.linked > input.dnd-active:not(:only-child) + colorbutton > .Button,
+  .InputNumber.vertical > .Input__area.linked.vertical > input.dnd-active:not(:only-child) + colorbutton > .Button,
   .linked.vertical > .dnd-active.InputNumber:not(:only-child):not(.vertical) + colorbutton > .Button,
-  .InputNumber.vertical.linked > input.dnd-active:not(:only-child) + fontbutton > .Button,
+  .InputNumber.vertical > .Input__area.linked.vertical > input.dnd-active:not(:only-child) + fontbutton > .Button,
   .linked.vertical > .dnd-active.InputNumber:not(:only-child):not(.vertical) + fontbutton > .Button,
-  .InputNumber.vertical.linked > input.dnd-active:not(:only-child) + filechooserbutton > .Button,
+  .InputNumber.vertical > .Input__area.linked.vertical > input.dnd-active:not(:only-child) + filechooserbutton > .Button,
   .linked.vertical > .dnd-active.InputNumber:not(:only-child):not(.vertical) + filechooserbutton > .Button,
-  .InputNumber.vertical.linked > input.dnd-active:not(:only-child) + combobox > box > .Button.combo,
-  .linked.vertical > .dnd-active.InputNumber:not(:only-child):not(.vertical) + combobox > box > .Button.combo, .InputNumber.vertical.linked > .Input.dnd-active:not(:only-child) + input, .linked.vertical > .Input.dnd-active:not(:only-child) + .InputNumber:not(.vertical),
+  .InputNumber.vertical > .Input__area.linked.vertical > input.dnd-active:not(:only-child) + combobox > box > .Button.combo,
+  .linked.vertical > .dnd-active.InputNumber:not(:only-child):not(.vertical) + combobox > box > .Button.combo, .InputNumber.vertical > .Input__area.linked.vertical > .Input.dnd-active:not(:only-child) + input, .linked.vertical > .Input.dnd-active:not(:only-child) + .InputNumber:not(.vertical),
   .linked.vertical > .Input.dnd-active:not(:only-child) + entry,
   .linked.vertical > .Input.dnd-active:not(:only-child) + .Input,
   .linked.vertical > .Input.dnd-active:not(:only-child) + .Button,
@@ -610,7 +630,7 @@ editablelabel > stack > text {
   to {
     background-image: radial-gradient(farthest-side, #3584e4 95%, rgba(53, 132, 228, 0)); } }
 
-notebook > header > tabs > arrow, windowcontrols button,
+notebook > header > tabs > arrow, .control-buttons button,
 .Button {
   position: relative;
   display: inline-flex;
@@ -629,13 +649,13 @@ notebook > header > tabs > arrow, windowcontrols button,
   border-bottom-color: #bfb8b1;
   background-color: #f6f5f4;
   box-shadow: inset 0 1px white, 0 1px 2px rgba(0, 0, 0, 0.07); }
-  notebook > header > tabs > arrow, windowcontrols button, notebook > header > tabs > arrow > .Label, windowcontrols button > .Label,
+  notebook > header > tabs > arrow, .control-buttons button, notebook > header > tabs > arrow > .Label, .control-buttons button > .Label,
   .Button,
   .Button > .Label {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap; }
-  notebook > header > tabs > arrow::before, windowcontrols button::before,
+  notebook > header > tabs > arrow::before, .control-buttons button::before,
   .Button::before {
     content: ' ';
     position: absolute;
@@ -646,16 +666,16 @@ notebook > header > tabs > arrow, windowcontrols button,
     left: 0px;
     background: linear-gradient(to top, rgba(0, 0, 0, 0.03), transparent);
     transition: all 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94); }
-  notebook > header > tabs > arrow, windowcontrols button,
+  notebook > header > tabs > arrow, .control-buttons button,
   .Button {
     outline: 0 solid transparent;
     outline-offset: 4px; }
-  notebook > header > tabs > arrow:focus:focus-visible, windowcontrols button:focus:focus-visible,
+  notebook > header > tabs > arrow:focus:focus-visible, .control-buttons button:focus:focus-visible,
   .Button:focus:focus-visible {
     outline-color: rgba(53, 132, 228, 0.5);
     outline-width: 2px;
     outline-offset: -2px; }
-  notebook > header > tabs > arrow.hover:not(:disabled):not(.disabled), windowcontrols button.hover:not(:disabled):not(.disabled), notebook > header > tabs > arrow:not(:disabled):not(.disabled):hover, windowcontrols button:not(:disabled):not(.disabled):hover,
+  notebook > header > tabs > arrow.hover:not(:disabled):not(.disabled), .control-buttons button.hover:not(:disabled):not(.disabled), notebook > header > tabs > arrow:not(:disabled):not(.disabled):hover, .control-buttons button:not(:disabled):not(.disabled):hover,
   .Button.hover:not(:disabled):not(.disabled),
   .Button:not(:disabled):not(.disabled):hover {
     color: #2e3436;
@@ -664,11 +684,11 @@ notebook > header > tabs > arrow, windowcontrols button,
     background-color: #f9f9f8;
     box-shadow: inset 0 1px #f4f2f1, 0 1px 2px rgba(0, 0, 0, 0.07);
     -gtk-icon-filter: brightness(1.2); }
-    notebook > header > tabs > arrow.hover:not(:disabled):not(.disabled)::before, windowcontrols button.hover:not(:disabled):not(.disabled)::before, notebook > header > tabs > arrow:not(:disabled):not(.disabled):hover::before, windowcontrols button:not(:disabled):not(.disabled):hover::before,
+    notebook > header > tabs > arrow.hover:not(:disabled):not(.disabled)::before, .control-buttons button.hover:not(:disabled):not(.disabled)::before, notebook > header > tabs > arrow:not(:disabled):not(.disabled):hover::before, .control-buttons button:not(:disabled):not(.disabled):hover::before,
     .Button.hover:not(:disabled):not(.disabled)::before,
     .Button:not(:disabled):not(.disabled):hover::before {
       opacity: 0; }
-  notebook > header > tabs > arrow.active:not(:disabled):not(.disabled), windowcontrols button.active:not(:disabled):not(.disabled), notebook > header > tabs > arrow:not(:disabled):not(.disabled):active, windowcontrols button:not(:disabled):not(.disabled):active, notebook > header > tabs > arrow:not(:disabled):not(.disabled):checked, windowcontrols button:not(:disabled):not(.disabled):checked,
+  notebook > header > tabs > arrow.active:not(:disabled):not(.disabled), .control-buttons button.active:not(:disabled):not(.disabled), notebook > header > tabs > arrow:not(:disabled):not(.disabled):active, .control-buttons button:not(:disabled):not(.disabled):active, notebook > header > tabs > arrow:not(:disabled):not(.disabled):checked, .control-buttons button:not(:disabled):not(.disabled):checked,
   .Button.active:not(:disabled):not(.disabled),
   .Button:not(:disabled):not(.disabled):active,
   .Button:not(:disabled):not(.disabled):checked {
@@ -679,12 +699,12 @@ notebook > header > tabs > arrow, windowcontrols button,
     text-shadow: none;
     --icon-shadow: none;
     transition-duration: 50ms; }
-    notebook > header > tabs > arrow.active:not(:disabled):not(.disabled)::before, windowcontrols button.active:not(:disabled):not(.disabled)::before, notebook > header > tabs > arrow:not(:disabled):not(.disabled):active::before, windowcontrols button:not(:disabled):not(.disabled):active::before, notebook > header > tabs > arrow:not(:disabled):not(.disabled):checked::before, windowcontrols button:not(:disabled):not(.disabled):checked::before,
+    notebook > header > tabs > arrow.active:not(:disabled):not(.disabled)::before, .control-buttons button.active:not(:disabled):not(.disabled)::before, notebook > header > tabs > arrow:not(:disabled):not(.disabled):active::before, .control-buttons button:not(:disabled):not(.disabled):active::before, notebook > header > tabs > arrow:not(:disabled):not(.disabled):checked::before, .control-buttons button:not(:disabled):not(.disabled):checked::before,
     .Button.active:not(:disabled):not(.disabled)::before,
     .Button:not(:disabled):not(.disabled):active::before,
     .Button:not(:disabled):not(.disabled):checked::before {
       opacity: 0; }
-  .window-inactive notebook > header > tabs > arrow, .window-inactive windowcontrols button, windowcontrols .window-inactive button, .window-inactive .Button.flat, .window-inactive .Button {
+  .window-inactive notebook > header > tabs > arrow, .window-inactive .control-buttons button, .control-buttons .window-inactive button, .window-inactive .Button.flat, .window-inactive .Button {
     color: #929595;
     border-color: #d5d0cc;
     background-color: #f6f5f4;
@@ -693,32 +713,32 @@ notebook > header > tabs > arrow, windowcontrols button,
     box-shadow: inset 0 1px rgba(255, 255, 255, 0);
     transition: 200ms ease-out;
     -gtk-icon-filter: none; }
-    .window-inactive notebook > header > tabs > arrow::before, .window-inactive windowcontrols button::before, windowcontrols .window-inactive button::before, .window-inactive .Button.flat::before, .window-inactive .Button::before {
+    .window-inactive notebook > header > tabs > arrow::before, .window-inactive .control-buttons button::before, .control-buttons .window-inactive button::before, .window-inactive .Button.flat::before, .window-inactive .Button::before {
       opacity: 0; }
-    .window-inactive notebook > header > tabs > arrow:active, .window-inactive windowcontrols button:active, windowcontrols .window-inactive button:active, .window-inactive notebook > header > tabs > arrow:checked, .window-inactive windowcontrols button:checked, windowcontrols .window-inactive button:checked, .window-inactive .Button.flat:active, .window-inactive .Button.flat:checked, .window-inactive .Button:active, .window-inactive .Button:checked {
+    .window-inactive notebook > header > tabs > arrow:active, .window-inactive .control-buttons button:active, .control-buttons .window-inactive button:active, .window-inactive notebook > header > tabs > arrow:checked, .window-inactive .control-buttons button:checked, .control-buttons .window-inactive button:checked, .window-inactive .Button.flat:active, .window-inactive .Button.flat:checked, .window-inactive .Button:active, .window-inactive .Button:checked {
       color: #929595;
       border-color: #d5d0cc;
       background-color: #e4e4e0;
       box-shadow: inset 0 1px rgba(255, 255, 255, 0); }
-      .window-inactive notebook > header > tabs > arrow:active::before, .window-inactive windowcontrols button:active::before, windowcontrols .window-inactive button:active::before, .window-inactive notebook > header > tabs > arrow:checked::before, .window-inactive windowcontrols button:checked::before, windowcontrols .window-inactive button:checked::before, .window-inactive .Button.flat:active::before, .window-inactive .Button.flat:checked::before, .window-inactive .Button:active::before, .window-inactive .Button:checked::before {
+      .window-inactive notebook > header > tabs > arrow:active::before, .window-inactive .control-buttons button:active::before, .control-buttons .window-inactive button:active::before, .window-inactive notebook > header > tabs > arrow:checked::before, .window-inactive .control-buttons button:checked::before, .control-buttons .window-inactive button:checked::before, .window-inactive .Button.flat:active::before, .window-inactive .Button.flat:checked::before, .window-inactive .Button:active::before, .window-inactive .Button:checked::before {
         opacity: 0; }
-    .window-inactive notebook > header > tabs > arrow:disabled, .window-inactive windowcontrols button:disabled, windowcontrols .window-inactive button:disabled, .window-inactive .Button.flat:disabled, .window-inactive .Button:disabled {
+    .window-inactive notebook > header > tabs > arrow:disabled, .window-inactive .control-buttons button:disabled, .control-buttons .window-inactive button:disabled, .window-inactive .Button.flat:disabled, .window-inactive .Button:disabled {
       color: #d4cfca;
       border-color: #d5d0cc;
       background-color: #faf9f8;
       text-shadow: none;
       --icon-shadow: none;
       box-shadow: inset 0 1px rgba(255, 255, 255, 0); }
-      .window-inactive notebook > header > tabs > arrow:disabled::before, .window-inactive windowcontrols button:disabled::before, windowcontrols .window-inactive button:disabled::before, .window-inactive .Button.flat:disabled::before, .window-inactive .Button:disabled::before {
+      .window-inactive notebook > header > tabs > arrow:disabled::before, .window-inactive .control-buttons button:disabled::before, .control-buttons .window-inactive button:disabled::before, .window-inactive .Button.flat:disabled::before, .window-inactive .Button:disabled::before {
         opacity: 0; }
-      .window-inactive notebook > header > tabs > arrow:disabled:active, .window-inactive windowcontrols button:disabled:active, windowcontrols .window-inactive button:disabled:active, .window-inactive notebook > header > tabs > arrow:disabled:checked, .window-inactive windowcontrols button:disabled:checked, windowcontrols .window-inactive button:disabled:checked, .window-inactive .Button.flat:disabled:active, .window-inactive .Button.flat:disabled:checked, .window-inactive .Button:disabled:active, .window-inactive .Button:disabled:checked {
+      .window-inactive notebook > header > tabs > arrow:disabled:active, .window-inactive .control-buttons button:disabled:active, .control-buttons .window-inactive button:disabled:active, .window-inactive notebook > header > tabs > arrow:disabled:checked, .window-inactive .control-buttons button:disabled:checked, .control-buttons .window-inactive button:disabled:checked, .window-inactive .Button.flat:disabled:active, .window-inactive .Button.flat:disabled:checked, .window-inactive .Button:disabled:active, .window-inactive .Button:disabled:checked {
         color: #d4cfca;
         border-color: #d5d0cc;
         background-color: #e4e4e0;
         box-shadow: inset 0 1px rgba(255, 255, 255, 0); }
-        .window-inactive notebook > header > tabs > arrow:disabled:active::before, .window-inactive windowcontrols button:disabled:active::before, windowcontrols .window-inactive button:disabled:active::before, .window-inactive notebook > header > tabs > arrow:disabled:checked::before, .window-inactive windowcontrols button:disabled:checked::before, windowcontrols .window-inactive button:disabled:checked::before, .window-inactive .Button.flat:disabled:active::before, .window-inactive .Button.flat:disabled:checked::before, .window-inactive .Button:disabled:active::before, .window-inactive .Button:disabled:checked::before {
+        .window-inactive notebook > header > tabs > arrow:disabled:active::before, .window-inactive .control-buttons button:disabled:active::before, .control-buttons .window-inactive button:disabled:active::before, .window-inactive notebook > header > tabs > arrow:disabled:checked::before, .window-inactive .control-buttons button:disabled:checked::before, .control-buttons .window-inactive button:disabled:checked::before, .window-inactive .Button.flat:disabled:active::before, .window-inactive .Button.flat:disabled:checked::before, .window-inactive .Button:disabled:active::before, .window-inactive .Button:disabled:checked::before {
           opacity: 0; }
-  notebook > header > tabs > arrow:disabled, windowcontrols button:disabled, notebook > header > tabs > arrow.disabled, windowcontrols button.disabled,
+  notebook > header > tabs > arrow:disabled, .control-buttons button:disabled, notebook > header > tabs > arrow.disabled, .control-buttons button.disabled,
   .Button:disabled,
   .Button.disabled {
     color: #929595;
@@ -728,11 +748,11 @@ notebook > header > tabs > arrow, windowcontrols button,
     --icon-shadow: none;
     --icon-color: #929595;
     box-shadow: inset 0 1px rgba(255, 255, 255, 0); }
-    notebook > header > tabs > arrow:disabled::before, windowcontrols button:disabled::before, notebook > header > tabs > arrow.disabled::before, windowcontrols button.disabled::before,
+    notebook > header > tabs > arrow:disabled::before, .control-buttons button:disabled::before, notebook > header > tabs > arrow.disabled::before, .control-buttons button.disabled::before,
     .Button:disabled::before,
     .Button.disabled::before {
       opacity: 0; }
-    notebook > header > tabs > arrow.active:disabled, windowcontrols button.active:disabled, notebook > header > tabs > arrow:disabled:active, windowcontrols button:disabled:active, notebook > header > tabs > arrow:disabled:checked, windowcontrols button:disabled:checked, notebook > header > tabs > arrow.disabled.active, windowcontrols button.disabled.active, notebook > header > tabs > arrow.disabled:active, windowcontrols button.disabled:active, notebook > header > tabs > arrow.disabled:checked, windowcontrols button.disabled:checked,
+    notebook > header > tabs > arrow.active:disabled, .control-buttons button.active:disabled, notebook > header > tabs > arrow:disabled:active, .control-buttons button:disabled:active, notebook > header > tabs > arrow:disabled:checked, .control-buttons button:disabled:checked, notebook > header > tabs > arrow.disabled.active, .control-buttons button.disabled.active, notebook > header > tabs > arrow.disabled:active, .control-buttons button.disabled:active, notebook > header > tabs > arrow.disabled:checked, .control-buttons button.disabled:checked,
     .Button.active:disabled,
     .Button:disabled:active,
     .Button:disabled:checked,
@@ -743,7 +763,7 @@ notebook > header > tabs > arrow, windowcontrols button,
       border-color: #d5d0cc;
       background-color: #e4e4e0;
       box-shadow: inset 0 1px rgba(255, 255, 255, 0); }
-      notebook > header > tabs > arrow.active:disabled::before, windowcontrols button.active:disabled::before, notebook > header > tabs > arrow:disabled:active::before, windowcontrols button:disabled:active::before, notebook > header > tabs > arrow:disabled:checked::before, windowcontrols button:disabled:checked::before, notebook > header > tabs > arrow.disabled.active::before, windowcontrols button.disabled.active::before, notebook > header > tabs > arrow.disabled:active::before, windowcontrols button.disabled:active::before, notebook > header > tabs > arrow.disabled:checked::before, windowcontrols button.disabled:checked::before,
+      notebook > header > tabs > arrow.active:disabled::before, .control-buttons button.active:disabled::before, notebook > header > tabs > arrow:disabled:active::before, .control-buttons button:disabled:active::before, notebook > header > tabs > arrow:disabled:checked::before, .control-buttons button:disabled:checked::before, notebook > header > tabs > arrow.disabled.active::before, .control-buttons button.disabled.active::before, notebook > header > tabs > arrow.disabled:active::before, .control-buttons button.disabled:active::before, notebook > header > tabs > arrow.disabled:checked::before, .control-buttons button.disabled:checked::before,
       .Button.active:disabled::before,
       .Button:disabled:active::before,
       .Button:disabled:checked::before,
@@ -751,7 +771,7 @@ notebook > header > tabs > arrow, windowcontrols button,
       .Button.disabled:active::before,
       .Button.disabled:checked::before {
         opacity: 0; }
-  button.sidebar-button, notebook > header > tabs > arrow, windowcontrols button, notebook > header > tabs > arrow.flat,
+  button.sidebar-button, notebook > header > tabs > arrow, .control-buttons button, notebook > header > tabs > arrow.flat,
   .Button.flat {
     border-color: transparent;
     background-color: transparent;
@@ -759,10 +779,10 @@ notebook > header > tabs > arrow, windowcontrols button,
     text-shadow: none;
     --icon-shadow: none;
     transition: none; }
-    button.sidebar-button::before, notebook > header > tabs > arrow::before, windowcontrols button::before, notebook > header > tabs > arrow.flat::before,
+    button.sidebar-button::before, notebook > header > tabs > arrow::before, .control-buttons button::before, notebook > header > tabs > arrow.flat::before,
     .Button.flat::before {
       opacity: 0; }
-    button.sidebar-button.hover:not(:disabled):not(.disabled), notebook > header > tabs > arrow.hover:not(:disabled):not(.disabled), windowcontrols button.hover:not(:disabled):not(.disabled), button.sidebar-button:not(:disabled):not(.disabled):hover, notebook > header > tabs > arrow:not(:disabled):not(.disabled):hover, windowcontrols button:not(:disabled):not(.disabled):hover,
+    button.sidebar-button.hover:not(:disabled):not(.disabled), notebook > header > tabs > arrow.hover:not(:disabled):not(.disabled), .control-buttons button.hover:not(:disabled):not(.disabled), button.sidebar-button:not(:disabled):not(.disabled):hover, notebook > header > tabs > arrow:not(:disabled):not(.disabled):hover, .control-buttons button:not(:disabled):not(.disabled):hover,
     .Button.flat.hover:not(:disabled):not(.disabled),
     .Button.flat:not(:disabled):not(.disabled):hover {
       border-color: transparent;
@@ -771,11 +791,11 @@ notebook > header > tabs > arrow, windowcontrols button,
       background-color: #e4e1de;
       transition: all 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
       transition-duration: 500ms; }
-      button.sidebar-button.hover:not(:disabled):not(.disabled)::before, notebook > header > tabs > arrow.hover:not(:disabled):not(.disabled)::before, windowcontrols button.hover:not(:disabled):not(.disabled)::before, button.sidebar-button:not(:disabled):not(.disabled):hover::before, notebook > header > tabs > arrow:not(:disabled):not(.disabled):hover::before, windowcontrols button:not(:disabled):not(.disabled):hover::before,
+      button.sidebar-button.hover:not(:disabled):not(.disabled)::before, notebook > header > tabs > arrow.hover:not(:disabled):not(.disabled)::before, .control-buttons button.hover:not(:disabled):not(.disabled)::before, button.sidebar-button:not(:disabled):not(.disabled):hover::before, notebook > header > tabs > arrow:not(:disabled):not(.disabled):hover::before, .control-buttons button:not(:disabled):not(.disabled):hover::before,
       .Button.flat.hover:not(:disabled):not(.disabled)::before,
       .Button.flat:not(:disabled):not(.disabled):hover::before {
         opacity: 0; }
-    button.sidebar-button:not(:disabled):not(.disabled):active, notebook > header > tabs > arrow:not(:disabled):not(.disabled):active, windowcontrols button:not(:disabled):not(.disabled):active, button.sidebar-button:not(:disabled):not(.disabled):checked, notebook > header > tabs > arrow:not(:disabled):not(.disabled):checked, windowcontrols button:not(:disabled):not(.disabled):checked,
+    button.sidebar-button:not(:disabled):not(.disabled):active, notebook > header > tabs > arrow:not(:disabled):not(.disabled):active, .control-buttons button:not(:disabled):not(.disabled):active, button.sidebar-button:not(:disabled):not(.disabled):checked, notebook > header > tabs > arrow:not(:disabled):not(.disabled):checked, .control-buttons button:not(:disabled):not(.disabled):checked,
     .Button.flat:not(:disabled):not(.disabled):active,
     .Button.flat:not(:disabled):not(.disabled):checked {
       border-color: transparent;
@@ -783,11 +803,11 @@ notebook > header > tabs > arrow, windowcontrols button,
       text-shadow: none;
       background-color: #b1a9a0;
       transition: all 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94); }
-      button.sidebar-button:not(:disabled):not(.disabled):active::before, notebook > header > tabs > arrow:not(:disabled):not(.disabled):active::before, windowcontrols button:not(:disabled):not(.disabled):active::before, button.sidebar-button:not(:disabled):not(.disabled):checked::before, notebook > header > tabs > arrow:not(:disabled):not(.disabled):checked::before, windowcontrols button:not(:disabled):not(.disabled):checked::before,
+      button.sidebar-button:not(:disabled):not(.disabled):active::before, notebook > header > tabs > arrow:not(:disabled):not(.disabled):active::before, .control-buttons button:not(:disabled):not(.disabled):active::before, button.sidebar-button:not(:disabled):not(.disabled):checked::before, notebook > header > tabs > arrow:not(:disabled):not(.disabled):checked::before, .control-buttons button:not(:disabled):not(.disabled):checked::before,
       .Button.flat:not(:disabled):not(.disabled):active::before,
       .Button.flat:not(:disabled):not(.disabled):checked::before {
         opacity: 0; }
-    button.sidebar-button:backdrop, notebook > header > tabs > arrow:backdrop, windowcontrols button:backdrop, button.sidebar-button:disabled, notebook > header > tabs > arrow:disabled, windowcontrols button:disabled,
+    button.sidebar-button:backdrop, notebook > header > tabs > arrow:backdrop, .control-buttons button:backdrop, button.sidebar-button:disabled, notebook > header > tabs > arrow:disabled, .control-buttons button:disabled,
     .Button.flat:backdrop,
     .Button.flat:disabled,
     .Button.flat:backdrop:disabled {
@@ -796,29 +816,29 @@ notebook > header > tabs > arrow, windowcontrols button,
       box-shadow: inset 0 1px rgba(255, 255, 255, 0);
       text-shadow: none;
       --icon-shadow: none; }
-      button.sidebar-button:backdrop::before, notebook > header > tabs > arrow:backdrop::before, windowcontrols button:backdrop::before, button.sidebar-button:disabled::before, notebook > header > tabs > arrow:disabled::before, windowcontrols button:disabled::before,
+      button.sidebar-button:backdrop::before, notebook > header > tabs > arrow:backdrop::before, .control-buttons button:backdrop::before, button.sidebar-button:disabled::before, notebook > header > tabs > arrow:disabled::before, .control-buttons button:disabled::before,
       .Button.flat:backdrop::before,
       .Button.flat:disabled::before,
       .Button.flat:backdrop:disabled::before {
         opacity: 0; }
-  notebook > header > tabs > arrow.image-button, windowcontrols button.image-button,
+  notebook > header > tabs > arrow.image-button, .control-buttons button.image-button,
   .Button.image-button {
     min-width: 24px;
     padding-left: 5px;
     padding-right: 5px; }
-  notebook > header > tabs > arrow.text-button, windowcontrols button.text-button,
+  notebook > header > tabs > arrow.text-button, .control-buttons button.text-button,
   .Button.text-button {
     padding-left: 16px;
     padding-right: 16px; }
-  notebook > header > tabs > arrow.text-button.image-button, windowcontrols button.text-button.image-button,
+  notebook > header > tabs > arrow.text-button.image-button, .control-buttons button.text-button.image-button,
   .Button.text-button.image-button {
     padding-left: 8px;
     padding-right: 8px; }
-    notebook > header > tabs > arrow.text-button.image-button .Label, windowcontrols button.text-button.image-button .Label,
+    notebook > header > tabs > arrow.text-button.image-button .Label, .control-buttons button.text-button.image-button .Label,
     .Button.text-button.image-button .Label {
       padding-left: 8px;
       padding-right: 8px; }
-  notebook > header > tabs > arrow.dnd-active, windowcontrols button.dnd-active,
+  notebook > header > tabs > arrow.dnd-active, .control-buttons button.dnd-active,
   .Button.dnd-active {
     color: #2ec27e;
     border-color: #2ec27e;
@@ -1578,7 +1598,7 @@ input::-webkit-outer-spin-button {
     padding: 0;
     border-spacing: 0;
     /* :not here just to bump specificity above that of the list button styling */ }
-    .osd .InputNumber:not(.vertical) > input, .InputNumber:not(.vertical) > input {
+    .osd .InputNumber:not(.vertical) > .Input__area > input, .InputNumber:not(.vertical) > .Input__area > input {
       min-width: 28px;
       margin: 0;
       background: none;
@@ -1587,7 +1607,7 @@ input::-webkit-outer-spin-button {
       border-radius: 0;
       box-shadow: none;
       padding: 6px; }
-      .window-inactive .osd .InputNumber:not(.vertical) > input.disabled, .window-inactive .InputNumber:not(.vertical) > input.disabled, .window-inactive .osd .InputNumber:not(.vertical) > input:disabled, .window-inactive .InputNumber:not(.vertical) > input:disabled {
+      .window-inactive .InputNumber:not(.vertical) > .Input__area > input.disabled, .window-inactive .InputNumber:not(.vertical) > .Input__area > input:disabled {
         background-color: transparent; }
     .InputNumber:not(.vertical) > button.InputNumber__button.up:not(.flat),
     .InputNumber:not(.vertical) > button.InputNumber__button.down:not(.flat) {
@@ -1605,7 +1625,8 @@ input::-webkit-outer-spin-button {
       border-style: none none none solid;
       border-color: rgba(205, 199, 194, 0.3);
       border-radius: 0;
-      box-shadow: none; }
+      box-shadow: none;
+      transition: all 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94); }
       .InputNumber:not(.vertical) > button.InputNumber__button.up:not(.flat):dir(rtl),
       .InputNumber:not(.vertical) > button.InputNumber__button.down:not(.flat):dir(rtl) {
         border-style: none solid none none; }
@@ -1692,14 +1713,14 @@ input::-webkit-outer-spin-button {
     .InputNumber.vertical.dnd-active {
       border-color: transparent;
       box-shadow: none; }
-    .InputNumber.vertical > input {
+    .InputNumber.vertical > .Input__area > input {
       min-height: 32px;
       min-width: 32px;
       width: 100%;
       padding: 0;
       border-radius: 0;
       text-align: center; }
-      .InputNumber.vertical > input > block-cursor {
+      .InputNumber.vertical > .Input__area > input > block-cursor {
         color: #ffffff;
         background-color: black; }
     .InputNumber.vertical > button {
@@ -2044,137 +2065,144 @@ input::-webkit-outer-spin-button {
 /*****************
  * Title buttons *
  *****************/
-windowcontrols {
+.control-buttons {
   border-spacing: 6px; }
-  windowcontrols.start:not(.empty):dir(ltr), windowcontrols.end:not(.empty):dir(rtl) {
+  .control-buttons.start:not(.empty):dir(ltr), .control-buttons.end:not(.empty):dir(rtl) {
     margin-right: 7px; }
-  windowcontrols.start:not(.empty):dir(rtl), windowcontrols.end:not(.empty):dir(ltr) {
+  .control-buttons.start:not(.empty):dir(rtl), .control-buttons.end:not(.empty):dir(ltr) {
     margin-left: 7px; }
-  windowcontrols button {
+  .control-buttons button {
     border-radius: 9999px;
     padding: 6px;
     margin: 0 2px;
     min-width: 0;
     min-height: 0; }
-    windowcontrols button:hover {
-      border-color: transparent;
-      box-shadow: none;
-      text-shadow: none;
-      background-color: #d6d1cd; }
-      windowcontrols button:hover::before {
+    .control-buttons button:not(:disabled):not(.disabled):hover {
+      color: #2e3436;
+      border-color: #c4bdb6;
+      border-bottom-color: #ada39a;
+      background-color: #dedad7;
+      box-shadow: inset 0 1px #d8d4d0, 0 1px 2px rgba(0, 0, 0, 0.07); }
+      .control-buttons button:not(:disabled):not(.disabled):hover::before {
         opacity: 0; }
-    windowcontrols button:active, windowcontrols button:checked {
+    .control-buttons button:not(:disabled):not(.disabled):active, .control-buttons button:not(:disabled):not(.disabled):checked {
       border-color: transparent;
       box-shadow: none;
       text-shadow: none;
-      background-color: #a3998f; }
-      windowcontrols button:active::before, windowcontrols button:checked::before {
+      background-color: #968a7e; }
+      .control-buttons button:not(:disabled):not(.disabled):active::before, .control-buttons button:not(:disabled):not(.disabled):checked::before {
         opacity: 0; }
 
 /***************
  * Header bars *
  ***************/
-.titlebar:not(headerbar),
-headerbar {
+.titlebar:not(.HeaderBar),
+.HeaderBar {
   padding: 0 6px;
   min-height: 46px;
-  border-width: 0 0 1px;
+  border-width: 1px;
   border-style: solid;
   border-color: #bfb8b1;
-  border-radius: 0;
-  background: #dfdcd8 linear-gradient(to top, #dad6d2, #e1dedb);
-  box-shadow: inset 0 1px rgba(255, 255, 255, 0.8);
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  background: #f1f0ee linear-gradient(to top, #dfdcd8, #f4f2f1);
+  box-shadow: inset 0 1px rgba(255, 255, 255, 0.8), inset 0 -2px 2px rgba(0, 0, 0, 0.02);
   /* Darken switchbuttons for headerbars. issue #1588 */ }
-  .titlebar:backdrop:not(headerbar),
-  headerbar:backdrop {
+  .window-inactive .titlebar:not(.HeaderBar), .window-inactive .HeaderBar {
     border-color: #d5d0cc;
     background-color: #f6f5f4;
     background-image: none;
     box-shadow: inset 0 1px rgba(255, 255, 255, 0.8);
     transition: 200ms ease-out; }
-  .titlebar:not(headerbar) .title,
-  headerbar .title {
+  .titlebar:not(.HeaderBar) > .Box,
+  .HeaderBar > .Box {
+    min-height: 46px; }
+  .titlebar:not(.HeaderBar) .title,
+  .HeaderBar .title {
     padding-left: 12px;
     padding-right: 12px;
     font-weight: bold; }
-  .titlebar:not(headerbar) .subtitle,
-  headerbar .subtitle {
+  .titlebar:not(.HeaderBar) .title:not(:only-child),
+  .HeaderBar .title:not(:only-child) {
+    margin-bottom: 0.15em; }
+  .titlebar:not(.HeaderBar) .subtitle,
+  .HeaderBar .subtitle {
     font-size: smaller;
     padding-left: 12px;
     padding-right: 12px; }
-  .titlebar:not(headerbar) .StackSwitcher > button:checked,
-  .titlebar:not(headerbar) button.toggle:checked,
-  headerbar .StackSwitcher > button:checked,
-  headerbar button.toggle:checked {
+  .titlebar:not(.HeaderBar) .StackSwitcher > button:checked,
+  .titlebar:not(.HeaderBar) button.toggle:checked,
+  .HeaderBar .StackSwitcher > button:checked,
+  .HeaderBar button.toggle:checked {
     background: image(#cfcac4);
     border-color: #c6bfb9;
     border-top-color: #bab3ab; }
-    .titlebar:not(headerbar) .StackSwitcher > button:checked:backdrop,
-    .titlebar:not(headerbar) button.toggle:checked:backdrop,
-    headerbar .StackSwitcher > button:checked:backdrop,
-    headerbar button.toggle:checked:backdrop {
+    .titlebar:not(.HeaderBar) .StackSwitcher > button:checked:backdrop,
+    .titlebar:not(.HeaderBar) button.toggle:checked:backdrop,
+    .HeaderBar .StackSwitcher > button:checked:backdrop,
+    .HeaderBar button.toggle:checked:backdrop {
       color: #929595;
       border-color: #d5d0cc;
       background-color: #e4e4e0;
       box-shadow: inset 0 1px rgba(255, 255, 255, 0); }
-      .titlebar:not(headerbar) .StackSwitcher > button:checked:backdrop::before,
-      .titlebar:not(headerbar) button.toggle:checked:backdrop::before,
-      headerbar .StackSwitcher > button:checked:backdrop::before,
-      headerbar button.toggle:checked:backdrop::before {
+      .titlebar:not(.HeaderBar) .StackSwitcher > button:checked:backdrop::before,
+      .titlebar:not(.HeaderBar) button.toggle:checked:backdrop::before,
+      .HeaderBar .StackSwitcher > button:checked:backdrop::before,
+      .HeaderBar button.toggle:checked:backdrop::before {
         opacity: 0; }
-  .tiled .titlebar:not(headerbar), .tiled-top .titlebar:not(headerbar), .tiled-left .titlebar:not(headerbar), .tiled-right .titlebar:not(headerbar), .tiled-bottom .titlebar:not(headerbar), .maximized .titlebar:not(headerbar), .fullscreen .titlebar:not(headerbar), .tiled headerbar, .tiled-top headerbar, .tiled-left headerbar, .tiled-right headerbar, .tiled-bottom headerbar, .maximized headerbar, .fullscreen headerbar {
+  .tiled .titlebar:not(.HeaderBar), .tiled-top .titlebar:not(.HeaderBar), .tiled-left .titlebar:not(.HeaderBar), .tiled-right .titlebar:not(.HeaderBar), .tiled-bottom .titlebar:not(.HeaderBar), .maximized .titlebar:not(.HeaderBar), .fullscreen .titlebar:not(.HeaderBar), .tiled .HeaderBar, .tiled-top .HeaderBar, .tiled-left .HeaderBar, .tiled-right .HeaderBar, .tiled-bottom .HeaderBar, .maximized .HeaderBar, .fullscreen .HeaderBar {
     border-radius: 0; }
-  .default-decoration.titlebar:not(headerbar),
-  headerbar.default-decoration {
+  .default-decoration.titlebar:not(.HeaderBar),
+  .HeaderBar.default-decoration {
     min-height: 28px;
     padding: 4px; }
-    .default-decoration.titlebar:not(headerbar) windowcontrols button,
-    .default-decoration.titlebar:not(headerbar) windowcontrols menubutton,
-    headerbar.default-decoration windowcontrols button,
-    headerbar.default-decoration windowcontrols menubutton {
+    .default-decoration.titlebar:not(.HeaderBar) .control-buttons button,
+    .default-decoration.titlebar:not(.HeaderBar) .control-buttons menubutton,
+    .HeaderBar.default-decoration .control-buttons button,
+    .HeaderBar.default-decoration .control-buttons menubutton {
       min-height: 26px;
       min-width: 26px;
       margin: 0;
       padding: 0; }
-    .default-decoration.titlebar:not(headerbar) windowcontrols menubutton button,
-    headerbar.default-decoration windowcontrols menubutton button {
+    .default-decoration.titlebar:not(.HeaderBar) .control-buttons menubutton button,
+    .HeaderBar.default-decoration .control-buttons menubutton button {
       min-height: 20px;
       min-width: 20px;
       margin: 0;
       padding: 4px; }
-  .solid-csd .titlebar:dir(rtl):not(headerbar), .solid-csd .titlebar:dir(ltr):not(headerbar), .solid-csd headerbar:backdrop:dir(rtl), .solid-csd headerbar:backdrop:dir(ltr), .solid-csd headerbar:dir(rtl), .solid-csd headerbar:dir(ltr) {
+  .solid-csd .titlebar:dir(rtl):not(.HeaderBar), .solid-csd .titlebar:dir(ltr):not(.HeaderBar), .solid-csd .HeaderBar:backdrop:dir(rtl), .solid-csd .HeaderBar:backdrop:dir(ltr), .solid-csd .HeaderBar:dir(rtl), .solid-csd .HeaderBar:dir(ltr) {
     margin-left: -1px;
     margin-right: -1px;
     margin-top: -1px;
     border-radius: 0;
     box-shadow: none; }
 
-headerbar > windowhandle > box,
-headerbar > windowhandle > box > box.start,
-headerbar > windowhandle > box > box.end {
+.HeaderBar > windowhandle > box,
+.HeaderBar > windowhandle > box > box.start,
+.HeaderBar > windowhandle > box > box.end {
   border-spacing: 6px; }
 
-headerbar entry,
-headerbar spinbutton,
-headerbar separator:not(.sidebar),
-headerbar button,
-headerbar menubutton {
+.HeaderBar entry,
+.HeaderBar spinbutton,
+.HeaderBar separator:not(.sidebar),
+.HeaderBar button,
+.HeaderBar menubutton {
   margin-top: 6px;
   margin-bottom: 6px; }
 
-headerbar menubutton > button {
+.HeaderBar menubutton > button {
   margin-top: 0px;
   margin-bottom: 0px; }
 
-headerbar switch {
+.HeaderBar switch {
   margin-top: 10px;
   margin-bottom: 10px; }
 
-headerbar.titlebar headerbar:not(.titlebar) {
+.HeaderBar.titlebar .HeaderBar:not(.titlebar) {
   background: none;
   box-shadow: none; }
 
-.Window.csd > .titlebar:not(headerbar) {
+.Window.csd > .titlebar:not(.HeaderBar) {
   padding: 0;
   background-color: transparent;
   background-image: none;
@@ -2182,7 +2210,7 @@ headerbar.titlebar headerbar:not(.titlebar) {
   border-color: transparent;
   box-shadow: none; }
 
-.titlebar:not(headerbar) separator {
+.titlebar:not(.HeaderBar) separator {
   background-color: #cdc7c2; }
 
 /************
@@ -4604,7 +4632,7 @@ colorchooser .popover.osd {
       padding: 0;
       border: solid 1px #cdc7c2;
       border-radius: 0;
-      box-shadow: inset 0 0 0 3px white, inset 0 1px rgba(255, 255, 255, 0.8); }
+      box-shadow: inset 0 0 0 3px #f1f0ee, inset 0 1px rgba(255, 255, 255, 0.8); }
       .Window.csd.solid-csd:backdrop {
         box-shadow: inset 0 0 0 3px #f6f5f4, inset 0 1px rgba(255, 255, 255, 0.8); }
   .Window.maximized, .Window.fullscreen, .Window.tiled, .Window.tiled-top, .Window.tiled-left, .Window.tiled-right, .Window.tiled-bottom {
@@ -4621,7 +4649,7 @@ tooltip.csd {
 .view.selected:focus, .view.selected,
 .TextView > textarea.selected:focus,
 .TextView > textarea.selected, .TextView > textarea::selection, .selected.IconView:focus, .selected.IconView, .Flowbox > .Flowbox__child.selected, .Grid > .Grid__child.selected,
-.Input > .Input__area > input::selection, .ModelButton.flat.selected, .InputNumber:not(.vertical) > .Input__area > input::selection, .InputNumber.vertical > input > .Input__area > input::selection, .InputNumber.vertical > input::selection, columnview.view.selected:focus, columnview.view.selected, columnview.selected.IconView,
+.Input > .Input__area > input::selection, .ModelButton.flat.selected, .InputNumber:not(.vertical) > .Input__area > input::selection, .InputNumber.vertical > .Input__area > input > .Input__area > input::selection, .InputNumber.vertical > .Input__area > input::selection, columnview.view.selected:focus, columnview.view.selected, columnview.selected.IconView,
 .TreeView.view.selected:focus,
 .TreeView.view.selected,
 .TreeView.selected.IconView, row.selected, calendar > grid > .Label.day-number.selected {
@@ -4629,14 +4657,14 @@ tooltip.csd {
   .Label.selected, .view.selected:focus, .view.selected,
   .TextView > textarea.selected:focus,
   .TextView > textarea.selected, .TextView > textarea::selection, .selected.IconView:focus, .selected.IconView, .Flowbox > .Flowbox__child.selected, .Grid > .Grid__child.selected,
-  .Input > .Input__area > input::selection, .ModelButton.flat.selected, .InputNumber:not(.vertical) > .Input__area > input::selection, .InputNumber.vertical > input > .Input__area > input::selection, .InputNumber.vertical > input::selection, columnview.view.selected:focus, columnview.view.selected, columnview.selected.IconView,
+  .Input > .Input__area > input::selection, .ModelButton.flat.selected, .InputNumber:not(.vertical) > .Input__area > input::selection, .InputNumber.vertical > .Input__area > input > .Input__area > input::selection, .InputNumber.vertical > .Input__area > input::selection, columnview.view.selected:focus, columnview.view.selected, columnview.selected.IconView,
   .TreeView.view.selected:focus,
   .TreeView.view.selected,
   .TreeView.selected.IconView, row.selected, calendar > grid > .Label.day-number.selected {
     color: #ffffff; }
     .Label.disabled::selection, .Label.selected:disabled, .view.selected:disabled,
     .TextView > textarea.selected:disabled, .TextView > textarea:disabled::selection, .selected.IconView:disabled, .Flowbox > .Flowbox__child.selected:disabled, .Grid > .Grid__child.selected:disabled,
-    .Input > .Input__area > input:disabled::selection, .ModelButton.flat.selected:disabled, .InputNumber:not(.vertical) > .Input__area > input:disabled::selection, .InputNumber.vertical > input > .Input__area > input:disabled::selection, .InputNumber.vertical > input:disabled::selection, columnview.view.selected:disabled, columnview.selected.IconView:disabled,
+    .Input > .Input__area > input:disabled::selection, .ModelButton.flat.selected:disabled, .InputNumber:not(.vertical) > .Input__area > input:disabled::selection, .InputNumber.vertical > .Input__area > input > .Input__area > input:disabled::selection, .InputNumber.vertical > .Input__area > input:disabled::selection, columnview.view.selected:disabled, columnview.selected.IconView:disabled,
     .TreeView.view.selected:disabled,
     .TreeView.selected.IconView:disabled, row.selected:disabled, calendar > grid > .Label.day-number.selected:disabled {
       color: #9ac2f2; }

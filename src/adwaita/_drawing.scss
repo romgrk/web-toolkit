@@ -478,14 +478,14 @@
 // $hc: top highlight color
 // $ov: a background layer for background shorthand (hence no commas!)
 //
-  $gradient: linear-gradient(to top, darken($c, 2%), lighten($c, 1%));
+  $gradient: linear-gradient(to top, darken($c, 8%), lighten($c, 1%));
 
   @if $variant == 'dark' { $gradient: linear-gradient(to top, lighten($c, 4%), lighten($c, 6%)); }
 
   @if $ov != none { background: $c $ov, $gradient; }
   @else { background: $c $gradient; }
 
-  box-shadow: inset 0 1px $hc; // top highlight
+  box-shadow: inset 0 1px $hc, inset 0 -2px 2px rgba(black, 0.02); // top highlight
 }
 
 @mixin overshoot($p, $t:normal, $c:$fg_color) {

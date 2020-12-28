@@ -17,7 +17,9 @@ function InputNumber({
         <button className='Button InputNumber__button up' disabled={disabled} tabIndex='-1'>
           <Icon name='list-add' />
         </button>
-        <input type='number' disabled={disabled} {...rest} />
+        <div className='Input__area'>
+          <input type='number' disabled={disabled} {...rest} />
+        </div>
         <button className='Button InputNumber__button down' disabled={disabled} tabIndex='-1'>
           <Icon name='list-remove' />
         </button>
@@ -26,7 +28,9 @@ function InputNumber({
 
   return (
     <div className={cx('InputNumber', className, { disabled, vertical })}>
-      <input type='number' disabled={disabled} {...rest} />
+      <div className='Input__area'>
+        <input type='number' disabled={disabled} {...rest} />
+      </div>
       <button className='InputNumber__button down' disabled={disabled} tabIndex='-1'>
         <Icon name='list-remove' />
       </button>

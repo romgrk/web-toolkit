@@ -4,8 +4,6 @@
 
 
 import React from 'react'
-import { createPortal } from 'react-dom'
-import { createPopper } from '@popperjs/core'
 import prop from 'prop-types'
 import cx from 'classname'
 
@@ -13,6 +11,8 @@ import Button from './Button'
 import Icon from './Icon'
 import Input from './Input'
 import Label from './Label'
+import Menu from './Menu'
+import Popover from './Popover'
 import Separator from './Separator'
 
 
@@ -54,8 +54,6 @@ class Dropdown extends React.Component {
 
     this.domNode = document.createElement('div')
     document.body.append(this.domNode)
-    document.addEventListener('click', this.onDocumentClick)
-    document.addEventListener('keydown', this.onDocumentKeyDown)
 
     this.state = {
       value: undefined,
@@ -68,53 +66,6 @@ class Dropdown extends React.Component {
 
   componentWillUnmount() {
     document.body.removeChild(this.domNode)
-    document.removeEventListener('click', this.onDocumentClick)
-    document.removeEventListener('keydown', this.onDocumentKeyDown)
-    if (this.popper) {
-      this.popper.destroy()
-    }
-  }
-
-  componentDidUpdate() {
-    if (!this.state.open)
-      return
-    this.updatePosition()
-  }
-
-  updatePosition() {
-    const {align} = this.props
-
-    const box = this.trigger.getBoundingClientRect()
-    const popover = this.popover.getBoundingClientRect()
-
-    // const top =  box.top + box.height
-    // const left = align === 'right' ? box.left : box.left - (popover.width - box.width)
-    const width = box.width
-
-    // if (top !== this.state.position.top || left !== this.state.position.left) {
-    if (width !== this.state.position.width) {
-      const position = {
-        // top,
-        // left,
-        width: width,
-      }
-      this.setState({ position })
-    }
-  }
-
-  onDocumentKeyDown = ev => {
-    if (this.state.open && ev.key === 'Escape') {
-      ev.preventDefault()
-      ev.stopPropagation()
-      this.setState({ open: false })
-    }
-  }
-
-  onDocumentClick = ev => {
-    if (this.state.open && !this.popover.contains(ev.target) && !this.trigger.contains(ev.target)) {
-      ev.preventDefault()
-      this.setState({ open: false })
-    }
   }
 
   onInputBlur = () => {
@@ -137,13 +88,6 @@ class Dropdown extends React.Component {
       this.props.onOpen()
     else
       this.setState({ open: true })
-
-    if (!this.popper) {
-      this.popper = createPopper(this.trigger, this.popover)
-    }
-    else {
-      this.popper.forceUpdate()
-    }
   }
 
   close = () => {
@@ -212,7 +156,6 @@ class Dropdown extends React.Component {
       loading,
       input,
     } = this.props
-    const { position } = this.state
     const open = this.isOpen()
     const value = this.getValue()
     const label =
@@ -264,25 +207,25 @@ class Dropdown extends React.Component {
     const options = this.getOptions()
     const actualChildren =
       options.map(o =>
-        <DropdownButton
+        <Menu.Button
           key={o.value}
           selected={String(o.value) === String(value)}
           onClick={() => this.select(o.value, o)}
         >
           {o.label}
-        </DropdownButton>
+        </Menu.Button>
       )
 
     if (actualChildren.length === 0)
       actualChildren.push(
-        <DropdownItem className='text-muted'>
+        <Menu.Item className='text-muted'>
           No option found
-        </DropdownItem>
+        </Menu.Item>
       )
 
     /* const transformedChildren =
      *   React.Children.map(children, child =>
-     *     child.type !== DropdownButton ? child :
+     *     child.type !== Menu.Button ? child :
      *       React.cloneElement(
      *         child,
      *         {
@@ -295,65 +238,33 @@ class Dropdown extends React.Component {
      *       )
      *   ) */
 
-    const popoverClassName = cx('Dropdown__menu popover menu', size, { open })
-    const popover =
-      <div className={popoverClassName} style={position} ref={ref => ref && (this.popover = ref)}>
-        <div className='contents'>
-          {actualChildren}
-        </div>
-      </div>
+    const popoverClassName = cx('Dropdown__menu', size)
+    const menu =
+      <Menu className={popoverClassName}>
+        {actualChildren}
+      </Menu>
 
     return (
-      <>
+      <Popover
+        className='Dropdown__menu'
+        method='click-controlled'
+        width='trigger'
+        arrow={false}
+        open={open}
+        content={menu}
+        onClose={this.close}
+      >
         {trigger}
-        {createPortal(popover, this.domNode)}
-      </>
+      </Popover>
     )
   }
-}
-
-function DropdownButton({ icon, children, className, selected, ...rest }) {
-  const itemClassName = 'Dropdown__item ModelButton flat Box horizontal align'
-    + (selected ? ' selected' : '')
-    + (className ? ' ' + className : '')
-
-  return (
-    <button className={itemClassName} {...rest} role='option' aria-selected={selected}>
-      {icon &&
-        <span className='Dropdown__item__icon'>
-          <Icon name={icon} />
-        </span>
-      }
-      <Label className='Dropdown__item__label Box__fill'>
-        {children}
-      </Label>
-    </button>
-  )
-}
-
-function DropdownItem({ icon, children, className, ...rest }) {
-  const itemClassName = 'Dropdown__item ModelItem Box horizontal align'
-    + (className ? ' ' + className : '')
-
-  return (
-    <div className={itemClassName} {...rest}>
-      {icon &&
-        <span className='Dropdown__item__icon'>
-          <Icon name={icon} />
-        </span>
-      }
-      <Label className='Dropdown__item__label Box__fill'>
-        {children}
-      </Label>
-    </div>
-  )
 }
 
 
 // Exports
 
-Dropdown.Item = DropdownItem
-Dropdown.Button = DropdownButton
+Dropdown.Item = Menu.Item
+Dropdown.Button = Menu.Button
 Dropdown.Separator = Separator
 
 export default Dropdown

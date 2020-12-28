@@ -1386,6 +1386,11 @@ input::-webkit-outer-spin-button {
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
     border-bottom-color: transparent;
+
+    &.Button.active {
+      @include button('hover');
+      border-color: $popover_border;
+    }
   }
 
   // TODO dnd behavior

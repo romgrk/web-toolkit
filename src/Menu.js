@@ -73,7 +73,25 @@ function CircularButtons({ children, className, label, ...rest }) {
   )
 }
 
+function Item({ children, className, ...rest }) {
+  return (
+    <Box horizontal className={cx('Menu__item', className)} {...rest}>
+      {children}
+    </Box>
+  )
+}
+
+function Title({ children, className, ...rest }) {
+  return (
+    <Label className={cx('Menu__item title', className)} {...rest}>
+      {children}
+    </Label>
+  )
+}
+
 Menu.Button = Button
+Menu.Item = Item
+Menu.Title = Title
 Menu.CircularButtons = CircularButtons
 Menu.InlineButtons = InlineButtons
 Menu.Separator = Separator

@@ -17,6 +17,8 @@ function getInversePlacement(p) {
   }
 }
 
+window.limit = 0
+
 class Popover extends React.PureComponent {
   static propTypes = {
     className: prop.string,
@@ -26,7 +28,8 @@ class Popover extends React.PureComponent {
     children: prop.object,
     position: prop.oneOf(['top', 'right', 'bottom', 'left']),
     align: prop.oneOf(['right', 'left']),
-    method: prop.oneOf(['mouseover', 'click', 'none']),
+    method: prop.oneOf(['mouseover', 'click', 'click-controlled', 'none']),
+    width: prop.oneOf(['trigger']),
     delay: prop.number,
     closeDelay: prop.number,
     onOpen: prop.func,
@@ -64,6 +67,7 @@ class Popover extends React.PureComponent {
     this.state = {
       open: false,
       placement: props.position,
+      styles: {},
     }
 
     this.triggerRef = React.createRef()
@@ -126,13 +130,10 @@ class Popover extends React.PureComponent {
         },
         /* Custom modifier */
         {
-          name: 'updatePlacement',
+          name: 'updateComponentState',
           enabled: true,
           phase: 'write',
-          fn: ({ state }) => {
-            if (this.state.placement !== state.placement)
-              this.setState({ placement: state.placement })
-          },
+          fn: this.onUpdatePopper,
         },
       ],
     })
@@ -144,7 +145,7 @@ class Popover extends React.PureComponent {
   }
 
   onDocumentClick = ev => {
-    if (this.props.method !== 'click')
+    if (this.props.method !== 'click' && this.props.method !== 'click-controlled')
       return
 
     if (!this.isOpen())
@@ -152,6 +153,23 @@ class Popover extends React.PureComponent {
 
     if (!(this.triggerRef.current.contains(ev.target) || this.popoverRef.current.contains(ev.target)))
       this.close()
+  }
+
+  onUpdatePopper = ({ state }) => {
+    if (this.state.placement !== state.placement) {
+      this.setState({ placement: state.placement })
+    }
+
+    if (this.props.width === 'trigger') {
+      const trigger = state.elements.reference
+      const rect = trigger.getBoundingClientRect()
+
+      const currentWidth = this.state.styles.width
+      const newWidth = rect.width - 1
+
+      if (currentWidth !== newWidth)
+        this.setState({ styles: { width: newWidth } })
+    }
   }
 
   onClick = ev => {
@@ -165,7 +183,7 @@ class Popover extends React.PureComponent {
       this.open()
   }
 
-  onMouseOver = ev => {
+  onMouseOver = () => {
     if (this.closeTimeout)
       this.closeTimeout = clearTimeout(this.closeTimeout)
 
@@ -183,7 +201,7 @@ class Popover extends React.PureComponent {
     }
   }
 
-  onMouseOut = ev => {
+  onMouseOut = () => {
     if (this.openTimeout)
       this.openTimeout = clearTimeout(this.openTimeout)
 
@@ -256,7 +274,7 @@ class Popover extends React.PureComponent {
 
   render() {
     const { arrow, children, className } = this.props
-    const { placement } = this.state
+    const { placement, styles } = this.state
     const open = this.isOpen()
     const trigger = children
 
@@ -291,8 +309,10 @@ class Popover extends React.PureComponent {
             style={/* position */ undefined}
             ref={this.popoverRef}
           >
-            <div className={cx('arrow', arrowPlacement)} ref={this.arrowRef} />
-            <div className='Popover__container popover__container'>
+            {arrow &&
+              <div className={cx('arrow', arrowPlacement)} ref={this.arrowRef} />
+            }
+            <div className='Popover__container popover__container' style={styles}>
               <div className='Popover__content'>
               {this.getContent()}
               </div>

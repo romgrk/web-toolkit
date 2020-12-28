@@ -1,0 +1,117 @@
+/*
+ * Notebook.js
+ */
+
+import { useState } from 'react'
+import prop from 'prop-types'
+import cx from 'classname'
+
+import Button from './Button'
+import Label from './Label'
+
+function Notebook({
+  children,
+  className,
+  position,
+  value: activePageValue,
+  arrows,
+  pages,
+  action,
+  onChange,
+  onClose,
+  ...rest
+}) {
+  const orientation = position === 'top' || position === 'bottom' ? 'horizontal' : 'vertical'
+  const isHorizontal = orientation === 'horizontal'
+
+  const isControlled = activePageValue !== undefined
+  const [activePageState, setActivePage] = useState(0)
+  const setPage = isControlled ? onChange : setActivePage
+
+  let activePage = isControlled ? activePageValue : activePageState
+  if (activePage >= pages.length) {
+    activePage = pages.length - 1
+    setPage(activePage)
+  }
+
+  const previousPage = () => setPage(activePage - 1)
+  const nextPage = () => setPage(activePage + 1)
+
+  return (
+    <div className={cx('Notebook', className, position)} {...rest}>
+      <div className={cx('Notebook__header', position)}>
+        <div className='Notebook__tabs'>
+          {arrows &&
+            <Button
+              className='Notebook__arrow'
+              icon={isHorizontal ? 'pan-start' : 'pan-up'}
+              disabled={activePage === 0}
+              onClick={previousPage}
+            />
+          }
+          {pages.map((page, i) =>
+            <div
+              className={cx('Notebook__tab', {
+                selected: i === activePage,
+                reorderable: true,
+              })}
+              role='button'
+              tabIndex='0'
+              onClick={() => isControlled ? onChange(i) : setActivePage(i)}
+            >
+              <Label>
+                {page.label}
+              </Label>
+              {page.closable &&
+                <Button
+                  small
+                  icon='window-close'
+                  tabIndex='-1'
+                  onClick={() => onClose(i)}
+                />
+              }
+            </div>
+          )}
+          {arrows &&
+            <Button
+              className='Notebook__arrow'
+              icon={isHorizontal ? 'pan-end' : 'pan-down'}
+              disabled={activePage >= pages.length - 1}
+              onClick={nextPage}
+            />
+          }
+        </div>
+        {action &&
+          <div className='Notebook__action'>
+            {action}
+          </div>
+        }
+      </div>
+      <div className='Notebook__content'>
+        {pages[activePage]?.content}
+      </div>
+    </div>
+  )
+}
+
+Notebook.propTypes = {
+  children: prop.node,
+  position: prop.oneOf(['top', 'bottom', 'left', 'right']),
+  arrows: prop.bool,
+  className: prop.string,
+  value: prop.number,
+  pages: prop.arrayOf(prop.shape({
+    label: prop.node,
+    content: prop.node,
+  })),
+  action: prop.node,
+  onChange: prop.func,
+  onClose: prop.func,
+}
+
+Notebook.defaultProps = {
+  position: 'top',
+  arrows: false,
+}
+
+export default Notebook

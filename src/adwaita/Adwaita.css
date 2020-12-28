@@ -322,7 +322,11 @@ button {
   align-items: center;
   display: inline-flex; }
   .Icon:not(.colored) svg * {
-    fill: var(--icon-color, #2e3436); }
+    fill: var(--icon-color, #2e3436) !important; }
+  .disabled .Icon:not(.colored):not(.increase-specificity) {
+    --icon-color: rgba(0, 0, 0, 0.3); }
+  .disabled .Icon.colored:not(.increase-specificity) {
+    opacity: 0.3; }
   .Icon svg {
     transform: scale(0.8); }
 
@@ -637,7 +641,7 @@ editablelabel > stack > text {
   to {
     background-image: radial-gradient(farthest-side, #3584e4 95%, rgba(53, 132, 228, 0)); } }
 
-notebook > header > tabs > arrow, .control-buttons button,
+.Notebook .Notebook__arrow, .control-buttons button,
 .Button {
   position: relative;
   display: inline-flex;
@@ -656,13 +660,13 @@ notebook > header > tabs > arrow, .control-buttons button,
   border-bottom-color: #bfb8b1;
   background-color: #f6f5f4;
   box-shadow: inset 0 1px white, 0 1px 2px rgba(0, 0, 0, 0.07); }
-  notebook > header > tabs > arrow, .control-buttons button, notebook > header > tabs > arrow > .Label, .control-buttons button > .Label,
+  .Notebook .Notebook__arrow, .control-buttons button, .Notebook .Notebook__arrow > .Label, .control-buttons button > .Label,
   .Button,
   .Button > .Label {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap; }
-  notebook > header > tabs > arrow::before, .control-buttons button::before,
+  .Notebook .Notebook__arrow::before, .control-buttons button::before,
   .Button::before {
     content: ' ';
     position: absolute;
@@ -673,16 +677,16 @@ notebook > header > tabs > arrow, .control-buttons button,
     left: 0px;
     background: linear-gradient(to top, rgba(0, 0, 0, 0.03), transparent);
     transition: all 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94); }
-  notebook > header > tabs > arrow, .control-buttons button,
+  .Notebook .Notebook__arrow, .control-buttons button,
   .Button {
     outline: 0 solid transparent;
     outline-offset: 4px; }
-  notebook > header > tabs > arrow:focus:focus-visible, .control-buttons button:focus:focus-visible,
+  .Notebook .Notebook__arrow:focus:focus-visible, .control-buttons button:focus:focus-visible,
   .Button:focus:focus-visible {
     outline-color: rgba(53, 132, 228, 0.5);
     outline-width: 2px;
     outline-offset: -2px; }
-  notebook > header > tabs > arrow.hover:not(:disabled):not(.disabled), .control-buttons button.hover:not(:disabled):not(.disabled), notebook > header > tabs > arrow:not(:disabled):not(.disabled):hover, .control-buttons button:not(:disabled):not(.disabled):hover,
+  .Notebook .Notebook__arrow.hover:not(:disabled):not(.disabled), .control-buttons button.hover:not(:disabled):not(.disabled), .Notebook .Notebook__arrow:not(:disabled):not(.disabled):hover, .control-buttons button:not(:disabled):not(.disabled):hover,
   .Button.hover:not(:disabled):not(.disabled),
   .Button:not(:disabled):not(.disabled):hover {
     color: #2e3436;
@@ -691,11 +695,11 @@ notebook > header > tabs > arrow, .control-buttons button,
     background-color: #f9f9f8;
     box-shadow: inset 0 1px #f4f2f1, 0 1px 2px rgba(0, 0, 0, 0.07);
     -gtk-icon-filter: brightness(1.2); }
-    notebook > header > tabs > arrow.hover:not(:disabled):not(.disabled)::before, .control-buttons button.hover:not(:disabled):not(.disabled)::before, notebook > header > tabs > arrow:not(:disabled):not(.disabled):hover::before, .control-buttons button:not(:disabled):not(.disabled):hover::before,
+    .Notebook .Notebook__arrow.hover:not(:disabled):not(.disabled)::before, .control-buttons button.hover:not(:disabled):not(.disabled)::before, .Notebook .Notebook__arrow:not(:disabled):not(.disabled):hover::before, .control-buttons button:not(:disabled):not(.disabled):hover::before,
     .Button.hover:not(:disabled):not(.disabled)::before,
     .Button:not(:disabled):not(.disabled):hover::before {
       opacity: 0; }
-  notebook > header > tabs > arrow.active:not(:disabled):not(.disabled), .control-buttons button.active:not(:disabled):not(.disabled), notebook > header > tabs > arrow:not(:disabled):not(.disabled):active, .control-buttons button:not(:disabled):not(.disabled):active, notebook > header > tabs > arrow:not(:disabled):not(.disabled):checked, .control-buttons button:not(:disabled):not(.disabled):checked,
+  .Notebook .Notebook__arrow.active:not(:disabled):not(.disabled), .control-buttons button.active:not(:disabled):not(.disabled), .Notebook .Notebook__arrow:not(:disabled):not(.disabled):active, .control-buttons button:not(:disabled):not(.disabled):active, .Notebook .Notebook__arrow:not(:disabled):not(.disabled):checked, .control-buttons button:not(:disabled):not(.disabled):checked,
   .Button.active:not(:disabled):not(.disabled),
   .Button:not(:disabled):not(.disabled):active,
   .Button:not(:disabled):not(.disabled):checked {
@@ -706,12 +710,12 @@ notebook > header > tabs > arrow, .control-buttons button,
     text-shadow: none;
     --icon-shadow: none;
     transition-duration: 50ms; }
-    notebook > header > tabs > arrow.active:not(:disabled):not(.disabled)::before, .control-buttons button.active:not(:disabled):not(.disabled)::before, notebook > header > tabs > arrow:not(:disabled):not(.disabled):active::before, .control-buttons button:not(:disabled):not(.disabled):active::before, notebook > header > tabs > arrow:not(:disabled):not(.disabled):checked::before, .control-buttons button:not(:disabled):not(.disabled):checked::before,
+    .Notebook .Notebook__arrow.active:not(:disabled):not(.disabled)::before, .control-buttons button.active:not(:disabled):not(.disabled)::before, .Notebook .Notebook__arrow:not(:disabled):not(.disabled):active::before, .control-buttons button:not(:disabled):not(.disabled):active::before, .Notebook .Notebook__arrow:not(:disabled):not(.disabled):checked::before, .control-buttons button:not(:disabled):not(.disabled):checked::before,
     .Button.active:not(:disabled):not(.disabled)::before,
     .Button:not(:disabled):not(.disabled):active::before,
     .Button:not(:disabled):not(.disabled):checked::before {
       opacity: 0; }
-  .window-inactive notebook > header > tabs > arrow, .window-inactive .control-buttons button, .control-buttons .window-inactive button, .window-inactive .Button.flat, .window-inactive .Button {
+  .window-inactive .Notebook .Notebook__arrow, .Notebook .window-inactive .Notebook__arrow, .window-inactive .control-buttons button, .control-buttons .window-inactive button, .window-inactive .Button.flat, .window-inactive .Button {
     color: #929595;
     border-color: #d5d0cc;
     background-color: #f6f5f4;
@@ -720,32 +724,32 @@ notebook > header > tabs > arrow, .control-buttons button,
     box-shadow: inset 0 1px rgba(255, 255, 255, 0);
     transition: 200ms ease-out;
     -gtk-icon-filter: none; }
-    .window-inactive notebook > header > tabs > arrow::before, .window-inactive .control-buttons button::before, .control-buttons .window-inactive button::before, .window-inactive .Button.flat::before, .window-inactive .Button::before {
+    .window-inactive .Notebook .Notebook__arrow::before, .Notebook .window-inactive .Notebook__arrow::before, .window-inactive .control-buttons button::before, .control-buttons .window-inactive button::before, .window-inactive .Button.flat::before, .window-inactive .Button::before {
       opacity: 0; }
-    .window-inactive notebook > header > tabs > arrow:active, .window-inactive .control-buttons button:active, .control-buttons .window-inactive button:active, .window-inactive notebook > header > tabs > arrow:checked, .window-inactive .control-buttons button:checked, .control-buttons .window-inactive button:checked, .window-inactive .Button.flat:active, .window-inactive .Button.flat:checked, .window-inactive .Button:active, .window-inactive .Button:checked {
+    .window-inactive .Notebook .Notebook__arrow:active, .Notebook .window-inactive .Notebook__arrow:active, .window-inactive .control-buttons button:active, .control-buttons .window-inactive button:active, .window-inactive .Notebook .Notebook__arrow:checked, .Notebook .window-inactive .Notebook__arrow:checked, .window-inactive .control-buttons button:checked, .control-buttons .window-inactive button:checked, .window-inactive .Button.flat:active, .window-inactive .Button.flat:checked, .window-inactive .Button:active, .window-inactive .Button:checked {
       color: #929595;
       border-color: #d5d0cc;
       background-color: #e4e4e0;
       box-shadow: inset 0 1px rgba(255, 255, 255, 0); }
-      .window-inactive notebook > header > tabs > arrow:active::before, .window-inactive .control-buttons button:active::before, .control-buttons .window-inactive button:active::before, .window-inactive notebook > header > tabs > arrow:checked::before, .window-inactive .control-buttons button:checked::before, .control-buttons .window-inactive button:checked::before, .window-inactive .Button.flat:active::before, .window-inactive .Button.flat:checked::before, .window-inactive .Button:active::before, .window-inactive .Button:checked::before {
+      .window-inactive .Notebook .Notebook__arrow:active::before, .Notebook .window-inactive .Notebook__arrow:active::before, .window-inactive .control-buttons button:active::before, .control-buttons .window-inactive button:active::before, .window-inactive .Notebook .Notebook__arrow:checked::before, .Notebook .window-inactive .Notebook__arrow:checked::before, .window-inactive .control-buttons button:checked::before, .control-buttons .window-inactive button:checked::before, .window-inactive .Button.flat:active::before, .window-inactive .Button.flat:checked::before, .window-inactive .Button:active::before, .window-inactive .Button:checked::before {
         opacity: 0; }
-    .window-inactive notebook > header > tabs > arrow:disabled, .window-inactive .control-buttons button:disabled, .control-buttons .window-inactive button:disabled, .window-inactive .Button.flat:disabled, .window-inactive .Button:disabled {
+    .window-inactive .Notebook .Notebook__arrow:disabled, .Notebook .window-inactive .Notebook__arrow:disabled, .window-inactive .control-buttons button:disabled, .control-buttons .window-inactive button:disabled, .window-inactive .Button.flat:disabled, .window-inactive .Button:disabled {
       color: #d4cfca;
       border-color: #d5d0cc;
       background-color: #faf9f8;
       text-shadow: none;
       --icon-shadow: none;
       box-shadow: inset 0 1px rgba(255, 255, 255, 0); }
-      .window-inactive notebook > header > tabs > arrow:disabled::before, .window-inactive .control-buttons button:disabled::before, .control-buttons .window-inactive button:disabled::before, .window-inactive .Button.flat:disabled::before, .window-inactive .Button:disabled::before {
+      .window-inactive .Notebook .Notebook__arrow:disabled::before, .Notebook .window-inactive .Notebook__arrow:disabled::before, .window-inactive .control-buttons button:disabled::before, .control-buttons .window-inactive button:disabled::before, .window-inactive .Button.flat:disabled::before, .window-inactive .Button:disabled::before {
         opacity: 0; }
-      .window-inactive notebook > header > tabs > arrow:disabled:active, .window-inactive .control-buttons button:disabled:active, .control-buttons .window-inactive button:disabled:active, .window-inactive notebook > header > tabs > arrow:disabled:checked, .window-inactive .control-buttons button:disabled:checked, .control-buttons .window-inactive button:disabled:checked, .window-inactive .Button.flat:disabled:active, .window-inactive .Button.flat:disabled:checked, .window-inactive .Button:disabled:active, .window-inactive .Button:disabled:checked {
+      .window-inactive .Notebook .Notebook__arrow:disabled:active, .Notebook .window-inactive .Notebook__arrow:disabled:active, .window-inactive .control-buttons button:disabled:active, .control-buttons .window-inactive button:disabled:active, .window-inactive .Notebook .Notebook__arrow:disabled:checked, .Notebook .window-inactive .Notebook__arrow:disabled:checked, .window-inactive .control-buttons button:disabled:checked, .control-buttons .window-inactive button:disabled:checked, .window-inactive .Button.flat:disabled:active, .window-inactive .Button.flat:disabled:checked, .window-inactive .Button:disabled:active, .window-inactive .Button:disabled:checked {
         color: #d4cfca;
         border-color: #d5d0cc;
         background-color: #e4e4e0;
         box-shadow: inset 0 1px rgba(255, 255, 255, 0); }
-        .window-inactive notebook > header > tabs > arrow:disabled:active::before, .window-inactive .control-buttons button:disabled:active::before, .control-buttons .window-inactive button:disabled:active::before, .window-inactive notebook > header > tabs > arrow:disabled:checked::before, .window-inactive .control-buttons button:disabled:checked::before, .control-buttons .window-inactive button:disabled:checked::before, .window-inactive .Button.flat:disabled:active::before, .window-inactive .Button.flat:disabled:checked::before, .window-inactive .Button:disabled:active::before, .window-inactive .Button:disabled:checked::before {
+        .window-inactive .Notebook .Notebook__arrow:disabled:active::before, .Notebook .window-inactive .Notebook__arrow:disabled:active::before, .window-inactive .control-buttons button:disabled:active::before, .control-buttons .window-inactive button:disabled:active::before, .window-inactive .Notebook .Notebook__arrow:disabled:checked::before, .Notebook .window-inactive .Notebook__arrow:disabled:checked::before, .window-inactive .control-buttons button:disabled:checked::before, .control-buttons .window-inactive button:disabled:checked::before, .window-inactive .Button.flat:disabled:active::before, .window-inactive .Button.flat:disabled:checked::before, .window-inactive .Button:disabled:active::before, .window-inactive .Button:disabled:checked::before {
           opacity: 0; }
-  notebook > header > tabs > arrow:disabled, .control-buttons button:disabled, notebook > header > tabs > arrow.disabled, .control-buttons button.disabled,
+  .Notebook .Notebook__arrow:disabled, .control-buttons button:disabled, .Notebook .disabled.Notebook__arrow, .control-buttons button.disabled,
   .Button:disabled,
   .Button.disabled {
     color: #929595;
@@ -755,11 +759,11 @@ notebook > header > tabs > arrow, .control-buttons button,
     --icon-shadow: none;
     --icon-color: #929595;
     box-shadow: inset 0 1px rgba(255, 255, 255, 0); }
-    notebook > header > tabs > arrow:disabled::before, .control-buttons button:disabled::before, notebook > header > tabs > arrow.disabled::before, .control-buttons button.disabled::before,
+    .Notebook .Notebook__arrow:disabled::before, .control-buttons button:disabled::before, .Notebook .disabled.Notebook__arrow::before, .control-buttons button.disabled::before,
     .Button:disabled::before,
     .Button.disabled::before {
       opacity: 0; }
-    notebook > header > tabs > arrow.active:disabled, .control-buttons button.active:disabled, notebook > header > tabs > arrow:disabled:active, .control-buttons button:disabled:active, notebook > header > tabs > arrow:disabled:checked, .control-buttons button:disabled:checked, notebook > header > tabs > arrow.disabled.active, .control-buttons button.disabled.active, notebook > header > tabs > arrow.disabled:active, .control-buttons button.disabled:active, notebook > header > tabs > arrow.disabled:checked, .control-buttons button.disabled:checked,
+    .Notebook .Notebook__arrow.active:disabled, .control-buttons button.active:disabled, .Notebook .Notebook__arrow:disabled:active, .control-buttons button:disabled:active, .Notebook .Notebook__arrow:disabled:checked, .control-buttons button:disabled:checked, .Notebook .disabled.active.Notebook__arrow, .control-buttons button.disabled.active, .Notebook .disabled.Notebook__arrow:active, .control-buttons button.disabled:active, .Notebook .disabled.Notebook__arrow:checked, .control-buttons button.disabled:checked,
     .Button.active:disabled,
     .Button:disabled:active,
     .Button:disabled:checked,
@@ -770,7 +774,7 @@ notebook > header > tabs > arrow, .control-buttons button,
       border-color: #d5d0cc;
       background-color: #e4e4e0;
       box-shadow: inset 0 1px rgba(255, 255, 255, 0); }
-      notebook > header > tabs > arrow.active:disabled::before, .control-buttons button.active:disabled::before, notebook > header > tabs > arrow:disabled:active::before, .control-buttons button:disabled:active::before, notebook > header > tabs > arrow:disabled:checked::before, .control-buttons button:disabled:checked::before, notebook > header > tabs > arrow.disabled.active::before, .control-buttons button.disabled.active::before, notebook > header > tabs > arrow.disabled:active::before, .control-buttons button.disabled:active::before, notebook > header > tabs > arrow.disabled:checked::before, .control-buttons button.disabled:checked::before,
+      .Notebook .Notebook__arrow.active:disabled::before, .control-buttons button.active:disabled::before, .Notebook .Notebook__arrow:disabled:active::before, .control-buttons button:disabled:active::before, .Notebook .Notebook__arrow:disabled:checked::before, .control-buttons button:disabled:checked::before, .Notebook .disabled.active.Notebook__arrow::before, .control-buttons button.disabled.active::before, .Notebook .disabled.Notebook__arrow:active::before, .control-buttons button.disabled:active::before, .Notebook .disabled.Notebook__arrow:checked::before, .control-buttons button.disabled:checked::before,
       .Button.active:disabled::before,
       .Button:disabled:active::before,
       .Button:disabled:checked::before,
@@ -778,7 +782,7 @@ notebook > header > tabs > arrow, .control-buttons button,
       .Button.disabled:active::before,
       .Button.disabled:checked::before {
         opacity: 0; }
-  button.sidebar-button, notebook > header > tabs > arrow, .control-buttons button, notebook > header > tabs > arrow.flat,
+  button.sidebar-button, .Notebook .Notebook__arrow, .control-buttons button,
   .Button.flat {
     border-color: transparent;
     background-color: transparent;
@@ -786,10 +790,10 @@ notebook > header > tabs > arrow, .control-buttons button,
     text-shadow: none;
     --icon-shadow: none;
     transition: none; }
-    button.sidebar-button::before, notebook > header > tabs > arrow::before, .control-buttons button::before, notebook > header > tabs > arrow.flat::before,
+    button.sidebar-button::before, .Notebook .Notebook__arrow::before, .control-buttons button::before,
     .Button.flat::before {
       opacity: 0; }
-    button.sidebar-button.hover:not(:disabled):not(.disabled), notebook > header > tabs > arrow.hover:not(:disabled):not(.disabled), .control-buttons button.hover:not(:disabled):not(.disabled), button.sidebar-button:not(:disabled):not(.disabled):hover, notebook > header > tabs > arrow:not(:disabled):not(.disabled):hover, .control-buttons button:not(:disabled):not(.disabled):hover,
+    button.sidebar-button.hover:not(:disabled):not(.disabled), .Notebook .Notebook__arrow.hover:not(:disabled):not(.disabled), .control-buttons button.hover:not(:disabled):not(.disabled), button.sidebar-button:not(:disabled):not(.disabled):hover, .Notebook .Notebook__arrow:not(:disabled):not(.disabled):hover, .control-buttons button:not(:disabled):not(.disabled):hover,
     .Button.flat.hover:not(:disabled):not(.disabled),
     .Button.flat:not(:disabled):not(.disabled):hover {
       border-color: transparent;
@@ -798,11 +802,11 @@ notebook > header > tabs > arrow, .control-buttons button,
       background-color: #e4e1de;
       transition: all 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
       transition-duration: 500ms; }
-      button.sidebar-button.hover:not(:disabled):not(.disabled)::before, notebook > header > tabs > arrow.hover:not(:disabled):not(.disabled)::before, .control-buttons button.hover:not(:disabled):not(.disabled)::before, button.sidebar-button:not(:disabled):not(.disabled):hover::before, notebook > header > tabs > arrow:not(:disabled):not(.disabled):hover::before, .control-buttons button:not(:disabled):not(.disabled):hover::before,
+      button.sidebar-button.hover:not(:disabled):not(.disabled)::before, .Notebook .Notebook__arrow.hover:not(:disabled):not(.disabled)::before, .control-buttons button.hover:not(:disabled):not(.disabled)::before, button.sidebar-button:not(:disabled):not(.disabled):hover::before, .Notebook .Notebook__arrow:not(:disabled):not(.disabled):hover::before, .control-buttons button:not(:disabled):not(.disabled):hover::before,
       .Button.flat.hover:not(:disabled):not(.disabled)::before,
       .Button.flat:not(:disabled):not(.disabled):hover::before {
         opacity: 0; }
-    button.sidebar-button:not(:disabled):not(.disabled):active, notebook > header > tabs > arrow:not(:disabled):not(.disabled):active, .control-buttons button:not(:disabled):not(.disabled):active, button.sidebar-button:not(:disabled):not(.disabled):checked, notebook > header > tabs > arrow:not(:disabled):not(.disabled):checked, .control-buttons button:not(:disabled):not(.disabled):checked,
+    button.sidebar-button:not(:disabled):not(.disabled):active, .Notebook .Notebook__arrow:not(:disabled):not(.disabled):active, .control-buttons button:not(:disabled):not(.disabled):active, button.sidebar-button:not(:disabled):not(.disabled):checked, .Notebook .Notebook__arrow:not(:disabled):not(.disabled):checked, .control-buttons button:not(:disabled):not(.disabled):checked,
     .Button.flat:not(:disabled):not(.disabled):active,
     .Button.flat:not(:disabled):not(.disabled):checked {
       border-color: transparent;
@@ -810,11 +814,11 @@ notebook > header > tabs > arrow, .control-buttons button,
       text-shadow: none;
       background-color: #b1a9a0;
       transition: all 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94); }
-      button.sidebar-button:not(:disabled):not(.disabled):active::before, notebook > header > tabs > arrow:not(:disabled):not(.disabled):active::before, .control-buttons button:not(:disabled):not(.disabled):active::before, button.sidebar-button:not(:disabled):not(.disabled):checked::before, notebook > header > tabs > arrow:not(:disabled):not(.disabled):checked::before, .control-buttons button:not(:disabled):not(.disabled):checked::before,
+      button.sidebar-button:not(:disabled):not(.disabled):active::before, .Notebook .Notebook__arrow:not(:disabled):not(.disabled):active::before, .control-buttons button:not(:disabled):not(.disabled):active::before, button.sidebar-button:not(:disabled):not(.disabled):checked::before, .Notebook .Notebook__arrow:not(:disabled):not(.disabled):checked::before, .control-buttons button:not(:disabled):not(.disabled):checked::before,
       .Button.flat:not(:disabled):not(.disabled):active::before,
       .Button.flat:not(:disabled):not(.disabled):checked::before {
         opacity: 0; }
-    button.sidebar-button:backdrop, notebook > header > tabs > arrow:backdrop, .control-buttons button:backdrop, button.sidebar-button:disabled, notebook > header > tabs > arrow:disabled, .control-buttons button:disabled,
+    button.sidebar-button:backdrop, .Notebook .Notebook__arrow:backdrop, .control-buttons button:backdrop, button.sidebar-button:disabled, .Notebook .Notebook__arrow:disabled, .control-buttons button:disabled,
     .Button.flat:backdrop,
     .Button.flat:disabled,
     .Button.flat:backdrop:disabled {
@@ -823,29 +827,29 @@ notebook > header > tabs > arrow, .control-buttons button,
       box-shadow: inset 0 1px rgba(255, 255, 255, 0);
       text-shadow: none;
       --icon-shadow: none; }
-      button.sidebar-button:backdrop::before, notebook > header > tabs > arrow:backdrop::before, .control-buttons button:backdrop::before, button.sidebar-button:disabled::before, notebook > header > tabs > arrow:disabled::before, .control-buttons button:disabled::before,
+      button.sidebar-button:backdrop::before, .Notebook .Notebook__arrow:backdrop::before, .control-buttons button:backdrop::before, button.sidebar-button:disabled::before, .Notebook .Notebook__arrow:disabled::before, .control-buttons button:disabled::before,
       .Button.flat:backdrop::before,
       .Button.flat:disabled::before,
       .Button.flat:backdrop:disabled::before {
         opacity: 0; }
-  notebook > header > tabs > arrow.image-button, .control-buttons button.image-button,
+  .Notebook .image-button.Notebook__arrow, .control-buttons button.image-button,
   .Button.image-button {
     min-width: 24px;
     padding-left: 5px;
     padding-right: 5px; }
-  notebook > header > tabs > arrow.text-button, .control-buttons button.text-button,
+  .Notebook .text-button.Notebook__arrow, .control-buttons button.text-button,
   .Button.text-button {
     padding-left: 16px;
     padding-right: 16px; }
-  notebook > header > tabs > arrow.text-button.image-button, .control-buttons button.text-button.image-button,
+  .Notebook .text-button.image-button.Notebook__arrow, .control-buttons button.text-button.image-button,
   .Button.text-button.image-button {
     padding-left: 8px;
     padding-right: 8px; }
-    notebook > header > tabs > arrow.text-button.image-button .Label, .control-buttons button.text-button.image-button .Label,
+    .Notebook .text-button.image-button.Notebook__arrow .Label, .control-buttons button.text-button.image-button .Label,
     .Button.text-button.image-button .Label {
       padding-left: 8px;
       padding-right: 8px; }
-  notebook > header > tabs > arrow.dnd-active, .control-buttons button.dnd-active,
+  .Notebook .dnd-active.Notebook__arrow, .control-buttons button.dnd-active,
   .Button.dnd-active {
     color: #2ec27e;
     border-color: #2ec27e;
@@ -2570,174 +2574,187 @@ pathbar > button.slider-button {
 /*************
  * Notebooks *
  *************/
-notebook > header > tabs > tab:checked {
-  outline: 0 solid transparent;
-  outline-offset: 4px; }
-
-notebook:focus:focus-visible > header > tabs > tab:checked {
-  outline-color: rgba(53, 132, 228, 0.5);
-  outline-width: 2px;
-  outline-offset: -2px; }
-
-notebook > header {
-  padding: 1px;
-  border-color: #cdc7c2;
-  border-width: 1px;
-  background-color: #e1dedb; }
-  notebook > header > tabs {
-    margin: -1px; }
-  notebook > header.top {
-    border-bottom-style: solid; }
-    notebook > header.top > tabs {
-      margin-bottom: -2px; }
-      notebook > header.top > tabs > tab:hover {
-        box-shadow: inset 0 -4px #cdc7c2; }
-      notebook > header.top > tabs > tab:checked {
-        box-shadow: inset 0 -4px #3584e4; }
-  notebook > header.bottom {
-    border-top-style: solid; }
-    notebook > header.bottom > tabs {
-      margin-top: -2px; }
-      notebook > header.bottom > tabs > tab:hover {
-        box-shadow: inset 0 4px #cdc7c2; }
-      notebook > header.bottom > tabs > tab:checked {
-        box-shadow: inset 0 4px #3584e4; }
-  notebook > header.left {
-    border-right-style: solid; }
-    notebook > header.left > tabs {
-      margin-right: -2px; }
-      notebook > header.left > tabs > tab:hover {
-        box-shadow: inset -4px 0 #cdc7c2; }
-      notebook > header.left > tabs > tab:checked {
-        box-shadow: inset -4px 0 #3584e4; }
-  notebook > header.right {
-    border-left-style: solid; }
-    notebook > header.right > tabs {
-      margin-left: -2px; }
-      notebook > header.right > tabs > tab:hover {
-        box-shadow: inset 4px 0 #cdc7c2; }
-      notebook > header.right > tabs > tab:checked {
-        box-shadow: inset 4px 0 #3584e4; }
-  notebook > header.top > tabs > arrow {
-    border-top-style: none; }
-  notebook > header.bottom > tabs > arrow {
-    border-bottom-style: none; }
-  notebook > header.top > tabs > arrow, notebook > header.bottom > tabs > arrow {
-    margin-left: -5px;
-    margin-right: -5px;
-    padding-left: 4px;
-    padding-right: 4px; }
-    notebook > header.top > tabs > arrow.down, notebook > header.bottom > tabs > arrow.down {
-      -gtk-icon-source: -gtk-icontheme("pan-start-symbolic"); }
-    notebook > header.top > tabs > arrow.up, notebook > header.bottom > tabs > arrow.up {
-      -gtk-icon-source: -gtk-icontheme("pan-end-symbolic"); }
-  notebook > header.left > tabs > arrow {
-    border-left-style: none; }
-  notebook > header.right > tabs > arrow {
-    border-right-style: none; }
-  notebook > header.left > tabs > arrow, notebook > header.right > tabs > arrow {
-    margin-top: -5px;
-    margin-bottom: -5px;
-    padding-top: 4px;
-    padding-bottom: 4px; }
-    notebook > header.left > tabs > arrow.down, notebook > header.right > tabs > arrow.down {
-      -gtk-icon-source: -gtk-icontheme("pan-up-symbolic"); }
-    notebook > header.left > tabs > arrow.up, notebook > header.right > tabs > arrow.up {
-      -gtk-icon-source: -gtk-icontheme("pan-down-symbolic"); }
-  notebook > header > tabs > arrow {
-    min-height: 16px;
+.Notebook {
+  display: flex;
+  border: 1px solid #cdc7c2;
+  /* Tabs */
+  /* Arrows */
+  /* Action buttons */ }
+  .Notebook.top {
+    flex-direction: column; }
+  .Notebook.bottom {
+    flex-direction: column-reverse; }
+  .Notebook.left {
+    flex-direction: row; }
+  .Notebook.right {
+    flex-direction: row-reverse; }
+  .Notebook .Notebook__header {
+    flex: 0;
+    display: flex;
+    border-color: #cdc7c2;
+    border-width: 1px;
+    background-color: #e1dedb; }
+    .Notebook .Notebook__header, .Notebook .Notebook__header > .Notebook__tabs {
+      display: flex;
+      align-items: center; }
+    .Notebook .Notebook__header.top {
+      border-bottom-style: solid; }
+    .Notebook .Notebook__header.bottom {
+      border-top-style: solid; }
+    .Notebook .Notebook__header.left {
+      border-right-style: solid; }
+    .Notebook .Notebook__header.right {
+      border-left-style: solid; }
+    .Notebook .Notebook__header.top, .Notebook .Notebook__header.bottom {
+      flex-direction: row; }
+      .Notebook .Notebook__header.top > .Notebook__tabs, .Notebook .Notebook__header.bottom > .Notebook__tabs {
+        flex-direction: row;
+        padding-left: 4px;
+        padding-right: 4px; }
+    .Notebook .Notebook__header.left, .Notebook .Notebook__header.right {
+      flex-direction: column; }
+      .Notebook .Notebook__header.left > .Notebook__tabs, .Notebook .Notebook__header.right > .Notebook__tabs {
+        flex-direction: column;
+        padding-top: 4px;
+        padding-bottom: 4px; }
+  .Notebook .Notebook__tabs > .Notebook__tab {
+    transition: outline-width 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94), outline-offset 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    padding: 3px 12px;
+    min-height: 30px;
+    min-width: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #2e3436;
+    font-weight: normal;
+    cursor: default;
+    user-select: none;
+    border: 0; }
+    .Notebook .Notebook__tabs > .Notebook__tab:focus {
+      outline: 0 solid transparent;
+      outline-offset: 4px; }
+    .Notebook .Notebook__tabs > .Notebook__tab:focus:focus:focus-visible {
+      outline-color: rgba(53, 132, 228, 0.5);
+      outline-width: 2px;
+      outline-offset: -2px; }
+    .Notebook .Notebook__tabs > .Notebook__tab:hover {
+      color: #2e3436;
+      background-color: #efedec; }
+    .Notebook .Notebook__tabs > .Notebook__tab.selected {
+      color: #2e3436;
+      background-color: #efedec; }
+    .Notebook .Notebook__tabs > .Notebook__tab.selected:hover {
+      background-color: #f4f2f1; }
+  .Notebook.top .Notebook__tabs > .Notebook__tab:hover {
+    box-shadow: inset 0 -3px #c8c2bc; }
+  .Notebook.top .Notebook__tabs > .Notebook__tab.selected {
+    box-shadow: inset 0 -3px #3584e4; }
+  .Notebook.bottom .Notebook__tabs > .Notebook__tab:hover {
+    box-shadow: inset 0 3px #c8c2bc; }
+  .Notebook.bottom .Notebook__tabs > .Notebook__tab.selected {
+    box-shadow: inset 0 3px #3584e4; }
+  .Notebook.left .Notebook__tabs > .Notebook__tab:hover {
+    box-shadow: inset -3px 0 #c8c2bc; }
+  .Notebook.left .Notebook__tabs > .Notebook__tab.selected {
+    box-shadow: inset -3px 0 #3584e4; }
+  .Notebook.right .Notebook__tabs > .Notebook__tab:hover {
+    box-shadow: inset 3px 0 #c8c2bc; }
+  .Notebook.right .Notebook__tabs > .Notebook__tab.selected {
+    box-shadow: inset 3px 0 #3584e4; }
+  .Notebook.top .Notebook__tab, .Notebook.bottom .Notebook__tab {
+    margin-left: 4px;
+    margin-right: 4px; }
+    .Notebook.top .Notebook__tab.reorderable, .Notebook.bottom .Notebook__tab.reorderable {
+      border-style: none solid; }
+  .Notebook.left .Notebook__tab, .Notebook.right .Notebook__tab {
+    margin-top: 4px;
+    margin-bottom: 4px;
+    width: 100%;
+    justify-content: start; }
+    .Notebook.left .Notebook__tab.reorderable, .Notebook.right .Notebook__tab.reorderable {
+      border-style: solid none; }
+    .Notebook.left .Notebook__tab > .Label, .Notebook.right .Notebook__tab > .Label {
+      flex: 1; }
+  .Notebook .Notebook__tab button {
+    padding: 0;
+    margin: 0;
+    margin-left: 6px;
+    margin-right: -6px;
+    margin-bottom: -2px;
     min-width: 16px;
+    min-height: 16px;
+    opacity: 0.3;
+    transition: all 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+    border-color: transparent;
+    background-color: transparent;
+    box-shadow: inset 0 1px rgba(255, 255, 255, 0);
+    text-shadow: none;
+    --icon-shadow: none; }
+    .Notebook .Notebook__tab button::before {
+      opacity: 0; }
+    .Notebook .Notebook__tab button:hover {
+      color: #2e3436;
+      border-color: #e3e1de;
+      border-bottom-color: #ccc7c2;
+      background-color: #fefefe;
+      box-shadow: inset 0 1px #f8f8f7, 0 1px 2px rgba(0, 0, 0, 0.07);
+      opacity: 1;
+      border-color: #c1bab3; }
+      .Notebook .Notebook__tab button:hover::before {
+        opacity: 0; }
+  .Notebook .Notebook__arrow {
+    min-height: 30px;
+    min-width: 30px;
     border-radius: 0; }
-    notebook > header > tabs > arrow:hover:not(:active):not(:backdrop) {
-      background-clip: padding-box;
-      background-image: none;
-      background-color: rgba(255, 255, 255, 0.3);
+    .Notebook .Notebook__arrow:not(:disabled):not(.disabled):hover:not(:active) {
+      background-color: rgba(255, 255, 255, 0.5);
       border-color: transparent;
       box-shadow: none; }
-    notebook > header > tabs > arrow:disabled {
+    .Notebook .Notebook__arrow:not(:disabled):not(.disabled):active {
+      background-color: #cecac5; }
+    .Notebook .Notebook__arrow:disabled {
       border-color: transparent;
       background-color: transparent;
       box-shadow: inset 0 1px rgba(255, 255, 255, 0);
       text-shadow: none;
       --icon-shadow: none; }
-      notebook > header > tabs > arrow:disabled::before {
+      .Notebook .Notebook__arrow:disabled::before {
         opacity: 0; }
-  notebook > header > tabs > tab {
-    transition: outline-width 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94), outline-offset 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    min-height: 30px;
-    min-width: 30px;
-    padding: 3px 12px;
-    color: #2e3436;
-    font-weight: normal;
-    border-width: 1px;
-    border-color: transparent; }
-    notebook > header > tabs > tab:hover {
-      color: #2e3436;
-      background-color: #d8d4d0; }
-      notebook > header > tabs > tab.reorderable-page:hover {
-        border-color: rgba(205, 199, 194, 0.3);
-        background-color: rgba(246, 245, 244, 0.2); }
-    notebook > header > tabs > tab:not(:checked) {
-      outline-color: transparent; }
-    notebook > header > tabs > tab:checked {
-      color: #2e3436; }
-      notebook > header > tabs > tab.reorderable-page:checked {
-        border-color: rgba(205, 199, 194, 0.5);
-        background-color: rgba(246, 245, 244, 0.5); }
-        notebook > header > tabs > tab.reorderable-page:checked:hover {
-          background-color: rgba(246, 245, 244, 0.7); }
-    notebook > header > tabs > tab button.flat {
-      color: alpha(currentColor,0.3);
-      padding: 0;
-      margin-top: 4px;
-      margin-bottom: 4px;
-      min-width: 20px;
-      min-height: 20px; }
-      notebook > header > tabs > tab button.flat:hover {
-        color: currentColor; }
-      notebook > header > tabs > tab button.flat:last-child {
-        margin-left: 4px;
-        margin-right: -4px; }
-      notebook > header > tabs > tab button.flat:first-child {
-        margin-left: -4px;
-        margin-right: 4px; }
-  notebook > header.top > tabs, notebook > header.bottom > tabs {
+  .Notebook.top .Notebook__arrow:first-child, .Notebook.bottom .Notebook__arrow:first-child {
+    margin-right: -4px; }
+  .Notebook.top .Notebook__arrow:last-child, .Notebook.bottom .Notebook__arrow:last-child {
+    margin-left: -4px; }
+  .Notebook.left .Notebook__arrow, .Notebook.right .Notebook__arrow {
+    width: 100%; }
+    .Notebook.left .Notebook__arrow:first-child, .Notebook.right .Notebook__arrow:first-child {
+      margin-bottom: -4px; }
+    .Notebook.left .Notebook__arrow:last-child, .Notebook.right .Notebook__arrow:last-child {
+      margin-top: -4px; }
+  .Notebook.bottom .Notebook__arrow, .Notebook.top .Notebook__arrow {
     padding-left: 4px;
     padding-right: 4px; }
-    notebook > header.top > tabs:not(:only-child), notebook > header.bottom > tabs:not(:only-child) {
-      margin-left: 3px;
-      margin-right: 3px; }
-      notebook > header.top > tabs:not(:only-child):first-child, notebook > header.bottom > tabs:not(:only-child):first-child {
-        margin-left: -1px; }
-      notebook > header.top > tabs:not(:only-child):last-child, notebook > header.bottom > tabs:not(:only-child):last-child {
-        margin-right: -1px; }
-    notebook > header.top > tabs > tab, notebook > header.bottom > tabs > tab {
-      margin-left: 4px;
-      margin-right: 4px; }
-      notebook > header.top > tabs > tab.reorderable-page, notebook > header.bottom > tabs > tab.reorderable-page {
-        border-style: none solid; }
-  notebook > header.left > tabs, notebook > header.right > tabs {
+  .Notebook.top .Notebook__arrow {
+    border-top-style: none; }
+  .Notebook.bottom .Notebook__arrow {
+    border-bottom-style: none; }
+  .Notebook.right .Notebook__arrow, .Notebook.left .Notebook__arrow {
     padding-top: 4px;
     padding-bottom: 4px; }
-    notebook > header.left > tabs:not(:only-child), notebook > header.right > tabs:not(:only-child) {
-      margin-top: 3px;
-      margin-bottom: 3px; }
-      notebook > header.left > tabs:not(:only-child):first-child, notebook > header.right > tabs:not(:only-child):first-child {
-        margin-top: -1px; }
-      notebook > header.left > tabs:not(:only-child):last-child, notebook > header.right > tabs:not(:only-child):last-child {
-        margin-bottom: -1px; }
-    notebook > header.left > tabs > tab, notebook > header.right > tabs > tab {
-      margin-top: 4px;
-      margin-bottom: 4px; }
-      notebook > header.left > tabs > tab.reorderable-page, notebook > header.right > tabs > tab.reorderable-page {
-        border-style: solid none; }
-  notebook > header.top > tabs > tab {
-    padding-bottom: 4px; }
-  notebook > header.bottom > tabs > tab {
-    padding-top: 4px; }
-
-notebook > stack:not(:only-child) {
-  background-color: #ffffff; }
+  .Notebook.left .Notebook__arrow {
+    border-left-style: none; }
+  .Notebook.right .Notebook__arrow {
+    border-right-style: none; }
+  .Notebook .Notebook__action button {
+    border-color: transparent;
+    background-color: transparent;
+    box-shadow: inset 0 1px rgba(255, 255, 255, 0);
+    text-shadow: none;
+    --icon-shadow: none; }
+    .Notebook .Notebook__action button::before {
+      opacity: 0; }
+  .Notebook .Notebook__content {
+    flex: 1;
+    background-color: #ffffff; }
 
 /**************
  * Scrollbars *

@@ -218,8 +218,8 @@ class Dropdown extends React.Component {
 
     if (actualChildren.length === 0)
       actualChildren.push(
-        <Menu.Item className='text-muted'>
-          No option found
+        <Menu.Item>
+          <Label muted italic>No option found</Label>
         </Menu.Item>
       )
 

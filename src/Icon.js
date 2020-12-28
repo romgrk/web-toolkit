@@ -1110,7 +1110,7 @@ function Icon({ className, name, ...rest }) {
   const element = icons[name]
 
   if (!element)
-    throw new Error('Icon: invalid name: ' + name)
+    return <span>Invalid name: {name}</span>
 
   return (
     <span className={cx('Icon', className)} {...rest}>

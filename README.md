@@ -2,6 +2,8 @@
 
 This is a work in progress web toolkit using GTK's default theme, Adwaita.
 
+[See live demo](https://github.com/romgrk/web-toolkit)
+
 ## Why
 
 All UI design frameworks suck. No one knows how to design. Except for Gnome designers
@@ -11,6 +13,8 @@ strangely.  And maybe Apple too, but they're not in the OSS business so I avoid 
 
 ![demo-1](https://raw.githubusercontent.com/romgrk/web-toolkit/master/static/demo-1.png)
 ![demo-2](https://raw.githubusercontent.com/romgrk/web-toolkit/master/static/demo-2.png)
+![demo-3](https://raw.githubusercontent.com/romgrk/web-toolkit/master/static/demo-3.png)
+![demo-4](https://raw.githubusercontent.com/romgrk/web-toolkit/master/static/demo-4.png)
 
 ## Roadmap
 

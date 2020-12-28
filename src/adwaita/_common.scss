@@ -50,6 +50,14 @@ $popover_radius: $button_radius + 4;
 }
 
 /***************
+ * Utils       *
+ ***************/
+
+.user-select-none {
+  user-select: none;
+}
+
+/***************
  * Base States *
  ***************/
 .background {
@@ -2096,13 +2104,8 @@ $_treeview_backdrop_borders_color: if($variant=='light',mix($backdrop_borders_co
  * Popover Base Menus *
  **********************/
 
-.popover.menu {
+.popover {
   padding: 0;
-  > .popover__container {
-    display: flex;
-    flex-direction: column;
-    background-color: $menu_color;
-  }
   &.MenuBar__popover > .popover__container {
     border-top-left-radius:  0;
     border-top-right-radius: 0;
@@ -2238,7 +2241,7 @@ $_treeview_backdrop_borders_color: if($variant=='light',mix($backdrop_borders_co
   padding: 0px;
   box-shadow: inset 0 -1px transparentize(black, 0.9);
 
-  > .MenuBar__item {
+  > .MenuBar__button {
     @include button('undecorated');
     color: $text_color;
 
@@ -2275,14 +2278,14 @@ $_treeview_backdrop_borders_color: if($variant=='light',mix($backdrop_borders_co
     }
   }
 
-  > .MenuBar__item popover.menu.background > .popover__container {
+  > .MenuBar__button popover.menu > .popover__container {
     padding: $menu-margin;
   }
   //nested submenus
-  > .MenuBar__item popover.menu popover.menu {
+  > .MenuBar__button popover.menu popover.menu {
     padding: 0 0 4px 0;
   }
-  > .MenuBar__item popover.menu.background popover.menu.background > .popover__container {
+  > .MenuBar__button popover.menu popover.menu > .popover__container {
     margin: 0;
     border-radius: $popover_radius; //including top
   }

@@ -59,6 +59,9 @@ button {
 .text-muted {
   color: #929595; }
 
+.text-italic {
+  font-style: italic; }
+
 /***************
  * Selections  *
  ***************/
@@ -86,6 +89,12 @@ button {
 
 *::-webkit-scrollbar-thumb:active {
   background-color: #888; }
+
+/***************
+ * Utils       *
+ ***************/
+.user-select-none {
+  user-select: none; }
 
 /***************
  * Base States *
@@ -2395,13 +2404,9 @@ pathbar > button.slider-button {
 /**********************
  * Popover Base Menus *
  **********************/
-.popover.menu {
+.popover {
   padding: 0; }
-  .popover.menu > .popover__container {
-    display: flex;
-    flex-direction: column;
-    background-color: #ffffff; }
-  .popover.menu.MenuBar__popover > .popover__container {
+  .popover.MenuBar__popover > .popover__container {
     border-top-left-radius: 0;
     border-top-right-radius: 0;
     border-top: none; }
@@ -2525,7 +2530,7 @@ pathbar > button.slider-button {
 .MenuBar {
   padding: 0px;
   box-shadow: inset 0 -1px rgba(0, 0, 0, 0.1); }
-  .MenuBar > .MenuBar__item {
+  .MenuBar > .MenuBar__button {
     border-color: transparent;
     background-color: transparent;
     box-shadow: inset 0 1px rgba(255, 255, 255, 0);
@@ -2537,25 +2542,25 @@ pathbar > button.slider-button {
     border-width: 0;
     border-top: 3px solid transparent;
     border-bottom: 3px solid transparent; }
-    .MenuBar > .MenuBar__item::before {
+    .MenuBar > .MenuBar__button::before {
       opacity: 0; }
-    .MenuBar > .MenuBar__item:hover, .MenuBar > .MenuBar__item.hover, .MenuBar > .MenuBar__item:active, .MenuBar > .MenuBar__item.active {
+    .MenuBar > .MenuBar__button:hover, .MenuBar > .MenuBar__button.hover, .MenuBar > .MenuBar__button:active, .MenuBar > .MenuBar__button.active {
       color: #3584e4;
       border-bottom: 3px solid #3584e4; }
-    .MenuBar > .MenuBar__item.focus, .MenuBar > .MenuBar__item:focus {
+    .MenuBar > .MenuBar__button.focus, .MenuBar > .MenuBar__button:focus {
       outline: none;
       background-color: #efedec; }
-    .MenuBar > .MenuBar__item.selected {
+    .MenuBar > .MenuBar__button.selected {
       box-shadow: inset 0 -3px #3584e4;
       color: #1b6acb; }
-    .MenuBar > .MenuBar__item:disabled {
+    .MenuBar > .MenuBar__button:disabled {
       color: #929595;
       box-shadow: none; }
-  .MenuBar > .MenuBar__item popover.menu.background > .popover__container {
+  .MenuBar > .MenuBar__button popover.menu > .popover__container {
     padding: 5px; }
-  .MenuBar > .MenuBar__item popover.menu popover.menu {
+  .MenuBar > .MenuBar__button popover.menu popover.menu {
     padding: 0 0 4px 0; }
-  .MenuBar > .MenuBar__item popover.menu.background popover.menu.background > .popover__container {
+  .MenuBar > .MenuBar__button popover.menu popover.menu > .popover__container {
     margin: 0;
     border-radius: 9px; }
 

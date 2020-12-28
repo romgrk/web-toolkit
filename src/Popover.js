@@ -7,17 +7,27 @@ import cx from 'classname'
 const NOOP = () => {}
 
 function getInversePlacement(p) {
-  switch (p) {
-    case 'top': return 'bottom'
-    case 'bottom': return 'top'
-    case 'left': return 'right'
-    case 'right': return 'left'
-    default:
-      return 'top'
-  }
+  if (p.startsWith('top')) return 'bottom'
+  if (p.startsWith('bottom')) return 'top'
+  if (p.startsWith('left')) return 'right'
+  if (p.startsWith('right')) return 'left'
+  return 'top'
 }
 
-window.limit = 0
+const PLACEMENTS = [
+  'top',
+  'top-start',
+  'top-end',
+  'bottom',
+  'bottom-start',
+  'bottom-end',
+  'right',
+  'right-start',
+  'right-end',
+  'left',
+  'left-start',
+  'left-end',
+]
 
 class Popover extends React.PureComponent {
   static propTypes = {
@@ -26,30 +36,28 @@ class Popover extends React.PureComponent {
     arrow: prop.bool,
     content: prop.oneOfType([prop.node, prop.func]).isRequired,
     children: prop.object,
-    position: prop.oneOf(['top', 'right', 'bottom', 'left']),
+    placement: prop.oneOf(PLACEMENTS),
     align: prop.oneOf(['right', 'left']),
     method: prop.oneOf(['mouseover', 'click', 'click-controlled', 'none']),
     width: prop.oneOf(['trigger']),
     delay: prop.number,
-    closeDelay: prop.number,
     onOpen: prop.func,
     onClose: prop.func,
   }
 
   static defaultProps = {
     arrow: true,
-    position: 'bottom',
+    placement: 'bottom',
     align: 'right',
     method: 'click',
     delay: 200,
-    closeDelay: 200,
     onOpen: NOOP,
     onClose: NOOP,
   }
 
   static getDerivedStateFromProps(props, state) {
-    if ('position' in props)
-      return { placement: props.position }
+    if ('placement' in props)
+      return { placement: props.placement }
     return null
   }
 
@@ -66,7 +74,7 @@ class Popover extends React.PureComponent {
 
     this.state = {
       open: false,
-      placement: props.position,
+      placement: props.placement,
       styles: {},
     }
 
@@ -112,7 +120,7 @@ class Popover extends React.PureComponent {
     this.popper = createPopper(
       this.triggerRef.current,
       this.popoverRef.current, {
-      placement: this.props.position,
+      placement: this.props.placement,
       modifiers: [
         {
           name: 'arrow',
@@ -206,13 +214,13 @@ class Popover extends React.PureComponent {
       this.openTimeout = clearTimeout(this.openTimeout)
 
     if (this.state.open) {
-      if (!this.props.closeDelay) {
+      if (!this.props.delay) {
         this.close()
       }
       else {
         this.closeTimeout = setTimeout(() => {
           this.close()
-        }, this.props.closeDelay)
+        }, this.props.delay)
       }
     }
   }
@@ -306,7 +314,6 @@ class Popover extends React.PureComponent {
         {createPortal((
           <div
             className={popoverClassName}
-            style={/* position */ undefined}
             ref={this.popoverRef}
           >
             {arrow &&

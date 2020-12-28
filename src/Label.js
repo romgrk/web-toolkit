@@ -16,6 +16,8 @@ function Label({
   success,
   warning,
   danger,
+  italic,
+  noSelect,
 }) {
   return (
     <span
@@ -32,6 +34,8 @@ function Label({
             'text-success': success,
             'text-warning': warning,
             'text-danger': danger,
+            'text-italic': italic,
+            'user-select-none': noSelect,
           }
         ) + ' ' + cx(className)
       }

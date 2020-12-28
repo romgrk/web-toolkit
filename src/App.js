@@ -9,6 +9,7 @@ import Input from './Input'
 import InputNumber from './InputNumber'
 import Label from './Label'
 import Menu from './Menu'
+import MenuBar from './MenuBar'
 import Popover from './Popover'
 import Separator from './Separator'
 import Spinner from './Spinner'
@@ -92,18 +93,6 @@ function AppContent() {
         <DemoMenu />
       </Box>
       <br/>
-
-      {/*
-        <Box horizontal>
-          <Box vertical>
-            <DemoDropdown users={users} />
-            <DemoToolbar />
-          </Box>
-          <DemoFrame />
-          <DemoMenu />
-        </Box>
-        <br/>
-      */}
 
       {/*
         <DemoHeaderBar />
@@ -360,6 +349,23 @@ function DemoToolbar() {
   return (
     <>
       <div className='Frame'>
+        <MenuBar>
+          <MenuBar.Button label='File'>
+            <Menu>
+              <Menu.Button>New</Menu.Button>
+              <Menu.Button>Open</Menu.Button>
+              <Menu.Button menu={true}>
+                Other
+              </Menu.Button>
+              <Menu.Separator />
+              <Menu.Button accelerator='Ctrl+Q'>
+                Quit
+              </Menu.Button>
+            </Menu>
+          </MenuBar.Button>
+          <MenuBar.Button label='Edit'></MenuBar.Button>
+          <MenuBar.Button label='View'></MenuBar.Button>
+        </MenuBar>
         <Toolbar horizontal>
           <Button icon='document-new' />
           <Button icon='document-edit' />
@@ -387,9 +393,9 @@ function DemoFrame() {
   return (
     <div className='Frame' style={{ height: 160, marginBottom: '1em' }}>
       <div className='MenuBar'>
-        <button className='MenuBar__item active'>File</button>
-        <button className='MenuBar__item'>Edit</button>
-        <button className='MenuBar__item'>View</button>
+        <button className='MenuBar__button active'>File</button>
+        <button className='MenuBar__button'>Edit</button>
+        <button className='MenuBar__button'>View</button>
       </div>
       <div className='MenuBar__popover popover Menu menu open' style={{ position: 'relative' }}>
         <div className='popover__container'>

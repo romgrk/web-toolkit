@@ -42,7 +42,7 @@ function App() {
    * }, []) */
 
   return (
-    <div className="App Box vertical compact">
+    <div className="App background Box vertical compact">
       <AppHeader />
       <AppContent />
     </div>

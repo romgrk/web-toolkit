@@ -82,7 +82,7 @@ function Input({
         }
       </div>
       {progress &&
-        <div className={cx('Input__progress', progress === true ? 'undeterminate' : undefined)}>
+        <div className={cx('Input__progress', progress === true ? 'indeterminate' : undefined)}>
           <span
             className='Input__progress__bar'
             style={typeof progress === 'number' ? { width: progress + '%' } : undefined}

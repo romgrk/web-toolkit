@@ -381,7 +381,7 @@ $popover_radius: $button_radius + 4;
     left: var(--input-padding);
   }
   50% {
-    left: calc(100% - var(--progress-undeterminate-width) - var(--input-padding, 8px));
+    left: calc(100% - var(--progress-indeterminate-width) - var(--input-padding, 8px));
   }
   100% {
     left: var(--input-padding);
@@ -391,7 +391,7 @@ $popover_radius: $button_radius + 4;
 %entry,
 .Input {
   --input-padding: 8px;
-  --progress-undeterminate-width: 50px;
+  --progress-indeterminate-width: 50px;
 
   %entry_basic, & {
     position: relative;
@@ -545,9 +545,9 @@ $popover_radius: $button_radius + 4;
       border-style: solid;
     }
 
-    &.undeterminate {
+    &.indeterminate {
       height: calc(100% - 1px);
-      width: var(--progress-undeterminate-width);
+      width: var(--progress-indeterminate-width);
       animation: move_along_width 2.5s infinite;
     }
   }
@@ -2857,58 +2857,10 @@ $_treeview_backdrop_borders_color: if($variant=='light',mix($backdrop_borders_co
 /************
  * GtkScale *
  ************/
-%scale_trough {
-  border: 1px solid $borders_color;
-  border-radius: 3px;
-  background-color: $dark_fill;
-
-  &:disabled {
-   background-color: $insensitive_bg_color;
-   border-color: $insensitive_borders_color;
-  }
-
-  // ...on selected list rows
-  row.selected & {
-    &:disabled, & {
-      outline-color: $alt_focus_border_color;
-      border-color: $selected_borders_color;
-    }
-  }
-
-  // OSD
-  .osd & {
-    border-color: $osd_borders_color;
-    background-color: transparentize($osd_borders_color, 0.2);
-
-    &:disabled { background-color: $osd_insensitive_bg_color; }
-  }
-}
-
-%scale_highlight {
-  border: 1px solid $selected_borders_color;
-  border-radius: 3px;
-  background-color: $selected_bg_color;
-
-  &:disabled {
-    background-color: transparent;
-    border-color: transparent;
-  }
-
-  // ...on selected list rows
-  row.selected & { &:disabled, & { border-color: $selected_borders_color; }}
-
-  // OSD
-  .osd & {
-    border-color: $osd_borders_color;
-
-    &:disabled { border-color: transparent; }
-  }
-}
+$_range_bg: darken($dark_fill, 5%);
+$_range_thumb_size: 16px;
 
 .Range {
-  $_range_bg: darken($dark_fill, 5%);
-  $_range_thumb_size: 16px;
-
   // sizing
   $_marks_length: 6px;
   $_marks_distance: 6px;
@@ -2940,17 +2892,20 @@ $_treeview_backdrop_borders_color: if($variant=='light',mix($backdrop_borders_co
     cursor: default;
   }
 
+  @at-root %range_content,
   .Range__content {
     position: relative;
     display: inline-block;
     width: 100%;
     height: 4px;
   }
+  @at-root %range_content_vertical,
   &.vertical .Range__content {
     width: 4px;
     height: 100%;
   }
 
+  @at-root %range_rail,
   .Range__rail {
     display: block;
     position: absolute;
@@ -2963,15 +2918,18 @@ $_treeview_backdrop_borders_color: if($variant=='light',mix($backdrop_borders_co
     background-color: $_range_bg;
     opacity: 0.38;
   }
+  @at-root %range_rail_vertical,
   &.vertical .Range__rail {
     height: 100%;
     width: 4px;
   }
+  @at-root %range_rail_disabled,
   &.disabled .Range__rail {
     @include button('insensitive');
-    border: 1px solid darken($borders_color, 10%);
+    border: 1px solid darken($borders_color, 15%);
   }
 
+  @at-root %range_track,
   .Range__track {
     display: block;
     position: absolute;
@@ -2982,6 +2940,7 @@ $_treeview_backdrop_borders_color: if($variant=='light',mix($backdrop_borders_co
     background-color: $selected_bg_color;
     transition: $button_transition;
   }
+  @at-root %range_track_vertical,
   &.vertical .Range__track {
     width: 4px;
   }
@@ -3019,6 +2978,7 @@ $_treeview_backdrop_borders_color: if($variant=='light',mix($backdrop_borders_co
   }
   &.disabled .Range__thumb {
     @include button('insensitive');
+    border: 1px solid darken($borders_color, 8%);
     &:hover {
       box-shadow: none;
     }
@@ -3081,88 +3041,81 @@ $_treeview_backdrop_borders_color: if($variant=='light',mix($backdrop_borders_co
 }
 
 
-
 /*****************
  * Progress bars *
  *****************/
-progressbar {
-  // sizing
-  &.horizontal {
-    > trough {
-      min-width: 150px;
-      &, > progress { min-height: 2px; }
-    }
-  }
+
+.Progress {
+  position: relative;
+  display: inline-flex;
+  cursor: pointer;
+
+  padding: 12px;
+  height: 28px;
+  width: 100%;
 
   &.vertical {
-    > trough {
-      min-height: 80px;
-      &, > progress { min-width: 2px; }
-    }
+    width: 28px;
+    height: 100%;
   }
 
-  &.horizontal > trough > progress { margin: 0 -1px; } // the progress node is positioned after the trough border
-  &.vertical > trough > progress { margin: -1px 0; }   // this moves it over it.
-
-
-  // FIXME: insensitive state missing and some other state should be set probably
-  font-size: smaller;
-  color: transparentize($fg_color, 0.6);
-  font-feature-settings: "tnum";
-
-  > trough { @extend %scale_trough; }
-
-  > trough > progress {
-    @extend %scale_highlight; /* share most of scales' */
-    /* override insensitive that is specific to progress */
-    &:disabled {
-      background-color: $insensitive_fg_color;
-      border-color: $insensitive_fg_color;
-    }
-
-    border-radius: 1.5px;
-
-    &.left {
-      border-top-left-radius: 2px;
-      border-bottom-left-radius: 2px;
-    }
-
-    &.right {
-      border-top-right-radius: 2px;
-      border-bottom-right-radius: 2px;
-    }
-
-    &.top {
-      border-top-right-radius: 2px;
-      border-top-left-radius: 2px;
-    }
-
-    &.bottom {
-      border-bottom-right-radius: 2px;
-      border-bottom-left-radius: 2px;
-    }
+  .Progress__content {
+    @extend %range_content;
+  }
+  &.vertical .Progress__content {
+    @extend %range_content_vertical;
   }
 
-  &.osd { // progressbar.osd used for epiphany page loading progress
-    min-width: 3px;
-    min-height: 3px;
-    background-color: transparent;
-
-    > trough {
-      border-style: none;
-      border-radius: 0;
-      background-color: transparent;
-      box-shadow: none;
-
-      > progress {
-        border-style: none;
-        border-radius: 0;
-      }
-    }
+  .Progress__rail {
+    @extend %range_rail;
+  }
+  &.vertical .Progress__rail {
+    @extend %range_rail_vertical;
+  }
+  &.disabled .Progress__rail {
+    @extend %range_rail_disabled;
   }
 
-  > trough.empty > progress { all: unset; } // makes the progress indicator disappear, when the fraction is 0
+  .Progress__track {
+    @extend %range_track;
+  }
+  &.vertical .Progress__track {
+    @extend %range_track_vertical;
+  }
+  &.indeterminate:not(.vertical) .Progress__track {
+    width: 25%;
+    animation: progress_horizontal 2.5s infinite;
+  }
+  &.indeterminate.vertical .Progress__track {
+    height: 25%;
+    animation: progress_vertical 2.5s infinite;
+  }
+
+  &.labeled {
+    padding-top: 24px;
+  }
+  .Progress__label {
+    position: absolute;
+    top: 3px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: rgba($insensitive_fg_color, 0.7);
+    white-space: nowrap;
+  }
 }
+
+@keyframes progress_horizontal {
+  0%   { left: 0%; }
+  50%  { left: calc(100% - 25%); }
+  100% { left: 0%; }
+}
+
+@keyframes progress_vertical {
+  0%   { top: 0%; }
+  50%  { top: calc(100% - 25%); }
+  100% { top: 0%; }
+}
+
 
 /*************
  * Level Bar *

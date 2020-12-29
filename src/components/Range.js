@@ -33,7 +33,6 @@ const Range = React.forwardRef(function Range(props, ref) {
     'aria-label': ariaLabel,
     'aria-labelledby': ariaLabelledby,
     'aria-valuetext': ariaValuetext,
-    classes,
     className,
     defaultValue,
     disabled = false,
@@ -421,9 +420,7 @@ const Range = React.forwardRef(function Range(props, ref) {
                   aria-hidden
                   data-index={index}
                   style={style}
-                  className={cx(classes.markLabel, {
-                    [classes.markLabelActive]: markActive,
-                  })}
+                  className='Range__mark__label'
                 >
                   {mark.label}
                 </span>
@@ -517,9 +514,9 @@ Range.propTypes = {
    */
   onMouseDown: prop.func,
   /**
-   * The slider orientation.
+   * If the slider is vertical.
    */
-  orientation: prop.oneOf(['horizontal', 'vertical']),
+  vertical: prop.bool,
   /**
    * A transformation function, to change the scale of the slider.
    */

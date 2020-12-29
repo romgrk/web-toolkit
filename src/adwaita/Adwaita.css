@@ -381,14 +381,14 @@ button {
   0% {
     left: var(--input-padding); }
   50% {
-    left: calc(100% - var(--progress-undeterminate-width) - var(--input-padding, 8px)); }
+    left: calc(100% - var(--progress-indeterminate-width) - var(--input-padding, 8px)); }
   100% {
     left: var(--input-padding); } }
 
 .InputNumber.vertical > .Input__area > input, .InputNumber:not(.vertical),
 .Input {
   --input-padding: 8px;
-  --progress-undeterminate-width: 50px; }
+  --progress-indeterminate-width: 50px; }
   .InputNumber.vertical > .Input__area > input, .InputNumber:not(.vertical),
   .Input {
     position: relative;
@@ -631,10 +631,10 @@ button {
       border-width: 0 0 2px;
       border-color: #3584e4;
       border-style: solid; }
-    .InputNumber.vertical > .Input__area > input .Input__progress.undeterminate, .InputNumber:not(.vertical) .Input__progress.undeterminate,
-    .Input .Input__progress.undeterminate {
+    .InputNumber.vertical > .Input__area > input .Input__progress.indeterminate, .InputNumber:not(.vertical) .Input__progress.indeterminate,
+    .Input .Input__progress.indeterminate {
       height: calc(100% - 1px);
-      width: var(--progress-undeterminate-width);
+      width: var(--progress-indeterminate-width);
       animation: move_along_width 2.5s infinite; }
   .InputNumber.vertical > .Input__area.linked:not(.vertical) > input:not(:first-child), .linked:not(.vertical) > .InputNumber:not(:first-child):not(.vertical), .linked:not(.vertical) > .Input:not(:first-child) {
     border-top-left-radius: 0;
@@ -3188,36 +3188,6 @@ pathbar > button.slider-button {
 /************
  * GtkScale *
  ************/
-progressbar > trough {
-  border: 1px solid #cdc7c2;
-  border-radius: 3px;
-  background-color: #e1dedb; }
-  progressbar > trough:disabled {
-    background-color: #f7f6f5;
-    border-color: #d5d0cc; }
-  row.selected progressbar > trough {
-    outline-color: rgba(255, 255, 255, 0.8);
-    border-color: #185fb4; }
-  .osd progressbar > trough {
-    border-color: rgba(0, 0, 0, 0.7);
-    background-color: rgba(0, 0, 0, 0.5); }
-    .osd progressbar > trough:disabled {
-      background-color: rgba(71, 71, 71, 0.5); }
-
-progressbar > trough > progress {
-  border: 1px solid #185fb4;
-  border-radius: 3px;
-  background-color: #3584e4; }
-  progressbar > trough > progress:disabled {
-    background-color: transparent;
-    border-color: transparent; }
-  row.selected progressbar > trough > progress {
-    border-color: #185fb4; }
-  .osd progressbar > trough > progress {
-    border-color: rgba(0, 0, 0, 0.7); }
-    .osd progressbar > trough > progress:disabled {
-      border-color: transparent; }
-
 .Range {
   position: relative;
   display: inline-flex;
@@ -3260,15 +3230,17 @@ progressbar > trough > progress {
   .Range.disabled {
     pointer-events: none;
     cursor: default; }
-  .Range .Range__content {
+  .Progress .Progress__content,
+  .Range__content {
     position: relative;
     display: inline-block;
     width: 100%;
     height: 4px; }
-  .Range.vertical .Range__content {
+  .Progress.vertical .Progress__content, .Range.vertical .Range__content {
     width: 4px;
     height: 100%; }
-  .Range .Range__rail {
+  .Progress .Progress__rail,
+  .Range__rail {
     display: block;
     position: absolute;
     top: 0;
@@ -3279,10 +3251,10 @@ progressbar > trough > progress {
     border: 1px solid #90857a;
     background-color: #d5d1cd;
     opacity: 0.38; }
-  .Range.vertical .Range__rail {
+  .Progress.vertical .Progress__rail, .Range.vertical .Range__rail {
     height: 100%;
     width: 4px; }
-  .Range.disabled .Range__rail {
+  .Progress.disabled .Progress__rail, .Range.disabled .Range__rail {
     color: #929595;
     border-color: #d5d0cc;
     background-color: #f7f6f5;
@@ -3290,10 +3262,11 @@ progressbar > trough > progress {
     --icon-shadow: none;
     --icon-color: #929595;
     box-shadow: inset 0 1px rgba(255, 255, 255, 0);
-    border: 1px solid #b6aea5; }
-    .Range.disabled .Range__rail::before {
+    border: 1px solid #aaa197; }
+    .Progress.disabled .Progress__rail::before, .Range.disabled .Range__rail::before {
       opacity: 0; }
-  .Range .Range__track {
+  .Progress .Progress__track,
+  .Range__track {
     display: block;
     position: absolute;
     content: '';
@@ -3302,7 +3275,7 @@ progressbar > trough > progress {
     border: 1px solid #185fb4;
     background-color: #3584e4;
     transition: all 150ms cubic-bezier(0.25, 0.46, 0.45, 0.94); }
-  .Range.vertical .Range__track {
+  .Progress.vertical .Progress__track, .Range.vertical .Range__track {
     width: 4px; }
   .Range.no-track .Range__track {
     display: none; }
@@ -3355,7 +3328,8 @@ progressbar > trough > progress {
     text-shadow: none;
     --icon-shadow: none;
     --icon-color: #929595;
-    box-shadow: inset 0 1px rgba(255, 255, 255, 0); }
+    box-shadow: inset 0 1px rgba(255, 255, 255, 0);
+    border: 1px solid #bab3ab; }
     .Range.disabled .Range__thumb::before {
       opacity: 0; }
     .Range.disabled .Range__thumb:hover {
@@ -3399,55 +3373,47 @@ progressbar > trough > progress {
 /*****************
  * Progress bars *
  *****************/
-progressbar {
-  font-size: smaller;
-  color: rgba(46, 52, 54, 0.4);
-  font-feature-settings: "tnum"; }
-  progressbar.horizontal > trough {
-    min-width: 150px; }
-    progressbar.horizontal > trough, progressbar.horizontal > trough > progress {
-      min-height: 2px; }
-  progressbar.vertical > trough {
-    min-height: 80px; }
-    progressbar.vertical > trough, progressbar.vertical > trough > progress {
-      min-width: 2px; }
-  progressbar.horizontal > trough > progress {
-    margin: 0 -1px; }
-  progressbar.vertical > trough > progress {
-    margin: -1px 0; }
-  progressbar > trough > progress {
-    /* share most of scales' */
-    /* override insensitive that is specific to progress */
-    border-radius: 1.5px; }
-    progressbar > trough > progress:disabled {
-      background-color: #929595;
-      border-color: #929595; }
-    progressbar > trough > progress.left {
-      border-top-left-radius: 2px;
-      border-bottom-left-radius: 2px; }
-    progressbar > trough > progress.right {
-      border-top-right-radius: 2px;
-      border-bottom-right-radius: 2px; }
-    progressbar > trough > progress.top {
-      border-top-right-radius: 2px;
-      border-top-left-radius: 2px; }
-    progressbar > trough > progress.bottom {
-      border-bottom-right-radius: 2px;
-      border-bottom-left-radius: 2px; }
-  progressbar.osd {
-    min-width: 3px;
-    min-height: 3px;
-    background-color: transparent; }
-    progressbar.osd > trough {
-      border-style: none;
-      border-radius: 0;
-      background-color: transparent;
-      box-shadow: none; }
-      progressbar.osd > trough > progress {
-        border-style: none;
-        border-radius: 0; }
-  progressbar > trough.empty > progress {
-    all: unset; }
+.Progress {
+  position: relative;
+  display: inline-flex;
+  cursor: pointer;
+  padding: 12px;
+  height: 28px;
+  width: 100%; }
+  .Progress.vertical {
+    width: 28px;
+    height: 100%; }
+  .Progress.indeterminate:not(.vertical) .Progress__track {
+    width: 25%;
+    animation: progress_horizontal 2.5s infinite; }
+  .Progress.indeterminate.vertical .Progress__track {
+    height: 25%;
+    animation: progress_vertical 2.5s infinite; }
+  .Progress.labeled {
+    padding-top: 24px; }
+  .Progress .Progress__label {
+    position: absolute;
+    top: 3px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: rgba(146, 149, 149, 0.7);
+    white-space: nowrap; }
+
+@keyframes progress_horizontal {
+  0% {
+    left: 0%; }
+  50% {
+    left: calc(100% - 25%); }
+  100% {
+    left: 0%; } }
+
+@keyframes progress_vertical {
+  0% {
+    top: 0%; }
+  50% {
+    top: calc(100% - 25%); }
+  100% {
+    top: 0%; } }
 
 /*************
  * Level Bar *

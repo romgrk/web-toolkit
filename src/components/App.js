@@ -13,6 +13,7 @@ import Menu from './Menu'
 import MenuBar from './MenuBar'
 import Notebook from './Notebook'
 import Popover from './Popover'
+import Progress from './Progress'
 import Radio from './Radio'
 import Range from './Range'
 import Separator from './Separator'
@@ -264,14 +265,14 @@ function DemoInput() {
             <Input placeholder='Progress' progress />
             <Button icon='window-close' />
           </Input.Group>
+          <div className='linked vertical' style={{ minWidth: 130 }}>
+            <Input placeholder='Street' />
+            <Input placeholder='City' />
+            <Input placeholder='Country' />
+          </div>
         </div>
         <div className='column' style={{ width: 300 }}>
           <div className='row'>
-            <div className='linked vertical' style={{ minWidth: 130 }}>
-              <Input placeholder='Street' />
-              <Input placeholder='City' />
-              <Input placeholder='Country' />
-            </div>
             <InputNumber value={5} vertical />
             <InputNumber value={50} vertical disabled />
             <Box vertical>
@@ -280,6 +281,7 @@ function DemoInput() {
             </Box>
           </div>
           <Box horizontal>
+            <Progress value={25} vertical />
             <Range defaultValue={[2, 6]} min={0} max={10} step={2} vertical marks />
             <Range defaultValue={5} min={0} max={10} step={2} vertical marks disabled />
             <Box vertical>
@@ -315,6 +317,8 @@ function DemoInput() {
           </Box>
           <Range defaultValue={5} min={0} max={10} step={2} marks />
           <Range defaultValue={5} min={0} max={10} step={2} marks disabled />
+          <Progress value={25} label />
+          <Progress value={undefined} />
         </div>
       </div>
 

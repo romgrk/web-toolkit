@@ -3230,16 +3230,16 @@ pathbar > button.slider-button {
   .Range.disabled {
     pointer-events: none;
     cursor: default; }
-  .Progress .Progress__content,
+  .LevelBar .LevelBar__content, .Progress .Progress__content,
   .Range__content {
     position: relative;
     display: inline-block;
     width: 100%;
     height: 4px; }
-  .Progress.vertical .Progress__content, .Range.vertical .Range__content {
+  .LevelBar.vertical .LevelBar__content, .Progress.vertical .Progress__content, .Range.vertical .Range__content {
     width: 4px;
     height: 100%; }
-  .Progress .Progress__rail,
+  .LevelBar .LevelBar__rail, .Progress .Progress__rail,
   .Range__rail {
     display: block;
     position: absolute;
@@ -3247,23 +3247,21 @@ pathbar > button.slider-button {
     left: 0;
     width: 100%;
     height: 4px;
-    border-radius: 2px;
-    border: 1px solid #90857a;
-    background-color: #d5d1cd;
-    opacity: 0.38; }
-  .Progress.vertical .Progress__rail, .Range.vertical .Range__rail {
+    border-radius: 1px;
+    border: 1px solid #c8c2bc;
+    background-color: #ebe8e6; }
+  .LevelBar.vertical .LevelBar__rail, .Progress.vertical .Progress__rail, .Range.vertical .Range__rail {
     height: 100%;
     width: 4px; }
-  .Progress.disabled .Progress__rail, .Range.disabled .Range__rail {
+  .LevelBar.disabled .LevelBar__rail, .Progress.disabled .Progress__rail, .Range.disabled .Range__rail {
     color: #929595;
     border-color: #d5d0cc;
     background-color: #f7f6f5;
     text-shadow: none;
     --icon-shadow: none;
     --icon-color: #929595;
-    box-shadow: inset 0 1px rgba(255, 255, 255, 0);
-    border: 1px solid #aaa197; }
-    .Progress.disabled .Progress__rail::before, .Range.disabled .Range__rail::before {
+    box-shadow: inset 0 1px rgba(255, 255, 255, 0); }
+    .LevelBar.disabled .LevelBar__rail::before, .Progress.disabled .Progress__rail::before, .Range.disabled .Range__rail::before {
       opacity: 0; }
   .Progress .Progress__track,
   .Range__track {
@@ -3341,7 +3339,7 @@ pathbar > button.slider-button {
   .Range .Range__mark {
     position: absolute;
     border-radius: 1px;
-    background-color: #c3bdb7; }
+    background-color: #d8d4d0; }
     .Range .Range__mark.active {
       background-color: #3584e4; }
   .Range:not(.vertical) .Range__mark {
@@ -3353,7 +3351,7 @@ pathbar > button.slider-button {
     width: 4px;
     height: 1px; }
   .Range.disabled .Range__mark.active {
-    background-color: #c3bdb7;
+    background-color: #d8d4d0;
     box-shadow: none; }
   .Range.fine-tune.horizontal {
     padding-top: 9px;
@@ -3418,52 +3416,44 @@ pathbar > button.slider-button {
 /*************
  * Level Bar *
  *************/
-levelbar.horizontal trough > block {
-  min-height: 9px;
-  border-radius: 3px; }
-  levelbar.horizontal trough > block:dir(rtl) {
-    border-radius: 0 3px 3px 0; }
-  levelbar.horizontal trough > block:dir(ltr) {
-    border-radius: 3px 0 0 3px; }
-  levelbar.horizontal trough > block.empty, levelbar.horizontal trough > block.full {
-    border-radius: 3px; }
-
-levelbar.horizontal.discrete trough > block {
-  min-height: 2px;
-  margin: 1px;
-  min-width: 24px;
-  border-radius: 0; }
-  levelbar.horizontal.discrete trough > block:first-child {
-    border-radius: 2px 0 0 2px; }
-  levelbar.horizontal.discrete trough > block:last-child {
-    border-radius: 0 2px 2px 0; }
-
-levelbar.vertical trough > block {
-  min-width: 9px;
-  border-radius: 3px; }
-
-levelbar.vertical.discrete > trough > block {
-  min-width: 2px;
-  margin: 1px 0;
-  min-height: 32px; }
-
-levelbar > trough {
-  padding: 0; }
-
-levelbar > trough > block {
-  border: 1px solid; }
-  levelbar > trough > block.low {
-    border-color: #c26000;
-    background-color: #f57900; }
-  levelbar > trough > block.high, levelbar > trough > block:not(.empty) {
-    border-color: #1b6acb;
-    background-color: #3584e4; }
-  levelbar > trough > block.full {
-    border-color: #26ab62;
-    background-color: #33d17a; }
-  levelbar > trough > block.empty {
-    background-color: #ebe8e6;
-    border-color: #cdc7c2; }
+.LevelBar {
+  position: relative;
+  display: inline-flex;
+  cursor: pointer;
+  padding: 12px;
+  height: 28px;
+  width: 100%; }
+  .LevelBar.vertical {
+    width: 28px;
+    height: 100%; }
+  .LevelBar .LevelBar__content {
+    display: flex;
+    flex-direction: row; }
+  .LevelBar.vertical .LevelBar__content {
+    flex-direction: column; }
+  .LevelBar .LevelBar__rail {
+    position: initial;
+    border-radius: 0; }
+    .LevelBar .LevelBar__rail:first-child {
+      border-top-left-radius: 1px;
+      border-bottom-left-radius: 1px; }
+    .LevelBar .LevelBar__rail:last-child {
+      border-top-right-radius: 1px;
+      border-bottom-right-radius: 1px; }
+    .LevelBar .LevelBar__rail:not(:last-child) {
+      margin-right: 2px; }
+    .LevelBar .LevelBar__rail.danger {
+      background-color: #e61a1a;
+      border-color: #8a0f0f; }
+    .LevelBar .LevelBar__rail.warning {
+      background-color: #e3a05f;
+      border-color: #bb6d21; }
+    .LevelBar .LevelBar__rail.info {
+      background-color: #3584e4;
+      border-color: #15539e; }
+    .LevelBar .LevelBar__rail.success {
+      background-color: #5ebf8a;
+      border-color: #348358; }
 
 /**********
  * Frames *

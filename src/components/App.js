@@ -9,6 +9,7 @@ import InfoBar from './InfoBar'
 import Input from './Input'
 import InputNumber from './InputNumber'
 import Label from './Label'
+import LevelBar from './LevelBar'
 import Menu from './Menu'
 import MenuBar from './MenuBar'
 import Notebook from './Notebook'
@@ -270,6 +271,10 @@ function DemoInput() {
             <Input placeholder='City' />
             <Input placeholder='Country' />
           </div>
+          <LevelBar value={0} />
+          <LevelBar value={1} />
+          <LevelBar value={2} />
+          <LevelBar value={4} />
         </div>
         <div className='column' style={{ width: 300 }}>
           <div className='row'>

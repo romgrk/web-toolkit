@@ -1517,6 +1517,7 @@ input::-webkit-outer-spin-button {
 /**************
  * GtkInfoBar *
  **************/
+
 .InfoBar {
   display: block;
   overflow: hidden;
@@ -1536,7 +1537,7 @@ input::-webkit-outer-spin-button {
   }
 
   // TODO dark variant
-  $_types:
+  $_bar_colors:
     if($variant == 'light',
       (
         (info,    desaturate(lighten($info_color,    30%), 20%)),
@@ -1552,8 +1553,7 @@ input::-webkit-outer-spin-button {
         (danger,  desaturate(darken($danger_color, 10%), 40%)),
       )
   );
-
-  @each $_type, $_color in $_types {
+  @each $_type, $_color in $_bar_colors {
     &.#{$_type} {
       > .Box {
         border-bottom: 1px solid darken($_color, 15%);
@@ -2857,7 +2857,8 @@ $_treeview_backdrop_borders_color: if($variant=='light',mix($backdrop_borders_co
 /************
  * GtkScale *
  ************/
-$_range_bg: darken($dark_fill, 5%);
+$_range_bg: darken($bg_color, 5%);
+$_range_border: darken($_range_bg, 15%);
 $_range_thumb_size: 16px;
 
 .Range {
@@ -2913,10 +2914,9 @@ $_range_thumb_size: 16px;
     left: 0;
     width: 100%;
     height: 4px;
-    border-radius: 2px;
-    border: 1px solid darken($_range_bg, 30%);
+    border-radius: 1px;
+    border: 1px solid $_range_border;
     background-color: $_range_bg;
-    opacity: 0.38;
   }
   @at-root %range_rail_vertical,
   &.vertical .Range__rail {
@@ -2926,7 +2926,6 @@ $_range_thumb_size: 16px;
   @at-root %range_rail_disabled,
   &.disabled .Range__rail {
     @include button('insensitive');
-    border: 1px solid darken($borders_color, 15%);
   }
 
   @at-root %range_track,
@@ -3124,81 +3123,75 @@ $_range_thumb_size: 16px;
 $levelbar_size: 9px;
 $levelbar_border_radius: 3px;
 
-levelbar {
-  &.horizontal {
-    trough > block {
-      min-height: $levelbar_size;
-      border-radius: $levelbar_border_radius;
+.LevelBar {
+  position: relative;
+  display: inline-flex;
+  cursor: pointer;
 
-      &:dir(rtl) {
-        border-radius: 0 $levelbar_border_radius $levelbar_border_radius 0;
-      }
-
-      &:dir(ltr) {
-        border-radius: $levelbar_border_radius 0 0 $levelbar_border_radius;
-      }
-
-      &.empty,&.full {
-        border-radius: $levelbar_border_radius;
-      }
-    }
-
-    // segmented level bar
-    &.discrete {
-      trough > block {
-        min-height: 2px;
-        margin: 1px;
-        min-width: 24px;
-        border-radius:0;
-        &:first-child {border-radius: 2px 0 0 2px;}
-        &:last-child {
-          border-radius: 0 2px 2px 0;
-        }
-      }
-    }
-  }
+  padding: 12px;
+  height: 28px;
+  width: 100%;
 
   &.vertical {
-    trough > block {
-      min-width: $levelbar_size;
-      border-radius: $levelbar_border_radius;
-    }
-
-    &.discrete > trough > block {
-      min-width: $levelbar_size - 7px;
-      margin: 1px 0;
-      min-height: 32px;
-    }
+    width: 28px;
+    height: 100%;
   }
 
-  > trough {
-    padding: 0;
+  .LevelBar__content {
+    @extend %range_content;
+    display: flex;
+    flex-direction: row;
+  }
+  &.vertical .LevelBar__content {
+    @extend %range_content_vertical;
+    flex-direction: column;
   }
 
-  // level bar colours
-  > trough > block {
-    border: 1px solid;
-
-    &.low {
-      border-color: if($variant == 'light', darken($warning_color, 10%), $borders_color);
-      background-color: $warning_color;
+  .LevelBar__rail {
+    @extend %range_rail;
+    position: initial;
+    border-radius: 0;
+    &:first-child {
+      border-top-left-radius: 1px;
+      border-bottom-left-radius: 1px;
+    }
+    &:last-child {
+      border-top-right-radius: 1px;
+      border-bottom-right-radius: 1px;
+    }
+    &:not(:last-child) {
+      margin-right: 2px;
     }
 
-    &.high,
-    &:not(.empty) {
-      border-color: if($variant == 'light', darken($selected_bg_color, 10%), $borders_color);
-      background-color: $selected_bg_color;
+    // TODO dark variant
+    $_bar_colors:
+      if($variant == 'light',
+        (
+          (danger,  desaturate(lighten($danger_color,  10%), 20%)),
+          (warning, desaturate(lighten($warning_color, 15%), 30%)),
+          (info,    $selected_bg_color),
+          (success, desaturate(lighten($success_color, 5%), 20%)),
+        )
+        ,
+        (
+          (danger,  desaturate(lighten($danger_color,  10%), 20%)),
+          (warning, desaturate(lighten($warning_color, 15%), 30%)),
+          (info,    $selected_bg_color),
+          (success, desaturate(lighten($success_color, 5%), 20%)),
+        )
+    );
+    @each $_type, $_color in $_bar_colors {
+      &.#{$_type} {
+        background-color: $_color;
+        border-color: darken($_color, 20%);
+      }
     }
-
-    &.full {
-      border-color: if($variant == 'light', darken($success_color, 10%), $borders_color);
-      background-color: $success_color;
-    }
-
-    &.empty {
-      background-color: darken($bg_color, 5%);
-      border-color: $borders_color;
-    }
+  }
+  &.vertical .LevelBar__rail {
+    @extend %range_rail_vertical;
+  }
+  &.disabled .LevelBar__rail {
+    @extend %range_rail_disabled;
   }
 }
 

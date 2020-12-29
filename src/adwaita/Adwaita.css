@@ -3403,7 +3403,6 @@ pathbar > button.slider-button {
 .Progress {
   position: relative;
   display: inline-flex;
-  cursor: pointer;
   padding: 12px;
   height: 28px;
   width: 100%; }
@@ -3424,7 +3423,8 @@ pathbar > button.slider-button {
     left: 50%;
     transform: translateX(-50%);
     color: rgba(146, 149, 149, 0.7);
-    white-space: nowrap; }
+    white-space: nowrap;
+    user-select: none; }
 
 @keyframes progress_horizontal {
   0% {

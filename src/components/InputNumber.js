@@ -9,8 +9,13 @@ function InputNumber({
   className,
   vertical,
   disabled,
+  onChange,
   ...rest
 }) {
+  const onInputChange = ev => {
+    onChange && onChange(Number(ev.target.value), ev)
+  }
+
   if (vertical)
     return (
       <div className={cx('InputNumber', className, { disabled, vertical })}>
@@ -18,7 +23,7 @@ function InputNumber({
           <Icon name='list-add' />
         </button>
         <div className='Input__area'>
-          <input type='number' disabled={disabled} {...rest} />
+          <input type='number' disabled={disabled} onChange={onInputChange} {...rest} />
         </div>
         <button className='Button InputNumber__button down' disabled={disabled} tabIndex='-1'>
           <Icon name='list-remove' />
@@ -29,7 +34,7 @@ function InputNumber({
   return (
     <div className={cx('InputNumber', className, { disabled, vertical })}>
       <div className='Input__area'>
-        <input type='number' disabled={disabled} {...rest} />
+        <input type='number' disabled={disabled} onChange={onInputChange} {...rest} />
       </div>
       <button className='InputNumber__button down' disabled={disabled} tabIndex='-1'>
         <Icon name='list-remove' />

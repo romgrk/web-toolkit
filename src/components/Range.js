@@ -180,7 +180,7 @@ const Range = React.forwardRef(function Range(props, ref) {
     setFocusVisible(index);
 
     if (onChange) {
-      onChange(event, newValue);
+      onChange(newValue, event);
     }
     if (onChangeCommitted) {
       onChangeCommitted(event, newValue);
@@ -262,7 +262,7 @@ const Range = React.forwardRef(function Range(props, ref) {
     setValueState(newValue);
 
     if (onChange) {
-      onChange(event, newValue);
+      onChange(newValue, event);
     }
   };
   const handleTouchEnd = (event) => {
@@ -308,7 +308,7 @@ const Range = React.forwardRef(function Range(props, ref) {
     setValueState(newValue);
 
     if (onChange) {
-      onChange(event, newValue);
+      onChange(newValue, event);
     }
 
     const doc = ownerDocument(sliderRef.current);
@@ -349,7 +349,7 @@ const Range = React.forwardRef(function Range(props, ref) {
     setValueState(newValue);
 
     if (onChange) {
-      onChange(event, newValue);
+      onChange(newValue, event);
     }
 
     const doc = ownerDocument(sliderRef.current);
@@ -498,8 +498,8 @@ Range.propTypes = {
   /**
    * Callback function that is fired when the slider's value changed.
    *
-   * @param {object} event The event source of the callback.
    * @param {number | number[]} value The new value.
+   * @param {object} event The event source of the callback.
    */
   onChange: prop.func,
   /**

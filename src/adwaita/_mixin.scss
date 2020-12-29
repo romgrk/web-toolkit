@@ -1,5 +1,12 @@
 
+// source: https://www.ryadel.com/en/css3-media-query-target-only-ie-ie6-ie11-firefox-chrome-safari-edge/
+@mixin is_chrome {
+  @media screen and (-webkit-min-device-pixel-ratio:0) { 
+    @content;
+  }
+}
 
+// screen-readers-only/keyboard-accessible-only elements
 @mixin visually_hidden {
   position: absolute;
   width: 1px;

@@ -11,6 +11,7 @@ import Input from './Input'
 import InputNumber from './InputNumber'
 import Label from './Label'
 import LevelBar from './LevelBar'
+import List from './List'
 import Menu from './Menu'
 import MenuBar from './MenuBar'
 import Notebook from './Notebook'
@@ -99,6 +100,9 @@ function AppContent() {
 
       <h1>Application</h1>
 
+      <DemoList />
+      <br/>
+
       <DemoInput />
       <br/>
 
@@ -124,14 +128,6 @@ function AppContent() {
 
       <DemoTable users={users} />
       <br/>
-
-      <p>
-        <div className='List'>
-          <div className='Row activatable'>Row 1</div>
-          <div className='Row activatable'>Row 2</div>
-          <div className='Row activatable'>Row 3</div>
-        </div>
-      </p>
 
       <p className='row'>
         <span className='Label'>Label</span>
@@ -169,13 +165,70 @@ function IconGrid() {
     <>
       {iconNames.map(name =>
       <Box horizontal inline style={{ width: 250 }}>
-        <Icon name={name} style={{ transform: 'scale(1.5)' }}/>
+        <Icon name={name} style={{ transform: 'scale(1.5)' }} colored />
         <Label muted>
           {name}
         </Label>
       </Box>
       )}
     </>
+  )
+}
+
+function DemoList() {
+  const [number, setNumber] = useState(0)
+  const [active, setActive] = useState(-1)
+
+  const items = [
+    'Row 1',
+    'Row 2',
+    'Row 3',
+    'Row 4',
+    'Row 5',
+    'Row 6',
+    'Row 7',
+    'Row 8',
+    'Row 9',
+    'Row 10',
+  ]
+
+  const richItems = [
+    <Box horizontal><Label>Row 1</Label><Switch /></Box>,
+    <Box horizontal><Label>Row 2</Label><Range value={number} onChange={setNumber} /></Box>,
+    <Box horizontal><Label>Row 3</Label><InputNumber value={number} onChange={setNumber} /></Box>,
+    <Box horizontal><Label>Row 4</Label><Button icon='mail-mark-important' /></Box>,
+    <Box horizontal><Label>Row 5</Label><Checkbox /></Box>,
+    <Box horizontal><Label>Row 6</Label></Box>,
+    <Box horizontal><Label>Row 7</Label></Box>,
+    <Box horizontal><Label>Row 8</Label></Box>,
+    <Box horizontal><Label>Row 9</Label></Box>,
+    <Box horizontal><Label>Row 10</Label></Box>,
+  ]
+
+  return (
+    <Box horizontal>
+      <List style={{ width: 200, height: 150 }} separators={false}>
+        {items.map((item, i) =>
+          <List.Item
+            key={i}
+            selected={active === i}
+            onClick={i !== 0 ? () => setActive(i) : undefined}
+          >
+            {item}
+          </List.Item>
+        )}
+      </List>
+      <List style={{ width: 220, height: 150 }} rich>
+        {richItems.map((item, i) =>
+          <List.Item
+            key={i}
+            activatable={[0, 1, 3, 4].some(n => n === i) ? false : true}
+          >
+            {item}
+          </List.Item>
+        )}
+      </List>
+    </Box>
   )
 }
 

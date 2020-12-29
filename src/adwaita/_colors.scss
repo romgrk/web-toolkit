@@ -19,6 +19,7 @@ $background_darker:  mix($borders_color, $bg_color, 50%);
 $selected_fg_color: #ffffff;
 $selected_bg_color: if($variant == 'light', #3584e4, darken(#3584e4, 20%));
 $selected_borders_color: if($variant== 'light', darken($selected_bg_color, 15%), darken($selected_bg_color, 30%));
+$selected_text_shadow: 0 1px transparentize($selected_bg_color, 0.5), 0 0 2px transparentize(white, 0.4);
 
 $link_color: if($variant == 'light', darken($selected_bg_color, 10%), lighten($selected_bg_color, 20%));
 $link_visited_color: if($variant == 'light', darken($selected_bg_color, 20%), lighten($selected_bg_color, 10%));

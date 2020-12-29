@@ -3,7 +3,7 @@
  */
 
 import React from 'react'
-import cx from 'classname'
+import cx from 'clsx'
 
 
 import { ReactComponent as AcAdapterSymbolic } from '../assets/icons/ac-adapter-symbolic.svg'
@@ -1106,14 +1106,14 @@ const icons = {
   'zoom-out': ZoomOutSymbolic,
 }
 
-function Icon({ className, name, ...rest }) {
+function Icon({ className, name, colored, ...rest }) {
   const element = icons[name]
 
   if (!element)
     return <span>Invalid name: {name}</span>
 
   return (
-    <span className={cx('Icon', className)} {...rest}>
+    <span className={cx('Icon', className, { colored })} {...rest}>
       {React.createElement(element)}
     </span>
   )

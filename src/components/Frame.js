@@ -12,6 +12,8 @@ function Frame({
   light,
   dark,
   darker,
+  scrollable,
+  border,
   label,
   ...rest
 }) {
@@ -26,6 +28,8 @@ function Frame({
           light,
           dark,
           darker,
+          scrollable,
+          'no-border': !border,
         }
       )}
       role={Component === 'fieldset' ? 'presentation' : undefined}
@@ -46,6 +50,12 @@ Frame.propTypes = {
   light: prop.bool,
   dark: prop.bool,
   darker: prop.bool,
+  scrollable: prop.bool,
+  border: prop.bool,
+}
+
+Frame.defaultProps = {
+  border: true,
 }
 
 export default Frame

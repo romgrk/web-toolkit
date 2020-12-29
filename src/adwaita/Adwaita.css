@@ -119,6 +119,12 @@ button {
 /***************
  * Layout      *
  ***************/
+.separator {
+  border-bottom: 1px solid #d8d4d0;
+  border-right: 1px solid #d8d4d0;
+  min-width: 1px;
+  min-height: 1px; }
+
 .Box.horizontal {
   display: flex;
   flex-direction: row; }
@@ -179,41 +185,6 @@ button {
   .TextView > textarea.selected {
     border-radius: 3px; }
 
-.TextView > textarea {
-  border-color: #cdc7c2;
-  border-radius: 5px;
-  border-spacing: 6px;
-  transition: all 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  color: black;
-  border-color: #cdc7c2;
-  background-color: #ffffff; }
-  .TextView > textarea {
-    position: relative;
-    outline: none;
-    overflow: visible; }
-  .TextView > textarea::after {
-    content: '';
-    position: absolute;
-    pointer-events: none;
-    z-index: 2;
-    display: inline-block;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    border: 2px solid transparent;
-    border-radius: inherit;
-    transform: translate(-2px, -2px) scale(1.03);
-    transition: all 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94); }
-  .TextView > textarea:focus-within {
-    outline: none; }
-  .TextView > textarea:focus-within::after {
-    border: 2px solid rgba(53, 132, 228, 0.5);
-    transform: translate(-2px, -2px) scale(0.99); }
-
-.TextView.dnd-active {
-  caret-color: #2ec27e; }
-
 .IconView {
   outline: 0 solid transparent;
   outline-offset: 4px; }
@@ -230,10 +201,6 @@ button {
   border-style: solid;
   border-width: 1px;
   border-color: #185fb4; }
-
-.SelectionArea, .content-view > .SelectionArea, .table.content-view > .SelectionArea, .table > .SelectionArea, .Flowbox.table > .SelectionArea, .Grid.table > .SelectionArea, .Grid > .SelectionArea, .Flowbox > .SelectionArea {
-  border: 1px solid #1b6acb;
-  background-color: rgba(27, 106, 203, 0.2); }
 
 .Flowbox > .Flowbox__child {
   padding: 3px;
@@ -263,6 +230,10 @@ button {
   .Grid > .Grid__child .Grid__box {
     border-spacing: 8px;
     margin: 12px; }
+
+.SelectionArea, .content-view > .SelectionArea, .table.content-view > .SelectionArea, .table > .SelectionArea, .Flowbox.table > .SelectionArea, .Grid.table > .SelectionArea, .Flowbox > .SelectionArea, .Grid > .SelectionArea {
+  border: 1px solid #1b6acb;
+  background-color: rgba(27, 106, 203, 0.2); }
 
 /****************
  * Labels       *
@@ -703,6 +674,41 @@ button {
   background-color: #ffffff; }
   .table .Input.flat:focus-within, .table .Input:focus-within {
     border-color: #3584e4; }
+
+.TextView > textarea {
+  border-color: #cdc7c2;
+  border-radius: 5px;
+  border-spacing: 6px;
+  transition: all 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  color: black;
+  border-color: #cdc7c2;
+  background-color: #ffffff; }
+  .TextView > textarea {
+    position: relative;
+    outline: none;
+    overflow: visible; }
+  .TextView > textarea::after {
+    content: '';
+    position: absolute;
+    pointer-events: none;
+    z-index: 2;
+    display: inline-block;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 2px solid transparent;
+    border-radius: inherit;
+    transform: translate(-2px, -2px) scale(1.03);
+    transition: all 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+  .TextView > textarea:focus-within {
+    outline: none; }
+  .TextView > textarea:focus-within::after {
+    border: 2px solid rgba(53, 132, 228, 0.5);
+    transform: translate(-2px, -2px) scale(0.99); }
+
+.TextView.dnd-active {
+  caret-color: #2ec27e; }
 
 /*******************
  * Editable Labels *
@@ -3466,61 +3472,34 @@ pathbar > button.slider-button {
   .Frame.inline {
     display: inline-block;
     width: min-content; }
-  .Frame > .Label {
-    margin: 4px; }
+  .Frame.light {
+    background-color: #ffffff; }
+  .Frame.dark {
+    background-color: #f1f0ee; }
+  .Frame.darker {
+    background-color: #e1dedb; }
 
-actionbar > revealer > box {
-  padding: 6px;
-  border-spacing: 6px;
-  border-top: 1px solid #cdc7c2; }
-
-scrolledwindow > overshoot.top {
-  background-image: radial-gradient(farthest-side at top, #b6aea5 85%, rgba(182, 174, 165, 0)), radial-gradient(farthest-side at top, rgba(46, 52, 54, 0.07), rgba(46, 52, 54, 0));
-  background-size: 100% 3%, 100% 50%;
-  background-repeat: no-repeat;
-  background-position: top;
-  background-color: transparent;
-  border: none;
-  box-shadow: none; }
-
-scrolledwindow > overshoot.bottom {
-  background-image: radial-gradient(farthest-side at bottom, #b6aea5 85%, rgba(182, 174, 165, 0)), radial-gradient(farthest-side at bottom, rgba(46, 52, 54, 0.07), rgba(46, 52, 54, 0));
-  background-size: 100% 3%, 100% 50%;
-  background-repeat: no-repeat;
-  background-position: bottom;
-  background-color: transparent;
-  border: none;
-  box-shadow: none; }
-
-scrolledwindow > overshoot.left {
-  background-image: radial-gradient(farthest-side at left, #b6aea5 85%, rgba(182, 174, 165, 0)), radial-gradient(farthest-side at left, rgba(46, 52, 54, 0.07), rgba(46, 52, 54, 0));
-  background-size: 3% 100%, 50% 100%;
-  background-repeat: no-repeat;
-  background-position: left;
-  background-color: transparent;
-  border: none;
-  box-shadow: none; }
-
-scrolledwindow > overshoot.right {
-  background-image: radial-gradient(farthest-side at right, #b6aea5 85%, rgba(182, 174, 165, 0)), radial-gradient(farthest-side at right, rgba(46, 52, 54, 0.07), rgba(46, 52, 54, 0));
-  background-size: 3% 100%, 50% 100%;
-  background-repeat: no-repeat;
-  background-position: right;
-  background-color: transparent;
-  border: none;
-  box-shadow: none; }
-
-scrolledwindow > junction {
-  background: #cdc7c2, linear-gradient(to bottom, transparent 1px, #cecece 1px), linear-gradient(to right, transparent 1px, #cecece 1px); }
-  scrolledwindow > junction:dir(rtl) {
-    background: #cdc7c2, linear-gradient(to bottom, transparent 1px, #cecece 1px), linear-gradient(to left, transparent 1px, #cecece 1px); }
-
-.separator {
-  border-bottom: 1px solid #d8d4d0;
-  border-right: 1px solid #d8d4d0;
-  min-width: 1px;
-  min-height: 1px; }
-
+/* scrolledwindow {
+ *   // This is used when content is touch-dragged past boundaries.
+ *   // draws a box on top of the content, the size changes programmatically.
+ *   > overshoot {
+ *     &.top {
+ *       @include overshoot(top);
+ *     }
+ * 
+ *     &.bottom {
+ *       @include overshoot(bottom);
+ *     }
+ * 
+ *     &.left {
+ *       @include overshoot(left);
+ *     }
+ * 
+ *     &.right {
+ *       @include overshoot(right);
+ *     }
+ *   }
+ * } */
 /*********
  * Lists *
  *********/
@@ -4144,19 +4123,19 @@ tooltip.csd {
   border-radius: 5px;
   box-shadow: none; }
 
-.view.selected:focus, .view.selected,
+.view.selected:focus, .view.selected, .selected.IconView:focus, .selected.IconView, .Flowbox > .Flowbox__child.selected, .Grid > .Grid__child.selected,
+.Input > .Input__area > input::selection,
 .TextView > textarea.selected:focus,
-.TextView > textarea.selected, .TextView > textarea::selection, .selected.IconView:focus, .selected.IconView, .Flowbox > .Flowbox__child.selected, .Grid > .Grid__child.selected,
-.Input > .Input__area > input::selection, .ModelButton.flat.selected, .InputNumber:not(.vertical) > .Input__area > input::selection, .InputNumber.vertical > .Input__area > input > .Input__area > input::selection, .InputNumber.vertical > .Input__area > input::selection, .table.selected:focus, .table.selected, row.selected, calendar > grid > .Label.day-number.selected {
+.TextView > textarea.selected, .TextView > textarea::selection, .ModelButton.flat.selected, .InputNumber:not(.vertical) > .Input__area > input::selection, .InputNumber.vertical > .Input__area > input > .Input__area > input::selection, .InputNumber.vertical > .Input__area > input::selection, .table.selected:focus, .table.selected, row.selected, calendar > grid > .Label.day-number.selected {
   background-color: #3584e4; }
-  .Label.selected, .view.selected:focus, .view.selected,
+  .Label.selected, .view.selected:focus, .view.selected, .selected.IconView:focus, .selected.IconView, .Flowbox > .Flowbox__child.selected, .Grid > .Grid__child.selected,
+  .Input > .Input__area > input::selection,
   .TextView > textarea.selected:focus,
-  .TextView > textarea.selected, .TextView > textarea::selection, .selected.IconView:focus, .selected.IconView, .Flowbox > .Flowbox__child.selected, .Grid > .Grid__child.selected,
-  .Input > .Input__area > input::selection, .ModelButton.flat.selected, .InputNumber:not(.vertical) > .Input__area > input::selection, .InputNumber.vertical > .Input__area > input > .Input__area > input::selection, .InputNumber.vertical > .Input__area > input::selection, .table.selected:focus, .table.selected, row.selected, calendar > grid > .Label.day-number.selected {
+  .TextView > textarea.selected, .TextView > textarea::selection, .ModelButton.flat.selected, .InputNumber:not(.vertical) > .Input__area > input::selection, .InputNumber.vertical > .Input__area > input > .Input__area > input::selection, .InputNumber.vertical > .Input__area > input::selection, .table.selected:focus, .table.selected, row.selected, calendar > grid > .Label.day-number.selected {
     color: #ffffff; }
-    .Label.disabled::selection, .Label.selected:disabled, .view.selected:disabled,
-    .TextView > textarea.selected:disabled, .TextView > textarea:disabled::selection, .selected.IconView:disabled, .Flowbox > .Flowbox__child.selected:disabled, .Grid > .Grid__child.selected:disabled,
-    .Input > .Input__area > input:disabled::selection, .ModelButton.flat.selected:disabled, .InputNumber:not(.vertical) > .Input__area > input:disabled::selection, .InputNumber.vertical > .Input__area > input > .Input__area > input:disabled::selection, .InputNumber.vertical > .Input__area > input:disabled::selection, .table.selected:disabled, row.selected:disabled, calendar > grid > .Label.day-number.selected:disabled {
+    .Label.disabled::selection, .Label.selected:disabled, .view.selected:disabled, .selected.IconView:disabled, .Flowbox > .Flowbox__child.selected:disabled, .Grid > .Grid__child.selected:disabled,
+    .Input > .Input__area > input:disabled::selection,
+    .TextView > textarea.selected:disabled, .TextView > textarea:disabled::selection, .ModelButton.flat.selected:disabled, .InputNumber:not(.vertical) > .Input__area > input:disabled::selection, .InputNumber.vertical > .Input__area > input > .Input__area > input:disabled::selection, .InputNumber.vertical > .Input__area > input:disabled::selection, .table.selected:disabled, row.selected:disabled, calendar > grid > .Label.day-number.selected:disabled {
       color: #9ac2f2; }
 
 .monospace {

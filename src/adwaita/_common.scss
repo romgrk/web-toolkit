@@ -78,6 +78,15 @@ $popover_radius: $button_radius + 4;
  * Layout      *
  ***************/
 
+// vbox and hbox separators
+.separator {
+  // background-color: lighten($borders_color, 5%);
+  border-bottom: 1px solid lighten($borders_color, 5%);
+  border-right: 1px solid lighten($borders_color, 5%);
+  min-width: 1px;
+  min-height: 1px;
+}
+
 .Box {
   &.horizontal {
     display: flex;
@@ -133,7 +142,6 @@ $popover_radius: $button_radius + 4;
   flex: 1;
 }
 
-
 .view,
 %view {
   color: $text_color;
@@ -153,27 +161,6 @@ $popover_radius: $button_radius + 4;
   }
 }
 
-.TextView {
-  > textarea {
-    @extend %view;
-
-    border-color: $borders_color;
-    border-radius: $button_radius;
-    border-spacing: 6px;
-    transition: all 200ms $ease-out-quad;
-
-    @include entry(normal);
-
-    @include focus-ring($focus-state: ':focus-within', $method: 'after');
-
-    &::selection { @extend %selected_items; }
-  }
-
-  &.dnd-active {
-    caret-color: $drop_target_color;
-  }
-}
-
 .IconView {
   @extend .view;
 
@@ -188,11 +175,6 @@ $popover_radius: $button_radius + 4;
     border-width: 1px;
     border-color: $selected_borders_color;
   }
-}
-
-.SelectionArea {
-  border: 1px solid darken($selected_bg_color, 10%);
-  background-color: transparentize(darken($selected_bg_color, 10%), 0.8);
 }
 
 .Flowbox {
@@ -232,6 +214,11 @@ $popover_radius: $button_radius + 4;
       margin: 12px;
     }
   }
+}
+
+.SelectionArea {
+  border: 1px solid darken($selected_bg_color, 10%);
+  background-color: transparentize(darken($selected_bg_color, 10%), 0.8);
 }
 
 /****************
@@ -628,6 +615,29 @@ $popover_radius: $button_radius + 4;
     &:focus-within { border-color: $selected_bg_color; }
   }
 }
+
+// textarea component
+.TextView {
+  > textarea {
+    @extend %view;
+
+    border-color: $borders_color;
+    border-radius: $button_radius;
+    border-spacing: 6px;
+    transition: all 200ms $ease-out-quad;
+
+    @include entry(normal);
+
+    @include focus-ring($focus-state: ':focus-within', $method: 'after');
+
+    &::selection { @extend %selected_items; }
+  }
+
+  &.dnd-active {
+    caret-color: $drop_target_color;
+  }
+}
+
 
 /*******************
  * Editable Labels *
@@ -1805,7 +1815,7 @@ $_treeview_backdrop_borders_color: if($variant=='light',mix($backdrop_borders_co
   height: 100%;
 
   border: 1px solid $_treeview_borders_color;
-  background-color: $background_low;
+  background-color: $background_light;
 
   @include focus-ring();
 
@@ -2327,7 +2337,7 @@ $_treeview_backdrop_borders_color: if($variant=='light',mix($backdrop_borders_co
  * Notebooks *
  *************/
 .Notebook {
-  $_notebook_header_bg: $dark_fill;
+  $_notebook_header_bg: $background_darker;
   $_notebook_hover: lighten($_notebook_header_bg, 5%);
   $_notebook_tab_margin: 6px;
 
@@ -2588,7 +2598,7 @@ $_treeview_backdrop_borders_color: if($variant=='light',mix($backdrop_borders_co
     border: 1px solid $borders_color;
     border-radius: 14px;
     color: rgba($fg_color, 0.2);
-    background-color: $dark_fill;
+    background-color: $background_darker;
     text-shadow: 0 1px transparentize(black, 0.9);
     transition: $focus_transition;
   }
@@ -3211,62 +3221,39 @@ $levelbar_border_radius: 3px;
     width: min-content;
   }
 
-  > .Label {
-    margin: 4px;
+  &.light {
+    background-color: $background_light;
+  }
+  &.dark {
+    background-color: $background_dark;
+  }
+  &.darker {
+    background-color: $background_darker;
   }
 }
 
-actionbar > revealer > box {
-  padding: 6px;
-  border-spacing: 6px;
-  border-top: 1px solid $borders_color;
-}
-
-scrolledwindow {
-  // This is used when content is touch-dragged past boundaries.
-  // draws a box on top of the content, the size changes programmatically.
-  > overshoot {
-    &.top {
-      @include overshoot(top);
-    }
-
-    &.bottom {
-      @include overshoot(bottom);
-    }
-
-    &.left {
-      @include overshoot(left);
-    }
-
-    &.right {
-      @include overshoot(right);
-    }
-  }
-
-  > junction { // the small square between two scrollbars
-    // Only color the top-left (or top right in RTL) pixel, to visually connect
-    // the borders of the two scrollbars.
-
-    background: $borders_color,
-                linear-gradient(to bottom, transparent 1px, $scrollbar_bg_color 1px),
-                linear-gradient(to right, transparent 1px, $scrollbar_bg_color 1px);
-
-    &:dir(rtl) {
-      background: $borders_color,
-                  linear-gradient(to bottom, transparent 1px, $scrollbar_bg_color 1px),
-                  linear-gradient(to left, transparent 1px, $scrollbar_bg_color 1px);
-    }
-  }
-}
-
-//vbox and hbox separators
-.separator {
-  // background-color: lighten($borders_color, 5%);
-  border-bottom: 1px solid lighten($borders_color, 5%);
-  border-right: 1px solid lighten($borders_color, 5%);
-  min-width: 1px;
-  min-height: 1px;
-}
+// TODO validate this
+/* scrolledwindow {
+ *   // This is used when content is touch-dragged past boundaries.
+ *   // draws a box on top of the content, the size changes programmatically.
+ *   > overshoot {
+ *     &.top {
+ *       @include overshoot(top);
+ *     }
+ * 
+ *     &.bottom {
+ *       @include overshoot(bottom);
+ *     }
+ * 
+ *     &.left {
+ *       @include overshoot(left);
+ *     }
+ * 
+ *     &.right {
+ *       @include overshoot(right);
+ *     }
+ *   }
+ * } */
 
 
 /*********

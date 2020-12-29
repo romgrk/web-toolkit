@@ -9,6 +9,9 @@ function Frame({
   children,
   className,
   inline,
+  light,
+  dark,
+  darker,
   label,
   ...rest
 }) {
@@ -20,6 +23,9 @@ function Frame({
         className,
         {
           inline,
+          light,
+          dark,
+          darker,
         }
       )}
       role={Component === 'fieldset' ? 'presentation' : undefined}
@@ -37,6 +43,9 @@ Frame.propTypes = {
   className: prop.string,
   label: prop.node,
   inline: prop.bool,
+  light: prop.bool,
+  dark: prop.bool,
+  darker: prop.bool,
 }
 
 export default Frame

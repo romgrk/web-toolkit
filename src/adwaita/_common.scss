@@ -3089,7 +3089,6 @@ $_range_thumb_size: 16px;
 .Progress {
   position: relative;
   display: inline-flex;
-  cursor: pointer;
 
   padding: 12px;
   height: 28px;
@@ -3142,6 +3141,7 @@ $_range_thumb_size: 16px;
     transform: translateX(-50%);
     color: rgba($insensitive_fg_color, 0.7);
     white-space: nowrap;
+    user-select: none;
   }
 }
 

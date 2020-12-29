@@ -2574,6 +2574,7 @@ pathbar > button.slider-button {
   flex-direction: row;
   align-items: center;
   border: none;
+  user-select: none;
   min-height: 30px;
   min-width: 40px;
   width: 100%;
@@ -2662,7 +2663,8 @@ pathbar > button.slider-button {
  **********/
 .MenuBar {
   padding: 0px;
-  box-shadow: inset 0 -1px rgba(0, 0, 0, 0.1); }
+  box-shadow: inset 0 -1px rgba(0, 0, 0, 0.1);
+  background-color: #f6f5f4; }
   .MenuBar > .MenuBar__button {
     border-color: transparent;
     background-color: transparent;
@@ -2674,7 +2676,8 @@ pathbar > button.slider-button {
     padding: 1px 8px;
     border-width: 0;
     border-top: 3px solid transparent;
-    border-bottom: 3px solid transparent; }
+    border-bottom: 3px solid transparent;
+    user-select: none; }
     .MenuBar > .MenuBar__button::before {
       opacity: 0; }
     .MenuBar > .MenuBar__button:hover, .MenuBar > .MenuBar__button.hover, .MenuBar > .MenuBar__button:active, .MenuBar > .MenuBar__button.active {

@@ -2172,6 +2172,7 @@ $_treeview_backdrop_borders_color: if($variant=='light',mix($backdrop_borders_co
     flex-direction: row;
     align-items: center;
     border: none;
+    user-select: none;
 
     min-height: 30px;
     min-width: 40px;
@@ -2264,6 +2265,7 @@ $_treeview_backdrop_borders_color: if($variant=='light',mix($backdrop_borders_co
 .MenuBar {
   padding: 0px;
   box-shadow: inset 0 -1px transparentize(black, 0.9);
+  background-color: $background_default;
 
   > .MenuBar__button {
     @include button('undecorated');
@@ -2274,7 +2276,7 @@ $_treeview_backdrop_borders_color: if($variant=='light',mix($backdrop_borders_co
     border-width: 0;
     border-top: 3px solid transparent;
     border-bottom: 3px solid transparent;
-    // line-height: 16px;
+    user-select: none;
 
     &:hover,
     &.hover,
@@ -3199,6 +3201,7 @@ $levelbar_border_radius: 3px;
 /**********
  * Frames *
  **********/
+
 .Frame {
   border: 1px solid $borders_color;
   // border-radius: $window_radius;

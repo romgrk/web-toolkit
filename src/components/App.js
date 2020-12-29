@@ -4,6 +4,7 @@ import Button from './Button'
 import Checkbox from './Checkbox'
 import Dropdown from './Dropdown'
 import HeaderBar from './HeaderBar'
+import Frame from './Frame'
 import Icon, { names as iconNames } from './Icon'
 import InfoBar from './InfoBar'
 import Input from './Input'
@@ -470,7 +471,7 @@ function DemoInfoBar() {
 function DemoToolbar() {
   return (
     <>
-      <div className='Frame'>
+      <Frame>
         <MenuBar>
           <MenuBar.Button label='File'>
             <Menu>
@@ -496,17 +497,22 @@ function DemoToolbar() {
           <Button icon='go-jump' />
           <Button icon='go-last' />
         </Toolbar>
-      </div>
-      <div className='Frame inline'>
-        <Toolbar vertical>
-          <Button icon='document-new' />
-          <Button icon='document-edit' />
-          <Separator />
-          <Button icon='go-first' />
-          <Button icon='go-jump' />
-          <Button icon='go-last' />
-        </Toolbar>
-      </div>
+      </Frame>
+      <Box horizontal>
+        <Frame inline>
+          <Toolbar vertical>
+            <Button icon='document-new' />
+            <Button icon='document-edit' />
+            <Separator />
+            <Button icon='go-first' />
+            <Button icon='go-jump' />
+            <Button icon='go-last' />
+          </Toolbar>
+        </Frame>
+        <Frame label='Frame with a label'>
+          Content
+        </Frame>
+      </Box>
     </>
   )
 }

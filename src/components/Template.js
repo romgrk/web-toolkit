@@ -2,7 +2,8 @@
  * Notebook.js
  */
 
-import cx from 'classname'
+import cx from 'clsx'
+import prop from 'prop-types'
 
 function Notebook({
   children,
@@ -13,6 +14,10 @@ function Notebook({
     <div className={cx('Notebook', className)} {...rest}>
     </div>
   )
+}
+
+Notebook.propTypes = {
+  className: prop.string,
 }
 
 export default Notebook

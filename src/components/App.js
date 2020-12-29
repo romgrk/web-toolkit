@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import Box from './Box'
 import Button from './Button'
+import Checkbox from './Checkbox'
 import Dropdown from './Dropdown'
 import HeaderBar from './HeaderBar'
 import Icon, { names as iconNames } from './Icon'
@@ -12,6 +13,7 @@ import Menu from './Menu'
 import MenuBar from './MenuBar'
 import Notebook from './Notebook'
 import Popover from './Popover'
+import Radio from './Radio'
 import Separator from './Separator'
 import Spinner from './Spinner'
 import Switch from './Switch'
@@ -287,6 +289,16 @@ function DemoInput() {
             <Switch disabled defaultValue={false} />
           </Box>
           <Box horizontal>
+            <Checkbox defaultValue={true} label='Field' />
+            <Checkbox defaultValue={false} label='Field' />
+            <Checkbox disabled defaultValue={true} label='Field' />
+            <Checkbox disabled defaultValue={false} label='Field' />
+          </Box>
+          <Box horizontal>
+            <Radio name='radio-one' defaultValue={true} label='Field' />
+            <Radio name='radio-one' defaultValue={false} label='Field' />
+            <Radio name='radio-two' disabled defaultValue={true} label='Field' />
+            <Radio name='radio-two' disabled defaultValue={false} label='Field' />
           </Box>
         </div>
       </div>

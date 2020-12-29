@@ -1,5 +1,5 @@
 /*
- * Switch.js
+ * Checkbox.js
  */
 
 
@@ -9,36 +9,36 @@ import cx from 'classname'
 
 const noop = () => {}
 
-const DEFAULT_LABELS = ['On', 'Off']
-
 let nextId = 1
 
-class Switch extends React.Component {
+class Checkbox extends React.Component {
   static propTypes = {
     label: prop.string,
-    labels: prop.oneOf([prop.bool, prop.arrayOf(prop.string)]),
+    showLabel: prop.bool,
     value: prop.bool,
     defaultValue: prop.bool,
     onChange: prop.func,
   }
 
   static defaultProps = {
+    showLabel: true,
     onChange: noop,
   }
 
   constructor(props) {
     super(props)
-    this.id = `switch_${nextId++}`
+    this.id = `checkbox_${nextId++}`
   }
 
   onChange = ev => {
-    this.props.onChange(ev.target.value, ev)
+    this.props.onChange(ev.target.checked, ev)
   }
 
   render() {
     const {
+      id,
       label,
-      labels: labelsValue,
+      showLabel,
       children,
       className,
       value,
@@ -47,32 +47,29 @@ class Switch extends React.Component {
       onChange,
       ...rest
     } = this.props
-    const labels = Array.isArray(labelsValue) ? labelsValue : DEFAULT_LABELS
 
     return (
-      <div className={cx('Switch', className, { disabled })} {...rest}>
+      <div className={cx('Checkbox', className, { disabled })}>
         <input
           type='checkbox'
-          id={this.id}
+          id={id || this.id}
           checked={value}
           defaultChecked={defaultValue}
           disabled={disabled}
           onChange={this.onChange}
         />
         <label
-          htmlFor={this.id}
+          htmlFor={id || this.id}
+          {...rest}
         >
-          {labelsValue &&
-            <>
-              <span>{labels[0]}</span>
-              <em className='sr-only'>{label}</em>
-              <span>{labels[1]}</span>
-            </>
-          }
+          <span className='element' />
+          <span className={cx('label__text', { 'sr-only': !showLabel })}>
+            {label}
+          </span>
         </label>
       </div>
     )
   }
 }
 
-export default Switch
+export default Checkbox

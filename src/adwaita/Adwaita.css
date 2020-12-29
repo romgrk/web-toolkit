@@ -173,7 +173,7 @@ button {
   .view:disabled, .IconView:disabled,
   .TextView > textarea:disabled {
     color: #929595;
-    background-color: #faf9f8; }
+    background-color: #f7f6f5; }
   .view.selected:focus, .selected.IconView:focus, .view.selected, .selected.IconView,
   .TextView > textarea.selected:focus,
   .TextView > textarea.selected {
@@ -501,7 +501,7 @@ button {
     .Input.disabled {
       color: #929595;
       border-color: #cdc7c2;
-      background-color: #faf9f8;
+      background-color: #f7f6f5;
       box-shadow: none; }
       .InputNumber.vertical > .Input__area > input:disabled .Icon, .InputNumber:disabled:not(.vertical) .Icon, .InputNumber.vertical > .Input__area > input.disabled .Icon, .disabled.InputNumber:not(.vertical) .Icon,
       .Input:disabled .Icon,
@@ -834,7 +834,7 @@ editablelabel > stack > text {
     .window-inactive .Notebook .Notebook__arrow:disabled, .Notebook .window-inactive .Notebook__arrow:disabled, .window-inactive .control-buttons button:disabled, .control-buttons .window-inactive button:disabled, .window-inactive .Button.flat:disabled, .window-inactive .Button:disabled {
       color: #d4cfca;
       border-color: #d5d0cc;
-      background-color: #faf9f8;
+      background-color: #f7f6f5;
       text-shadow: none;
       --icon-shadow: none;
       box-shadow: inset 0 1px rgba(255, 255, 255, 0); }
@@ -852,7 +852,7 @@ editablelabel > stack > text {
   .Button.disabled {
     color: #929595;
     border-color: #d5d0cc;
-    background-color: #faf9f8;
+    background-color: #f7f6f5;
     text-shadow: none;
     --icon-shadow: none;
     --icon-color: #929595;
@@ -1187,7 +1187,7 @@ row.selected button.sidebar-button:not(:active):not(:checked):not(:hover):not(di
   .Button.suggested-action:disabled {
     color: #929595;
     border-color: #d5d0cc;
-    background-color: #faf9f8;
+    background-color: #f7f6f5;
     text-shadow: none;
     --icon-shadow: none;
     --icon-color: #929595;
@@ -1329,7 +1329,7 @@ row.selected button.sidebar-button:not(:active):not(:checked):not(:hover):not(di
   .Button.destructive-action:disabled {
     color: #929595;
     border-color: #d5d0cc;
-    background-color: #faf9f8;
+    background-color: #f7f6f5;
     text-shadow: none;
     --icon-shadow: none;
     --icon-color: #929595;
@@ -1552,7 +1552,7 @@ stacksidebar row.needs-attention > .Label, .StackSwitcher > .Button.needs-attent
   .Toolbar button:disabled {
     color: #929595;
     border-color: #d5d0cc;
-    background-color: #faf9f8;
+    background-color: #f7f6f5;
     text-shadow: none;
     --icon-shadow: none;
     --icon-color: #929595;
@@ -1571,7 +1571,7 @@ stacksidebar row.needs-attention > .Label, .StackSwitcher > .Button.needs-attent
   .Toolbar button:backdrop:disabled {
     color: #d4cfca;
     border-color: #d5d0cc;
-    background-color: #faf9f8;
+    background-color: #f7f6f5;
     text-shadow: none;
     --icon-shadow: none;
     box-shadow: inset 0 1px rgba(255, 255, 255, 0); }
@@ -2893,11 +2893,13 @@ pathbar > button.slider-button {
   font-size: smaller; }
   .Switch input {
     position: absolute;
-    opacity: 0;
-    width: 0;
-    height: 0;
-    top: -9999px;
-    left: -9999px; }
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0; }
   .Switch label {
     position: relative;
     display: inline-block;
@@ -2940,7 +2942,7 @@ pathbar > button.slider-button {
   .Switch input:disabled + label {
     color: #929595;
     border-color: #cdc7c2;
-    background-color: #faf9f8;
+    background-color: #f7f6f5;
     text-shadow: none; }
   .Switch label::after {
     content: '';
@@ -2986,7 +2988,7 @@ pathbar > button.slider-button {
   .Switch input:disabled + label::after {
     color: #929595;
     border-color: #d5d0cc;
-    background-color: #faf9f8;
+    background-color: #f7f6f5;
     text-shadow: none;
     --icon-shadow: none;
     --icon-color: #929595;
@@ -3013,6 +3015,165 @@ pathbar > button.slider-button {
 /*************************
  * Check and Radio items *
  *************************/
+.Checkbox,
+.Radio {
+  --element-size: 20px;
+  --element-padding-size: calc(var(--element-size) * 0.19);
+  --element-inner-size: calc(var(--element-size) - 2 * var(--element-padding-size));
+  font-size: 14px; }
+  .Checkbox input,
+  .Radio input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0; }
+  .Checkbox label,
+  .Radio label {
+    position: relative;
+    display: inline-block;
+    height: calc(1 * var(--element-size));
+    padding-left: var(--element-size);
+    padding-right: 2px;
+    color: #2e3436;
+    border-radius: 5px;
+    text-shadow: 0 1px rgba(0, 0, 0, 0.1);
+    user-select: none;
+    transition: all 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+  .Checkbox input + label,
+  .Radio input + label {
+    position: relative;
+    outline: none;
+    overflow: visible; }
+  .Checkbox input + label::before,
+  .Radio input + label::before {
+    content: '';
+    position: absolute;
+    pointer-events: none;
+    z-index: 2;
+    display: inline-block;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 2px solid transparent;
+    border-radius: inherit;
+    transform: translate(-2px, -2px) scale(1.06);
+    transition: all 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+  .Checkbox input:focus:focus-visible + label,
+  .Radio input:focus:focus-visible + label {
+    outline: none; }
+  .Checkbox input:focus:focus-visible + label::before,
+  .Radio input:focus:focus-visible + label::before {
+    border: 2px solid rgba(53, 132, 228, 0.5);
+    transform: translate(-2px, -2px) scale(1.03); }
+  .Checkbox label > .element,
+  .Radio label > .element {
+    content: '';
+    position: absolute;
+    display: inline-block;
+    color: black;
+    border-color: #cdc7c2;
+    background-color: #ffffff;
+    border: 1px solid #bfb8b1;
+    box-shadow: 0 1px rgba(0, 0, 0, 0.075);
+    transition: all 150ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    top: calc(var(--element-padding-size) - 1px);
+    left: calc(var(--element-padding-size) - 1px);
+    width: var(--element-inner-size);
+    height: var(--element-inner-size); }
+    .Checkbox label > .element::before, .Checkbox label > .element::after,
+    .Radio label > .element::before,
+    .Radio label > .element::after {
+      content: '';
+      position: absolute;
+      display: inline-block;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%; }
+  .Checkbox label:hover > .element,
+  .Radio label:hover > .element {
+    background-color: #ebe9e6; }
+  .Checkbox input:not(:disabled) + label:active > .element,
+  .Radio input:not(:disabled) + label:active > .element {
+    background-color: #e1ddda;
+    box-shadow: inset 0 1px #c4bdb6; }
+  .Checkbox input:checked + label > .element, .Checkbox input:checked:disabled + label > .element,
+  .Radio input:checked + label > .element,
+  .Radio input:checked:disabled + label > .element {
+    color: #ffffff;
+    border-color: #185fb4;
+    background-image: linear-gradient(to top, #3987e5, #5094e8); }
+  .Checkbox input:checked:not(:disabled) + label:hover > .element,
+  .Radio input:checked:not(:disabled) + label:hover > .element {
+    background-image: linear-gradient(to top, #5094e8, #6ba5eb); }
+  .Checkbox input:checked:not(:disabled) + label:active > .element,
+  .Radio input:checked:not(:disabled) + label:active > .element {
+    background-image: linear-gradient(to top, #2379e2, #3181e3);
+    box-shadow: inset 0 1px #1c6fd4; }
+  .Checkbox input:disabled + label,
+  .Radio input:disabled + label {
+    color: #929595;
+    text-shadow: none; }
+  .Checkbox input:disabled + label > .element,
+  .Radio input:disabled + label > .element {
+    color: #929595;
+    border-color: #cdc7c2;
+    background-color: #f7f6f5;
+    box-shadow: none;
+    border-color: #d5d0cc;
+    background-color: #f7f6f5;
+    background-image: none; }
+  row.selected .Checkbox, row.selected .Radio {
+    outline-color: rgba(255, 255, 255, 0.8);
+    box-shadow: none;
+    border-color: #185fb4; }
+    row.selected .Checkbox > slider:checked, row.selected .Checkbox > slider, row.selected .Radio > slider:checked, row.selected .Radio > slider {
+      border-color: #185fb4; }
+
+.Checkbox {
+  --element-stroke-width: 3px; }
+  .Checkbox label .element {
+    border-radius: 3px; }
+    .Checkbox label .element::before {
+      transition: all 150ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      transition-property: transform;
+      transform: translate(3px, 0px) rotate(45deg) scale(0); }
+  .Checkbox input:checked + label .element::before {
+    border: var(--element-stroke-width) solid white;
+    border-top-width: 0;
+    border-left-width: 0;
+    width: calc(var(--element-inner-size) / 6);
+    height: calc(var(--element-inner-size) / 2.5);
+    transform: translate(3px, 0px) rotate(45deg); }
+  .Checkbox input:checked:disabled + label .element::before {
+    border-color: rgba(255, 255, 255, 0.5); }
+
+.Radio label .element {
+  border-radius: 50%; }
+  .Radio label .element::before {
+    transition: all 150ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transition-property: transform;
+    transform: translate(-50%, -50%) scale(0); }
+
+.Radio input:checked + label .element::before {
+  background-color: white;
+  border-radius: 50%;
+  width: calc(var(--element-inner-size) / 1.9);
+  height: calc(var(--element-inner-size) / 1.9);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: inset 0 1px 0 0px #e6e6e6; }
+
+.Radio input:checked:disabled + label .element::before {
+  background-color: rgba(255, 255, 255, 0.5);
+  box-shadow: none; }
+
 .view.content-view.check:not(list), .content-view.check.IconView:not(list),
 .content-view .tile check:not(list) {
   margin: 4px;
@@ -3289,7 +3450,7 @@ progressbar > trough, scale > trough > fill, scale > trough {
   border-radius: 3px;
   background-color: #e1dedb; }
   progressbar > trough:disabled, scale > trough > fill:disabled, scale > trough:disabled {
-    background-color: #faf9f8;
+    background-color: #f7f6f5;
     border-color: #d5d0cc; }
   row.selected progressbar > trough, row.selected scale > trough > fill, row.selected scale > trough {
     outline-color: rgba(255, 255, 255, 0.8);
@@ -3381,7 +3542,7 @@ scale {
     scale > trough > slider:disabled {
       color: #929595;
       border-color: #d5d0cc;
-      background-color: #faf9f8;
+      background-color: #f7f6f5;
       text-shadow: none;
       --icon-shadow: none;
       --icon-color: #929595;
@@ -4882,7 +5043,7 @@ text/foreground color of selections */
 @define-color theme_selected_fg_color #ffffff;
 /*
 base background color of insensitive widgets */
-@define-color insensitive_bg_color #faf9f8;
+@define-color insensitive_bg_color #f7f6f5;
 /*
 text foreground color of insensitive widgets */
 @define-color insensitive_fg_color #929595;

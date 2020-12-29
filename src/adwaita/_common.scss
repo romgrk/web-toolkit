@@ -54,14 +54,7 @@ $popover_radius: $button_radius + 4;
  ***************/
 
 .sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0,0,0,0);
-  border: 0;
+  @include visually_hidden;
 }
 
 .user-select-none {
@@ -2581,12 +2574,7 @@ $_treeview_backdrop_borders_color: if($variant=='light',mix($backdrop_borders_co
   font-size: smaller;
 
   & input {
-    position: absolute;
-    opacity: 0;
-    width: 0;
-    height: 0;
-    top: -9999px;
-    left: -9999px;
+    @include visually_hidden;
   }
 
   & label {
@@ -2659,7 +2647,6 @@ $_treeview_backdrop_borders_color: if($variant=='light',mix($backdrop_borders_co
     }
   }
 
-
   row.selected & {
     outline-color: $alt_focus_border_color;
 
@@ -2680,16 +2667,189 @@ $_treeview_backdrop_borders_color: if($variant=='light',mix($backdrop_borders_co
 // all assets are rendered from assets.svg. never add pngs directly
 
 
+.Checkbox,
+.Radio {
+
+  // Layout:
+  //
+  // |-----label---------------|
+  // |-padding-|-----text------|
+  // |<element>|
+  //
+  // Variables:
+  // | <element> |
+  // |-----------| --element-size
+  //    |-----|    --element-inner-size
+  // |--|          --element-padding-size
+
+  --element-size: 20px;
+  --element-padding-size: calc(var(--element-size) * 0.19);
+  --element-inner-size: calc(var(--element-size) - 2 * var(--element-padding-size));
+
+  font-size: 14px;
+
+  & input {
+    @include visually_hidden;
+  }
+
+  & label {
+    position: relative;
+    display: inline-block;
+    // width:  calc(2 * var(--element-size));
+    height: calc(1 * var(--element-size));
+    padding-left: var(--element-size);
+    padding-right: 2px;
+    // similar to the .scale
+    color: $fg_color;
+    border-radius: $button_radius;
+    text-shadow: 0 1px transparentize(black, 0.9);
+    user-select: none;
+    transition: $focus_transition;
+  }
+  & input {
+    @include focus-ring($target: ' + label', $offset: 0, $outer: true, $method: 'before');
+  }
+  & label > .element {
+    content: '';
+    position: absolute;
+    display: inline-block;
+
+    @include entry(normal);
+    border: 1px solid darken($borders_color, 6%);
+    box-shadow: 0 1px rgba(black, 0.075);
+    transition: $button_transition;
+
+    top:  calc(var(--element-padding-size) - 1px);
+    left: calc(var(--element-padding-size) - 1px);
+    width:  var(--element-inner-size);
+    height: var(--element-inner-size);
+
+    &::before,
+    &::after {
+      content: '';
+      position: absolute;
+      display: inline-block;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+  }
+  & label:hover > .element {
+    background-color: mix($base_color, $borders_color, 60%);
+  }
+  & input:not(:disabled) + label:active > .element {
+    background-color: mix($base_color, $borders_color, 40%);
+    box-shadow: inset 0 1px darken($borders_color, 4%);
+  }
+  & input:checked + label > .element,
+  & input:checked:disabled + label > .element {
+    color: $selected_fg_color;
+    border-color: darken($selected_bg_color, 15%);
+    background-image:
+      linear-gradient(to top, lighten($selected_bg_color, 1%), lighten($selected_bg_color, 6%));
+
+  }
+  & input:checked:not(:disabled) + label:hover > .element {
+    background-image:
+      linear-gradient(to top, lighten($selected_bg_color, 6%), lighten($selected_bg_color, 12%));
+  }
+  & input:checked:not(:disabled) + label:active > .element {
+    background-image:
+      linear-gradient(to top, darken($selected_bg_color, 4%), darken($selected_bg_color, 1%));
+    box-shadow: inset 0 1px darken($selected_bg_color, 8%);
+  }
+  & input:disabled + label {
+    color: $insensitive_fg_color;
+    text-shadow: none; 
+  }
+  & input:disabled + label > .element {
+    @include entry(insensitive);
+    border-color: $insensitive_borders_color;
+    background-color: $insensitive_bg_color;
+    background-image: none;
+  }
+
+  // TODO validate this
+  row.selected & {
+    outline-color: $alt_focus_border_color;
+
+    @if $variant == 'light' {
+      box-shadow: none;
+      border-color: $switch_borders_color;
+
+      > slider { &:checked, & { border-color: $switch_borders_color; } }
+    }
+  }
+}
+
+.Checkbox {
+  --element-stroke-width: 3px;
+
+  & label .element {
+    border-radius: 3px;
+    &::before {
+      transition: $button_transition;
+      transition-property: transform;
+      transform: translate(3px, 0px) rotate(45deg) scale(0);
+    }
+  }
+  & input:checked + label .element {
+    &::before {
+      border: var(--element-stroke-width) solid white;
+      border-top-width: 0;
+      border-left-width: 0;
+      width:  calc(var(--element-inner-size) / 6);
+      height: calc(var(--element-inner-size) / 2.5);
+      transform: translate(3px, 0px) rotate(45deg);
+    }
+  }
+  & input:checked:disabled + label .element {
+    &::before {
+      border-color: rgba(white, 0.5);
+    }
+  }
+}
+
+.Radio {
+  & label .element {
+    border-radius: 50%;
+    &::before {
+      transition: $button_transition;
+      transition-property: transform;
+      transform: translate(-50%, -50%) scale(0);
+    }
+  }
+  & input:checked + label .element {
+    &::before {
+      background-color: white;
+      border-radius: 50%;
+      width:  calc(var(--element-inner-size) / 1.9);
+      height: calc(var(--element-inner-size) / 1.9);
+      top:  50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      box-shadow: inset 0 1px 0 0px mix(white, black, 90%);
+    }
+  }
+  & input:checked:disabled + label .element {
+    &::before {
+      background-color: rgba(white, 0.5);
+      box-shadow: none;
+    }
+  }
+}
+
 //selection-mode
 @each $check_state, $check_icon, $check_color, $check_background in
-  ('', 'none', 'transparent', $checkradio_bg_color),
-  (':hover', 'none', 'transparent', $checkradio_bg_color),
-  (':active', 'none', 'transparent', $checkradio_bg_color),
-  (':backdrop', 'none', 'transparent', '#{desaturate($checkradio_bg_color, 100%)}'),
-  (':checked', '-gtk-icontheme(\'object-select-symbolic\')', $osd_fg_color, $checkradio_bg_color),
-  (':checked:hover', '-gtk-icontheme(\'object-select-symbolic\')', $osd_fg_color, $checkradio_bg_color),
-  (':checked:active', '-gtk-icontheme(\'object-select-symbolic\')', $osd_fg_color, $checkradio_bg_color),
-  (':backdrop:checked', '-gtk-icontheme(\'object-select-symbolic\')', '#{transparentize($osd_fg_color, 0.2)}', '#{desaturate($checkradio_bg_color, 100%)}'), {
+  ('',                  'none',                                       'transparent',                   $checkradio_bg_color),
+  (':hover',            'none',                                       'transparent',                   $checkradio_bg_color),
+  (':active',           'none',                                       'transparent',                   $checkradio_bg_color),
+  (':backdrop',         'none',                                       'transparent',                   '#{desaturate($checkradio_bg_color, 100%)}'),
+  (':checked',          '-gtk-icontheme(\'object-select-symbolic\')', $osd_fg_color,                   $checkradio_bg_color),
+  (':checked:hover',    '-gtk-icontheme(\'object-select-symbolic\')', $osd_fg_color,                   $checkradio_bg_color),
+  (':checked:active',   '-gtk-icontheme(\'object-select-symbolic\')', $osd_fg_color,                   $checkradio_bg_color),
+  (':backdrop:checked', '-gtk-icontheme(\'object-select-symbolic\')', '#{transparentize($osd_fg_color, 0.2)}',                             '#{desaturate($checkradio_bg_color, 100%)}'), {
 
   .view.content-view.check#{$check_state}:not(list),
   .content-view .tile check#{$check_state}:not(list) {

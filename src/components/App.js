@@ -14,6 +14,7 @@ import MenuBar from './MenuBar'
 import Notebook from './Notebook'
 import Popover from './Popover'
 import Radio from './Radio'
+import Range from './Range'
 import Separator from './Separator'
 import Spinner from './Spinner'
 import Switch from './Switch'
@@ -41,7 +42,7 @@ function App() {
    * }, []) */
 
   return (
-    <div className="App background Box vertical compact">
+    <div className="App Box vertical compact">
       <AppHeader />
       <AppContent />
     </div>
@@ -279,27 +280,41 @@ function DemoInput() {
             </Box>
           </div>
           <Box horizontal>
-            <Switch defaultValue={true} />
-            <Switch defaultValue={true} labels />
-            <Switch disabled defaultValue={true} />
+            <Range defaultValue={[2, 6]} min={0} max={10} step={2} vertical marks />
+            <Range defaultValue={5} min={0} max={10} step={2} vertical marks disabled />
+            <Box vertical>
+              <Box horizontal>
+                <Switch defaultValue={true} />
+                <Switch defaultValue={true} labels />
+                <Switch disabled defaultValue={true} />
+              </Box>
+              <Box horizontal>
+                <Switch defaultValue={false} />
+                <Switch defaultValue={false} labels />
+                <Switch disabled defaultValue={false} />
+              </Box>
+              <Box horizontal>
+                <Checkbox defaultValue={true} label='Field' />
+                <Checkbox defaultValue={false} label='Field' />
+                <Checkbox disabled defaultValue={true} label='Field' />
+                <Checkbox disabled defaultValue={false} label='Field' />
+              </Box>
+              <Box horizontal>
+                <Radio name='radio-one' defaultValue={true} label='Field' />
+                <Radio name='radio-one' defaultValue={false} label='Field' />
+                <Radio name='radio-two' disabled defaultValue={true} label='Field' />
+                <Radio name='radio-two' disabled defaultValue={false} label='Field' />
+              </Box>
+              <Box horizontal>
+                <Radio name='radio-one' defaultValue={true} label='Field' />
+                <Radio name='radio-one' defaultValue={false} label='Field' />
+                <Radio name='radio-two' disabled defaultValue={true} label='Field' />
+                <Radio name='radio-two' disabled defaultValue={false} label='Field' />
+              </Box>
+            </Box>
           </Box>
-          <Box horizontal>
-            <Switch defaultValue={false} />
-            <Switch defaultValue={false} labels />
-            <Switch disabled defaultValue={false} />
-          </Box>
-          <Box horizontal>
-            <Checkbox defaultValue={true} label='Field' />
-            <Checkbox defaultValue={false} label='Field' />
-            <Checkbox disabled defaultValue={true} label='Field' />
-            <Checkbox disabled defaultValue={false} label='Field' />
-          </Box>
-          <Box horizontal>
-            <Radio name='radio-one' defaultValue={true} label='Field' />
-            <Radio name='radio-one' defaultValue={false} label='Field' />
-            <Radio name='radio-two' disabled defaultValue={true} label='Field' />
-            <Radio name='radio-two' disabled defaultValue={false} label='Field' />
-          </Box>
+          <Range defaultValue={5} min={0} max={10} step={2} marks />
+          <Range defaultValue={5} min={0} max={10} step={2} marks disabled />
         </div>
       </div>
 

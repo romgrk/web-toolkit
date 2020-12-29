@@ -164,7 +164,7 @@ $popover_radius: $button_radius + 4;
 
     @include entry(normal);
 
-    @include focus-ring($focus-state: 'focus-within', $method: 'after');
+    @include focus-ring($focus-state: ':focus-within', $method: 'after');
 
     &::selection { @extend %selected_items; }
   }
@@ -407,7 +407,7 @@ $popover_radius: $button_radius + 4;
     transition: all 200ms $ease-out-quad;
 
     @include entry(normal);
-    @include focus-ring($focus-state: 'focus-within', $method: 'after');
+    @include focus-ring($focus-state: ':focus-within', $method: 'after');
 
     > .Input__area {
       position: relative;
@@ -489,7 +489,7 @@ $popover_radius: $button_radius + 4;
 
         @include focus-ring(
           $fc: transparentize($e_color, 0.5),
-          $focus-state: 'focus-within', $method: 'after');
+          $focus-state: ':focus-within', $method: 'after');
 
         &:focus-within { @include entry(focus, $e_color); }
 
@@ -1314,7 +1314,7 @@ input::-webkit-outer-spin-button {
     }
 
     > .Input__area {
-      @include focus-ring($focus-state: 'focus-within', $method: 'after');
+      @include focus-ring($focus-state: ':focus-within', $method: 'after');
     }
 
     > .Input__area > input {
@@ -2840,135 +2840,18 @@ $_treeview_backdrop_borders_color: if($variant=='light',mix($backdrop_borders_co
   }
 }
 
-//selection-mode
-@each $check_state, $check_icon, $check_color, $check_background in
-  ('',                  'none',                                       'transparent',                   $checkradio_bg_color),
-  (':hover',            'none',                                       'transparent',                   $checkradio_bg_color),
-  (':active',           'none',                                       'transparent',                   $checkradio_bg_color),
-  (':backdrop',         'none',                                       'transparent',                   '#{desaturate($checkradio_bg_color, 100%)}'),
-  (':checked',          '-gtk-icontheme(\'object-select-symbolic\')', $osd_fg_color,                   $checkradio_bg_color),
-  (':checked:hover',    '-gtk-icontheme(\'object-select-symbolic\')', $osd_fg_color,                   $checkradio_bg_color),
-  (':checked:active',   '-gtk-icontheme(\'object-select-symbolic\')', $osd_fg_color,                   $checkradio_bg_color),
-  (':backdrop:checked', '-gtk-icontheme(\'object-select-symbolic\')', '#{transparentize($osd_fg_color, 0.2)}',                             '#{desaturate($checkradio_bg_color, 100%)}'), {
-
-  .view.content-view.check#{$check_state}:not(list),
-  .content-view .tile check#{$check_state}:not(list) {
-    margin: 4px;
-    min-width: 32px;
-    min-height: 32px;
-    color: #{$check_color};
-    background-color: #{$check_background};
-    border-radius: 5px;
-    background-image: none;
-    transition: 200ms;
-    box-shadow: none;
-    border-width: 0;
-    -gtk-icon-source: #{$check_icon};
-    --icon-shadow: none;
-  }
-}
-
-checkbutton {
-  border-spacing: 4px;
-  border-radius: $button_radius;
-  transition: $focus_transition;
-
-  @include focus-ring();
-
-  &.text-button {
-    // this is for a nice focus on check and radios text
-    padding: 4px;
-  }
-}
-
-check,
-radio {
-  min-height: 14px;
-  min-width: 14px;
-  border: 1px solid;
-  -gtk-icon-source: none;
-
-  & {
-    // for unchecked
-    $_c: if($variant=='light', white, $bg_color);
-
-    @each $state, $t in ("", "normal"),
-                        (":hover", "hover"),
-                        (":active", "active"),
-                        (":disabled", "insensitive") {
-      &#{$state} {
-        @include check($t, $_c);
-      }
-    }
-  }
-
-  & {
-    // for checked
-    @each $t in (':checked'), (':indeterminate') {
-      &#{$t} {
-        @each $state, $t in ("", "normal"),
-                            (":hover", "hover"),
-                            (":active", "active"),
-                            (":disabled", "insensitive") {
-          &#{$state} {
-            @include check($t, $checkradio_bg_color, $checkradio_fg_color, $checked: true);
-          }
-        }
-      }
-    }
-  }
-
-  @if $variant == 'light' {
-    // the borders of the light variant versions of checks and radios are too similar in luminosity to the selected background
-    // color, hence we need special casing.
-    row.selected & { border-color: $checkradio_borders_color; }
-  }
-
-  .osd & {
-    @include button(osd);
-
-    &:hover { @include button(osd); }
-    &:active { @include button(osd-active); }
-    &:disabled { @include button(osd-insensitive); }
-  }
-}
-
-%check,
-check {
-  border-radius: 3px;
-  --icon-size: 14px;
-
-  &:checked { -gtk-icon-source: -gtk-scaled(-gtk-recolor(url("assets/check-symbolic.symbolic.png")),
-                                            -gtk-recolor(url("assets/check@2-symbolic.symbolic.png"))); }
-
-  &:indeterminate { -gtk-icon-source: -gtk-scaled(-gtk-recolor(url("assets/dash-symbolic.symbolic.png")),
-                                                  -gtk-recolor(url("assets/dash@2-symbolic.symbolic.png"))); }
-}
-
-%radio,
-radio {
-  border-radius: 100%;
-  --icon-size: 14px;
-
-  &:checked { -gtk-icon-source: -gtk-scaled(-gtk-recolor(url("assets/bullet-symbolic.symbolic.png")),
-                                            -gtk-recolor(url("assets/bullet@2-symbolic.symbolic.png"))); }
-
-  &:indeterminate { -gtk-icon-source: -gtk-scaled(-gtk-recolor(url("assets/dash-symbolic.symbolic.png")),
-                                                  -gtk-recolor(url("assets/dash@2-symbolic.symbolic.png"))); }
-}
-
-.TreeView.view check,
-.TreeView.view radio {
-  &.selected {
-    &:focus, & {
-      color: $checkradio_fg_color;
-
-      @if $variant == 'light' { border-color: $selected_borders_color; }
-    }
-  }
-}
-
-.TreeView.view radio.selected { &:focus, & { @extend %radio; }} // This is a workaround
+// TODO validate this
+/* .TreeView.view check,
+ * .TreeView.view radio {
+ *   &.selected {
+ *     &:focus, & {
+ *       color: $checkradio_fg_color;
+ * 
+ *       @if $variant == 'light' { border-color: $selected_borders_color; }
+ *     }
+ *   }
+ * }
+ * .TreeView.view radio.selected { &:focus, & { @extend %radio; }} // This is a workaround */
 
 
 /************
@@ -3022,30 +2905,153 @@ radio {
   }
 }
 
-scale {
+.Range {
+  $_range_bg: darken($dark_fill, 5%);
+  $_range_thumb_size: 16px;
+
   // sizing
   $_marks_length: 6px;
   $_marks_distance: 6px;
 
-  min-height: 10px;
-  min-width: 10px;
+  position: relative;
+  display: inline-flex;
+  cursor: pointer;
+
   padding: 12px;
+  height: 28px;
+  width: 100%;
 
-  @include focus-ring("> trough", $offset: 10px);
+  border-radius: 16px;
+  @include focus-ring($focus-state: '.focus', $method: 'before');
 
-  // those are inside the trough node, I need them to show their own border over the trough one, so negative margin
-  > trough {
-    transition: $focus_transition;
+  &.vertical {
+    width: 28px;
+    height: 100%;
+  }
+  &.marked {
+    margin-bottom: 20px;
+    &.vertical {
+      margin-bottom: auto;
+      margin-right: 20px;
+    }
+  }
+  &.disabled {
+    pointer-events: none;
+    cursor: default;
+  }
 
-    > fill,
-    > highlight { margin: -1px; }
+  .Range__content {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    height: 4px;
+  }
+  &.vertical .Range__content {
+    width: 4px;
+    height: 100%;
+  }
 
-  // the slider is inside the trough, so to have make it bigger there's a negative margin
+  .Range__rail {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    border-radius: 2px;
+    border: 1px solid darken($_range_bg, 30%);
+    background-color: $_range_bg;
+    opacity: 0.38;
+  }
+  &.vertical .Range__rail {
+    height: 100%;
+    width: 4px;
+  }
+  &.disabled .Range__rail {
+    @include button('insensitive');
+    border: 1px solid darken($borders_color, 10%);
+  }
 
-    > slider {
-      min-height: 18px;
-      min-width: 18px;
-      margin: -9px;
+  .Range__track {
+    display: block;
+    position: absolute;
+    content: '';
+    height: 4px;
+    border-radius: 2px;
+    border: 1px solid darken($selected_bg_color, 15%);
+    background-color: $selected_bg_color;
+    transition: $button_transition;
+  }
+  &.vertical .Range__track {
+    width: 4px;
+  }
+  &.no-track .Range__track {
+    display: none;
+  }
+  &.disabled .Range__track {
+    display: none;
+  }
+
+  .Range__thumb {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width:  $_range_thumb_size;
+    height: $_range_thumb_size;
+    margin-left: -8px;
+    margin-top:  -6px;
+
+    @include button('normal');
+    border: 1px solid darken($borders_color, 20%);
+    border-radius: 50%;
+
+    outline: 0;
+    transition: $button_transition;
+
+    &:hover {
+      @include button('hover');
+      border: 1px solid darken($borders_color, 20%);
+    }
+    &:active {
+      border-color: darken($selected_bg_color, 25%);
+    }
+  }
+  &.disabled .Range__thumb {
+    @include button('insensitive');
+    &:hover {
+      box-shadow: none;
+    }
+  }
+  &.vertical .Range__thumb {
+    margin-top: 0;
+    margin-bottom: -6px;
+    margin-left: -6px;
+  }
+
+  .Range__mark {
+    position: absolute;
+    border-radius: 1px;
+    background-color: darken($_range_bg, 8%);
+    &.active {
+      background-color: $selected_bg_color;
+      // box-shadow: 0 0 0 1px rgba($selected_bg_color, 0.1);
+    }
+  }
+  &:not(.vertical) .Range__mark {
+    top: 8px;
+    width: 1px;
+    height: 4px;
+  }
+  &.vertical .Range__mark {
+    left: 8px;
+    width:  4px;
+    height: 1px;
+  }
+  &.disabled .Range__mark {
+    &.active {
+      background-color: darken($_range_bg, 8%);
+      box-shadow: none;
     }
   }
 
@@ -3072,337 +3078,8 @@ scale {
       border-radius: 5px;
     }
   }
-
-  // the backing bit
-  > trough {
-    @extend %scale_trough;
-  }
-
-  // the colored part of the backing bit
-  > trough > highlight { @extend %scale_highlight; }
-
-  // this is another differently styled part of the backing bit, the most relevant use case is for example
-  // in media player to indicate how much video stream as been cached
-  > trough > fill {
-    @extend %scale_trough;
-
-    &:backdrop, & { background-color: $borders_color; }
-
-    &:disabled {
-      border-color: transparent;
-      background-color: transparent;
-    }
-
-    // OSD
-    .osd & {
-      background-color: mix($osd_fg_color, $osd_borders_color, 25%);
-
-      &:disabled {
-       border-color: transparent;
-       background-color: transparent;
-      }
-    }
-  }
-
-  > trough > slider {
-    @include button(normal-alt, $edge: $shadow_color);
-
-    border: 1px solid darken($alt_borders_color, 3%);
-    border-radius: 100%;
-    transition: $button_transition;
-    transition-property: background, border, box-shadow;
-
-    &:hover { @include button(hover, $edge: $shadow_color); }
-
-    &:active { border-color: $selected_borders_color; }
-
-    &:disabled { @include button(insensitive); }
-
-    // ...on selected list rows
-    row.selected & { &:disabled, & { border-color: $selected_borders_color; } }
-
-    // OSD
-    .osd & {
-      @include button(osd);
-      border-color: darken($osd_borders_color, 3%);
-      background-color: opacify($osd_bg_color, 1); // solid background needed here
-
-      &:hover {
-        @include button(osd-hover);
-        background-color: opacify($osd_bg_color, 1); // solid background needed here
-      }
-
-      &:active {
-        @include button(osd-active);
-        background-color: opacify($osd_bg_color, 1); // solid background needed here
-      }
-
-      &:disabled {
-        @include button(osd-insensitive);
-        background-color: opacify($osd_bg_color, 1); // solid background needed here
-      }
-    }
-  }
-
-  > value {
-    color: gtkalpha(currentColor, 0.55);
-    font-feature-settings: "tnum";
-  }
-
-  &.horizontal {
-    > marks {
-      color: gtkalpha(currentColor, 0.55);
-      &.top    { margin-bottom: $_marks_distance; }
-      &.bottom { margin-top: $_marks_distance; }
-
-      indicator {
-        background-color: currentColor;
-        min-height: $_marks_length;
-        min-width: 1px;
-      }
-    }
-
-    > value.left  { margin-right: 9px; }
-    > value.right { margin-left: 9px; }
-
-    &.fine-tune >marks {
-      &.top { margin-top: 3px; }
-      &.bottom { margin-bottom: 3px; }
-
-      indicator { min-height: ($_marks_length - 3px); }
-    }
-  }
-
-  &.vertical {
-    > marks {
-      color: gtkalpha(currentColor, 0.55);
-      &.top    { margin-right: $_marks_distance; }
-      &.bottom { margin-left: $_marks_distance; }
-
-      indicator {
-        background-color: currentColor;
-        min-height: 1px;
-        min-width: $_marks_length;
-      }
-    }
-
-    > value.top    { margin-bottom: 9px; }
-    > value.bottom { margin-top: 9px; }
-
-    &.fine-tune >marks {
-      &.top { margin-left: 3px; }
-      &.bottom { margin-right: 3px; }
-
-      indicator { min-height: ($_marks_length - 3px); }
-    }
-  }
-
-  // *WARNING* scale with marks madness following
-
-  // FIXME: OSD and selected list rows missing, I don't feel like adding the other 144 assets needed for those...
-  $suffix: if($variant == 'light', '', '-dark');
-
-  @each $dir_class, $dir_infix in ('horizontal', 'horz'),
-                                  ('vertical', 'vert') {
-    @each $marks_infix, $marks_class in ('scale-has-marks-above', 'marks-before:not(.marks-after)'),
-                                        ('scale-has-marks-below', 'marks-after:not(.marks-before)') {
-      @each $state, $state_infix in ('', ''),
-                                    (':hover', '-hover'),
-                                    (':active', '-active'),
-                                    (':disabled', '-insensitive'),
-                                    (':backdrop', '-backdrop'),
-                                    (':backdrop:disabled', '-backdrop-insensitive') {
-        &.#{$dir_class}.#{$marks_class} {
-
-          > trough > slider {
-            &#{$state} {
-              // an asymmetric slider asset is used here, so the margins are uneven, the smaller
-              // margin is set on the point side.
-              margin: -10px;
-              $_scale_asset: 'assets/slider-#{$dir_infix}-#{$marks_infix}#{$state_infix}#{$suffix}';
-              border-style: none;
-              border-radius: 0;
-
-              background-color: transparent;
-              background-image: -gtk-scaled(url('#{$_scale_asset}.png'), url('#{$_scale_asset}@2.png'));
-
-              $_scale_slider_bg_pos: bottom;
-
-              @if $dir_class == 'horizontal' {
-                min-height: 26px;
-                min-width: 22px;
-
-                @if $marks_infix == 'scale-has-marks-above' {
-                  margin-top: -14px;
-
-                  $_scale_slider_bg_pos: top;
-                }
-
-                @else { margin-bottom: -14px; }
-              }
-
-              @else {
-                min-height: 22px;
-                min-width: 26px;
-
-                @if $marks_infix == 'scale-has-marks-above' {
-                  margin-left: -14px;
-
-                  $_scale_slider_bg_pos: left bottom;
-                }
-
-                @else {
-                  margin-right: -14px;
-
-                  $_scale_slider_bg_pos: right bottom;
-                }
-              }
-
-              background-position: $_scale_slider_bg_pos;
-              background-repeat: no-repeat;
-              box-shadow: none;
-            }
-          }
-
-          &.fine-tune > trough > slider {
-            @if $dir_class == 'horizontal' {
-              // bigger negative margins to make the trough grow here as well
-              margin: -7px -10px;
-
-              @if $marks_infix == 'scale-has-marks-above' { margin-top: -11px; }
-
-              @else { margin-bottom: -11px; }
-            }
-
-            @else {
-              margin: -10px -7px;
-
-              @if $marks_infix == 'scale-has-marks-above' { margin-left: -11px; }
-
-              @else { margin-right: -11px; }
-            }
-          }
-        }
-      }
-    }
-  }
-
-  &.color {
-    min-height: 0;
-    min-width: 0;
-
-    > trough {
-      background-image: image($borders_color);
-      background-repeat: no-repeat;
-    }
-
-    &.horizontal {
-      padding: 0 0 15px 0;
-
-      > trough {
-        padding-bottom: 4px;
-        background-position: 0 -3px;
-        border-top-left-radius: 0;
-        border-top-right-radius: 0;
-      }
-
-      > trough > slider {
-        &:dir(ltr), &:dir(rtl) { // specificity bump
-          &:hover, &:backdrop, &:disabled, &:backdrop:disabled, & {
-            margin-bottom: -15px;
-            margin-top: 6px;
-          }
-        }
-      }
-    }
-
-    &.vertical {
-      &:dir(ltr) {
-        padding: 0 0 0 15px;
-
-        > trough {
-          padding-left: 4px;
-          background-position: 3px 0;
-          border-bottom-right-radius: 0;
-          border-top-right-radius: 0;
-        }
-
-        > trough > slider {
-          &:hover, &:backdrop, &:disabled, &:backdrop:disabled, & {
-            margin-left: -15px;
-            margin-right: 6px;
-          }
-        }
-      }
-
-      &:dir(rtl) {
-        padding: 0 15px 0 0;
-
-        > trough {
-          padding-right: 4px;
-          background-position: -3px 0;
-          border-bottom-left-radius: 0;
-          border-top-left-radius: 0;
-        }
-
-        > trough > slider {
-          &:hover, &:backdrop, &:disabled, &:backdrop:disabled, & {
-            margin-right: -15px;
-            margin-left: 6px;
-          }
-        }
-      }
-    }
-
-    &.fine-tune {
-      &.horizontal {
-        &:dir(ltr), &:dir(rtl) { // specificity bump
-          padding: 0 0 12px 0;
-
-          > trough {
-            padding-bottom: 7px;
-            background-position: 0 -6px;
-          }
-
-          > trough > slider {
-            margin-bottom: -15px;
-            margin-top: 6px;
-          }
-        }
-      }
-
-      &.vertical {
-        &:dir(ltr) {
-          padding: 0 0 0 12px;
-
-          > trough {
-            padding-left: 7px;
-            background-position: 6px 0;
-          }
-
-          > trough > slider {
-            margin-left: -15px;
-            margin-right: 6px;
-          }
-        }
-
-        &:dir(rtl) {
-          padding: 0 12px 0 0;
-
-          > trough {
-            padding-right: 7px;
-            background-position: -6px 0;
-          }
-
-          > trough > slider {
-            margin-right: -15px;
-            margin-left: 6px;
-          }
-        }
-      }
-    }
-  }
 }
+
 
 
 /*****************

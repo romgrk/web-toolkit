@@ -3174,892 +3174,227 @@ pathbar > button.slider-button {
   background-color: rgba(255, 255, 255, 0.5);
   box-shadow: none; }
 
-.view.content-view.check:not(list), .content-view.check.IconView:not(list),
-.content-view .tile check:not(list) {
-  margin: 4px;
-  min-width: 32px;
-  min-height: 32px;
-  color: transparent;
-  background-color: #3584e4;
-  border-radius: 5px;
-  background-image: none;
-  transition: 200ms;
-  box-shadow: none;
-  border-width: 0;
-  -gtk-icon-source: none;
-  --icon-shadow: none; }
-
-.view.content-view.check:hover:not(list), .content-view.check.IconView:hover:not(list),
-.content-view .tile check:hover:not(list) {
-  margin: 4px;
-  min-width: 32px;
-  min-height: 32px;
-  color: transparent;
-  background-color: #3584e4;
-  border-radius: 5px;
-  background-image: none;
-  transition: 200ms;
-  box-shadow: none;
-  border-width: 0;
-  -gtk-icon-source: none;
-  --icon-shadow: none; }
-
-.view.content-view.check:active:not(list), .content-view.check.IconView:active:not(list),
-.content-view .tile check:active:not(list) {
-  margin: 4px;
-  min-width: 32px;
-  min-height: 32px;
-  color: transparent;
-  background-color: #3584e4;
-  border-radius: 5px;
-  background-image: none;
-  transition: 200ms;
-  box-shadow: none;
-  border-width: 0;
-  -gtk-icon-source: none;
-  --icon-shadow: none; }
-
-.view.content-view.check:backdrop:not(list), .content-view.check.IconView:backdrop:not(list),
-.content-view .tile check:backdrop:not(list) {
-  margin: 4px;
-  min-width: 32px;
-  min-height: 32px;
-  color: transparent;
-  background-color: #8d8d8d;
-  border-radius: 5px;
-  background-image: none;
-  transition: 200ms;
-  box-shadow: none;
-  border-width: 0;
-  -gtk-icon-source: none;
-  --icon-shadow: none; }
-
-.view.content-view.check:checked:not(list), .content-view.check.IconView:checked:not(list),
-.content-view .tile check:checked:not(list) {
-  margin: 4px;
-  min-width: 32px;
-  min-height: 32px;
-  color: #eeeeec;
-  background-color: #3584e4;
-  border-radius: 5px;
-  background-image: none;
-  transition: 200ms;
-  box-shadow: none;
-  border-width: 0;
-  -gtk-icon-source: -gtk-icontheme('object-select-symbolic');
-  --icon-shadow: none; }
-
-.view.content-view.check:checked:hover:not(list), .content-view.check.IconView:checked:hover:not(list),
-.content-view .tile check:checked:hover:not(list) {
-  margin: 4px;
-  min-width: 32px;
-  min-height: 32px;
-  color: #eeeeec;
-  background-color: #3584e4;
-  border-radius: 5px;
-  background-image: none;
-  transition: 200ms;
-  box-shadow: none;
-  border-width: 0;
-  -gtk-icon-source: -gtk-icontheme('object-select-symbolic');
-  --icon-shadow: none; }
-
-.view.content-view.check:checked:active:not(list), .content-view.check.IconView:checked:active:not(list),
-.content-view .tile check:checked:active:not(list) {
-  margin: 4px;
-  min-width: 32px;
-  min-height: 32px;
-  color: #eeeeec;
-  background-color: #3584e4;
-  border-radius: 5px;
-  background-image: none;
-  transition: 200ms;
-  box-shadow: none;
-  border-width: 0;
-  -gtk-icon-source: -gtk-icontheme('object-select-symbolic');
-  --icon-shadow: none; }
-
-.view.content-view.check:backdrop:checked:not(list), .content-view.check.IconView:backdrop:checked:not(list),
-.content-view .tile check:backdrop:checked:not(list) {
-  margin: 4px;
-  min-width: 32px;
-  min-height: 32px;
-  color: rgba(238, 238, 236, 0.8);
-  background-color: #8d8d8d;
-  border-radius: 5px;
-  background-image: none;
-  transition: 200ms;
-  box-shadow: none;
-  border-width: 0;
-  -gtk-icon-source: -gtk-icontheme('object-select-symbolic');
-  --icon-shadow: none; }
-
-checkbutton {
-  border-spacing: 4px;
-  border-radius: 5px;
-  transition: all 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94); }
-  checkbutton {
-    outline: 0 solid transparent;
-    outline-offset: 4px; }
-  checkbutton:focus:focus-visible {
-    outline-color: rgba(53, 132, 228, 0.5);
-    outline-width: 2px;
-    outline-offset: -2px; }
-  checkbutton.text-button {
-    padding: 4px; }
-
-check,
-radio {
-  min-height: 14px;
-  min-width: 14px;
-  border: 1px solid;
-  -gtk-icon-source: none; }
-  check,
-  radio {
-    background-clip: padding-box;
-    background-image: linear-gradient(to bottom, white 20%, white 90%);
-    border-color: #bfb8b1;
-    box-shadow: 0 1px rgba(0, 0, 0, 0.05);
-    color: #ffffff; }
-  check:hover,
-  radio:hover {
-    background-image: image(#f2f2f2); }
-  check:active,
-  radio:active {
-    box-shadow: inset 0 1px rgba(0, 0, 0, 0.2);
-    background-image: image(#d9d9d9); }
-  check:disabled,
-  radio:disabled {
-    box-shadow: none;
-    color: rgba(255, 255, 255, 0.7); }
-  check:checked,
-  radio:checked {
-    background-clip: border-box;
-    background-image: linear-gradient(to bottom, #4b92e7 20%, #3584e4 90%);
-    border-color: #1b6acb;
-    box-shadow: 0 1px rgba(0, 0, 0, 0.05);
-    color: #ffffff; }
-  check:checked:hover,
-  radio:checked:hover {
-    background-image: linear-gradient(to bottom, #5d9de9 10%, #478fe6 90%); }
-  check:checked:active,
-  radio:checked:active {
-    box-shadow: inset 0 1px rgba(0, 0, 0, 0.2);
-    background-image: image(#1f76e1); }
-  check:checked:disabled,
-  radio:checked:disabled {
-    box-shadow: none;
-    color: rgba(255, 255, 255, 0.7); }
-  check:indeterminate,
-  radio:indeterminate {
-    background-clip: border-box;
-    background-image: linear-gradient(to bottom, #4b92e7 20%, #3584e4 90%);
-    border-color: #1b6acb;
-    box-shadow: 0 1px rgba(0, 0, 0, 0.05);
-    color: #ffffff; }
-  check:indeterminate:hover,
-  radio:indeterminate:hover {
-    background-image: linear-gradient(to bottom, #5d9de9 10%, #478fe6 90%); }
-  check:indeterminate:active,
-  radio:indeterminate:active {
-    box-shadow: inset 0 1px rgba(0, 0, 0, 0.2);
-    background-image: image(#1f76e1); }
-  check:indeterminate:disabled,
-  radio:indeterminate:disabled {
-    box-shadow: none;
-    color: rgba(255, 255, 255, 0.7); }
-  row.selected check, row.selected radio {
-    border-color: #1b6acb; }
-  .osd check, .osd radio {
-    color: #eeeeec;
-    outline-color: rgba(53, 132, 228, 0.5);
-    border-color: rgba(0, 0, 0, 0.7);
-    background-color: rgba(53, 53, 53, 0.7);
-    background-clip: padding-box;
-    box-shadow: inset 0 1px rgba(255, 255, 255, 0.1);
-    text-shadow: none;
-    --icon-shadow: none; }
-    .osd check::before, .osd radio::before {
-      opacity: 0; }
-    .osd check:hover, .osd radio:hover {
-      color: #eeeeec;
-      outline-color: rgba(53, 132, 228, 0.5);
-      border-color: rgba(0, 0, 0, 0.7);
-      background-color: rgba(53, 53, 53, 0.7);
-      background-clip: padding-box;
-      box-shadow: inset 0 1px rgba(255, 255, 255, 0.1);
-      text-shadow: none;
-      --icon-shadow: none; }
-      .osd check:hover::before, .osd radio:hover::before {
-        opacity: 0; }
-    .osd check:active, .osd radio:active {
-      color: white;
-      border-color: rgba(0, 0, 0, 0.7);
-      background-color: rgba(2, 2, 2, 0.7);
-      background-clip: padding-box;
-      box-shadow: none;
-      text-shadow: none;
-      --icon-shadow: none; }
-      .osd check:active::before, .osd radio:active::before {
-        opacity: 0; }
-    .osd check:disabled, .osd radio:disabled {
-      color: #919190;
-      border-color: rgba(0, 0, 0, 0.7);
-      background-color: rgba(71, 71, 71, 0.5);
-      background-clip: padding-box;
-      box-shadow: none;
-      text-shadow: none;
-      --icon-shadow: none; }
-      .osd check:disabled::before, .osd radio:disabled::before {
-        opacity: 0; }
-
-
-check {
-  border-radius: 3px;
-  --icon-size: 14px; }
-  
-  check:checked {
-    -gtk-icon-source: -gtk-scaled(-gtk-recolor(url("assets/check-symbolic.symbolic.png")), -gtk-recolor(url("assets/check@2-symbolic.symbolic.png"))); }
-  
-  check:indeterminate {
-    -gtk-icon-source: -gtk-scaled(-gtk-recolor(url("assets/dash-symbolic.symbolic.png")), -gtk-recolor(url("assets/dash@2-symbolic.symbolic.png"))); }
-
-.TreeView.view radio.selected:focus, .TreeView.view radio.selected, .TreeView.IconView radio.selected,
-radio {
-  border-radius: 100%;
-  --icon-size: 14px; }
-  .TreeView.view radio.selected:checked, .TreeView.IconView radio.selected:checked,
-  radio:checked {
-    -gtk-icon-source: -gtk-scaled(-gtk-recolor(url("assets/bullet-symbolic.symbolic.png")), -gtk-recolor(url("assets/bullet@2-symbolic.symbolic.png"))); }
-  .TreeView.view radio.selected:indeterminate, .TreeView.IconView radio.selected:indeterminate,
-  radio:indeterminate {
-    -gtk-icon-source: -gtk-scaled(-gtk-recolor(url("assets/dash-symbolic.symbolic.png")), -gtk-recolor(url("assets/dash@2-symbolic.symbolic.png"))); }
-
-.TreeView.view check.selected:focus, .TreeView.view check.selected, .TreeView.IconView check.selected,
-.TreeView.view radio.selected:focus,
-.TreeView.view radio.selected,
-.TreeView.IconView radio.selected {
-  color: #ffffff;
-  border-color: #185fb4; }
-
+/* .TreeView.view check,
+ * .TreeView.view radio {
+ *   &.selected {
+ *     &:focus, & {
+ *       color: $checkradio_fg_color;
+ * 
+ *       @if $variant == 'light' { border-color: $selected_borders_color; }
+ *     }
+ *   }
+ * }
+ * .TreeView.view radio.selected { &:focus, & { @extend %radio; }} // This is a workaround */
 /************
  * GtkScale *
  ************/
-progressbar > trough, scale > trough > fill, scale > trough {
+progressbar > trough {
   border: 1px solid #cdc7c2;
   border-radius: 3px;
   background-color: #e1dedb; }
-  progressbar > trough:disabled, scale > trough > fill:disabled, scale > trough:disabled {
+  progressbar > trough:disabled {
     background-color: #f7f6f5;
     border-color: #d5d0cc; }
-  row.selected progressbar > trough, row.selected scale > trough > fill, row.selected scale > trough {
+  row.selected progressbar > trough {
     outline-color: rgba(255, 255, 255, 0.8);
     border-color: #185fb4; }
-  .osd progressbar > trough, .osd scale > trough > fill, .osd scale > trough {
+  .osd progressbar > trough {
     border-color: rgba(0, 0, 0, 0.7);
     background-color: rgba(0, 0, 0, 0.5); }
-    .osd progressbar > trough:disabled, .osd scale > trough > fill:disabled, .osd scale > trough:disabled {
+    .osd progressbar > trough:disabled {
       background-color: rgba(71, 71, 71, 0.5); }
 
-progressbar > trough > progress, scale > trough > highlight {
+progressbar > trough > progress {
   border: 1px solid #185fb4;
   border-radius: 3px;
   background-color: #3584e4; }
-  progressbar > trough > progress:disabled, scale > trough > highlight:disabled {
+  progressbar > trough > progress:disabled {
     background-color: transparent;
     border-color: transparent; }
-  row.selected progressbar > trough > progress, row.selected scale > trough > highlight {
+  row.selected progressbar > trough > progress {
     border-color: #185fb4; }
-  .osd progressbar > trough > progress, .osd scale > trough > highlight {
+  .osd progressbar > trough > progress {
     border-color: rgba(0, 0, 0, 0.7); }
-    .osd progressbar > trough > progress:disabled, .osd scale > trough > highlight:disabled {
+    .osd progressbar > trough > progress:disabled {
       border-color: transparent; }
 
-scale {
-  min-height: 10px;
-  min-width: 10px;
-  padding: 12px; }
-  scale > trough {
-    outline: 0 solid transparent;
-    outline-offset: 16px; }
-  scale:focus:focus-visible > trough {
-    outline-color: rgba(53, 132, 228, 0.5);
-    outline-width: 2px;
-    outline-offset: 10px; }
-  scale > trough {
+.Range {
+  position: relative;
+  display: inline-flex;
+  cursor: pointer;
+  padding: 12px;
+  height: 28px;
+  width: 100%;
+  border-radius: 16px; }
+  .Range {
+    position: relative;
+    outline: none;
+    overflow: visible; }
+  .Range::before {
+    content: '';
+    position: absolute;
+    pointer-events: none;
+    z-index: 2;
+    display: inline-block;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 2px solid transparent;
+    border-radius: inherit;
+    transform: translate(-2px, -2px) scale(1.03);
     transition: all 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94); }
-    scale > trough > fill,
-    scale > trough > highlight {
-      margin: -1px; }
-    scale > trough > slider {
-      min-height: 18px;
-      min-width: 18px;
-      margin: -9px; }
-  scale.fine-tune.horizontal {
-    padding-top: 9px;
-    padding-bottom: 9px;
-    min-height: 16px; }
-  scale.fine-tune.vertical {
-    padding-left: 9px;
-    padding-right: 9px;
-    min-width: 16px; }
-  scale.fine-tune > trough > slider {
-    margin: -6px; }
-  scale.fine-tune > trough > fill,
-  scale.fine-tune > trough > highlight,
-  scale.fine-tune > trough {
-    border-radius: 5px; }
-  scale > trough > fill:backdrop, scale > trough > fill {
-    background-color: #cdc7c2; }
-  scale > trough > fill:disabled {
-    border-color: transparent;
-    background-color: transparent; }
-  .osd scale > trough > fill {
-    background-color: rgba(91, 91, 90, 0.775); }
-    .osd scale > trough > fill:disabled {
-      border-color: transparent;
-      background-color: transparent; }
-  scale > trough > slider {
+  .Range.focus {
+    outline: none; }
+  .Range.focus::before {
+    border: 2px solid rgba(53, 132, 228, 0.5);
+    transform: translate(-2px, -2px) scale(0.99); }
+  .Range.vertical {
+    width: 28px;
+    height: 100%; }
+  .Range.marked {
+    margin-bottom: 20px; }
+    .Range.marked.vertical {
+      margin-bottom: auto;
+      margin-right: 20px; }
+  .Range.disabled {
+    pointer-events: none;
+    cursor: default; }
+  .Range .Range__content {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    height: 4px; }
+  .Range.vertical .Range__content {
+    width: 4px;
+    height: 100%; }
+  .Range .Range__rail {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    border-radius: 2px;
+    border: 1px solid #90857a;
+    background-color: #d5d1cd;
+    opacity: 0.38; }
+  .Range.vertical .Range__rail {
+    height: 100%;
+    width: 4px; }
+  .Range.disabled .Range__rail {
+    color: #929595;
+    border-color: #d5d0cc;
+    background-color: #f7f6f5;
+    text-shadow: none;
+    --icon-shadow: none;
+    --icon-color: #929595;
+    box-shadow: inset 0 1px rgba(255, 255, 255, 0);
+    border: 1px solid #b6aea5; }
+    .Range.disabled .Range__rail::before {
+      opacity: 0; }
+  .Range .Range__track {
+    display: block;
+    position: absolute;
+    content: '';
+    height: 4px;
+    border-radius: 2px;
+    border: 1px solid #185fb4;
+    background-color: #3584e4;
+    transition: all 150ms cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+  .Range.vertical .Range__track {
+    width: 4px; }
+  .Range.no-track .Range__track {
+    display: none; }
+  .Range.disabled .Range__track {
+    display: none; }
+  .Range .Range__thumb {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 16px;
+    height: 16px;
+    margin-left: -8px;
+    margin-top: -6px;
     color: #2e3436;
     outline-color: rgba(53, 132, 228, 0.5);
-    border-color: #bfb8b1;
-    background-image: linear-gradient(to bottom, white 20%, #f6f5f4 90%);
-    box-shadow: inset 0 1px white, 0 1px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.07);
-    border: 1px solid #b8b0a8;
-    border-radius: 100%;
-    transition: all 150ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    transition-property: background, border, box-shadow; }
-    scale > trough > slider:hover {
+    border-color: #cdc7c2;
+    border-bottom-color: #bfb8b1;
+    background-color: #f6f5f4;
+    box-shadow: inset 0 1px white, 0 1px 2px rgba(0, 0, 0, 0.07);
+    border: 1px solid #9f9489;
+    border-radius: 50%;
+    outline: 0;
+    transition: all 150ms cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+    .Range .Range__thumb::before {
+      content: ' ';
+      position: absolute;
+      pointer-events: none;
+      width: 100%;
+      height: 100%;
+      top: 0px;
+      left: 0px;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.03), transparent);
+      transition: all 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+    .Range .Range__thumb:hover {
       color: #2e3436;
       border-color: #cdc7c2;
       border-bottom-color: #bfb8b1;
       background-color: #f9f9f8;
-      box-shadow: inset 0 1px #f4f2f1, 0 1px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.07); }
-      scale > trough > slider:hover::before {
+      box-shadow: inset 0 1px #f4f2f1, 0 1px 2px rgba(0, 0, 0, 0.07);
+      border: 1px solid #9f9489; }
+      .Range .Range__thumb:hover::before {
         opacity: 0; }
-    scale > trough > slider:active {
-      border-color: #185fb4; }
-    scale > trough > slider:disabled {
-      color: #929595;
-      border-color: #d5d0cc;
-      background-color: #f7f6f5;
-      text-shadow: none;
-      --icon-shadow: none;
-      --icon-color: #929595;
-      box-shadow: inset 0 1px rgba(255, 255, 255, 0); }
-      scale > trough > slider:disabled::before {
-        opacity: 0; }
-    row.selected scale > trough > slider:disabled, row.selected scale > trough > slider {
-      border-color: #185fb4; }
-    .osd scale > trough > slider {
-      color: #eeeeec;
-      outline-color: rgba(53, 132, 228, 0.5);
-      border-color: rgba(0, 0, 0, 0.7);
-      background-color: rgba(53, 53, 53, 0.7);
-      background-clip: padding-box;
-      box-shadow: inset 0 1px rgba(255, 255, 255, 0.1);
-      text-shadow: none;
-      --icon-shadow: none;
-      border-color: rgba(0, 0, 0, 0.7);
-      background-color: #353535; }
-      .osd scale > trough > slider::before {
-        opacity: 0; }
-      .osd scale > trough > slider:hover {
-        color: white;
-        border-color: rgba(0, 0, 0, 0.7);
-        background-color: rgba(27, 27, 27, 0.7);
-        background-clip: padding-box;
-        box-shadow: inset 0 1px rgba(255, 255, 255, 0.1);
-        text-shadow: none;
-        --icon-shadow: none;
-        background-color: #353535; }
-        .osd scale > trough > slider:hover::before {
-          opacity: 0; }
-      .osd scale > trough > slider:active {
-        color: white;
-        border-color: rgba(0, 0, 0, 0.7);
-        background-color: rgba(2, 2, 2, 0.7);
-        background-clip: padding-box;
-        box-shadow: none;
-        text-shadow: none;
-        --icon-shadow: none;
-        background-color: #353535; }
-        .osd scale > trough > slider:active::before {
-          opacity: 0; }
-      .osd scale > trough > slider:disabled {
-        color: #919190;
-        border-color: rgba(0, 0, 0, 0.7);
-        background-color: rgba(71, 71, 71, 0.5);
-        background-clip: padding-box;
-        box-shadow: none;
-        text-shadow: none;
-        --icon-shadow: none;
-        background-color: #353535; }
-        .osd scale > trough > slider:disabled::before {
-          opacity: 0; }
-  scale > value {
-    color: alpha(currentColor,0.55);
-    font-feature-settings: "tnum"; }
-  scale.horizontal > marks {
-    color: alpha(currentColor,0.55); }
-    scale.horizontal > marks.top {
-      margin-bottom: 6px; }
-    scale.horizontal > marks.bottom {
-      margin-top: 6px; }
-    scale.horizontal > marks indicator {
-      background-color: currentColor;
-      min-height: 6px;
-      min-width: 1px; }
-  scale.horizontal > value.left {
-    margin-right: 9px; }
-  scale.horizontal > value.right {
-    margin-left: 9px; }
-  scale.horizontal.fine-tune > marks.top {
-    margin-top: 3px; }
-  scale.horizontal.fine-tune > marks.bottom {
-    margin-bottom: 3px; }
-  scale.horizontal.fine-tune > marks indicator {
-    min-height: 3px; }
-  scale.vertical > marks {
-    color: alpha(currentColor,0.55); }
-    scale.vertical > marks.top {
-      margin-right: 6px; }
-    scale.vertical > marks.bottom {
-      margin-left: 6px; }
-    scale.vertical > marks indicator {
-      background-color: currentColor;
-      min-height: 1px;
-      min-width: 6px; }
-  scale.vertical > value.top {
-    margin-bottom: 9px; }
-  scale.vertical > value.bottom {
-    margin-top: 9px; }
-  scale.vertical.fine-tune > marks.top {
-    margin-left: 3px; }
-  scale.vertical.fine-tune > marks.bottom {
-    margin-right: 3px; }
-  scale.vertical.fine-tune > marks indicator {
-    min-height: 3px; }
-  scale.horizontal.marks-before:not(.marks-after) > trough > slider {
-    margin: -10px;
-    border-style: none;
-    border-radius: 0;
-    background-color: transparent;
-    background-image: -gtk-scaled(url("assets/slider-horz-scale-has-marks-above.png"), url("assets/slider-horz-scale-has-marks-above@2.png"));
-    min-height: 26px;
-    min-width: 22px;
-    margin-top: -14px;
-    background-position: top;
-    background-repeat: no-repeat;
+    .Range .Range__thumb:active {
+      border-color: #124787; }
+  .Range.disabled .Range__thumb {
+    color: #929595;
+    border-color: #d5d0cc;
+    background-color: #f7f6f5;
+    text-shadow: none;
+    --icon-shadow: none;
+    --icon-color: #929595;
+    box-shadow: inset 0 1px rgba(255, 255, 255, 0); }
+    .Range.disabled .Range__thumb::before {
+      opacity: 0; }
+    .Range.disabled .Range__thumb:hover {
+      box-shadow: none; }
+  .Range.vertical .Range__thumb {
+    margin-top: 0;
+    margin-bottom: -6px;
+    margin-left: -6px; }
+  .Range .Range__mark {
+    position: absolute;
+    border-radius: 1px;
+    background-color: #c3bdb7; }
+    .Range .Range__mark.active {
+      background-color: #3584e4; }
+  .Range:not(.vertical) .Range__mark {
+    top: 8px;
+    width: 1px;
+    height: 4px; }
+  .Range.vertical .Range__mark {
+    left: 8px;
+    width: 4px;
+    height: 1px; }
+  .Range.disabled .Range__mark.active {
+    background-color: #c3bdb7;
     box-shadow: none; }
-  scale.horizontal.marks-before.fine-tune:not(.marks-after) > trough > slider {
-    margin: -7px -10px;
-    margin-top: -11px; }
-  scale.horizontal.marks-before:not(.marks-after) > trough > slider:hover {
-    margin: -10px;
-    border-style: none;
-    border-radius: 0;
-    background-color: transparent;
-    background-image: -gtk-scaled(url("assets/slider-horz-scale-has-marks-above-hover.png"), url("assets/slider-horz-scale-has-marks-above-hover@2.png"));
-    min-height: 26px;
-    min-width: 22px;
-    margin-top: -14px;
-    background-position: top;
-    background-repeat: no-repeat;
-    box-shadow: none; }
-  scale.horizontal.marks-before.fine-tune:not(.marks-after) > trough > slider {
-    margin: -7px -10px;
-    margin-top: -11px; }
-  scale.horizontal.marks-before:not(.marks-after) > trough > slider:active {
-    margin: -10px;
-    border-style: none;
-    border-radius: 0;
-    background-color: transparent;
-    background-image: -gtk-scaled(url("assets/slider-horz-scale-has-marks-above-active.png"), url("assets/slider-horz-scale-has-marks-above-active@2.png"));
-    min-height: 26px;
-    min-width: 22px;
-    margin-top: -14px;
-    background-position: top;
-    background-repeat: no-repeat;
-    box-shadow: none; }
-  scale.horizontal.marks-before.fine-tune:not(.marks-after) > trough > slider {
-    margin: -7px -10px;
-    margin-top: -11px; }
-  scale.horizontal.marks-before:not(.marks-after) > trough > slider:disabled {
-    margin: -10px;
-    border-style: none;
-    border-radius: 0;
-    background-color: transparent;
-    background-image: -gtk-scaled(url("assets/slider-horz-scale-has-marks-above-insensitive.png"), url("assets/slider-horz-scale-has-marks-above-insensitive@2.png"));
-    min-height: 26px;
-    min-width: 22px;
-    margin-top: -14px;
-    background-position: top;
-    background-repeat: no-repeat;
-    box-shadow: none; }
-  scale.horizontal.marks-before.fine-tune:not(.marks-after) > trough > slider {
-    margin: -7px -10px;
-    margin-top: -11px; }
-  scale.horizontal.marks-before:not(.marks-after) > trough > slider:backdrop {
-    margin: -10px;
-    border-style: none;
-    border-radius: 0;
-    background-color: transparent;
-    background-image: -gtk-scaled(url("assets/slider-horz-scale-has-marks-above-backdrop.png"), url("assets/slider-horz-scale-has-marks-above-backdrop@2.png"));
-    min-height: 26px;
-    min-width: 22px;
-    margin-top: -14px;
-    background-position: top;
-    background-repeat: no-repeat;
-    box-shadow: none; }
-  scale.horizontal.marks-before.fine-tune:not(.marks-after) > trough > slider {
-    margin: -7px -10px;
-    margin-top: -11px; }
-  scale.horizontal.marks-before:not(.marks-after) > trough > slider:backdrop:disabled {
-    margin: -10px;
-    border-style: none;
-    border-radius: 0;
-    background-color: transparent;
-    background-image: -gtk-scaled(url("assets/slider-horz-scale-has-marks-above-backdrop-insensitive.png"), url("assets/slider-horz-scale-has-marks-above-backdrop-insensitive@2.png"));
-    min-height: 26px;
-    min-width: 22px;
-    margin-top: -14px;
-    background-position: top;
-    background-repeat: no-repeat;
-    box-shadow: none; }
-  scale.horizontal.marks-before.fine-tune:not(.marks-after) > trough > slider {
-    margin: -7px -10px;
-    margin-top: -11px; }
-  scale.horizontal.marks-after:not(.marks-before) > trough > slider {
-    margin: -10px;
-    border-style: none;
-    border-radius: 0;
-    background-color: transparent;
-    background-image: -gtk-scaled(url("assets/slider-horz-scale-has-marks-below.png"), url("assets/slider-horz-scale-has-marks-below@2.png"));
-    min-height: 26px;
-    min-width: 22px;
-    margin-bottom: -14px;
-    background-position: bottom;
-    background-repeat: no-repeat;
-    box-shadow: none; }
-  scale.horizontal.marks-after.fine-tune:not(.marks-before) > trough > slider {
-    margin: -7px -10px;
-    margin-bottom: -11px; }
-  scale.horizontal.marks-after:not(.marks-before) > trough > slider:hover {
-    margin: -10px;
-    border-style: none;
-    border-radius: 0;
-    background-color: transparent;
-    background-image: -gtk-scaled(url("assets/slider-horz-scale-has-marks-below-hover.png"), url("assets/slider-horz-scale-has-marks-below-hover@2.png"));
-    min-height: 26px;
-    min-width: 22px;
-    margin-bottom: -14px;
-    background-position: bottom;
-    background-repeat: no-repeat;
-    box-shadow: none; }
-  scale.horizontal.marks-after.fine-tune:not(.marks-before) > trough > slider {
-    margin: -7px -10px;
-    margin-bottom: -11px; }
-  scale.horizontal.marks-after:not(.marks-before) > trough > slider:active {
-    margin: -10px;
-    border-style: none;
-    border-radius: 0;
-    background-color: transparent;
-    background-image: -gtk-scaled(url("assets/slider-horz-scale-has-marks-below-active.png"), url("assets/slider-horz-scale-has-marks-below-active@2.png"));
-    min-height: 26px;
-    min-width: 22px;
-    margin-bottom: -14px;
-    background-position: bottom;
-    background-repeat: no-repeat;
-    box-shadow: none; }
-  scale.horizontal.marks-after.fine-tune:not(.marks-before) > trough > slider {
-    margin: -7px -10px;
-    margin-bottom: -11px; }
-  scale.horizontal.marks-after:not(.marks-before) > trough > slider:disabled {
-    margin: -10px;
-    border-style: none;
-    border-radius: 0;
-    background-color: transparent;
-    background-image: -gtk-scaled(url("assets/slider-horz-scale-has-marks-below-insensitive.png"), url("assets/slider-horz-scale-has-marks-below-insensitive@2.png"));
-    min-height: 26px;
-    min-width: 22px;
-    margin-bottom: -14px;
-    background-position: bottom;
-    background-repeat: no-repeat;
-    box-shadow: none; }
-  scale.horizontal.marks-after.fine-tune:not(.marks-before) > trough > slider {
-    margin: -7px -10px;
-    margin-bottom: -11px; }
-  scale.horizontal.marks-after:not(.marks-before) > trough > slider:backdrop {
-    margin: -10px;
-    border-style: none;
-    border-radius: 0;
-    background-color: transparent;
-    background-image: -gtk-scaled(url("assets/slider-horz-scale-has-marks-below-backdrop.png"), url("assets/slider-horz-scale-has-marks-below-backdrop@2.png"));
-    min-height: 26px;
-    min-width: 22px;
-    margin-bottom: -14px;
-    background-position: bottom;
-    background-repeat: no-repeat;
-    box-shadow: none; }
-  scale.horizontal.marks-after.fine-tune:not(.marks-before) > trough > slider {
-    margin: -7px -10px;
-    margin-bottom: -11px; }
-  scale.horizontal.marks-after:not(.marks-before) > trough > slider:backdrop:disabled {
-    margin: -10px;
-    border-style: none;
-    border-radius: 0;
-    background-color: transparent;
-    background-image: -gtk-scaled(url("assets/slider-horz-scale-has-marks-below-backdrop-insensitive.png"), url("assets/slider-horz-scale-has-marks-below-backdrop-insensitive@2.png"));
-    min-height: 26px;
-    min-width: 22px;
-    margin-bottom: -14px;
-    background-position: bottom;
-    background-repeat: no-repeat;
-    box-shadow: none; }
-  scale.horizontal.marks-after.fine-tune:not(.marks-before) > trough > slider {
-    margin: -7px -10px;
-    margin-bottom: -11px; }
-  scale.vertical.marks-before:not(.marks-after) > trough > slider {
-    margin: -10px;
-    border-style: none;
-    border-radius: 0;
-    background-color: transparent;
-    background-image: -gtk-scaled(url("assets/slider-vert-scale-has-marks-above.png"), url("assets/slider-vert-scale-has-marks-above@2.png"));
-    min-height: 22px;
-    min-width: 26px;
-    margin-left: -14px;
-    background-position: left bottom;
-    background-repeat: no-repeat;
-    box-shadow: none; }
-  scale.vertical.marks-before.fine-tune:not(.marks-after) > trough > slider {
-    margin: -10px -7px;
-    margin-left: -11px; }
-  scale.vertical.marks-before:not(.marks-after) > trough > slider:hover {
-    margin: -10px;
-    border-style: none;
-    border-radius: 0;
-    background-color: transparent;
-    background-image: -gtk-scaled(url("assets/slider-vert-scale-has-marks-above-hover.png"), url("assets/slider-vert-scale-has-marks-above-hover@2.png"));
-    min-height: 22px;
-    min-width: 26px;
-    margin-left: -14px;
-    background-position: left bottom;
-    background-repeat: no-repeat;
-    box-shadow: none; }
-  scale.vertical.marks-before.fine-tune:not(.marks-after) > trough > slider {
-    margin: -10px -7px;
-    margin-left: -11px; }
-  scale.vertical.marks-before:not(.marks-after) > trough > slider:active {
-    margin: -10px;
-    border-style: none;
-    border-radius: 0;
-    background-color: transparent;
-    background-image: -gtk-scaled(url("assets/slider-vert-scale-has-marks-above-active.png"), url("assets/slider-vert-scale-has-marks-above-active@2.png"));
-    min-height: 22px;
-    min-width: 26px;
-    margin-left: -14px;
-    background-position: left bottom;
-    background-repeat: no-repeat;
-    box-shadow: none; }
-  scale.vertical.marks-before.fine-tune:not(.marks-after) > trough > slider {
-    margin: -10px -7px;
-    margin-left: -11px; }
-  scale.vertical.marks-before:not(.marks-after) > trough > slider:disabled {
-    margin: -10px;
-    border-style: none;
-    border-radius: 0;
-    background-color: transparent;
-    background-image: -gtk-scaled(url("assets/slider-vert-scale-has-marks-above-insensitive.png"), url("assets/slider-vert-scale-has-marks-above-insensitive@2.png"));
-    min-height: 22px;
-    min-width: 26px;
-    margin-left: -14px;
-    background-position: left bottom;
-    background-repeat: no-repeat;
-    box-shadow: none; }
-  scale.vertical.marks-before.fine-tune:not(.marks-after) > trough > slider {
-    margin: -10px -7px;
-    margin-left: -11px; }
-  scale.vertical.marks-before:not(.marks-after) > trough > slider:backdrop {
-    margin: -10px;
-    border-style: none;
-    border-radius: 0;
-    background-color: transparent;
-    background-image: -gtk-scaled(url("assets/slider-vert-scale-has-marks-above-backdrop.png"), url("assets/slider-vert-scale-has-marks-above-backdrop@2.png"));
-    min-height: 22px;
-    min-width: 26px;
-    margin-left: -14px;
-    background-position: left bottom;
-    background-repeat: no-repeat;
-    box-shadow: none; }
-  scale.vertical.marks-before.fine-tune:not(.marks-after) > trough > slider {
-    margin: -10px -7px;
-    margin-left: -11px; }
-  scale.vertical.marks-before:not(.marks-after) > trough > slider:backdrop:disabled {
-    margin: -10px;
-    border-style: none;
-    border-radius: 0;
-    background-color: transparent;
-    background-image: -gtk-scaled(url("assets/slider-vert-scale-has-marks-above-backdrop-insensitive.png"), url("assets/slider-vert-scale-has-marks-above-backdrop-insensitive@2.png"));
-    min-height: 22px;
-    min-width: 26px;
-    margin-left: -14px;
-    background-position: left bottom;
-    background-repeat: no-repeat;
-    box-shadow: none; }
-  scale.vertical.marks-before.fine-tune:not(.marks-after) > trough > slider {
-    margin: -10px -7px;
-    margin-left: -11px; }
-  scale.vertical.marks-after:not(.marks-before) > trough > slider {
-    margin: -10px;
-    border-style: none;
-    border-radius: 0;
-    background-color: transparent;
-    background-image: -gtk-scaled(url("assets/slider-vert-scale-has-marks-below.png"), url("assets/slider-vert-scale-has-marks-below@2.png"));
-    min-height: 22px;
-    min-width: 26px;
-    margin-right: -14px;
-    background-position: right bottom;
-    background-repeat: no-repeat;
-    box-shadow: none; }
-  scale.vertical.marks-after.fine-tune:not(.marks-before) > trough > slider {
-    margin: -10px -7px;
-    margin-right: -11px; }
-  scale.vertical.marks-after:not(.marks-before) > trough > slider:hover {
-    margin: -10px;
-    border-style: none;
-    border-radius: 0;
-    background-color: transparent;
-    background-image: -gtk-scaled(url("assets/slider-vert-scale-has-marks-below-hover.png"), url("assets/slider-vert-scale-has-marks-below-hover@2.png"));
-    min-height: 22px;
-    min-width: 26px;
-    margin-right: -14px;
-    background-position: right bottom;
-    background-repeat: no-repeat;
-    box-shadow: none; }
-  scale.vertical.marks-after.fine-tune:not(.marks-before) > trough > slider {
-    margin: -10px -7px;
-    margin-right: -11px; }
-  scale.vertical.marks-after:not(.marks-before) > trough > slider:active {
-    margin: -10px;
-    border-style: none;
-    border-radius: 0;
-    background-color: transparent;
-    background-image: -gtk-scaled(url("assets/slider-vert-scale-has-marks-below-active.png"), url("assets/slider-vert-scale-has-marks-below-active@2.png"));
-    min-height: 22px;
-    min-width: 26px;
-    margin-right: -14px;
-    background-position: right bottom;
-    background-repeat: no-repeat;
-    box-shadow: none; }
-  scale.vertical.marks-after.fine-tune:not(.marks-before) > trough > slider {
-    margin: -10px -7px;
-    margin-right: -11px; }
-  scale.vertical.marks-after:not(.marks-before) > trough > slider:disabled {
-    margin: -10px;
-    border-style: none;
-    border-radius: 0;
-    background-color: transparent;
-    background-image: -gtk-scaled(url("assets/slider-vert-scale-has-marks-below-insensitive.png"), url("assets/slider-vert-scale-has-marks-below-insensitive@2.png"));
-    min-height: 22px;
-    min-width: 26px;
-    margin-right: -14px;
-    background-position: right bottom;
-    background-repeat: no-repeat;
-    box-shadow: none; }
-  scale.vertical.marks-after.fine-tune:not(.marks-before) > trough > slider {
-    margin: -10px -7px;
-    margin-right: -11px; }
-  scale.vertical.marks-after:not(.marks-before) > trough > slider:backdrop {
-    margin: -10px;
-    border-style: none;
-    border-radius: 0;
-    background-color: transparent;
-    background-image: -gtk-scaled(url("assets/slider-vert-scale-has-marks-below-backdrop.png"), url("assets/slider-vert-scale-has-marks-below-backdrop@2.png"));
-    min-height: 22px;
-    min-width: 26px;
-    margin-right: -14px;
-    background-position: right bottom;
-    background-repeat: no-repeat;
-    box-shadow: none; }
-  scale.vertical.marks-after.fine-tune:not(.marks-before) > trough > slider {
-    margin: -10px -7px;
-    margin-right: -11px; }
-  scale.vertical.marks-after:not(.marks-before) > trough > slider:backdrop:disabled {
-    margin: -10px;
-    border-style: none;
-    border-radius: 0;
-    background-color: transparent;
-    background-image: -gtk-scaled(url("assets/slider-vert-scale-has-marks-below-backdrop-insensitive.png"), url("assets/slider-vert-scale-has-marks-below-backdrop-insensitive@2.png"));
-    min-height: 22px;
-    min-width: 26px;
-    margin-right: -14px;
-    background-position: right bottom;
-    background-repeat: no-repeat;
-    box-shadow: none; }
-  scale.vertical.marks-after.fine-tune:not(.marks-before) > trough > slider {
-    margin: -10px -7px;
-    margin-right: -11px; }
-  scale.color {
-    min-height: 0;
-    min-width: 0; }
-    scale.color > trough {
-      background-image: image(#cdc7c2);
-      background-repeat: no-repeat; }
-    scale.color.horizontal {
-      padding: 0 0 15px 0; }
-      scale.color.horizontal > trough {
-        padding-bottom: 4px;
-        background-position: 0 -3px;
-        border-top-left-radius: 0;
-        border-top-right-radius: 0; }
-      scale.color.horizontal > trough > slider:dir(ltr):hover, scale.color.horizontal > trough > slider:dir(ltr):backdrop, scale.color.horizontal > trough > slider:dir(ltr):disabled, scale.color.horizontal > trough > slider:dir(ltr):backdrop:disabled, scale.color.horizontal > trough > slider:dir(ltr), scale.color.horizontal > trough > slider:dir(rtl):hover, scale.color.horizontal > trough > slider:dir(rtl):backdrop, scale.color.horizontal > trough > slider:dir(rtl):disabled, scale.color.horizontal > trough > slider:dir(rtl):backdrop:disabled, scale.color.horizontal > trough > slider:dir(rtl) {
-        margin-bottom: -15px;
-        margin-top: 6px; }
-    scale.color.vertical:dir(ltr) {
-      padding: 0 0 0 15px; }
-      scale.color.vertical:dir(ltr) > trough {
-        padding-left: 4px;
-        background-position: 3px 0;
-        border-bottom-right-radius: 0;
-        border-top-right-radius: 0; }
-      scale.color.vertical:dir(ltr) > trough > slider:hover, scale.color.vertical:dir(ltr) > trough > slider:backdrop, scale.color.vertical:dir(ltr) > trough > slider:disabled, scale.color.vertical:dir(ltr) > trough > slider:backdrop:disabled, scale.color.vertical:dir(ltr) > trough > slider {
-        margin-left: -15px;
-        margin-right: 6px; }
-    scale.color.vertical:dir(rtl) {
-      padding: 0 15px 0 0; }
-      scale.color.vertical:dir(rtl) > trough {
-        padding-right: 4px;
-        background-position: -3px 0;
-        border-bottom-left-radius: 0;
-        border-top-left-radius: 0; }
-      scale.color.vertical:dir(rtl) > trough > slider:hover, scale.color.vertical:dir(rtl) > trough > slider:backdrop, scale.color.vertical:dir(rtl) > trough > slider:disabled, scale.color.vertical:dir(rtl) > trough > slider:backdrop:disabled, scale.color.vertical:dir(rtl) > trough > slider {
-        margin-right: -15px;
-        margin-left: 6px; }
-    scale.color.fine-tune.horizontal:dir(ltr), scale.color.fine-tune.horizontal:dir(rtl) {
-      padding: 0 0 12px 0; }
-      scale.color.fine-tune.horizontal:dir(ltr) > trough, scale.color.fine-tune.horizontal:dir(rtl) > trough {
-        padding-bottom: 7px;
-        background-position: 0 -6px; }
-      scale.color.fine-tune.horizontal:dir(ltr) > trough > slider, scale.color.fine-tune.horizontal:dir(rtl) > trough > slider {
-        margin-bottom: -15px;
-        margin-top: 6px; }
-    scale.color.fine-tune.vertical:dir(ltr) {
-      padding: 0 0 0 12px; }
-      scale.color.fine-tune.vertical:dir(ltr) > trough {
-        padding-left: 7px;
-        background-position: 6px 0; }
-      scale.color.fine-tune.vertical:dir(ltr) > trough > slider {
-        margin-left: -15px;
-        margin-right: 6px; }
-    scale.color.fine-tune.vertical:dir(rtl) {
-      padding: 0 12px 0 0; }
-      scale.color.fine-tune.vertical:dir(rtl) > trough {
-        padding-right: 7px;
-        background-position: -6px 0; }
-      scale.color.fine-tune.vertical:dir(rtl) > trough > slider {
-        margin-right: -15px;
-        margin-left: 6px; }
+  .Range.fine-tune.horizontal {
+    padding-top: 9px;
+    padding-bottom: 9px;
+    min-height: 16px; }
+  .Range.fine-tune.vertical {
+    padding-left: 9px;
+    padding-right: 9px;
+    min-width: 16px; }
+  .Range.fine-tune > trough > slider {
+    margin: -6px; }
+  .Range.fine-tune > trough > fill,
+  .Range.fine-tune > trough > highlight,
+  .Range.fine-tune > trough {
+    border-radius: 5px; }
 
 /*****************
  * Progress bars *

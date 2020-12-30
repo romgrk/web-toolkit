@@ -4,6 +4,10 @@ This is a work in progress web toolkit using GTK's default theme, Adwaita.
 
 [See live demo](https://romgrk.github.io/web-toolkit-example/)
 
+**HELP WANTED**: I need help to make this into a production-ready library.
+Come help me! Checkout the open issues or [ask here](https://github.com/romgrk/web-toolkit/issues/2)
+if you're unsure how you can help.
+
 ## Why
 
 All UI design frameworks suck. No one knows how to design. Except for Gnome designers
@@ -25,6 +29,13 @@ The second goal is to create components to make it easy to use the framework. Fo
 demo components are being created with React but I've been thinking about making a Solid
 version. But the first goal should allow any UI framework to reuse the CSS classes.
 
-## Contribution
+## Contributions
 
-Help me please. This is going to be great.
+To start coding, clone the project, run `npm install`, then run `npm start` to spawn the
+dev server. You need to have `sassc` installed.
+
+## License
+
+Undecided yet. I use MIT usually but the CSS files of the GTK project were reused so I'm not
+sure it can be licensed as MIT or if it needs to be LGPL. Either way, best case it's MIT
+worst case it's LGPL, which is still permissive and allows commercial use so it's fine.

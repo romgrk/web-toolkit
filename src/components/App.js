@@ -80,13 +80,13 @@ function AppContent() {
 
       <h1>Application</h1>
 
+      <DemoNotebook />
+      <br/>
+
       <DemoInput />
       <br/>
 
       <DemoPopover />
-      <br/>
-
-      <DemoNotebook />
       <br/>
 
       <Box horizontal>
@@ -240,13 +240,21 @@ function DemoNotebook({}) {
   return (
     <>
       <Box vertical>
-        <Box horizontal>
-          <Notebook arrows action={action} position='top' pages={pages} />
-          <Notebook arrows action={action} position='bottom' pages={pages} />
+        <Box horizontal style={{ height: 200 }}>
+          <Box.Fill expandChildren>
+            <Notebook arrows action={action} position='top' pages={pages} />
+          </Box.Fill>
+          <Box.Fill expandChildren>
+            <Notebook arrows action={action} position='bottom' pages={pages} />
+          </Box.Fill>
         </Box>
-        <Box horizontal>
-          <Notebook arrows action={action} position='left' pages={pages} />
-          <Notebook arrows action={action} position='right' pages={pages} />
+        <Box horizontal style={{ height: 200 }}>
+          <Box.Fill expandChildren>
+            <Notebook arrows action={action} position='left' pages={pages} />
+          </Box.Fill>
+          <Box.Fill expandChildren>
+            <Notebook arrows action={action} position='right' pages={pages} />
+          </Box.Fill>
         </Box>
       </Box>
       <br/>

@@ -2,7 +2,7 @@
  * Box.js
  */
 
-import cx from 'classname'
+import cx from 'clsx'
 
 function Box({
   children,
@@ -10,13 +10,15 @@ function Box({
   inline,
   compact,
   fill,
-  horizontal,
+  horizontal: horizontalValue,
   vertical,
   align,
   justify,
   space,
   ...rest
 }) {
+  const horizontal =
+    horizontalValue === undefined && vertical === undefined ? true : horizontalValue
   return (
     <div
       className={cx(
@@ -32,5 +34,30 @@ function Box({
     </div>
   )
 }
+
+function Fill({
+  children,
+  className,
+  expandChildren,
+  ...rest
+}) {
+  return (
+    <div
+      className={
+        cx(
+          'Box__fill',
+          {
+            'expand-children': expandChildren
+          }
+        )
+      }
+      {...rest}
+    >
+      {children}
+    </div>
+  )
+}
+
+Box.Fill = Fill
 
 export default Box

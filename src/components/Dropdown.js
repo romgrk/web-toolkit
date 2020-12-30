@@ -61,6 +61,7 @@ class Dropdown extends React.Component {
       open: false,
       position: { top: 0, left: 0 },
       inputValue: '',
+      previousInputValue: '',
     }
   }
 
@@ -97,7 +98,7 @@ class Dropdown extends React.Component {
       this.setState({ open: false })
 
     if (this.props.input && this.state.inputValue) {
-      this.setState({ inputValue: '' })
+      this.setState({ inputValue: '', previousInputValue: this.state.inputValue })
     }
   }
 
@@ -128,12 +129,14 @@ class Dropdown extends React.Component {
 
   getOptions() {
     const { options, filterKey, filter } = this.props
-    const { inputValue } = this.state
+    const open = this.isOpen()
+    const { inputValue, previousInputValue } = this.state
+    const value = open ? inputValue : previousInputValue
 
-    if (!inputValue)
+    if (!value)
       return options
 
-    const needle = inputValue.toLowerCase()
+    const needle = value.toLowerCase()
 
     return options.filter(o => {
       const optionValue = 
@@ -253,6 +256,7 @@ class Dropdown extends React.Component {
         open={open}
         content={menu}
         onClose={this.close}
+        shouldUpdatePlacement={open}
       >
         {trigger}
       </Popover>

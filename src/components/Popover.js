@@ -41,6 +41,7 @@ class Popover extends React.PureComponent {
     method: prop.oneOf(['mouseover', 'click', 'click-controlled', 'none']),
     width: prop.oneOf(['trigger']),
     delay: prop.number,
+    shouldUpdatePlacement: prop.bool,
     onOpen: prop.func,
     onClose: prop.func,
   }
@@ -51,6 +52,7 @@ class Popover extends React.PureComponent {
     align: 'right',
     method: 'click',
     delay: 200,
+    shouldUpdatePlacement: true,
     onOpen: NOOP,
     onClose: NOOP,
   }
@@ -95,8 +97,10 @@ class Popover extends React.PureComponent {
 
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.open !== this.props.open ||
-        prevState.open !== this.state.open) {
-      this.popper.update()
+        prevState.open !== this.state.open
+    ) {
+      if (this.props.shouldUpdatePlacement)
+        this.popper.update()
     }
   }
 

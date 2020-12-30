@@ -9,6 +9,7 @@ $asset_suffix: if($variant=='dark', '-dark', '');
 $backdrop_transition: 200ms ease-out;
 $button_transition: all 150ms $ease-out-quad;
 $focus_transition: all 200ms $ease-out-quad;
+$popover_transition: all 100ms $ease-out-quad;
 $button_radius: 5px;
 $menu_radius: 5px;
 $menu_margin: $menu_radius; //margin around menuitems & sidebar items
@@ -1435,7 +1436,6 @@ input::-webkit-outer-spin-button {
 /**************
  * ComboBoxes *
  **************/
-.Dropdown__menu.popover.menu.background > .popover__container { padding: 0; } //allow search entries with no margin
 
 .Dropdown {
   display: flex;
@@ -1453,9 +1453,16 @@ input::-webkit-outer-spin-button {
   }
   &.open {
     background-color: $popover_bg;
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
-    border-bottom-color: transparent;
+    &.popover-bottom {
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+      border-bottom-color: transparent;
+    }
+    &.popover-top {
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+      border-top-color: transparent;
+    }
 
     &.Button.active {
       @include button('hover');
@@ -1470,23 +1477,28 @@ input::-webkit-outer-spin-button {
    * } */
 }
 
-// newstyle
-.Dropdown__menu.popover {
+.Dropdown__menu.Popover {
 
-  > .popover__container {
+  &.bottom .Popover__container {
     padding-top: 0;
     border-top: none;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
   }
+  &.top .Popover__container {
+    padding-top: 0;
+    border-bottom: none;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
 
-  > .popover__container .Dropdown__item {
+  .Popover__container .Dropdown__item {
     // align menu labels with the button .Label
     padding-left: 9px;
     padding-right: 9px;
     padding: 0 $menu_padding;
   }
-  > .popover__container .ModelButton {
+  .Popover__container .ModelButton {
 
     &.selected {
       font-weight: 700;
@@ -2066,7 +2078,7 @@ $_treeview_backdrop_borders_color: if($variant=='light',mix($backdrop_borders_co
 //    -> .Menu
 //    -> ...
 
-.popover {
+.Popover {
   --arrow-size: 10px;
 
   position: absolute;
@@ -2075,10 +2087,19 @@ $_treeview_backdrop_borders_color: if($variant=='light',mix($backdrop_borders_co
 
   &:not(.open) {
     pointer-events: none;
-    opacity: 0;
   }
 
-  > .arrow {
+  .Popover__wrapper {
+    transition: $popover_transition;
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  &.open .Popover__wrapper {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  .Popover__arrow {
     position: absolute;
     z-index: 2;
     width: 0;
@@ -2149,7 +2170,7 @@ $_treeview_backdrop_borders_color: if($variant=='light',mix($backdrop_borders_co
     }
   }
 
-  > .popover__container {
+  .Popover__container {
     padding: 8px 0;
 
     background-color: $popover_bg;
@@ -2172,9 +2193,9 @@ $_treeview_backdrop_borders_color: if($variant=='light',mix($backdrop_borders_co
  * Popover Base Menus *
  **********************/
 
-.popover {
+.Popover {
   padding: 0;
-  &.MenuBar__popover > .popover__container {
+  &.MenuBar__popover > .Popover__wrapper > .Popover__container {
     border-top-left-radius:  0;
     border-top-right-radius: 0;
     border-top: none;
@@ -2348,20 +2369,20 @@ $_treeview_backdrop_borders_color: if($variant=='light',mix($backdrop_borders_co
     }
   }
 
-  > .MenuBar__button popover.menu > .popover__container {
+  > .MenuBar__button popover.menu > .Popover__container {
     padding: $menu-margin;
   }
   //nested submenus
   > .MenuBar__button popover.menu popover.menu {
     padding: 0 0 4px 0;
   }
-  > .MenuBar__button popover.menu popover.menu > .popover__container {
+  > .MenuBar__button popover.menu popover.menu > .Popover__container {
     margin: 0;
     border-radius: $popover_radius; //including top
   }
 }
 .MenuBar__popover {
-  > .popover__container {
+  > .Popover__container {
     padding-top: 0;
   }
 }
@@ -4075,7 +4096,7 @@ plane {
 }
 
 // colorscale popup
-colorchooser .popover.osd { border-radius: 5px; }
+colorchooser .Popover.osd { border-radius: 5px; }
 
 /********
  * Misc *
@@ -4320,7 +4341,7 @@ shortcut > .keycap {
  * Emoji *
  ********/
 
-popover.emoji-picker > .popover__container {
+popover.emoji-picker > .Popover__container {
   padding: 0;
 }
 
@@ -4382,7 +4403,7 @@ emoji-completion-row emoji:hover {
   background-color: $menu_selected_color;
 }
 
-popover.entry-completion > .popover__container {
+popover.entry-completion > .Popover__container {
   padding: 0;
 }
 

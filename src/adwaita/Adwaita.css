@@ -1934,9 +1934,6 @@ input::-webkit-outer-spin-button {
 /**************
  * ComboBoxes *
  **************/
-.Dropdown__menu.popover.menu.background > .popover__container {
-  padding: 0; }
-
 .Dropdown {
   display: flex;
   flex-direction: row;
@@ -1951,10 +1948,15 @@ input::-webkit-outer-spin-button {
   .Dropdown.Button > .Icon {
     flex: 0; }
   .Dropdown.open {
-    background-color: #ffffff;
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
-    border-bottom-color: transparent; }
+    background-color: #ffffff; }
+    .Dropdown.open.popover-bottom {
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+      border-bottom-color: transparent; }
+    .Dropdown.open.popover-top {
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+      border-top-color: transparent; }
     .Dropdown.open.Button.active {
       color: #2e3436;
       border-color: #cdc7c2;
@@ -1965,29 +1967,35 @@ input::-webkit-outer-spin-button {
       .Dropdown.open.Button.active::before {
         opacity: 0; }
 
-.Dropdown__menu.popover > .popover__container {
+.Dropdown__menu.Popover.bottom .Popover__container {
   padding-top: 0;
   border-top: none;
   border-top-left-radius: 0;
   border-top-right-radius: 0; }
 
-.Dropdown__menu.popover > .popover__container .Dropdown__item {
+.Dropdown__menu.Popover.top .Popover__container {
+  padding-top: 0;
+  border-bottom: none;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0; }
+
+.Dropdown__menu.Popover .Popover__container .Dropdown__item {
   padding-left: 9px;
   padding-right: 9px;
   padding: 0 12px; }
 
-.Dropdown__menu.popover > .popover__container .ModelButton.selected {
+.Dropdown__menu.Popover .Popover__container .ModelButton.selected {
   font-weight: 700;
   outline-color: rgba(255, 255, 255, 0.8);
   color: black;
   background-color: #efedec; }
 
-.Dropdown__menu.popover .list {
+.Dropdown__menu.Popover .list {
   margin: 8px 0; }
-  .Dropdown__menu.popover .list > .row {
+  .Dropdown__menu.Popover .list > .row {
     padding: 8px; }
 
-.Dropdown__menu.popover .dropdown-searchbar {
+.Dropdown__menu.Popover .dropdown-searchbar {
   padding: 6px;
   border-bottom: 1px solid #cdc7c2; }
 
@@ -2486,86 +2494,92 @@ pathbar > button.slider-button {
 /***************
  * Popovers   *
  ***************/
-.popover {
+.Popover {
   --arrow-size: 10px;
   position: absolute;
   z-index: 2;
   background-color: transparent; }
-  .popover:not(.open) {
-    pointer-events: none;
-    opacity: 0; }
-  .popover > .arrow {
+  .Popover:not(.open) {
+    pointer-events: none; }
+  .Popover .Popover__wrapper {
+    transition: all 100ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    opacity: 0;
+    transform: scale(0.95); }
+  .Popover.open .Popover__wrapper {
+    opacity: 1;
+    transform: scale(1); }
+  .Popover .Popover__arrow {
     position: absolute;
     z-index: 2;
     width: 0;
     height: 0;
     background-color: transparent; }
-    .popover > .arrow::after, .popover > .arrow::before {
+    .Popover .Popover__arrow::after, .Popover .Popover__arrow::before {
       content: ' ';
       position: absolute;
       top: 0;
       left: 0;
       border: var(--arrow-size) solid transparent; }
-    .popover > .arrow.top {
+    .Popover .Popover__arrow.top {
       top: calc(-1 * var(--arrow-size) + 1px);
       margin-left: calc(-1 * var(--arrow-size)); }
-      .popover > .arrow.top::before {
+      .Popover .Popover__arrow.top::before {
         top: -1px;
         border-top-width: 0;
         border-bottom-color: rgba(0, 0, 0, 0.23); }
-      .popover > .arrow.top::after {
+      .Popover .Popover__arrow.top::after {
         border-top-width: 0;
         border-bottom-color: #ffffff; }
-    .popover > .arrow.bottom {
+    .Popover .Popover__arrow.bottom {
       bottom: 2px;
       margin-left: calc(-1 * var(--arrow-size)); }
-      .popover > .arrow.bottom::before {
+      .Popover .Popover__arrow.bottom::before {
         top: 1px;
         border-bottom-width: 0;
         border-top-color: rgba(0, 0, 0, 0.23); }
-      .popover > .arrow.bottom::after {
+      .Popover .Popover__arrow.bottom::after {
         border-bottom-width: 0;
         border-top-color: #ffffff; }
-    .popover > .arrow.left {
+    .Popover .Popover__arrow.left {
       left: calc(-1 * var(--arrow-size) + 1px);
       margin-top: calc(-1 * var(--arrow-size)); }
-      .popover > .arrow.left::before {
+      .Popover .Popover__arrow.left::before {
         left: -1px;
         border-left-width: 0;
         border-right-color: rgba(0, 0, 0, 0.23); }
-      .popover > .arrow.left::after {
+      .Popover .Popover__arrow.left::after {
         border-left-width: 0;
         border-right-color: #ffffff; }
-    .popover > .arrow.right {
+    .Popover .Popover__arrow.right {
       right: 2px;
       margin-top: calc(-1 * var(--arrow-size)); }
-      .popover > .arrow.right::before {
+      .Popover .Popover__arrow.right::before {
         left: 1px;
         border-right-width: 0;
         border-left-color: rgba(0, 0, 0, 0.23); }
-      .popover > .arrow.right::after {
+      .Popover .Popover__arrow.right::after {
         border-right-width: 0;
         border-left-color: #ffffff; }
-  .popover > .popover__container {
+  .Popover .Popover__container {
     padding: 8px 0;
     background-color: #ffffff;
     background-clip: padding-box;
     border: 1px solid rgba(0, 0, 0, 0.23);
     border-radius: 9px;
     box-shadow: 0 1px 3px 2px rgba(0, 0, 0, 0.08); }
-    .popover > .popover__container > .list,
-    .popover > .popover__container > .view,
-    .popover > .popover__container > .IconView,
-    .popover > .popover__container > .Toolbar {
+    .Popover .Popover__container > .list,
+    .Popover .Popover__container > .view,
+    .Popover .Popover__container > .IconView,
+    .Popover .Popover__container > .Toolbar {
       border-style: none;
       background-color: transparent; }
 
 /**********************
  * Popover Base Menus *
  **********************/
-.popover {
+.Popover {
   padding: 0; }
-  .popover.MenuBar__popover > .popover__container {
+  .Popover.MenuBar__popover > .Popover__wrapper > .Popover__container {
     border-top-left-radius: 0;
     border-top-right-radius: 0;
     border-top: none; }
@@ -2718,15 +2732,15 @@ pathbar > button.slider-button {
     .MenuBar > .MenuBar__button:disabled {
       color: #929595;
       box-shadow: none; }
-  .MenuBar > .MenuBar__button popover.menu > .popover__container {
+  .MenuBar > .MenuBar__button popover.menu > .Popover__container {
     padding: 5px; }
   .MenuBar > .MenuBar__button popover.menu popover.menu {
     padding: 0 0 4px 0; }
-  .MenuBar > .MenuBar__button popover.menu popover.menu > .popover__container {
+  .MenuBar > .MenuBar__button popover.menu popover.menu > .Popover__container {
     margin: 0;
     border-radius: 9px; }
 
-.MenuBar__popover > .popover__container {
+.MenuBar__popover > .Popover__container {
   padding-top: 0; }
 
 /*************
@@ -4113,7 +4127,7 @@ plane {
     outline-width: 2px;
     outline-offset: 2px; }
 
-colorchooser .popover.osd {
+colorchooser .Popover.osd {
   border-radius: 5px; }
 
 /********
@@ -4299,7 +4313,7 @@ shortcut > .keycap {
 /*********
  * Emoji *
  ********/
-popover.emoji-picker > .popover__container {
+popover.emoji-picker > .Popover__container {
   padding: 0; }
 
 .emoji-searchbar {
@@ -4349,7 +4363,7 @@ emoji-completion-row emoji:focus,
 emoji-completion-row emoji:hover {
   background-color: #efedec; }
 
-popover.entry-completion > .popover__container {
+popover.entry-completion > .Popover__container {
   padding: 0; }
 
 statusbar {

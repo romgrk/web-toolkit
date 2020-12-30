@@ -2,7 +2,7 @@ import React from 'react'
 import { findDOMNode, createPortal } from 'react-dom'
 import { createPopper } from '@popperjs/core'
 import prop from 'prop-types'
-import cx from 'classname'
+import cx from 'clsx'
 
 const NOOP = () => {}
 
@@ -55,6 +55,12 @@ class Popover extends React.PureComponent {
     onClose: NOOP,
   }
 
+  static getDerivedStateFromProps(props, state) {
+    if (props.open !== state.previousOpen)
+      return { previousOpen: props.open, closing: props.open === false }
+    return null
+  }
+
   constructor(props) {
     super(props)
 
@@ -68,6 +74,7 @@ class Popover extends React.PureComponent {
 
     this.state = {
       open: false,
+      closing: false,
       actualPlacement: props.placement,
       styles: {},
     }
@@ -114,6 +121,7 @@ class Popover extends React.PureComponent {
   attachPopper() {
     if (this.popper || !this.popoverRef.current)
       return
+    const hasArrow = this.props.arrow
     this.popper = createPopper(
       this.triggerRef.current,
       this.popoverRef.current, {
@@ -121,27 +129,29 @@ class Popover extends React.PureComponent {
       modifiers: [
         {
           name: 'arrow',
-          enabled: this.props.arrow,
+          enabled: hasArrow,
           options: {
             element: this.arrowRef.current,
             padding: 15,
           },
         },
         {
+          /* Offset from the trigger */
           name: 'offset',
           options: {
-            offset: [0, 10],
+            offset: [0, hasArrow ? 10 : 0],
           },
         },
         {
+          /* Avoids touching the edge of the window */
           name: 'preventOverflow',
           options: {
             altAxis: true,
             padding: 10,
           },
         },
-        /* Custom modifier */
         {
+          /* Custom modifier */
           name: 'updateComponentState',
           enabled: true,
           phase: 'write',
@@ -165,6 +175,10 @@ class Popover extends React.PureComponent {
 
     if (!(this.triggerRef.current.contains(ev.target) || this.popoverRef.current.contains(ev.target)))
       this.close()
+  }
+
+  onTransitionEnd = () => {
+    this.setState({ closing: false })
   }
 
   onUpdatePopper = ({ state }) => {
@@ -257,7 +271,7 @@ class Popover extends React.PureComponent {
       if (this.props.open === true)
         return this.props.onClose()
     }
-    this.setState({ open: false })
+    this.setState({ open: false, closing: true })
     if (!this.isControlled())
       this.props.onClose()
   }
@@ -286,7 +300,7 @@ class Popover extends React.PureComponent {
 
   render() {
     const { arrow, children, className } = this.props
-    const { actualPlacement, styles } = this.state
+    const { actualPlacement, styles, closing } = this.state
     const open = this.isOpen()
     const trigger = children
 
@@ -297,6 +311,10 @@ class Popover extends React.PureComponent {
     const props = {
       ...trigger.props,
       ...eventListeners,
+      className: cx(
+        trigger.props.className,
+        open ? `popover-${actualPlacement}` : undefined,
+      ),
       active: open,
       ref: node => {
         if (node) this.triggerRef.current = findDOMNode(node)
@@ -308,9 +326,9 @@ class Popover extends React.PureComponent {
     const popoverClassName = cx(
       'Popover popover',
       className,
-      `placement-${actualPlacement}`,
+      actualPlacement,
       arrow ? `arrow-${arrowPlacement}` : undefined,
-      { open, arrow }
+      { open, arrow, closing }
     )
 
     return (
@@ -318,16 +336,19 @@ class Popover extends React.PureComponent {
         {React.cloneElement(trigger, props)}
         {createPortal((
           <div
-            className={popoverClassName}
             ref={this.popoverRef}
+            className={popoverClassName}
+            onTransitionEnd={this.onTransitionEnd}
           >
+            <div className='Popover__wrapper'>
             {arrow &&
-              <div className={cx('arrow', arrowPlacement)} ref={this.arrowRef} />
+              <div className={cx('Popover__arrow', arrowPlacement)} ref={this.arrowRef} />
             }
-            <div className='Popover__container popover__container' style={styles}>
+            <div className='Popover__container' style={styles}>
               <div className='Popover__content'>
               {this.getContent()}
               </div>
+            </div>
             </div>
           </div>
         ), this.domNode)}

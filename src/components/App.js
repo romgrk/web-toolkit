@@ -89,7 +89,6 @@ function AppContent() {
       <DemoNotebook />
       <br/>
 
-      {/*
       <Box horizontal>
         <Box vertical>
           <DemoDropdown users={users} />
@@ -98,7 +97,6 @@ function AppContent() {
         <DemoFrame />
         <DemoMenu />
       </Box>
-      */}
       <br/>
 
       <DemoHeaderBar />
@@ -570,19 +568,21 @@ function DemoFrame() {
         <button className='MenuBar__button'>Edit</button>
         <button className='MenuBar__button'>View</button>
       </div>
-      <div className='MenuBar__popover popover Menu menu open' style={{ position: 'relative' }}>
-        <div className='popover__container'>
-          <Menu>
-            <Menu.Button>New</Menu.Button>
-            <Menu.Button>Open</Menu.Button>
-            <Menu.Button menu={true}>
-              Other
-            </Menu.Button>
-            <Menu.Separator />
-            <Menu.Button accelerator='Ctrl+Q'>
-              Quit
-            </Menu.Button>
-          </Menu>
+      <div className='MenuBar__popover Popover menu open' style={{ position: 'relative' }}>
+        <div className='Popover__wrapper'>
+          <div className='Popover__container'>
+            <Menu>
+              <Menu.Button>New</Menu.Button>
+              <Menu.Button>Open</Menu.Button>
+              <Menu.Button menu={true}>
+                Other
+              </Menu.Button>
+              <Menu.Separator />
+              <Menu.Button accelerator='Ctrl+Q'>
+                Quit
+              </Menu.Button>
+            </Menu>
+          </div>
         </div>
       </div>
     </div>
@@ -656,10 +656,12 @@ function DemoHeaderBar() {
 function DemoMenu() {
   return (
     <div>
-      <div className='popover menu bottom arrow arrow-top open' style={{ position: 'relative' }}>
-        <div className='arrow top' style={{ left: 100, top: -19 }} />
-        <div className='popover__container'>
-          <ComplexMenu />
+      <div className='Popover menu bottom arrow arrow-top open' style={{ position: 'relative' }}>
+        <div className='Popover__wrapper'>
+          <div className='Popover__arrow top' style={{ left: 100 }} />
+          <div className='Popover__container'>
+            <ComplexMenu />
+          </div>
         </div>
       </div>
     </div>

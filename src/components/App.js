@@ -213,23 +213,29 @@ function DemoList() {
 function DemoNotebook({}) {
   const pages = [
     {
+      key: 'popover',
       label: 'Popover',
       closable: true,
       content:
-        <div style={{ minWidth: 218, minHeight: 50, padding: '1em' }}>
+        <Box padded>
           Pharetra velit vitae eros. Vivamus ac risus. Mauris ac pede
           laoreet felis pharetra ultricies. Proin et neque. Aliquam dignissim
           placerat felis. Mauris porta ante sagittis purus.
 
           Nullam adipiscing eros.
-        </div>,
+        </Box>,
     },
     {
+      key: 'inputs',
       label: 'Inputs',
       closable: true,
-      content: 'Empty',
+      content:
+        <Box padded>
+          Empty
+        </Box>,
     },
     {
+      key: 'icons',
       label: 'Icons',
       content: <IconGrid />,
     },
@@ -245,9 +251,12 @@ function DemoNotebook({}) {
             <Notebook arrows action={action} position='top' pages={pages} />
           </Box.Fill>
           <Box.Fill expandChildren>
+          {/*
             <Notebook arrows action={action} position='bottom' pages={pages} />
+          */}
           </Box.Fill>
         </Box>
+        {/*
         <Box horizontal style={{ height: 200 }}>
           <Box.Fill expandChildren>
             <Notebook arrows action={action} position='left' pages={pages} />
@@ -256,6 +265,7 @@ function DemoNotebook({}) {
             <Notebook arrows action={action} position='right' pages={pages} />
           </Box.Fill>
         </Box>
+        */}
       </Box>
       <br/>
     </>

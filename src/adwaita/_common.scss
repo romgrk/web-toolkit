@@ -10,6 +10,7 @@ $backdrop_transition: 200ms ease-out;
 $button_transition: all 150ms $ease-out-quad;
 $focus_transition: all 200ms $ease-out-quad;
 $popover_transition: all 80ms $ease-out-quad;
+$page_switcher_transition: all 150ms $ease-out-quad;
 $button_radius: 5px;
 $menu_radius: 5px;
 $menu_margin: $menu_radius; //margin around menuitems & sidebar items
@@ -165,6 +166,10 @@ $popover_radius: $button_radius + 4;
   &.fill-height {
     display: inline-flex;
     height: 100%;
+  }
+
+  &.padded {
+    padding: 1em;
   }
 }
 .Box__fill {
@@ -2615,8 +2620,61 @@ $_treeview_backdrop_borders_color: if($variant=='light',mix($backdrop_borders_co
   .Notebook__content {
     flex: 1;
     background-color: $base_color;
+  }
+  .Notebook__content > .PageSwitcher > .PageSwitcher__page {
     overflow: auto;
     @include small_scrollbar;
+  }
+}
+
+
+/****************
+ * PageSwitcher *
+ ****************/
+.PageSwitcher {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+
+  .PageSwitcher__page {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transition: $page_switcher_transition;
+  }
+  .PageSwitcher__page.active {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+
+  &.horizontal {
+    .PageSwitcher__page:not(.active):first-child {
+      transform: translate3d(-100%, 0, 0);
+    }
+    .PageSwitcher__page:not(.active):last-child {
+      transform: translate3d(100%, 0, 0);
+    }
+  }
+
+  &.vertical {
+    .PageSwitcher__page:not(.active):first-child {
+      transform: translate3d(0, -100%, 0);
+    }
+    .PageSwitcher__page:not(.active):last-child {
+      transform: translate3d(0, 100%, 0);
+    }
+  }
+
+  &.opacity {
+    .PageSwitcher__page:not(.active):first-child {
+      opacity: 0;
+    }
+    .PageSwitcher__page:not(.active):last-child {
+      opacity: 0;
+    }
   }
 }
 

@@ -8,6 +8,7 @@ import cx from 'classname'
 
 import Button from './Button'
 import Label from './Label'
+import PageSwitcher from './PageSwitcher'
 
 const noop = () => {}
 
@@ -15,6 +16,7 @@ function Notebook({
   children,
   className,
   position,
+  transition,
   value: activePageValue,
   arrows,
   pages,
@@ -90,7 +92,12 @@ function Notebook({
         }
       </div>
       <div className='Notebook__content'>
-        {pages[activePage]?.content}
+        <PageSwitcher
+          pages={pages}
+          activePage={activePage}
+          transition={transition ??
+            ((position === 'top' || position === 'bottom') ? 'horizontal' : 'vertical')}
+        />
       </div>
     </div>
   )
@@ -99,13 +106,11 @@ function Notebook({
 Notebook.propTypes = {
   children: prop.node,
   position: prop.oneOf(['top', 'bottom', 'left', 'right']),
+  transition: PageSwitcher.propTypes.transition,
   arrows: prop.bool,
   className: prop.string,
   value: prop.number,
-  pages: prop.arrayOf(prop.shape({
-    label: prop.node,
-    content: prop.node,
-  })),
+  pages: PageSwitcher.propTypes.pages,
   action: prop.node,
   onChange: prop.func,
   onClose: prop.func,

@@ -10,15 +10,14 @@ function Box({
   inline,
   compact,
   fill,
-  horizontal: horizontalValue,
+  horizontal,
   vertical,
   align,
   justify,
   space,
+  padded,
   ...rest
 }) {
-  const horizontal =
-    horizontalValue === undefined && vertical === undefined ? true : horizontalValue
   return (
     <div
       className={cx(
@@ -26,7 +25,7 @@ function Box({
         className,
         space ? `space-${space}` : undefined,
         typeof fill === 'string' ? `fill-${fill}` : fill ? 'fill' : undefined,
-        { inline, compact, vertical, horizontal, align, justify }
+        { inline, compact, vertical, horizontal, align, justify, padded }
       )}
       {...rest}
     >

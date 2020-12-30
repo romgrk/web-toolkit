@@ -85,7 +85,6 @@ class PageSwitcher extends React.Component {
     if (activePage !== activePageProp && !isSwitching) {
       this.mustSetIsSwitching = true
     }
-    console.log('render', this.state, { activePageProp, must: this.mustSetIsSwitching })
 
     return (
       <div

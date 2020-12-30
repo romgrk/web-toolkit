@@ -3068,6 +3068,91 @@ pathbar > button.slider-button {
 .Expander.horizontal:not(.open) .Expander__container {
   width: 0; }
 
+/************
+ * Paned    *
+ ************/
+.Paned {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid #cdc7c2; }
+  .Paned .Paned__wrapper {
+    width: 100%;
+    height: 100%; }
+  .Paned .Paned__pane {
+    flex: 0 0 auto;
+    overflow: hidden; }
+  .Paned .Paned__handle {
+    flex: 0 0 1px;
+    position: absolute !important;
+    touch-action: none; }
+    .Paned .Paned__handle {
+      position: relative;
+      outline: none;
+      overflow: visible; }
+    .Paned .Paned__handle::after {
+      content: '';
+      position: absolute;
+      pointer-events: none;
+      z-index: 2;
+      display: inline-block;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 2px solid transparent;
+      border-radius: inherit;
+      transform: translate(-2px, -2px) scale(1.03);
+      transition: all 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+    .Paned .Paned__handle:focus:focus-visible {
+      outline: none; }
+    .Paned .Paned__handle:focus:focus-visible::after {
+      border: 2px solid rgba(53, 132, 228, 0.5);
+      transform: translate(-2px, -2px) scale(0.99); }
+    .Paned .Paned__handle::before {
+      content: '';
+      position: absolute;
+      display: inline-block;
+      background-color: #cdc7c2;
+      outline: none; }
+  .Paned.horizontal .Paned__wrapper {
+    display: flex;
+    flex-direction: row; }
+  .Paned.horizontal .Paned__pane {
+    width: 50%; }
+  .Paned.horizontal .Paned__handle {
+    top: 0;
+    left: 50%;
+    height: 100%;
+    cursor: ew-resize;
+    padding: 0 5px;
+    transform: translateX(-50%); }
+    .Paned.horizontal .Paned__handle::before {
+      top: 0;
+      left: 50%;
+      width: 1px;
+      height: 100%; }
+    .Paned.horizontal .Paned__handle:active::before {
+      width: 4px; }
+  .Paned.vertical .Paned__wrapper {
+    display: flex;
+    flex-direction: column; }
+  .Paned.vertical .Paned__pane {
+    height: 50%; }
+  .Paned.vertical .Paned__handle {
+    top: 50%;
+    left: 0;
+    width: 100%;
+    cursor: ns-resize;
+    padding: 5px 0;
+    transform: translateY(-50%); }
+    .Paned.vertical .Paned__handle::before {
+      top: 50%;
+      left: 0;
+      width: 100%;
+      height: 1px; }
+    .Paned.vertical .Paned__handle:active::before {
+      height: 4px; }
+
 /**********
  * Switch *
  **********/

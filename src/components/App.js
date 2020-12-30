@@ -16,6 +16,7 @@ import List from './List'
 import Menu from './Menu'
 import MenuBar from './MenuBar'
 import Notebook from './Notebook'
+import Paned from './Paned'
 import Popover from './Popover'
 import Progress from './Progress'
 import Radio from './Radio'
@@ -81,9 +82,12 @@ function AppContent() {
 
       <h1>Application</h1>
 
-      <Box horizontal expandChildren>
-        <DemoExpander />
+      <DemoPaned />
+      <br/>
+
+      <Box horizontal expandChildren style={{ height: 200 }}>
         <DemoNotebook />
+        <DemoExpander />
       </Box>
       <br/>
 
@@ -211,6 +215,41 @@ function DemoList() {
         )}
       </List>
     </Box>
+  )
+}
+
+function DemoPaned({}) {
+  return (
+    <>
+      <Box horizontal expandChildren style={{ height: 200 }}>
+        <Paned>
+          <Box padded>
+            Suscipit. Duis leo est, interdum nec, varius in, facilisis
+            vitae, odio. Phasellus eget leo at urna adipiscing vulputate. Nam eu
+            erat vel arcu tristique mattis.
+            felis.
+          </Box>
+          <Box padded>
+            Suspendisse sit amet tellus non odio porta pellentesque. Nulla facilisi.
+            Integer iaculis condimentum augue. Nullam urna nulla, vestibulum quis, lacinia
+            eget, ullamcorper eu, dui.
+          </Box>
+        </Paned>
+        <Paned orientation='vertical'>
+          <Box padded>
+            Suscipit. Duis leo est, interdum nec, varius in, facilisis
+            vitae, odio. Phasellus eget leo at urna adipiscing vulputate. Nam eu
+            erat vel arcu tristique mattis.
+            felis.
+          </Box>
+          <Box padded>
+            Suspendisse sit amet tellus non odio porta pellentesque. Nulla facilisi.
+            Integer iaculis condimentum augue. Nullam urna nulla, vestibulum quis, lacinia
+            eget, ullamcorper eu, dui.
+          </Box>
+        </Paned>
+      </Box>
+    </>
   )
 }
 

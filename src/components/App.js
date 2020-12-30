@@ -307,7 +307,7 @@ function DemoInput() {
           <Input
             icon={<Spinner />}
             iconAfter='edit-clear'
-            placeholder='Disabled'
+            value='Disabled'
             disabled
           />
           <Input placeholder='Flat' flat />
@@ -335,8 +335,8 @@ function DemoInput() {
             <InputNumber value={5} vertical />
             <InputNumber value={50} vertical disabled />
             <Box vertical>
-              <InputNumber />
-              <InputNumber disabled />
+              <InputNumber defaultValue={0} min={0} />
+              <InputNumber defaultValue={0} min={0} disabled />
             </Box>
           </div>
           <Box horizontal>

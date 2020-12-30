@@ -322,10 +322,10 @@ button {
   align-items: center;
   display: inline-flex; }
   .Icon:not(.colored) svg * {
-    fill: var(--icon-color, #2e3436) !important; }
-  .disabled .Icon:not(.colored):not(.increase-specificity) {
+    fill: var(--icon-color, unset) !important; }
+  *:disabled .Icon:not(.colored):not(.increase-specificity), .disabled .Icon:not(.colored):not(.increase-specificity) {
     --icon-color: rgba(0, 0, 0, 0.3); }
-  .disabled .Icon.colored:not(.increase-specificity) {
+  *:disabled .Icon.colored:not(.increase-specificity), .disabled .Icon.colored:not(.increase-specificity) {
     opacity: 0.3; }
   .Icon svg {
     transform: scale(0.8); }
@@ -417,7 +417,8 @@ button {
         width: 100%;
         height: 100%;
         border: none;
-        background: none; }
+        background: none;
+        color: inherit; }
         .InputNumber.vertical > .Input__area > input > .Input__area > input:focus, .InputNumber:not(.vertical) > .Input__area > input:focus,
         .Input > .Input__area > input:focus {
           outline: none; }
@@ -477,10 +478,6 @@ button {
       border-color: #cdc7c2;
       background-color: #f7f6f5;
       box-shadow: none; }
-      .InputNumber.vertical > .Input__area > input:disabled .Icon, .InputNumber:disabled:not(.vertical) .Icon, .InputNumber.vertical > .Input__area > input.disabled .Icon, .disabled.InputNumber:not(.vertical) .Icon,
-      .Input:disabled .Icon,
-      .Input.disabled .Icon {
-        opacity: 0.7; }
     .InputNumber.vertical > .Input__area > input.error, .error.InputNumber:not(.vertical),
     .Input.error {
       border-color: #cc0000; }
@@ -1782,7 +1779,8 @@ input::-webkit-outer-spin-button {
     border-color: rgba(0, 0, 0, 0.4);
     border-radius: 0;
     box-shadow: none;
-    --icon-shadow: 0 1px black; }
+    --icon-shadow: 0 1px black;
+    transition: all 150ms cubic-bezier(0.25, 0.46, 0.45, 0.94); }
     .osd .InputNumber:not(.vertical) > button.InputNumber__button.up:not(.flat)::before,
     .osd .InputNumber:not(.vertical) > button.InputNumber__button.down:not(.flat)::before {
       opacity: 0; }
@@ -1833,28 +1831,30 @@ input::-webkit-outer-spin-button {
       border-color: transparent;
       box-shadow: none; }
     .InputNumber.vertical > .Input__area {
-      position: relative;
-      outline: none;
-      overflow: visible; }
-    .InputNumber.vertical > .Input__area::after {
-      content: '';
-      position: absolute;
-      pointer-events: none;
-      z-index: 2;
-      display: inline-block;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      border: 2px solid transparent;
-      border-radius: inherit;
-      transform: translate(-2px, -2px) scale(1.03);
-      transition: all 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94); }
-    .InputNumber.vertical > .Input__area:focus-within {
-      outline: none; }
-    .InputNumber.vertical > .Input__area:focus-within::after {
-      border: 2px solid rgba(53, 132, 228, 0.5);
-      transform: translate(-2px, -2px) scale(0.99); }
+      order: 2; }
+      .InputNumber.vertical > .Input__area {
+        position: relative;
+        outline: none;
+        overflow: visible; }
+      .InputNumber.vertical > .Input__area::after {
+        content: '';
+        position: absolute;
+        pointer-events: none;
+        z-index: 2;
+        display: inline-block;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border: 2px solid transparent;
+        border-radius: inherit;
+        transform: translate(-2px, -2px) scale(1.03);
+        transition: all 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+      .InputNumber.vertical > .Input__area:focus-within {
+        outline: none; }
+      .InputNumber.vertical > .Input__area:focus-within::after {
+        border: 2px solid rgba(53, 132, 228, 0.5);
+        transform: translate(-2px, -2px) scale(0.99); }
     .InputNumber.vertical > .Input__area > input {
       min-height: 32px;
       min-width: 32px;
@@ -1870,14 +1870,16 @@ input::-webkit-outer-spin-button {
       min-width: 32px;
       width: 100%;
       padding: 0; }
-    .InputNumber.vertical > button.up {
-      border-bottom-style: none;
-      border-bottom-left-radius: 0;
-      border-bottom-right-radius: 0; }
-    .InputNumber.vertical > button.down {
-      border-top-style: none;
-      border-top-left-radius: 0;
-      border-top-right-radius: 0; }
+      .InputNumber.vertical > button.up {
+        order: 1;
+        border-bottom-style: none;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0; }
+      .InputNumber.vertical > button.down {
+        order: 3;
+        border-top-style: none;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0; }
   .osd .InputNumber.vertical > button:first-child {
     color: #eeeeec;
     outline-color: rgba(53, 132, 228, 0.5);

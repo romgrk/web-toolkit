@@ -347,14 +347,16 @@ $popover_radius: $button_radius + 4;
 
   &:not(.colored) {
     svg * {
-      fill: var(--icon-color, #{$fg_color}) !important;
+      fill: var(--icon-color, unset) !important;
     }
   }
 
+  *:disabled &:not(.colored):not(.increase-specificity),
   .disabled &:not(.colored):not(.increase-specificity) {
     --icon-color: rgba(0, 0, 0, 0.3);
   }
 
+  *:disabled &.colored:not(.increase-specificity),
   .disabled &.colored:not(.increase-specificity) {
     opacity: 0.3;
   }
@@ -435,6 +437,7 @@ $popover_radius: $button_radius + 4;
         height: 100%;
         border: none;
         background: none;
+        color: inherit;
         &:focus {
           outline: none;
         }
@@ -471,7 +474,11 @@ $popover_radius: $button_radius + 4;
     .Input__right { margin-left: 6px; }
 
     &.flat {
-      &:focus-within, .window-inactive &, &:disabled, .window-inactive &:disabled, & {
+      &:focus-within,
+      .window-inactive &,
+      &:disabled,
+      .window-inactive &:disabled,
+      & {
         min-height: 0;
         padding: 2px;
         background-color: transparent;
@@ -491,7 +498,7 @@ $popover_radius: $button_radius + 4;
     &.disabled {
       @include entry(insensitive);
       .Icon {
-        opacity: 0.7;
+        // opacity: 0.5;
       }
     }
 
@@ -1303,6 +1310,7 @@ input::-webkit-outer-spin-button {
       border-radius: 0;
       box-shadow: none;
       --icon-shadow: 0 1px black;
+      transition: $button_transition;
 
       &:dir(rtl) { border-style: none solid none none; }
 
@@ -1352,6 +1360,7 @@ input::-webkit-outer-spin-button {
     }
 
     > .Input__area {
+      order: 2;
       @include focus-ring($focus-state: ':focus-within', $method: 'after');
     }
 
@@ -1376,20 +1385,18 @@ input::-webkit-outer-spin-button {
       width: 100%;
       padding: 0;
 
-      &.up { @extend %top_button; }
-      &.down { @extend %bottom_button; }
-    }
-
-    %top_button {
-      border-bottom-style: none;
-      border-bottom-left-radius: 0;
-      border-bottom-right-radius: 0;
-    }
-
-    %bottom_button {
-      border-top-style: none;
-      border-top-left-radius: 0;
-      border-top-right-radius: 0;
+      &.up {
+        order: 1;
+        border-bottom-style: none;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+      }
+      &.down {
+        order: 3;
+        border-top-style: none;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+      }
     }
   }
 

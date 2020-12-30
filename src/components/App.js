@@ -25,26 +25,7 @@ import Switch from './Switch'
 import Table from './Table'
 import Toolbar from './Toolbar'
 
-function blur() {
-  document.body.classList.add('window-inactive');
-}
-
-function focus() {
-  document.body.classList.remove('window-inactive');
-}
-
 function App() {
-  /* useEffect(() => {
-   *   if (document.visibilityState === 'hidden')
-   *     blur()
-   *   window.addEventListener('blur', blur);
-   *   window.addEventListener('focus', focus);
-   *   return () => {
-   *     window.removeEventListener('blur', blur);
-   *     window.removeEventListener('focus', focus);
-   *   }
-   * }, []) */
-
   return (
     <div className="App background Box vertical compact">
       <AppHeader />
@@ -89,7 +70,6 @@ function AppContent() {
     }, 1000)
   }, [])
 
-
   return (
     <div className='App__content Box__fill' style={{ position: 'relative' }}>
       <div style={{ position: 'absolute', top: '2em', right: '2em' }}>
@@ -100,20 +80,16 @@ function AppContent() {
 
       <h1>Application</h1>
 
-      <DemoList />
+      <DemoInput />
       <br/>
 
-      <DemoInput />
+      <DemoPopover />
       <br/>
 
       <DemoNotebook />
       <br/>
 
-      <Box horizontal>
-        <DemoPopover />
-      </Box>
-      <br/>
-
+      {/*
       <Box horizontal>
         <Box vertical>
           <DemoDropdown users={users} />
@@ -122,11 +98,15 @@ function AppContent() {
         <DemoFrame />
         <DemoMenu />
       </Box>
+      */}
       <br/>
 
       <DemoHeaderBar />
 
       <DemoTable users={users} />
+      <br/>
+
+      <DemoList />
       <br/>
 
       <p className='row'>
@@ -281,24 +261,29 @@ function DemoPopover({}) {
   const toggle = () => setOpen(!open)
 
   return (
-    <Popover
-      open={open}
-      content={<ComplexMenu />}
-      onOpen={toggle}
-      onClose={toggle}
-    >
-      <Button icon='emblem-system'>
-        Settings
-      </Button>
-    </Popover>
+    <Box horizontal>
+      <div className='Box__fill' />
+      <Popover
+        placement='bottom'
+        open={open}
+        content={<ComplexMenu />}
+        onOpen={toggle}
+        onClose={toggle}
+      >
+        <Button icon='emblem-system'>
+          Open Popover
+        </Button>
+      </Popover>
+      <div className='Box__fill' />
+    </Box>
   )
 }
 
 function DemoInput() {
   return (
     <>
-      <div className='row'>
-        <div className='column' style={{ width: 300 }}>
+      <Box horizontal>
+        <Box vertical style={{ width: 300 }}>
           <Input
             icon='folder-saved-search'
             iconAfter='edit-clear'
@@ -329,8 +314,8 @@ function DemoInput() {
           <LevelBar value={1} />
           <LevelBar value={2} />
           <LevelBar value={4} />
-        </div>
-        <div className='column' style={{ width: 300 }}>
+        </Box>
+        <Box vertical style={{ width: 300 }}>
           <div className='row'>
             <InputNumber value={5} vertical />
             <InputNumber value={50} vertical disabled />
@@ -378,9 +363,16 @@ function DemoInput() {
           <Range defaultValue={5} min={0} max={10} step={2} marks disabled />
           <Progress value={25} label />
           <Progress value={undefined} />
-        </div>
-      </div>
+        </Box>
+      </Box>
 
+    </>
+  )
+}
+
+function DemoButtons() {
+  return (
+    <Box>
       <p className='row'>
         <Button text>Normal</Button>
         <Button text hover>Hover</Button>
@@ -419,7 +411,7 @@ function DemoInput() {
           <Button text className='needs-attention'><span className='Label'>Page 4</span></Button>
         </span>
       </p>
-    </>
+    </Box>
   )
 }
 
@@ -675,3 +667,23 @@ function DemoMenu() {
 }
 
 export default App;
+
+
+/* function blur() {
+ *   document.body.classList.add('window-inactive');
+ * }
+ * 
+ * function focus() {
+ *   document.body.classList.remove('window-inactive');
+ * } */
+  /* useEffect(() => {
+   *   if (document.visibilityState === 'hidden')
+   *     blur()
+   *   window.addEventListener('blur', blur);
+   *   window.addEventListener('focus', focus);
+   *   return () => {
+   *     window.removeEventListener('blur', blur);
+   *     window.removeEventListener('focus', focus);
+   *   }
+   * }, []) */
+

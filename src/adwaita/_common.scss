@@ -2078,10 +2078,6 @@ $_treeview_backdrop_borders_color: if($variant=='light',mix($backdrop_borders_co
     opacity: 0;
   }
 
-  &.arrow > .popover__container {
-    margin-top: var(--arrow-size);
-  }
-
   > .arrow {
     position: absolute;
     z-index: 2;
@@ -2101,7 +2097,6 @@ $_treeview_backdrop_borders_color: if($variant=='light',mix($backdrop_borders_co
 
     &.top {
       top: calc(-1 * var(--arrow-size) + 1px);
-      margin-top: var(--arrow-size);
       margin-left: calc(-1 * var(--arrow-size));
       &::before {
         top: -1px;
@@ -2114,8 +2109,7 @@ $_treeview_backdrop_borders_color: if($variant=='light',mix($backdrop_borders_co
       }
     }
     &.bottom {
-      top: calc(-1 * var(--arrow-size) + 1px);
-      margin-bottom: var(--arrow-size);
+      bottom: 2px;
       margin-left: calc(-1 * var(--arrow-size));
       &::before {
         top: 1px;
@@ -2129,6 +2123,7 @@ $_treeview_backdrop_borders_color: if($variant=='light',mix($backdrop_borders_co
     }
     &.left {
       left: calc(-1 * var(--arrow-size) + 1px);
+      margin-top: calc(-1 * var(--arrow-size));
       &::before {
         left: -1px;
         border-left-width: 0;
@@ -2140,7 +2135,8 @@ $_treeview_backdrop_borders_color: if($variant=='light',mix($backdrop_borders_co
       }
     }
     &.right {
-      left: calc(-1 * var(--arrow-size) + 1px);
+      right: 2px;
+      margin-top: calc(-1 * var(--arrow-size));
       &::before {
         left: 1px;
         border-right-width: 0;

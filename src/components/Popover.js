@@ -55,12 +55,6 @@ class Popover extends React.PureComponent {
     onClose: NOOP,
   }
 
-  static getDerivedStateFromProps(props, state) {
-    if ('placement' in props)
-      return { placement: props.placement }
-    return null
-  }
-
   constructor(props) {
     super(props)
 
@@ -74,7 +68,7 @@ class Popover extends React.PureComponent {
 
     this.state = {
       open: false,
-      placement: props.placement,
+      actualPlacement: props.placement,
       styles: {},
     }
 
@@ -92,8 +86,11 @@ class Popover extends React.PureComponent {
     this.attachPopper()
   }
 
-  componentDidUpdate() {
-    this.popper.update()
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.open !== this.props.open ||
+        prevState.open !== this.state.open) {
+      this.popper.update()
+    }
   }
 
   attachDomNode() {
@@ -124,9 +121,16 @@ class Popover extends React.PureComponent {
       modifiers: [
         {
           name: 'arrow',
+          enabled: this.props.arrow,
           options: {
             element: this.arrowRef.current,
-            padding: 5,
+            padding: 15,
+          },
+        },
+        {
+          name: 'offset',
+          options: {
+            offset: [0, 10],
           },
         },
         {
@@ -164,8 +168,8 @@ class Popover extends React.PureComponent {
   }
 
   onUpdatePopper = ({ state }) => {
-    if (this.state.placement !== state.placement) {
-      this.setState({ placement: state.placement })
+    if (this.state.actualPlacement !== state.placement) {
+      this.setState({ actualPlacement: state.placement })
     }
 
     if (this.props.width === 'trigger') {
@@ -282,7 +286,7 @@ class Popover extends React.PureComponent {
 
   render() {
     const { arrow, children, className } = this.props
-    const { placement, styles } = this.state
+    const { actualPlacement, styles } = this.state
     const open = this.isOpen()
     const trigger = children
 
@@ -300,10 +304,11 @@ class Popover extends React.PureComponent {
       },
     }
 
-    const arrowPlacement = getInversePlacement(placement)
+    const arrowPlacement = getInversePlacement(actualPlacement)
     const popoverClassName = cx(
       'Popover popover',
       className,
+      `placement-${actualPlacement}`,
       arrow ? `arrow-${arrowPlacement}` : undefined,
       { open, arrow }
     )
@@ -329,10 +334,6 @@ class Popover extends React.PureComponent {
       </>
     )
   }
-}
-
-Popover.Content = function Content({ children }) {
-  return children
 }
 
 export default Popover

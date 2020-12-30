@@ -2,7 +2,7 @@
 
 This is a work in progress web toolkit using GTK's default theme, Adwaita.
 
-[See live demo](https://romgrk.github.io/web-toolkit-example/)
+[See live demo](https://romgrk.github.io/web-toolkit/)
 
 **HELP WANTED**: I need help to make this into a production-ready library.
 Come help me! Checkout the open issues or [ask here](https://github.com/romgrk/web-toolkit/issues/2)

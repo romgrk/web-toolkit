@@ -3,6 +3,7 @@ import Box from './Box'
 import Button from './Button'
 import Checkbox from './Checkbox'
 import Dropdown from './Dropdown'
+import Expander from './Expander'
 import HeaderBar from './HeaderBar'
 import Frame from './Frame'
 import Icon, { names as iconNames } from './Icon'
@@ -80,7 +81,10 @@ function AppContent() {
 
       <h1>Application</h1>
 
-      <DemoNotebook />
+      <Box horizontal expandChildren>
+        <DemoExpander />
+        <DemoNotebook />
+      </Box>
       <br/>
 
       <DemoInput />
@@ -207,6 +211,23 @@ function DemoList() {
         )}
       </List>
     </Box>
+  )
+}
+
+function DemoExpander({}) {
+  return (
+    <>
+      <Box vertical>
+        Before
+        <Expander label='View the paragraph'>
+          Pellentesque at dolor non lectus sagittis semper. Donec quis mi. Duis eget
+          pede. Phasellus arcu tellus, ultricies id, consequat id, lobortis nec, diam.
+          Suspendisse sed nunc. Pellentesque id magna. Morbi interdum quam at est.
+          Maecenas eleifend mi in urna. Praesent et lectus.
+        </Expander>
+        After
+      </Box>
+    </>
   )
 }
 

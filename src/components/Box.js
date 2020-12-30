@@ -16,6 +16,7 @@ function Box({
   justify,
   space,
   padded,
+  expandChildren,
   ...rest
 }) {
   return (
@@ -25,7 +26,16 @@ function Box({
         className,
         space ? `space-${space}` : undefined,
         typeof fill === 'string' ? `fill-${fill}` : fill ? 'fill' : undefined,
-        { inline, compact, vertical, horizontal, align, justify, padded }
+        {
+          inline,
+          compact,
+          vertical,
+          horizontal,
+          align,
+          justify,
+          padded,
+          'expand-children': expandChildren,
+        }
       )}
       {...rest}
     >

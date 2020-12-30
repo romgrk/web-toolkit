@@ -171,6 +171,10 @@ $popover_radius: $button_radius + 4;
   &.padded {
     padding: 1em;
   }
+
+  &.expand-children > * {
+    flex: 1;
+  }
 }
 .Box__fill {
   flex: 1;
@@ -732,7 +736,6 @@ $_dot_color: if($variant=='light', $selected_bg_color,
     }
 
     @include button(normal);
-
     @include focus-ring($method: 'after');
 
     &:not(:disabled):not(.disabled) {
@@ -1152,6 +1155,10 @@ button.color {
   color: $link_color;
   text-decoration: underline;
   cursor: pointer;
+  transition: $button_transition;
+  border-radius: $button_radius;
+
+  @include focus-ring($method: 'after');
 
   &:not(:disabled):not(.disabled) {
     &:visited {
@@ -1179,10 +1186,6 @@ button.color {
   @at-root %link_selected,
   &.selected,
   *.selected & { color: mix($selected_fg_color, $link_color, 80%); }
-}
-
-.link {
-  @include focus-ring();
 }
 
 button.link {
@@ -2674,6 +2677,60 @@ $_treeview_backdrop_borders_color: if($variant=='light',mix($backdrop_borders_co
     }
     .PageSwitcher__page:not(.active):last-child {
       opacity: 0;
+    }
+  }
+}
+
+
+/************
+ * Expander *
+ ************/
+.Expander {
+  .Expander__button {
+    @include button('undecorated');
+    @include focus-ring($method: 'after');
+
+    transition: $button_transition;
+    border-radius: $button_radius;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .Expander__button .Icon.arrow {
+    transition: $page_switcher_transition;
+  }
+  &.open .Expander__button .Icon.arrow {
+    transform: rotate(-90deg);
+  }
+
+  .Expander__container {
+    position: relative;
+    overflow: hidden;
+    transition: $page_switcher_transition;
+  }
+  .Expander__content {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  &.vertical {
+    .Expander__content {
+      width: 100%;
+      height: auto;
+    }
+    &:not(.open) .Expander__container {
+      height: 0;
+    }
+  }
+
+  &.horizontal {
+    .Expander__content {
+      height: 100%;
+      width: auto;
+    }
+    &:not(.open) .Expander__container {
+      width: 0;
     }
   }
 }

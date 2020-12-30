@@ -91,6 +91,18 @@ $popover_radius: $button_radius + 4;
   user-select: none;
 }
 
+.fill {
+  width: 100%;
+  height: 100%;
+}
+.fill-width {
+  width: 100%;
+}
+.fill-height {
+  height: 100%;
+}
+
+
 /***************
  * Base States *
  ***************/
@@ -2744,6 +2756,16 @@ $_treeview_backdrop_borders_color: if($variant=='light',mix($backdrop_borders_co
   overflow: hidden;
   border: 1px solid $borders_color;
 
+  &.border-handle {
+    border: none;
+  }
+  &.border-none {
+    border: none;
+    .Paned__handle::before {
+      background-color: transparent;
+    }
+  }
+
   .Paned__wrapper {
     width: 100%;
     height: 100%;
@@ -2761,20 +2783,20 @@ $_treeview_backdrop_borders_color: if($variant=='light',mix($backdrop_borders_co
       content: '';
       position: absolute;
       display: inline-block;
-      background-color: $borders_color;
       outline: none;
+      border-width: 0;
+      border-style: solid;
+      border-color: lighten($borders_color, 5%);
     }
   }
 
-  &.horizontal {
-    .Paned__wrapper {
-      display: flex;
-      flex-direction: row;
-    }
-    .Paned__pane {
+  .Paned__wrapper.horizontal {
+    display: flex;
+    flex-direction: row;
+    > .Paned__pane {
       width: 50%;
     }
-    .Paned__handle {
+    > .Paned__handle {
       top: 0;
       left: 50%;
       height: 100%;
@@ -2786,21 +2808,20 @@ $_treeview_backdrop_borders_color: if($variant=='light',mix($backdrop_borders_co
         left: 50%;
         width: 1px;
         height: 100%;
+        border-right-width: 1px;
       }
       &:active::before {
         width: 4px;
       }
     }
   }
-  &.vertical {
-    .Paned__wrapper {
-      display: flex;
-      flex-direction: column;
-    }
-    .Paned__pane {
+  .Paned__wrapper.vertical {
+    display: flex;
+    flex-direction: column;
+    > .Paned__pane {
       height: 50%;
     }
-    .Paned__handle {
+    > .Paned__handle {
       top: 50%;
       left: 0;
       width: 100%;
@@ -2812,6 +2833,7 @@ $_treeview_backdrop_borders_color: if($variant=='light',mix($backdrop_borders_co
         left: 0;
         width: 100%;
         height: 1px;
+        border-bottom-width: 1px;
       }
       &:active::before {
         height: 4px;
@@ -3537,6 +3559,10 @@ list,
   &.separators:not(.horizontal) > .List__item:not(.separator) {
     border-bottom: 1px solid $_treeview_borders_color;
   }
+
+  &.border-none {
+    border: none;
+  }
 }
 
 .List__item {
@@ -3614,6 +3640,10 @@ list,
 
 // XXX: implement other styles
 // https://gitlab.gnome.org/GNOME/gtk/-/issues/2929#note_879049
+
+.List.sidebar {
+  background-color: $background_default;
+}
 
 /********************************************************
  * Data Tables                                          *

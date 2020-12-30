@@ -109,6 +109,16 @@ button {
 .user-select-none {
   user-select: none; }
 
+.fill {
+  width: 100%;
+  height: 100%; }
+
+.fill-width {
+  width: 100%; }
+
+.fill-height {
+  height: 100%; }
+
 /***************
  * Base States *
  ***************/
@@ -3075,6 +3085,12 @@ pathbar > button.slider-button {
   position: relative;
   overflow: hidden;
   border: 1px solid #cdc7c2; }
+  .Paned.border-handle {
+    border: none; }
+  .Paned.border-none {
+    border: none; }
+    .Paned.border-none .Paned__handle::before {
+      background-color: transparent; }
   .Paned .Paned__wrapper {
     width: 100%;
     height: 100%; }
@@ -3112,46 +3128,50 @@ pathbar > button.slider-button {
       content: '';
       position: absolute;
       display: inline-block;
-      background-color: #cdc7c2;
-      outline: none; }
-  .Paned.horizontal .Paned__wrapper {
+      outline: none;
+      border-width: 0;
+      border-style: solid;
+      border-color: #d8d4d0; }
+  .Paned .Paned__wrapper.horizontal {
     display: flex;
     flex-direction: row; }
-  .Paned.horizontal .Paned__pane {
-    width: 50%; }
-  .Paned.horizontal .Paned__handle {
-    top: 0;
-    left: 50%;
-    height: 100%;
-    cursor: ew-resize;
-    padding: 0 5px;
-    transform: translateX(-50%); }
-    .Paned.horizontal .Paned__handle::before {
+    .Paned .Paned__wrapper.horizontal > .Paned__pane {
+      width: 50%; }
+    .Paned .Paned__wrapper.horizontal > .Paned__handle {
       top: 0;
       left: 50%;
-      width: 1px;
-      height: 100%; }
-    .Paned.horizontal .Paned__handle:active::before {
-      width: 4px; }
-  .Paned.vertical .Paned__wrapper {
+      height: 100%;
+      cursor: ew-resize;
+      padding: 0 5px;
+      transform: translateX(-50%); }
+      .Paned .Paned__wrapper.horizontal > .Paned__handle::before {
+        top: 0;
+        left: 50%;
+        width: 1px;
+        height: 100%;
+        border-right-width: 1px; }
+      .Paned .Paned__wrapper.horizontal > .Paned__handle:active::before {
+        width: 4px; }
+  .Paned .Paned__wrapper.vertical {
     display: flex;
     flex-direction: column; }
-  .Paned.vertical .Paned__pane {
-    height: 50%; }
-  .Paned.vertical .Paned__handle {
-    top: 50%;
-    left: 0;
-    width: 100%;
-    cursor: ns-resize;
-    padding: 5px 0;
-    transform: translateY(-50%); }
-    .Paned.vertical .Paned__handle::before {
+    .Paned .Paned__wrapper.vertical > .Paned__pane {
+      height: 50%; }
+    .Paned .Paned__wrapper.vertical > .Paned__handle {
       top: 50%;
       left: 0;
       width: 100%;
-      height: 1px; }
-    .Paned.vertical .Paned__handle:active::before {
-      height: 4px; }
+      cursor: ns-resize;
+      padding: 5px 0;
+      transform: translateY(-50%); }
+      .Paned .Paned__wrapper.vertical > .Paned__handle::before {
+        top: 50%;
+        left: 0;
+        width: 100%;
+        height: 1px;
+        border-bottom-width: 1px; }
+      .Paned .Paned__wrapper.vertical > .Paned__handle:active::before {
+        height: 4px; }
 
 /**********
  * Switch *
@@ -3819,6 +3839,10 @@ list,
   .List:not(.horizontal) .List__item.separator,
   .List.separators:not(.horizontal) > .List__item:not(.separator) {
     border-bottom: 1px solid #d7d2ce; }
+  listview.border-none,
+  list.border-none,
+  .List.border-none {
+    border: none; }
 
 .List__item {
   list-style: none;
@@ -3887,6 +3911,9 @@ list,
       --icon-shadow: none; }
       .List.rich > .List__item .Button.active::before, .List.rich > .List__item .Button:active::before {
         opacity: 0; }
+
+.List.sidebar {
+  background-color: #f6f5f4; }
 
 /********************************************************
  * Data Tables                                          *

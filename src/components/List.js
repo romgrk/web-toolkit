@@ -10,7 +10,10 @@ function List({
   className,
   separators,
   horizontal,
+  border,
+  fill,
   rich,
+  sidebar,
   ...rest
 }) {
   return (
@@ -20,9 +23,16 @@ function List({
           'List',
           className,
           {
+            'fill': fill === true,
+            'fill-width': fill === 'width',
+            'fill-height': fill === 'height',
+            'border-none': border === false,
+          },
+          {
             separators,
             horizontal,
             rich,
+            sidebar,
           }
         )
       }

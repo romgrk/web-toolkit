@@ -33,10 +33,13 @@ class Paned extends React.Component {
     orientation: prop.oneOf(['horizontal', 'vertical']),
     size: prop.number,
     defaultSize: prop.oneOf([prop.string, prop.number]),
+    border: prop.oneOf([prop.bool, 'handle']),
+    fill: prop.oneOf([prop.bool, 'width', 'height']),
   }
 
   static defaultProps = {
     orientation: 'horizontal',
+    border: true,
   }
 
   constructor(props) {
@@ -44,7 +47,7 @@ class Paned extends React.Component {
     this.handle = React.createRef()
     this.touchId = undefined
     this.state = {
-      size: undefined,
+      size: props.defaultSize,
       containerSize: undefined,
     }
   }
@@ -129,7 +132,6 @@ class Paned extends React.Component {
         && this.state.containerSize === containerSize)
       return
 
-    console.log('update')
     setTimeout(() => {
       this.setState({ containerSize })
       if (this.state.size === undefined)
@@ -142,6 +144,8 @@ class Paned extends React.Component {
       children,
       className,
       orientation,
+      border,
+      fill,
       ...rest
     } = this.props
     const { size } = this.state
@@ -151,14 +155,22 @@ class Paned extends React.Component {
 
     return (
       <div
-        className={cx('Paned', className, orientation)}
+        className={cx('Paned', className, orientation,
+          {
+            'fill': fill === true,
+            'fill-width': fill === 'width',
+            'fill-height': fill === 'height',
+            'border-none': border === false,
+            'border-handle': border === 'handle',
+          },
+        )}
         {...rest}
       >
         <AutoSizer>
           {dimensions => {
             this.updateContainerSize(dimensions)
             return (
-              <div className='Paned__wrapper' style={dimensions}>
+              <div className={cx('Paned__wrapper', orientation)} style={dimensions}>
                 <div className='Paned__pane' style={firstStyle(orientation, size)}>
                   {children[0]}
                 </div>

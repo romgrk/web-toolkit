@@ -28,10 +28,34 @@ import Table from './Table'
 import Toolbar from './Toolbar'
 
 function App() {
+  const sections = [
+    { label: 'Paned' },
+    { label: 'Notebook' },
+    { label: 'Expander' },
+    { label: 'Input' },
+    { label: 'Button' },
+    { label: 'Dropdown' },
+    { label: 'Menu' },
+    { label: 'HeaderBar' },
+    { label: 'Table' },
+    { label: 'List' },
+  ]
+
   return (
     <div className="App background Box vertical compact">
       <AppHeader />
-      <AppContent />
+      <Paned defaultSize={200} fill border='handle'>
+        <List border={false} fill sidebar>
+          {sections.map(s =>
+            <List.Item key={s}>
+              {s.label}
+            </List.Item>
+          )}
+        </List>
+        <Box fill>
+          <AppContent />
+        </Box>
+      </Paned>
     </div>
   );
 }

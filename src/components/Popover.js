@@ -99,7 +99,7 @@ class Popover extends React.PureComponent {
     if (prevProps.open !== this.props.open ||
         prevState.open !== this.state.open
     ) {
-      if (this.props.shouldUpdatePlacement)
+      if (this.props.shouldUpdatePlacement && this.popper)
         this.popper.update()
     }
   }
@@ -123,12 +123,35 @@ class Popover extends React.PureComponent {
   }
 
   attachPopper() {
-    if (this.popper || !this.popoverRef.current)
+    if (!this.popoverRef.current)
       return
-    const hasArrow = this.props.arrow
+
+    if (this.popper)
+      return
+
     this.popper = createPopper(
       this.triggerRef.current,
-      this.popoverRef.current, {
+      this.popoverRef.current,
+      this.getPopperOptions(),
+    )
+  }
+
+  detachPopper() {
+    if (this.popper) {
+      this.popper.destroy()
+      this.popper = null
+    }
+  }
+
+  updatePopperOptions() {
+    if (!this.popper)
+      return
+    this.popper.setOptions(this.getPopperOptions())
+  }
+
+  getPopperOptions() {
+    const hasArrow = this.props.arrow
+    return {
       placement: this.props.placement,
       modifiers: [
         {
@@ -156,19 +179,20 @@ class Popover extends React.PureComponent {
         },
         {
           /* Custom modifier */
+          name: 'eventListeners',
+          enabled: this.isOpen(),
+        },
+        {
+          /* Custom modifier */
           name: 'updateComponentState',
           enabled: true,
           phase: 'write',
           fn: this.onUpdatePopper,
         },
       ],
-    })
+    }
   }
 
-  detachPopper() {
-    if (this.popper)
-      this.popper.destroy()
-  }
 
   onDocumentClick = ev => {
     if (this.props.method !== 'click' && this.props.method !== 'click-controlled')
@@ -262,6 +286,7 @@ class Popover extends React.PureComponent {
     }
 
     this.attachDomNode()
+    this.updatePopperOptions()
     this.openTimeout = undefined
     this.setState({ open: true })
 
@@ -275,6 +300,7 @@ class Popover extends React.PureComponent {
       if (this.props.open === true)
         return this.props.onClose()
     }
+    this.updatePopperOptions()
     this.setState({ open: false, closing: true })
     if (!this.isControlled())
       this.props.onClose()
@@ -310,6 +336,9 @@ class Popover extends React.PureComponent {
 
     if (this.props.open && !this.state.open)
       setTimeout(this.open, 0)
+
+    if (!open && this.popper)
+      setTimeout(this.close, 0)
 
     const eventListeners = this.getEventListeners()
     const props = {

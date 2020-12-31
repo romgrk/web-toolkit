@@ -44,6 +44,8 @@ class Popover extends React.PureComponent {
     shouldUpdatePlacement: prop.bool,
     onOpen: prop.func,
     onClose: prop.func,
+    onDidOpen: prop.func,
+    onDidClose: prop.func,
   }
 
   static defaultProps = {
@@ -55,6 +57,8 @@ class Popover extends React.PureComponent {
     shouldUpdatePlacement: true,
     onOpen: NOOP,
     onClose: NOOP,
+    onDidOpen: NOOP,
+    onDidClose: NOOP,
   }
 
   static getDerivedStateFromProps(props, state) {
@@ -84,6 +88,8 @@ class Popover extends React.PureComponent {
     this.triggerRef = React.createRef()
     this.popoverRef = React.createRef()
     this.arrowRef = React.createRef()
+
+    this.observer = new ResizeObserver(this.onContentResize)
   }
 
   componentWillUnmount() {
@@ -193,6 +199,22 @@ class Popover extends React.PureComponent {
     }
   }
 
+  onContentResize = () => {
+    if (this.popper)
+      this.popper.update()
+  }
+
+  onRefPopover = ref => {
+    if (!ref) {
+      if (this.popoverRef.current) {
+        this.observer.unobserve(this.popoverRef.current)
+        this.popoverRef.current = null
+      }
+      return
+    }
+    this.popoverRef.current = ref
+    this.observer.observe(this.popoverRef.current)
+  }
 
   onDocumentClick = ev => {
     if (this.props.method !== 'click' && this.props.method !== 'click-controlled')
@@ -207,6 +229,10 @@ class Popover extends React.PureComponent {
 
   onTransitionEnd = () => {
     this.setState({ closing: false })
+    if (this.state.open)
+      this.props.onDidOpen()
+    else
+      this.props.onDidClose()
   }
 
   onUpdatePopper = ({ state }) => {
@@ -244,11 +270,9 @@ class Popover extends React.PureComponent {
     if (this.state.open === false) { // is closed
       if (!this.props.delay) {
         this.open()
-        this.updatePosition()
       }
       else {
         this.openTimeout = setTimeout(() => {
-          this.updatePosition()
           this.open()
         }, this.props.delay)
       }
@@ -329,7 +353,7 @@ class Popover extends React.PureComponent {
   }
 
   render() {
-    const { arrow, children, className } = this.props
+    const { method, arrow, children, className } = this.props
     const { actualPlacement, styles, closing } = this.state
     const open = this.isOpen()
     const trigger = children
@@ -356,6 +380,7 @@ class Popover extends React.PureComponent {
     }
 
     const arrowPlacement = getInversePlacement(actualPlacement)
+    const popoverEventListeners = method === 'mouseover' ? eventListeners : undefined
     const popoverClassName = cx(
       'Popover popover',
       className,
@@ -369,9 +394,10 @@ class Popover extends React.PureComponent {
         {React.cloneElement(trigger, props)}
         {createPortal((
           <div
-            ref={this.popoverRef}
+            ref={this.onRefPopover}
             className={popoverClassName}
             onTransitionEnd={this.onTransitionEnd}
+            {...popoverEventListeners}
           >
             <div className='Popover__wrapper'>
             {arrow &&

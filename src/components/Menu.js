@@ -54,6 +54,15 @@ function Button({
   )
 }
 
+function Back({ children, className, ...rest }) {
+  return (
+    <button className={cx('ModelButton flat Menu__button Menu__back', className)} {...rest}>
+      <Icon name='go-previous' className='Menu__icon submenu' />
+      <span className='Label Menu__button__text'>{children}</span>
+    </button>
+  )
+}
+
 function InlineButtons({ children, className, label, ...rest }) {
   return (
     <Box horizontal className={cx('Menu__item inline-buttons', className)} align {...rest}>
@@ -91,6 +100,7 @@ function Title({ children, className, ...rest }) {
 
 Menu.Button = Button
 Menu.Item = Item
+Menu.Back = Back
 Menu.Title = Title
 Menu.CircularButtons = CircularButtons
 Menu.InlineButtons = InlineButtons

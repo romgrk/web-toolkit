@@ -16,8 +16,10 @@ import List from './List'
 import Menu from './Menu'
 import MenuBar from './MenuBar'
 import Notebook from './Notebook'
+import PageSwitcher from './PageSwitcher'
 import Paned from './Paned'
 import Popover from './Popover'
+import PopoverMenu from './PopoverMenu'
 import Progress from './Progress'
 import Radio from './Radio'
 import Range from './Range'
@@ -39,6 +41,7 @@ function App() {
     { label: 'HeaderBar' },
     { label: 'Table' },
     { label: 'List' },
+    { label: 'Other' },
   ]
 
   return (
@@ -47,7 +50,7 @@ function App() {
       <Paned defaultSize={200} fill border='handle'>
         <List border={false} fill sidebar>
           {sections.map(s =>
-            <List.Item key={s}>
+            <List.Item key={s.label}>
               {s.label}
             </List.Item>
           )}
@@ -106,6 +109,9 @@ function AppContent() {
 
       <h1>Application</h1>
 
+      <DemoPopover />
+      <br/>
+
       <DemoPaned />
       <br/>
 
@@ -116,9 +122,6 @@ function AppContent() {
       <br/>
 
       <DemoInput />
-      <br/>
-
-      <DemoPopover />
       <br/>
 
       <Box horizontal>
@@ -357,25 +360,80 @@ function DemoNotebook({}) {
 }
 
 function DemoPopover({}) {
-  const [open, setOpen] = useState(false)
-  const toggle = () => setOpen(!open)
+  const smallPopover =
+    <Popover
+      placement='right'
+      content={
+        <Box vertical compact>
+          <Button flat icon='list-remove' />
+          <Range vertical style={{ height: 80 }} />
+          <Button flat icon='list-add' />
+        </Box>
+      }
+    >
+      <Button icon='audio-headphones'>
+        Volume
+      </Button>
+    </Popover>
+
+  const hoverPopover =
+    <Popover
+      method='mouseover'
+      placement='left'
+      content={
+        <Box vertical compact>
+          I'm a popover content
+        </Box>
+      }
+    >
+      <Button icon='input-mouse'>
+        Hover Me
+      </Button>
+    </Popover>
 
   return (
     <Box horizontal>
-      <div className='Box__fill' />
-      <Popover
-        placement='bottom'
-        open={open}
-        content={<ComplexMenu />}
-        onOpen={toggle}
-        onClose={toggle}
-      >
-        <Button icon='emblem-system'>
-          Open Popover
-        </Button>
-      </Popover>
-      <div className='Box__fill' />
+      {smallPopover}
+      <Box.Fill />
+      <DemoPopoverMenu />
+      <Box.Fill />
+      {hoverPopover}
     </Box>
+  )
+}
+
+function DemoPopoverMenu({}) {
+  const [open, setOpen] = useState(false)
+
+  const getPages = ({ change, close, back }) => [
+    {
+      key: 'main',
+      content:
+        <ComplexMenu
+          onClickShare={() => change('share')}
+        />
+    },
+    {
+      key: 'share',
+      content:
+        <Menu icons>
+          <Menu.Back onClick={back}>
+            Share
+          </Menu.Back>
+          <Menu.Button checkbox={true}>Option 1</Menu.Button>
+          <Menu.Button checkbox={true}>Option 2</Menu.Button>
+          <Menu.Button checkbox={false}>Option 3</Menu.Button>
+          <Menu.Button checkbox={true}>Option 4</Menu.Button>
+        </Menu>
+    },
+  ]
+
+  return (
+    <PopoverMenu pages={getPages} open={open} onChangeOpen={setOpen}>
+      <Button icon='emblem-system'>
+        Open Popover
+      </Button>
+    </PopoverMenu>
   )
 }
 
@@ -691,7 +749,7 @@ function DemoFrame() {
   )
 }
 
-function ComplexMenu() {
+function ComplexMenu({ onClickShare }) {
   return (
     <Menu icons>
       <Menu.CircularButtons>
@@ -709,7 +767,7 @@ function ComplexMenu() {
       <Menu.Separator />
       <Menu.Button checkbox={true}>Pin</Menu.Button>
       <Menu.Button>Select Labels...</Menu.Button>
-      <Menu.Button menu={<div>Some menu</div>}>
+      <Menu.Button menu={<div>Some menu</div>} onClick={onClickShare}>
         Share
       </Menu.Button>
       <Menu.Separator />

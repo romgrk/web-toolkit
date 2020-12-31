@@ -34,7 +34,7 @@ const Range = React.forwardRef(function Range(props, ref) {
     'aria-labelledby': ariaLabelledby,
     'aria-valuetext': ariaValuetext,
     className,
-    defaultValue,
+    defaultValue = 0,
     disabled = false,
     marks: marksProp = false,
     max = 100,

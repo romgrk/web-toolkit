@@ -411,21 +411,23 @@ button {
       pointer-events: none;
       z-index: 2;
       display: inline-block;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
       border: 2px solid transparent;
       border-radius: inherit;
-      transform: translate(-2px, -2px) scale(1.03);
-      transition: all 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+      transition: all 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      top: -4px;
+      left: -4px;
+      width: calc(100% - -4px);
+      height: calc(100% - -4px); }
     .InputNumber.vertical > .Input__area > input:focus-within, .InputNumber:focus-within:not(.vertical),
     .Input:focus-within {
       outline: none; }
     .InputNumber.vertical > .Input__area > input:focus-within::after, .InputNumber:focus-within:not(.vertical)::after,
     .Input:focus-within::after {
       border: 2px solid rgba(53, 132, 228, 0.5);
-      transform: translate(-2px, -2px) scale(0.99); }
+      top: -2px;
+      left: -2px;
+      width: 100%;
+      height: 100%; }
     .InputNumber.vertical > .Input__area > input > .Input__area, .InputNumber:not(.vertical) > .Input__area,
     .Input > .Input__area {
       position: relative;
@@ -513,21 +515,23 @@ button {
         pointer-events: none;
         z-index: 2;
         display: inline-block;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
         border: 2px solid transparent;
         border-radius: inherit;
-        transform: translate(-2px, -2px) scale(1.03);
-        transition: all 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+        transition: all 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        top: -4px;
+        left: -4px;
+        width: calc(100% - -4px);
+        height: calc(100% - -4px); }
       .InputNumber.vertical > .Input__area > input.error:focus-within, .error.InputNumber:focus-within:not(.vertical),
       .Input.error:focus-within {
         outline: none; }
       .InputNumber.vertical > .Input__area > input.error:focus-within::after, .error.InputNumber:focus-within:not(.vertical)::after,
       .Input.error:focus-within::after {
         border: 2px solid rgba(204, 0, 0, 0.5);
-        transform: translate(-2px, -2px) scale(0.99); }
+        top: -2px;
+        left: -2px;
+        width: 100%;
+        height: 100%; }
       .InputNumber.vertical > .Input__area > input.error input, .error.InputNumber:not(.vertical) input,
       .Input.error input {
         color: #ac0a0b; }
@@ -549,21 +553,23 @@ button {
         pointer-events: none;
         z-index: 2;
         display: inline-block;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
         border: 2px solid transparent;
         border-radius: inherit;
-        transform: translate(-2px, -2px) scale(1.03);
-        transition: all 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+        transition: all 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        top: -4px;
+        left: -4px;
+        width: calc(100% - -4px);
+        height: calc(100% - -4px); }
       .InputNumber.vertical > .Input__area > input.warning:focus-within, .warning.InputNumber:focus-within:not(.vertical),
       .Input.warning:focus-within {
         outline: none; }
       .InputNumber.vertical > .Input__area > input.warning:focus-within::after, .warning.InputNumber:focus-within:not(.vertical)::after,
       .Input.warning:focus-within::after {
         border: 2px solid rgba(245, 121, 0, 0.5);
-        transform: translate(-2px, -2px) scale(0.99); }
+        top: -2px;
+        left: -2px;
+        width: 100%;
+        height: 100%; }
       .InputNumber.vertical > .Input__area > input.warning input, .warning.InputNumber:not(.vertical) input,
       .Input.warning input {
         color: #cd6b0b; }
@@ -713,19 +719,21 @@ button {
     pointer-events: none;
     z-index: 2;
     display: inline-block;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
     border: 2px solid transparent;
     border-radius: inherit;
-    transform: translate(-2px, -2px) scale(1.03);
-    transition: all 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+    transition: all 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    top: -4px;
+    left: -4px;
+    width: calc(100% - -4px);
+    height: calc(100% - -4px); }
   .TextView > textarea:focus-within {
     outline: none; }
   .TextView > textarea:focus-within::after {
     border: 2px solid rgba(53, 132, 228, 0.5);
-    transform: translate(-2px, -2px) scale(0.99); }
+    top: -2px;
+    left: -2px;
+    width: 100%;
+    height: 100%; }
 
 .TextView.dnd-active {
   caret-color: #2ec27e; }
@@ -795,21 +803,23 @@ editablelabel > stack > text {
     pointer-events: none;
     z-index: 2;
     display: inline-block;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
     border: 2px solid transparent;
     border-radius: inherit;
-    transform: translate(-2px, -2px) scale(1.03);
-    transition: all 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+    transition: all 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    top: -4px;
+    left: -4px;
+    width: calc(100% - -4px);
+    height: calc(100% - -4px); }
   .Notebook .Notebook__arrow:focus:focus-visible, .control-buttons button:focus:focus-visible,
   .Button:focus:focus-visible {
     outline: none; }
   .Notebook .Notebook__arrow:focus:focus-visible::after, .control-buttons button:focus:focus-visible::after,
   .Button:focus:focus-visible::after {
     border: 2px solid rgba(53, 132, 228, 0.5);
-    transform: translate(-2px, -2px) scale(0.99); }
+    top: -2px;
+    left: -2px;
+    width: 100%;
+    height: 100%; }
   .Notebook .Notebook__arrow.hover:not(:disabled):not(.disabled), .control-buttons button.hover:not(:disabled):not(.disabled), .Notebook .Notebook__arrow:not(:disabled):not(.disabled):hover, .control-buttons button:not(:disabled):not(.disabled):hover,
   .Button.hover:not(:disabled):not(.disabled),
   .Button:not(:disabled):not(.disabled):hover {
@@ -1674,21 +1684,23 @@ button.link,
     pointer-events: none;
     z-index: 2;
     display: inline-block;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
     border: 2px solid transparent;
     border-radius: inherit;
-    transform: translate(-2px, -2px) scale(1.03);
-    transition: all 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+    transition: all 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    top: -4px;
+    left: -4px;
+    width: calc(100% - -4px);
+    height: calc(100% - -4px); }
   
   .link:focus:focus-visible {
     outline: none; }
   
   .link:focus:focus-visible::after {
     border: 2px solid rgba(53, 132, 228, 0.5);
-    transform: translate(-2px, -2px) scale(0.99); }
+    top: -2px;
+    left: -2px;
+    width: 100%;
+    height: 100%; }
   
   .link:not(:disabled):not(.disabled):visited {
     color: #15539e; }
@@ -1882,19 +1894,21 @@ input::-webkit-outer-spin-button {
         pointer-events: none;
         z-index: 2;
         display: inline-block;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
         border: 2px solid transparent;
         border-radius: inherit;
-        transform: translate(-2px, -2px) scale(1.03);
-        transition: all 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+        transition: all 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        top: -4px;
+        left: -4px;
+        width: calc(100% - -4px);
+        height: calc(100% - -4px); }
       .InputNumber.vertical > .Input__area:focus-within {
         outline: none; }
       .InputNumber.vertical > .Input__area:focus-within::after {
         border: 2px solid rgba(53, 132, 228, 0.5);
-        transform: translate(-2px, -2px) scale(0.99); }
+        top: -2px;
+        left: -2px;
+        width: 100%;
+        height: 100%; }
     .InputNumber.vertical > .Input__area > input {
       min-height: 32px;
       min-width: 32px;
@@ -3034,19 +3048,21 @@ pathbar > button.slider-button {
     pointer-events: none;
     z-index: 2;
     display: inline-block;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
     border: 2px solid transparent;
     border-radius: inherit;
-    transform: translate(-2px, -2px) scale(1.03);
-    transition: all 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+    transition: all 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    top: -4px;
+    left: -4px;
+    width: calc(100% - -4px);
+    height: calc(100% - -4px); }
   .Expander .Expander__button:focus:focus-visible {
     outline: none; }
   .Expander .Expander__button:focus:focus-visible::after {
     border: 2px solid rgba(53, 132, 228, 0.5);
-    transform: translate(-2px, -2px) scale(0.99); }
+    top: -2px;
+    left: -2px;
+    width: 100%;
+    height: 100%; }
 
 .Expander .Expander__button .Icon.arrow {
   transition: all 150ms cubic-bezier(0.25, 0.46, 0.45, 0.94); }
@@ -3111,19 +3127,21 @@ pathbar > button.slider-button {
       pointer-events: none;
       z-index: 2;
       display: inline-block;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
       border: 2px solid transparent;
       border-radius: inherit;
-      transform: translate(-2px, -2px) scale(1.03);
-      transition: all 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+      transition: all 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      top: -4px;
+      left: -4px;
+      width: calc(100% - -4px);
+      height: calc(100% - -4px); }
     .Paned .Paned__handle:focus:focus-visible {
       outline: none; }
     .Paned .Paned__handle:focus:focus-visible::after {
       border: 2px solid rgba(53, 132, 228, 0.5);
-      transform: translate(-2px, -2px) scale(0.99); }
+      top: -2px;
+      left: -2px;
+      width: 100%;
+      height: 100%; }
     .Paned .Paned__handle::before {
       content: '';
       position: absolute;
@@ -3210,19 +3228,21 @@ pathbar > button.slider-button {
     pointer-events: none;
     z-index: 2;
     display: inline-block;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
     border: 2px solid transparent;
     border-radius: inherit;
-    transform: translate(-2px, -2px) scale(1.06);
-    transition: all 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+    transition: all 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    top: -2px;
+    left: -2px;
+    width: calc(100% - 0);
+    height: calc(100% - 0); }
   .Switch input:focus:focus-visible + label {
     outline: none; }
   .Switch input:focus:focus-visible + label::before {
     border: 2px solid rgba(53, 132, 228, 0.5);
-    transform: translate(-2px, -2px) scale(1.03); }
+    top: -2px;
+    left: -2px;
+    width: 100%;
+    height: 100%; }
   .Switch input:checked + label {
     color: #ffffff;
     border-color: #185fb4;
@@ -3344,21 +3364,23 @@ pathbar > button.slider-button {
     pointer-events: none;
     z-index: 2;
     display: inline-block;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
     border: 2px solid transparent;
     border-radius: inherit;
-    transform: translate(-2px, -2px) scale(1.06);
-    transition: all 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+    transition: all 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    top: -2px;
+    left: -2px;
+    width: calc(100% - 0);
+    height: calc(100% - 0); }
   .Checkbox input:focus:focus-visible + label,
   .Radio input:focus:focus-visible + label {
     outline: none; }
   .Checkbox input:focus:focus-visible + label::before,
   .Radio input:focus:focus-visible + label::before {
     border: 2px solid rgba(53, 132, 228, 0.5);
-    transform: translate(-2px, -2px) scale(1.03); }
+    top: -2px;
+    left: -2px;
+    width: 100%;
+    height: 100%; }
   .Checkbox label > .element,
   .Radio label > .element {
     content: '';
@@ -3495,19 +3517,21 @@ pathbar > button.slider-button {
     pointer-events: none;
     z-index: 2;
     display: inline-block;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
     border: 2px solid transparent;
     border-radius: inherit;
-    transform: translate(-2px, -2px) scale(1.03);
-    transition: all 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+    transition: all 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    top: -4px;
+    left: -4px;
+    width: calc(100% - -4px);
+    height: calc(100% - -4px); }
   .Range.focus {
     outline: none; }
   .Range.focus::before {
     border: 2px solid rgba(53, 132, 228, 0.5);
-    transform: translate(-2px, -2px) scale(0.99); }
+    top: -2px;
+    left: -2px;
+    width: 100%;
+    height: 100%; }
   .Range.vertical {
     width: 28px;
     height: 100%; }

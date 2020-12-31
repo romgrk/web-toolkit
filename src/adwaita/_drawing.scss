@@ -41,14 +41,13 @@
       pointer-events: none;
       z-index: 2;
       display: inline-block;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
       border: $width solid transparent;
       border-radius: inherit;
-      transform: translate(-2px, -2px) scale(if($outer, $scale + 0.03, $scale));
       transition: $focus_transition;
+      top:  $offset - 2px;
+      left: $offset - 2px;
+      width:  calc(100% - #{2 * $offset});
+      height: calc(100% - #{2 * $offset});
     }
 
     &#{$focus-state}#{$target} {
@@ -56,7 +55,10 @@
     }
     &#{$focus-state}#{$target}::#{$method} {
       border: $width solid $fc;
-      transform: translate(-2px, -2px) scale(if($outer, 1.03, 0.99));
+      top:  -2px;
+      left: -2px;
+      width: 100%;
+      height: 100%;
     }
   }
 }

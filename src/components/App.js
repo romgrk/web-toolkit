@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import React,{ useState, useEffect } from 'react'
 import Box from './Box'
 import Button from './Button'
 import Checkbox from './Checkbox'
@@ -28,6 +28,7 @@ import Spinner from './Spinner'
 import Switch from './Switch'
 import Table from './Table'
 import Toolbar from './Toolbar'
+import * as Icons from './icons'
 
 function App() {
   const sections = [
@@ -176,13 +177,13 @@ function AppContent() {
 function IconGrid() {
   return (
     <>
-      {iconNames.map(name =>
-      <Box horizontal inline style={{ width: 250 }}>
-        <Icon name={name} style={{ transform: 'scale(1.5)' }} colored />
-        <Label muted>
-          {name}
-        </Label>
-      </Box>
+      {Object.entries(Icons).map(entry => 
+        <Box horizontal inline style={{ width: 250 }}>
+          {React.createElement(entry[1], {style: { transform: 'scale(1.5)' }, colored: true})}
+          <Label muted>
+            {entry[0]}
+          </Label>
+        </Box>
       )}
     </>
   )

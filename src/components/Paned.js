@@ -33,8 +33,8 @@ class Paned extends React.Component {
     orientation: prop.oneOf(['horizontal', 'vertical']),
     size: prop.number,
     defaultSize: prop.oneOf([prop.string, prop.number]),
-    border: prop.oneOf([prop.bool, 'handle']),
-    fill: prop.oneOf([prop.bool, 'width', 'height']),
+    border: prop.oneOf([prop.boolean, 'handle']),
+    fill: prop.oneOf([prop.boolean, 'width', 'height']),
   }
 
   static defaultProps = {
@@ -213,8 +213,12 @@ function firstStyle(orientation, size) {
 }
 
 function secondStyle(orientation, size, dimensions) {
+  const totalSize = dimensions[properties[orientation].size]
+  if (typeof totalSize !== 'number' || typeof size !== 'number')
+    return undefined
+  const secondSize = totalSize - size
   return {
-    [properties[orientation].size]: dimensions[properties[orientation].size] - size,
+    [properties[orientation].size]: secondSize,
   }
 }
 

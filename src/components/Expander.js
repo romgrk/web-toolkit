@@ -24,6 +24,7 @@ function Expander({
   const [openState, setOpenState] = useState(defaultOpen)
   const open = openProp ?? openState
   const setOpen = openProp !== undefined ? onChange : setOpenState
+  const toggle = () => setOpen(!open)
 
   const contentRef = useRef()
 
@@ -37,10 +38,12 @@ function Expander({
   return (
     <div className={cx('Expander', className, transition, { open })} {...rest}>
       {label &&
-        <button className='Expander__button' onClick={() => setOpen(!open)}>
-          <Label>{label}</Label>
-          <Icon name='pan-start' className='arrow' />
-        </button>
+        typeof label === 'function' ?
+          label({ toggle }) :
+          <button className='Expander__button' onClick={toggle}>
+            <Label>{label}</Label>
+            <Icon name='pan-start' className='arrow' />
+          </button>
       }
       <div className='Expander__container' style={containerStyle}>
         <div className='Expander__content' style={contentStyle} ref={contentRef}>
@@ -67,7 +70,7 @@ Expander.propTypes = {
   className: prop.string,
   open: prop.bool,
   defaultOpen: prop.bool,
-  label: prop.node,
+  label: prop.oneOfType([prop.node, prop.func]),
   transition: prop.oneOf(['horizontal', 'vertical']),
   size: prop.number,
   onChange: prop.func,

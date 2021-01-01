@@ -12,7 +12,7 @@ class PageSwitcher extends React.Component {
     className: prop.string,
     pages: prop.arrayOf(prop.shape({
       key: prop.string.isRequired,
-      label: prop.node.isRequired,
+      label: prop.node,
       content: prop.node.isRequired,
     })),
     mainPage: prop.number,

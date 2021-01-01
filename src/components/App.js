@@ -142,7 +142,7 @@ function AppContent() {
       <DemoList />
       <br/>
 
-      <p className='row'>
+      <div className='row'>
         <span className='Label'>Label</span>
         <span className='Label selected'>Label</span>
         <span className='Label separator'>Label</span>
@@ -153,7 +153,7 @@ function AppContent() {
         <Spinner />
         <Spinner disabled />
         <Spinner hidden />
-      </p>
+      </div>
 
       <h1>Heading 1</h1>
       <h2>Heading 2</h2>
@@ -162,11 +162,11 @@ function AppContent() {
       <h5>Heading 5</h5>
       <h6>Heading 6</h6>
 
-      <p>
+      <div>
         <div className='TextView'>
           <textarea></textarea>
         </div>
-      </p>
+      </div>
 
       <IconGrid />
     </div>
@@ -176,8 +176,8 @@ function AppContent() {
 function IconGrid() {
   return (
     <>
-      {iconNames.map(name =>
-      <Box horizontal inline style={{ width: 250 }}>
+      {iconNames.map((name, i) =>
+      <Box key={i} horizontal inline style={{ width: 250 }}>
         <Icon name={name} style={{ transform: 'scale(1.5)' }} colored />
         <Label muted>
           {name}
@@ -531,7 +531,7 @@ function DemoInput() {
 function DemoButtons() {
   return (
     <Box>
-      <p className='row'>
+      <div className='row'>
         <Button text>Normal</Button>
         <Button text hover>Hover</Button>
         <Button text disabled>Disabled</Button>
@@ -540,8 +540,8 @@ function DemoButtons() {
         <Button text flat>Flat</Button>
         <Button text flat disabled>Flat</Button>
         <Button text link>Link</Button>
-      </p>
-      <p className='row'>
+      </div>
+      <div className='row'>
         <Button icon='list-add'>Icon</Button>
         <Button>No Icon</Button>
         <Button text icon='list-add' circular />
@@ -552,13 +552,13 @@ function DemoButtons() {
           <Button>3</Button>
           <Button>4</Button>
         </span>
-      </p>
-      <p className='row'>
+      </div>
+      <div className='row'>
         <Button text>Normal</Button>
         <Button text primary>Primary</Button>
         <Button text danger>Danger</Button>
-      </p>
-      <p className='row'>
+      </div>
+      <div className='row'>
         <Button className='osd'>
           OSD Button
         </Button>
@@ -568,7 +568,7 @@ function DemoButtons() {
           <Button text>Page 3</Button>
           <Button text className='needs-attention'><span className='Label'>Page 4</span></Button>
         </span>
-      </p>
+      </div>
     </Box>
   )
 }

@@ -32,9 +32,9 @@ class Paned extends React.Component {
     className: prop.string,
     orientation: prop.oneOf(['horizontal', 'vertical']),
     size: prop.number,
-    defaultSize: prop.oneOf([prop.string, prop.number]),
-    border: prop.oneOf([prop.boolean, 'handle']),
-    fill: prop.oneOf([prop.boolean, 'width', 'height']),
+    defaultSize: prop.number,
+    border: prop.oneOf([true, false, 'handle']),
+    fill: prop.oneOf([true, false, 'width', 'height']),
   }
 
   static defaultProps = {
@@ -146,6 +146,7 @@ class Paned extends React.Component {
       orientation,
       border,
       fill,
+      defaultSize,
       ...rest
     } = this.props
     const { size } = this.state

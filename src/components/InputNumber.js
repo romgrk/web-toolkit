@@ -2,7 +2,7 @@
  * InputNumber.js
  */
 
-import { useState } from 'react'
+import { useState, useCallback } from 'react'
 import prop from 'prop-types'
 import cx from 'clsx'
 import Icon from './Icon'
@@ -14,10 +14,11 @@ function InputNumber({
   vertical,
   disabled,
   value: valueProp,
+  defaultValue,
   onChange,
   ...rest
 }) {
-  const [valueState, setValueState] = useState(rest.defaultValue ?? '')
+  const [valueState, setValueState] = useState(defaultValue ?? '')
   const value = valueProp ?? valueState
   const step = rest.step ?? 1
   const min = rest.min ?? -Infinity

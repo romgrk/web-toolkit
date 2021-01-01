@@ -16,7 +16,7 @@ let nextId = 1
 class Switch extends React.Component {
   static propTypes = {
     label: prop.string,
-    labels: prop.oneOf([prop.bool, prop.arrayOf(prop.string)]),
+    labels: prop.oneOfType([prop.bool, prop.arrayOf(prop.string)]),
     value: prop.bool,
     defaultValue: prop.bool,
     onChange: prop.func,

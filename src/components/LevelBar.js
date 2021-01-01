@@ -33,6 +33,7 @@ const LevelBar = React.forwardRef(function LevelBar(props, ref) {
       <span className='LevelBar__content'>
         {range(0, segments).map(n =>
           <span
+            key={n}
             className={cx(
               'LevelBar__rail',
               value < n ? 'empty' : levelValue || level,

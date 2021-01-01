@@ -221,25 +221,10 @@ class Dropdown extends React.Component {
 
     if (actualChildren.length === 0)
       actualChildren.push(
-        <Menu.Item>
+        <Menu.Item key='empty_item'>
           <Label muted italic>No option found</Label>
         </Menu.Item>
       )
-
-    /* const transformedChildren =
-     *   React.Children.map(children, child =>
-     *     child.type !== Menu.Button ? child :
-     *       React.cloneElement(
-     *         child,
-     *         {
-     *           onClick: ev => {
-     *             this.close()
-     *             if (child.props.onClick)
-     *               child.props.onClick(ev)
-     *           }
-     *         }
-     *       )
-     *   ) */
 
     const popoverClassName = cx('Dropdown__menu', size)
     const menu =

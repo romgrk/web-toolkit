@@ -77,7 +77,7 @@ Progress.propTypes = {
   /** The value of the slider. For indeterminate pass undefined. */
   value: prop.number,
   /** If a label should be shown */
-  label: prop.oneOf([prop.bool, prop.node]),
+  label: prop.oneOfType([prop.bool, prop.node]),
 }
 
 export default Progress

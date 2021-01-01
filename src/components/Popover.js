@@ -370,9 +370,9 @@ class Popover extends React.PureComponent {
       ...eventListeners,
       className: cx(
         trigger.props.className,
+        open ? `with-popover` : undefined,
         open ? `popover-${actualPlacement}` : undefined,
       ),
-      active: open,
       ref: node => {
         if (node) this.triggerRef.current = findDOMNode(node)
         if (trigger.ref) trigger.ref(node)

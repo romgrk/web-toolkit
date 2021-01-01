@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import Autocomplete from './Autocomplete'
 import Box from './Box'
 import Button from './Button'
 import Checkbox from './Checkbox'
@@ -74,7 +75,7 @@ function AppHeader() {
       <HeaderBar.Title fill>
         Web Toolkit Demo
       </HeaderBar.Title>
-      <Input icon='system-search' placeholder='Search...' />
+      <DemoAutocomplete />
       <span className='StackSwitcher linked'>
         <Button text>Editor</Button>
         <Button text active>Build</Button>
@@ -107,7 +108,7 @@ function AppContent() {
         </a>
       </div>
 
-      <h1>Application</h1>
+      <h1>Demo</h1>
 
       <DemoPopover />
       <br/>
@@ -122,6 +123,8 @@ function AppContent() {
       <br/>
 
       <DemoInput />
+      <br/>
+
       <br/>
 
       <Box horizontal>
@@ -356,6 +359,46 @@ function DemoNotebook({}) {
       </Box>
       <br/>
     </>
+  )
+}
+
+function DemoAutocomplete() {
+  const [value, setValue] = useState('')
+  const [users, setUsers] = useState(false)
+  useEffect(() => {
+    fetch('https://jsonplaceholder.typicode.com/users')
+    .then(r => r.json())
+    .then(setUsers)
+  }, [])
+
+  const loading = users === false
+  const onChange = setValue
+
+  const filteredUsers =
+    loading ? [] :
+    users.filter(u =>
+      u.name.toLowerCase().includes(value.toLowerCase()))
+  const options = filteredUsers.map(u =>
+    <List.Item key={u.id}>
+      <Box compact horizontal>
+        <Box.Fill style={{ minWidth: 200 }}>
+          {u.name}
+        </Box.Fill>
+        <Label muted>{u.phone}</Label>
+      </Box>
+    </List.Item>
+  )
+
+  return (
+    <Box>
+      <Autocomplete
+        icon='system-search'
+        placeholder='Autocomplete...'
+        loading={loading}
+        options={options}
+        onChange={onChange}
+      />
+    </Box>
   )
 }
 
@@ -768,7 +811,8 @@ function ComplexMenu({ onClickShare }) {
       <Menu.Button checkbox={true}>Pin</Menu.Button>
       <Menu.Button>Select Labels...</Menu.Button>
       <Menu.Button menu={<div>Some menu</div>} onClick={onClickShare}>
-        Share
+        Share{' '}
+        {onClickShare && <span className='text-muted'>(Click Me)</span> }
       </Menu.Button>
       <Menu.Separator />
       <Menu.Title>Size</Menu.Title>

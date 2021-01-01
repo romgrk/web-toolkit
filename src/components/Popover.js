@@ -39,9 +39,10 @@ class Popover extends React.PureComponent {
     placement: prop.oneOf(PLACEMENTS),
     align: prop.oneOf(['right', 'left']),
     method: prop.oneOf(['mouseover', 'click', 'click-controlled', 'none']),
-    width: prop.oneOf(['trigger']),
+    width: prop.oneOf(['trigger', 'trigger-min']),
     delay: prop.number,
     shouldUpdatePlacement: prop.bool,
+    shouldAttachEarly: prop.bool,
     onOpen: prop.func,
     onClose: prop.func,
     onDidOpen: prop.func,
@@ -94,6 +95,8 @@ class Popover extends React.PureComponent {
 
   componentDidMount() {
     this.attachPopper()
+    if (this.props.shouldAttachEarly)
+      this.attachDomNode()
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -237,15 +240,24 @@ class Popover extends React.PureComponent {
       this.setState({ actualPlacement: state.placement })
     }
 
-    if (this.props.width === 'trigger') {
+    if (this.props.width) {
       const trigger = state.elements.reference
       const rect = trigger.getBoundingClientRect()
 
-      const currentWidth = this.state.styles.width
-      const newWidth = rect.width - 1
+      if (this.props.width === 'trigger') {
+        const currentWidth = this.state.styles.width
+        const newWidth = rect.width - 1
 
-      if (currentWidth !== newWidth)
-        this.setState({ styles: { width: newWidth } })
+        if (currentWidth !== newWidth)
+          this.setState({ styles: { width: newWidth } })
+      }
+      else if (this.props.width === 'trigger-min') {
+        const currentWidth = this.state.styles.minWidth
+        const newWidth = rect.width - 1
+
+        if (currentWidth !== newWidth)
+          this.setState({ styles: { minWidth: newWidth } })
+      }
     }
   }
 

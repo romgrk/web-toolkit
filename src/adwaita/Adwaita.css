@@ -3115,6 +3115,12 @@ pathbar > button.slider-button {
 .Expander.horizontal:not(.open) .Expander__container {
   width: 0; }
 
+.Expander.fit-content.vertical .Expander__content {
+  width: max-content; }
+
+.Expander.fit-content.horizontal .Expander__content {
+  height: max-content; }
+
 /************
  * Paned    *
  ************/
@@ -3211,6 +3217,20 @@ pathbar > button.slider-button {
         border-bottom-width: 1px; }
       .Paned .Paned__wrapper.vertical > .Paned__handle:active::before {
         height: 4px; }
+
+/****************
+ * Autocomplete *
+ ****************/
+.Autocomplete__popover .Popover__wrapper {
+  transition: all 150ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  opacity: 0;
+  transform: none; }
+
+.Autocomplete__popover .List__item {
+  padding-left: 8px;
+  padding-right: 8px; }
+  .Autocomplete__popover .List__item > * {
+    white-space: nowrap; }
 
 /**********
  * Switch *
@@ -3987,44 +4007,6 @@ columnview row:not(.selected) cell editablelabel.editing text selection {
   background-clip: padding-box; }
   .app-notification border {
     border: none; }
-
-/*************
- * Expanders *
- *************/
-expander {
-  min-width: 16px;
-  min-height: 16px;
-  -gtk-icon-source: -gtk-icontheme("pan-end-symbolic"); }
-  expander:dir(rtl) {
-    -gtk-icon-source: -gtk-icontheme("pan-end-symbolic-rtl"); }
-  expander:disabled {
-    color: #929595; }
-  expander:checked {
-    -gtk-icon-source: -gtk-icontheme("pan-down-symbolic"); }
-
-expander-widget > box > title {
-  outline: 0 solid transparent;
-  outline-offset: 4px; }
-
-expander-widget:focus:focus-visible > box > title {
-  outline-color: rgba(53, 132, 228, 0.5);
-  outline-width: 2px;
-  outline-offset: -2px; }
-
-expander-widget > box > title {
-  transition: all 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  border-radius: 5px; }
-  expander-widget > box > title:hover > expander {
-    color: #748489; }
-
-.navigation-sidebar.dnd-active:not(decoration):not(.Window):focus, .navigation-sidebar.dnd-active:not(decoration):not(.Window),
-placessidebar.dnd-active:not(decoration):not(.Window):focus,
-placessidebar.dnd-active:not(decoration):not(.Window),
-.StackSwitcher.dnd-active:not(decoration):not(.Window):focus,
-.StackSwitcher.dnd-active:not(decoration):not(.Window),
-expander-widget.dnd-active:not(decoration):not(.Window):focus,
-expander-widget.dnd-active:not(decoration):not(.Window) {
-  box-shadow: none; }
 
 /************
  * Calendar *

@@ -431,9 +431,11 @@ $popover_radius: $button_radius + 4;
   }
 }
 
+$_input_padding: 8px;
+
 %entry,
 .Input {
-  --input-padding: 8px;
+  --input-padding: #{$_input_padding};
   --progress-indeterminate-width: 50px;
 
   %entry_basic, & {
@@ -2787,6 +2789,19 @@ $_treeview_backdrop_borders_color: if($variant=='light',mix($backdrop_borders_co
       width: 0;
     }
   }
+
+  &.fit-content {
+    &.vertical {
+      .Expander__content {
+        width: max-content;
+      }
+    }
+    &.horizontal {
+      .Expander__content {
+        height: max-content;
+      }
+    }
+  }
 }
 
 
@@ -2884,6 +2899,26 @@ $_treeview_backdrop_borders_color: if($variant=='light',mix($backdrop_borders_co
   }
 }
 
+
+/****************
+ * Autocomplete *
+ ****************/
+
+.Autocomplete__popover {
+  .Popover__wrapper {
+    transition: $page_switcher_transition;
+    opacity: 0;
+    transform: none;
+  }
+
+  .List__item {
+    padding-left: $_input_padding;
+    padding-right: $_input_padding;
+    > * {
+      white-space: nowrap;
+    }
+  }
+}
 
 /**********
  * Switch *
@@ -3725,44 +3760,6 @@ columnview row:not(.selected) cell editablelabel.editing text selection {
   button { @extend %osd_button; }
 
   border { border: none; }
-}
-
-
-/*************
- * Expanders *
- *************/
-expander {
-  min-width: 16px;
-  min-height: 16px;
-  -gtk-icon-source: -gtk-icontheme('pan-end-symbolic');
-  &:dir(rtl) { -gtk-icon-source: -gtk-icontheme('pan-end-symbolic-rtl'); }
-
-  &:disabled { color: $insensitive_fg_color; }
-
-  &:checked { -gtk-icon-source: -gtk-icontheme('pan-down-symbolic'); }
-}
-
-expander-widget {
-  @include focus-ring("> box > title");
-
-  > box > title {
-    transition: $focus_transition;
-    border-radius: $button_radius;
-
-    &:hover > expander {
-      color: lighten($fg_color,30%); //only lightens the icon
-    }
-  }
-}
-
-.navigation-sidebar,
-placessidebar,
-.StackSwitcher,
-expander-widget {
-  &:not(decoration):not(.Window).dnd-active:focus,
-  &:not(decoration):not(.Window).dnd-active {
-    box-shadow: none;
-  }
 }
 
 

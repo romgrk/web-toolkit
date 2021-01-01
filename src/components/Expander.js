@@ -43,11 +43,12 @@ class Expander extends React.Component {
   }
 
   componentDidUpdate() {
+    this.updateDimensions()
+  }
+
+  updateDimensions() {
     const { size, fitContent } = this.props
     const property = this.getProperty()
-
-    if (!fitContent)
-      return
 
     let value = size || 100
 
@@ -57,8 +58,10 @@ class Expander extends React.Component {
       const style = {}
       style[property] = value
 
-      const inverseProperty = getInverseProperty(property)
-      style[inverseProperty] = rect[inverseProperty]
+      if (fitContent) {
+        const inverseProperty = getInverseProperty(property)
+        style[inverseProperty] = rect[inverseProperty]
+      }
 
       if (!equals(style, this.state.containerStyle))
         this.setState({ containerStyle: style })
@@ -66,7 +69,7 @@ class Expander extends React.Component {
   }
 
   isOpen() {
-    return this.props.open ?? this.props.state
+    return this.props.open ?? this.state.open
   }
 
   getProperty() {
@@ -84,6 +87,12 @@ class Expander extends React.Component {
     const open = this.isOpen()
     return open ? this.state.containerStyle :
       { ...this.state.containerStyle, [property]: 0 }
+  }
+
+  onRef = ref => {
+    this.contentRef.current = ref
+    if (ref)
+      this.updateDimensions()
   }
 
   render() {
@@ -126,7 +135,7 @@ class Expander extends React.Component {
             </button>
         }
         <div className='Expander__container' style={containerStyle}>
-          <div className='Expander__content' style={contentStyle} ref={this.contentRef}>
+          <div className='Expander__content' style={contentStyle} ref={this.onRef}>
             {children}
           </div>
         </div>

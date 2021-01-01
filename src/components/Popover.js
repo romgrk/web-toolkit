@@ -61,12 +61,6 @@ class Popover extends React.PureComponent {
     onDidClose: NOOP,
   }
 
-  static getDerivedStateFromProps(props, state) {
-    if (props.open !== state.previousOpen)
-      return { previousOpen: props.open, closing: props.open === false }
-    return null
-  }
-
   constructor(props) {
     super(props)
 
@@ -74,6 +68,7 @@ class Popover extends React.PureComponent {
     this.domNode.className = 'Popover__domNode'
 
     this.isDomNodeAttached = false
+    this.isEventListening = false
 
     this.openTimeout = undefined
     this.closeTimeout = undefined
@@ -157,6 +152,8 @@ class Popover extends React.PureComponent {
 
   getPopperOptions() {
     const hasArrow = this.props.arrow
+    const isOpen = this.isOpen()
+    this.isEventListening = isOpen
     return {
       placement: this.props.placement,
       modifiers: [
@@ -186,7 +183,7 @@ class Popover extends React.PureComponent {
         {
           /* Custom modifier */
           name: 'eventListeners',
-          enabled: this.isOpen(),
+          enabled: isOpen,
         },
         {
           /* Custom modifier */
@@ -361,8 +358,8 @@ class Popover extends React.PureComponent {
     if (this.props.open && !this.state.open)
       setTimeout(this.open, 0)
 
-    if (!open && this.popper)
-      setTimeout(this.close, 0)
+    if (open !== this.isEventListening)
+      this.updatePopperOptions()
 
     const eventListeners = this.getEventListeners()
     const props = {

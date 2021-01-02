@@ -17,6 +17,16 @@ function createComponentName(fileName) {
   return componentName;
 }
 
+function createIndex(files) {
+    let indexFile = fs.createWriteStream(path.join(TARGET_DIR, "index.js"));
+    indexFile.on('error', function(err) { console.log(err) });
+    files.forEach(file => { 
+      let componentName = createComponentName(file);
+      indexFile.write(`export {default as ${componentName}} from "./${componentName}";\n`); 
+    });
+    indexFile.end();
+}
+
 function createIconComponent(file, componentName) {
   return `import React from "react";
 import cx from 'clsx';
@@ -34,10 +44,6 @@ export default ${componentName};`;
 }
 
 function saveIconComponent(component, componentName) {
-  if (!fs.existsSync(TARGET_DIR))
-    fs.mkdir(TARGET_DIR, (err) => {
-      if (err) return console.log(err);
-    });
   fs.writeFile(
     path.join(TARGET_DIR, `${componentName}.js`),
     component,
@@ -50,6 +56,10 @@ function saveIconComponent(component, componentName) {
 }
 
 async function run() {
+  if (!fs.existsSync(TARGET_DIR))
+  fs.mkdir(TARGET_DIR, (err) => {
+    if (err) return console.log(err);
+  });
   fs.readdir(SVG_DIR, (err, files) => {
     if (err) return console.error(err);
     files.forEach((file) => {
@@ -57,6 +67,7 @@ async function run() {
       let component = createIconComponent(file, componentName);
       saveIconComponent(component, componentName);
     });
+    createIndex(files);
   });
 }
 

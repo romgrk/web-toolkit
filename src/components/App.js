@@ -31,6 +31,20 @@ import Table from './Table'
 import Toolbar from './Toolbar'
 
 function App() {
+  return (
+    <div className="App background Box vertical compact">
+      <AppHeader />
+      <Paned defaultSize={200} fill border='handle'>
+        <AppSidebar />
+        <Box fill>
+          <AppContent />
+        </Box>
+      </Paned>
+    </div>
+  );
+}
+
+function AppSidebar() {
   const sections = [
     { label: 'Paned' },
     { label: 'Notebook' },
@@ -42,26 +56,17 @@ function App() {
     { label: 'HeaderBar' },
     { label: 'Table' },
     { label: 'List' },
-    { label: 'Other' },
   ]
 
   return (
-    <div className="App background Box vertical compact">
-      <AppHeader />
-      <Paned defaultSize={200} fill border='handle'>
-        <List border={false} fill sidebar>
-          {sections.map(s =>
-            <List.Item key={s.label}>
-              {s.label}
-            </List.Item>
-          )}
-        </List>
-        <Box fill>
-          <AppContent />
-        </Box>
-      </Paned>
-    </div>
-  );
+    <List border={false} fill sidebar>
+      {sections.map(s =>
+        <List.Item key={s.label}>
+          {s.label}
+        </List.Item>
+      )}
+    </List>
+  )
 }
 
 function AppHeader() {
@@ -116,15 +121,13 @@ function AppContent() {
       <DemoPaned />
       <br/>
 
-      <Box horizontal expandChildren style={{ height: 200 }}>
-        <DemoNotebook />
-        <DemoExpander />
-      </Box>
+      <DemoNotebook />
+      <br/>
+
+      <DemoExpander />
       <br/>
 
       <DemoInput />
-      <br/>
-
       <br/>
 
       <Box horizontal>
@@ -145,49 +148,11 @@ function AppContent() {
       <DemoList />
       <br/>
 
-      <div className='row'>
-        <span className='Label'>Label</span>
-        <span className='Label selected'>Label</span>
-        <span className='Label separator'>Label</span>
-        <span className='Label disabled'>Label</span>
-        <span className='Label error'>Label</span>
-        <span className='Label error disabled'>Label</span>
-
-        <Spinner />
-        <Spinner disabled />
-        <Spinner hidden />
-      </div>
-
-      <h1>Heading 1</h1>
-      <h2>Heading 2</h2>
-      <h3>Heading 3</h3>
-      <h4>Heading 4</h4>
-      <h5>Heading 5</h5>
-      <h6>Heading 6</h6>
-
-      <div>
-        <div className='TextView'>
-          <textarea></textarea>
-        </div>
-      </div>
+      <DemoTypography />
+      <br/>
 
       <IconGrid />
     </div>
-  )
-}
-
-function IconGrid() {
-  return (
-    <>
-      {iconNames.map((name, i) =>
-      <Box key={i} horizontal inline style={{ width: 250 }}>
-        <Icon name={name} style={{ transform: 'scale(1.5)' }} colored />
-        <Label muted>
-          {name}
-        </Label>
-      </Box>
-      )}
-    </>
   )
 }
 
@@ -286,15 +251,27 @@ function DemoPaned({}) {
 function DemoExpander({}) {
   return (
     <>
-      <Box vertical>
-        Before
-        <Expander label='View the paragraph'>
-          Pellentesque at dolor non lectus sagittis semper. Donec quis mi. Duis eget
-          pede. Phasellus arcu tellus, ultricies id, consequat id, lobortis nec, diam.
-          Suspendisse sed nunc. Pellentesque id magna. Morbi interdum quam at est.
-          Maecenas eleifend mi in urna. Praesent et lectus.
-        </Expander>
-        After
+      <Box horizontal expandChildren style={{ height: 200 }}>
+        <Box vertical>
+          Before
+          <Expander label='View the paragraph'>
+            Pellentesque at dolor non lectus sagittis semper. Donec quis mi. Duis eget
+            pede. Phasellus arcu tellus, ultricies id, consequat id, lobortis nec, diam.
+            Suspendisse sed nunc. Pellentesque id magna. Morbi interdum quam at est.
+            Maecenas eleifend mi in urna. Praesent et lectus.
+          </Expander>
+          After
+        </Box>
+        <Box vertical>
+          Before
+          <Expander label='View the paragraph'>
+            Pellentesque at dolor non lectus sagittis semper. Donec quis mi. Duis eget
+            pede. Phasellus arcu tellus, ultricies id, consequat id, lobortis nec, diam.
+            Suspendisse sed nunc. Pellentesque id magna. Morbi interdum quam at est.
+            Maecenas eleifend mi in urna. Praesent et lectus.
+          </Expander>
+          After
+        </Box>
       </Box>
     </>
   )
@@ -303,8 +280,8 @@ function DemoExpander({}) {
 function DemoNotebook({}) {
   const pages = [
     {
-      key: 'popover',
-      label: 'Popover',
+      key: 'page-1',
+      label: 'Page 1',
       closable: true,
       content:
         <Box padded>
@@ -316,18 +293,32 @@ function DemoNotebook({}) {
         </Box>,
     },
     {
-      key: 'inputs',
-      label: 'Inputs',
+      key: 'page-2',
+      label: 'Page 2',
       closable: true,
       content:
         <Box padded>
-          Empty
+          Mattis odio vitae tortor. Fusce iaculis. Aliquam rhoncus,
+          diam quis tincidunt facilisis, sem quam luctus augue, ut posuere
+          neque sem vitae neque.
+
+          Sed sed justo. Curabitur consectetuer arcu. Etiam placerat est eget odio.
+          Nulla.
         </Box>,
     },
     {
-      key: 'icons',
-      label: 'Icons',
-      content: <IconGrid />,
+      key: 'page-3',
+      label: 'Page 3',
+      closable: true,
+      content:
+        <Box padded>
+          Cum sociis natoque penatibus et magnis dis parturient montes, nascetur
+          ridiculus mus. Nunc faucibus posuere turpis. Sed laoreet, est sed gravida
+          tempor, nibh enim fringilla quam, et dapibus mi enim sit amet risus. Nulla
+          sollicitudin eros sit amet diam. Aliquam ante. Vestibulum ante ipsum primis in
+          faucibus orci luctus et ultrices posuere cubilia Curae; Ut et est. Donec semper
+          nulla in ipsum. Integer elit. In pharetra lorem vel ante.
+        </Box>,
     },
   ]
 
@@ -341,21 +332,9 @@ function DemoNotebook({}) {
             <Notebook arrows action={action} position='top' pages={pages} />
           </Box.Fill>
           <Box.Fill expandChildren>
-          {/*
-            <Notebook arrows action={action} position='bottom' pages={pages} />
-          */}
-          </Box.Fill>
-        </Box>
-        {/*
-        <Box horizontal style={{ height: 200 }}>
-          <Box.Fill expandChildren>
             <Notebook arrows action={action} position='left' pages={pages} />
           </Box.Fill>
-          <Box.Fill expandChildren>
-            <Notebook arrows action={action} position='right' pages={pages} />
-          </Box.Fill>
         </Box>
-        */}
       </Box>
       <br/>
     </>
@@ -869,6 +848,48 @@ function DemoMenu() {
         </div>
       </div>
     </div>
+  )
+}
+
+function DemoTypography() {
+  return (
+    <Box>
+      <h1>Heading 1</h1>
+      <h2>Heading 2</h2>
+      <h3>Heading 3</h3>
+      <h4>Heading 4</h4>
+      <h5>Heading 5</h5>
+      <h6>Heading 6</h6>
+
+      <Box horizontal>
+        <Label>Label</Label>
+        <Label selected>Label</Label>
+        <Label separator>Label</Label>
+        <Label disabled>Label</Label>
+        <Label error>Label</Label>
+        <Label error disabled>Label</Label>
+
+        <Spinner />
+        <Spinner disabled />
+        <Spinner hidden />
+      </Box>
+
+    </Box>
+  )
+}
+
+function IconGrid() {
+  return (
+    <>
+      {iconNames.map((name, i) =>
+      <Box key={i} horizontal inline style={{ width: 250 }}>
+        <Icon name={name} style={{ transform: 'scale(1.5)' }} colored />
+        <Label muted>
+          {name}
+        </Label>
+      </Box>
+      )}
+    </>
   )
 }
 

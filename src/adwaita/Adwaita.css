@@ -4010,7 +4010,7 @@ button.List__item {
       .List.rich > .List__item .Button.active::before, .List.rich > .List__item .Button:active::before {
         opacity: 0; }
 
-.Expander__content > .List {
+.List.sublist {
   width: 100%;
   background-color: #f1f0ee;
   border-bottom: 1px solid #cdc7c2;

@@ -115,6 +115,9 @@ function AppContent() {
 
       <h1>Demo</h1>
 
+      <DemoTable users={users} />
+      <br/>
+
       <DemoList />
       <br/>
 
@@ -144,9 +147,6 @@ function AppContent() {
       <br/>
 
       <DemoHeaderBar />
-
-      <DemoTable users={users} />
-      <br/>
 
       <DemoTypography />
       <br/>
@@ -219,7 +219,7 @@ function DemoList() {
           </List.Item>
         }
       >
-        <List rich border={false}>
+        <List rich border={false} sublist>
           <List.Item activatable as='label'>
             <Radio defaultValue={true} name='settings-1' /> <Label className='Box__fill'>Option 1</Label>
           </List.Item>

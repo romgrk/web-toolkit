@@ -17,6 +17,7 @@ function List({
   fill,
   rich,
   sidebar,
+  sublist,
   ...rest
 }) {
   return (
@@ -36,6 +37,7 @@ function List({
             horizontal,
             rounded,
             rich,
+            sublist,
             sidebar: sidebar,
             'stack-sidebar': sidebar === 'stack',
             'navigation-sidebar': sidebar === 'navigation',

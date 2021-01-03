@@ -3739,7 +3739,8 @@ button.List__item {
   }
 }
 
-.Expander__content > .List {
+// Expandable list item's sublist
+.List.sublist {
   width: 100%;
   background-color: $background_dark;
   border-bottom: 1px solid $borders_color;

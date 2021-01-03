@@ -17,7 +17,6 @@ const Progress = React.forwardRef(function Progress(props, ref) {
   const {
     className,
     vertical = false,
-    track = 'normal',
     label = false,
     value,
     ...rest
@@ -27,7 +26,7 @@ const Progress = React.forwardRef(function Progress(props, ref) {
   const isRtl = false;
 
   let axis = orientation
-  if (isRtl && vertical == false) {
+  if (isRtl && vertical === false) {
     axis += '-reverse';
   }
 

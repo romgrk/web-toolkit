@@ -252,10 +252,7 @@ function DemoList() {
         </List>
         <List style={{ width: 220, height: 150 }} rich>
           {richItems.map((item, i) =>
-            <List.Item
-              key={i}
-              activatable={[0, 1, 3, 4].some(n => n === i) ? false : true}
-            >
+            <List.Item key={i} as='label' activatable>
               {item}
             </List.Item>
           )}

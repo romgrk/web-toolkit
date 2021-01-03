@@ -1,4 +1,5 @@
-import React,{ useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
+import Autocomplete from './Autocomplete'
 import Box from './Box'
 import Button from './Button'
 import Checkbox from './Checkbox'
@@ -31,6 +32,20 @@ import Toolbar from './Toolbar'
 import * as Icons from './icons'
 
 function App() {
+  return (
+    <div className="App background Box vertical compact">
+      <AppHeader />
+      <Paned defaultSize={200} fill border='handle'>
+        <AppSidebar />
+        <Box fill>
+          <AppContent />
+        </Box>
+      </Paned>
+    </div>
+  );
+}
+
+function AppSidebar() {
   const sections = [
     { label: 'Paned' },
     { label: 'Notebook' },
@@ -42,26 +57,17 @@ function App() {
     { label: 'HeaderBar' },
     { label: 'Table' },
     { label: 'List' },
-    { label: 'Other' },
   ]
 
   return (
-    <div className="App background Box vertical compact">
-      <AppHeader />
-      <Paned defaultSize={200} fill border='handle'>
-        <List border={false} fill sidebar>
-          {sections.map(s =>
-            <List.Item key={s.label}>
-              {s.label}
-            </List.Item>
-          )}
-        </List>
-        <Box fill>
-          <AppContent />
-        </Box>
-      </Paned>
-    </div>
-  );
+    <List border={false} fill sidebar='navigation'>
+      {sections.map(s =>
+        <List.Item key={s.label} className='align' activatable selected={s.label === 'Notebook'}>
+          <Label>{s.label}</Label>
+        </List.Item>
+      )}
+    </List>
+  )
 }
 
 function AppHeader() {
@@ -75,7 +81,7 @@ function AppHeader() {
       <HeaderBar.Title fill>
         Web Toolkit Demo
       </HeaderBar.Title>
-      <Input icon='system-search' placeholder='Search...' />
+      <DemoAutocomplete />
       <span className='StackSwitcher linked'>
         <Button text>Editor</Button>
         <Button text active>Build</Button>
@@ -108,7 +114,16 @@ function AppContent() {
         </a>
       </div>
 
-      <h1>Application</h1>
+      <h1>Demo</h1>
+
+      <DemoTable users={users} />
+      <br/>
+
+      <DemoSize />
+      <br/>
+
+      <DemoList />
+      <br/>
 
       <DemoPopover />
       <br/>
@@ -116,10 +131,10 @@ function AppContent() {
       <DemoPaned />
       <br/>
 
-      <Box horizontal expandChildren style={{ height: 200 }}>
-        <DemoNotebook />
-        <DemoExpander />
-      </Box>
+      <DemoNotebook />
+      <br/>
+
+      <DemoExpander />
       <br/>
 
       <DemoInput />
@@ -137,37 +152,8 @@ function AppContent() {
 
       <DemoHeaderBar />
 
-      <DemoTable users={users} />
+      <DemoTypography />
       <br/>
-
-      <DemoList />
-      <br/>
-
-      <p className='row'>
-        <span className='Label'>Label</span>
-        <span className='Label selected'>Label</span>
-        <span className='Label separator'>Label</span>
-        <span className='Label disabled'>Label</span>
-        <span className='Label error'>Label</span>
-        <span className='Label error disabled'>Label</span>
-
-        <Spinner />
-        <Spinner disabled />
-        <Spinner hidden />
-      </p>
-
-      <h1>Heading 1</h1>
-      <h2>Heading 2</h2>
-      <h3>Heading 3</h3>
-      <h4>Heading 4</h4>
-      <h5>Heading 5</h5>
-      <h6>Heading 6</h6>
-
-      <p>
-        <div className='TextView'>
-          <textarea></textarea>
-        </div>
-      </p>
 
       <IconGrid />
     </div>
@@ -190,6 +176,7 @@ function IconGrid() {
 }
 
 function DemoList() {
+  const [stackPage, setStackPage] = useState(0)
   const [number, setNumber] = useState(0)
   const [active, setActive] = useState(-1)
 
@@ -207,42 +194,118 @@ function DemoList() {
   ]
 
   const richItems = [
-    <Box horizontal><Label>Row 1</Label><Switch /></Box>,
-    <Box horizontal><Label>Row 2</Label><Range value={number} onChange={setNumber} /></Box>,
-    <Box horizontal><Label>Row 3</Label><InputNumber value={number} onChange={setNumber} /></Box>,
-    <Box horizontal><Label>Row 4</Label><Button icon='mail-mark-important' /></Box>,
-    <Box horizontal><Label>Row 5</Label><Checkbox /></Box>,
-    <Box horizontal><Label>Row 6</Label></Box>,
-    <Box horizontal><Label>Row 7</Label></Box>,
-    <Box horizontal><Label>Row 8</Label></Box>,
-    <Box horizontal><Label>Row 9</Label></Box>,
-    <Box horizontal><Label>Row 10</Label></Box>,
+    <><Label>Row 1</Label><Switch /></>,
+    <><Label>Row 2</Label><Range value={number} onChange={setNumber} /></>,
+    <><Label>Row 3</Label><InputNumber value={number} onChange={setNumber} /></>,
+    <><Label>Row 4</Label><Button icon='mail-mark-important' /></>,
+    <><Label>Row 5</Label><Checkbox /></>,
+    <><Label>Row 6</Label></>,
+    <><Label>Row 7</Label></>,
+    <><Label>Row 8</Label></>,
+    <><Label>Row 9</Label></>,
+    <><Label>Row 10</Label></>,
   ]
 
+  const stackItems = [
+    { key: 1, label: 'One', content: 'One' },
+    { key: 2, label: 'Two', content: 'Two' },
+    { key: 3, label: 'Three', content: 'Three' },
+  ]
+
+  const checkboxList =
+    <List style={{ width: 200 }} rich rounded>
+      <List.Item activatable as='label'>
+        <Radio defaultValue={true} name='settings-1' /> <Label className='Box__fill'>Option 1</Label>
+      </List.Item>
+      <List.Item activatable as='label'>
+        <Radio defaultValue={false} name='settings-1' /> <Label className='Box__fill'>Option 1</Label>
+      </List.Item>
+      <List.Item activatable as='label'>
+        <Radio defaultValue={false} name='settings-1' /> <Label className='Box__fill'>Option 1</Label>
+      </List.Item>
+    </List>
+
+  const switchList = 
+    <List style={{ width: 200 }} rich rounded>
+      <List.Item activatable as='label'>
+        <Label className='Box__fill'>Option 1</Label> <Switch />
+      </List.Item>
+      <Expander
+        contents
+        label={
+          <List.Item activatable expandable>
+            <Label className='Box__fill'>Option 2</Label>
+          </List.Item>
+        }
+      >
+        <List rich border={false} sublist>
+          <List.Item activatable as='label'>
+            <Radio defaultValue={true} name='settings-1' /> <Label className='Box__fill'>Option 1</Label>
+          </List.Item>
+          <List.Item activatable as='label'>
+            <Radio defaultValue={false} name='settings-1' /> <Label className='Box__fill'>Option 1</Label>
+          </List.Item>
+          <List.Item activatable as='label'>
+            <Radio defaultValue={false} name='settings-1' /> <Label className='Box__fill'>Option 1</Label>
+          </List.Item>
+        </List>
+      </Expander>
+      <List.Item activatable as='label'>
+        <Label className='Box__fill'>Option 3</Label> <Switch />
+      </List.Item>
+    </List>
+
   return (
-    <Box horizontal>
-      <List style={{ width: 200, height: 150 }} separators={false}>
-        {items.map((item, i) =>
-          <List.Item
-            key={i}
-            selected={active === i}
-            onClick={i !== 0 ? () => setActive(i) : undefined}
-          >
-            {item}
-          </List.Item>
-        )}
-      </List>
-      <List style={{ width: 220, height: 150 }} rich>
-        {richItems.map((item, i) =>
-          <List.Item
-            key={i}
-            activatable={[0, 1, 3, 4].some(n => n === i) ? false : true}
-          >
-            {item}
-          </List.Item>
-        )}
-      </List>
-    </Box>
+    <>
+      <Box horizontal>
+        <List style={{ width: 200, height: 150 }} separators={false}>
+          {items.map((item, i) =>
+            <List.Item
+              key={i}
+              selected={active === i}
+              onClick={i !== 0 ? () => setActive(i) : undefined}
+            >
+              {item}
+            </List.Item>
+          )}
+        </List>
+        <List style={{ width: 220, height: 150 }} rich>
+          {richItems.map((item, i) =>
+            <List.Item key={i} as='label' activatable>
+              {item}
+            </List.Item>
+          )}
+        </List>
+      </Box>
+      <br/>
+      <Box horizontal align='start'>
+        {switchList}
+        {checkboxList}
+      </Box>
+      <br/>
+      <Box horizontal>
+        <Box horizontal compact border>
+          <List style={{ width: 220, height: 150 }} sidebar='stack' border='right'>
+            {stackItems.map((item, i) =>
+              <List.Item
+                key={i}
+                selected={stackPage === i}
+                needsAttention={i === 2}
+                activatable
+                onClick={() => setStackPage(i)}
+              >
+                <Label>{item.label}</Label>
+              </List.Item>
+            )}
+          </List>
+          <PageSwitcher
+            transition={false}
+            activePage={stackPage}
+            pages={stackItems}
+          />
+        </Box>
+      </Box>
+    </>
   )
 }
 
@@ -284,15 +347,27 @@ function DemoPaned({}) {
 function DemoExpander({}) {
   return (
     <>
-      <Box vertical>
-        Before
-        <Expander label='View the paragraph'>
-          Pellentesque at dolor non lectus sagittis semper. Donec quis mi. Duis eget
-          pede. Phasellus arcu tellus, ultricies id, consequat id, lobortis nec, diam.
-          Suspendisse sed nunc. Pellentesque id magna. Morbi interdum quam at est.
-          Maecenas eleifend mi in urna. Praesent et lectus.
-        </Expander>
-        After
+      <Box horizontal expandChildren style={{ height: 200 }}>
+        <Box vertical>
+          Before
+          <Expander label='View the paragraph'>
+            Pellentesque at dolor non lectus sagittis semper. Donec quis mi. Duis eget
+            pede. Phasellus arcu tellus, ultricies id, consequat id, lobortis nec, diam.
+            Suspendisse sed nunc. Pellentesque id magna. Morbi interdum quam at est.
+            Maecenas eleifend mi in urna. Praesent et lectus.
+          </Expander>
+          After
+        </Box>
+        <Box vertical>
+          Before
+          <Expander label='View the paragraph'>
+            Pellentesque at dolor non lectus sagittis semper. Donec quis mi. Duis eget
+            pede. Phasellus arcu tellus, ultricies id, consequat id, lobortis nec, diam.
+            Suspendisse sed nunc. Pellentesque id magna. Morbi interdum quam at est.
+            Maecenas eleifend mi in urna. Praesent et lectus.
+          </Expander>
+          After
+        </Box>
       </Box>
     </>
   )
@@ -301,8 +376,8 @@ function DemoExpander({}) {
 function DemoNotebook({}) {
   const pages = [
     {
-      key: 'popover',
-      label: 'Popover',
+      key: 'page-1',
+      label: 'Page 1',
       closable: true,
       content:
         <Box padded>
@@ -314,18 +389,32 @@ function DemoNotebook({}) {
         </Box>,
     },
     {
-      key: 'inputs',
-      label: 'Inputs',
+      key: 'page-2',
+      label: 'Page 2',
       closable: true,
       content:
         <Box padded>
-          Empty
+          Mattis odio vitae tortor. Fusce iaculis. Aliquam rhoncus,
+          diam quis tincidunt facilisis, sem quam luctus augue, ut posuere
+          neque sem vitae neque.
+
+          Sed sed justo. Curabitur consectetuer arcu. Etiam placerat est eget odio.
+          Nulla.
         </Box>,
     },
     {
-      key: 'icons',
-      label: 'Icons',
-      content: <IconGrid />,
+      key: 'page-3',
+      label: 'Page 3',
+      closable: true,
+      content:
+        <Box padded>
+          Cum sociis natoque penatibus et magnis dis parturient montes, nascetur
+          ridiculus mus. Nunc faucibus posuere turpis. Sed laoreet, est sed gravida
+          tempor, nibh enim fringilla quam, et dapibus mi enim sit amet risus. Nulla
+          sollicitudin eros sit amet diam. Aliquam ante. Vestibulum ante ipsum primis in
+          faucibus orci luctus et ultrices posuere cubilia Curae; Ut et est. Donec semper
+          nulla in ipsum. Integer elit. In pharetra lorem vel ante.
+        </Box>,
     },
   ]
 
@@ -339,24 +428,52 @@ function DemoNotebook({}) {
             <Notebook arrows action={action} position='top' pages={pages} />
           </Box.Fill>
           <Box.Fill expandChildren>
-          {/*
-            <Notebook arrows action={action} position='bottom' pages={pages} />
-          */}
-          </Box.Fill>
-        </Box>
-        {/*
-        <Box horizontal style={{ height: 200 }}>
-          <Box.Fill expandChildren>
             <Notebook arrows action={action} position='left' pages={pages} />
           </Box.Fill>
-          <Box.Fill expandChildren>
-            <Notebook arrows action={action} position='right' pages={pages} />
-          </Box.Fill>
         </Box>
-        */}
       </Box>
       <br/>
     </>
+  )
+}
+
+function DemoAutocomplete() {
+  const [value, setValue] = useState('')
+  const [users, setUsers] = useState(false)
+  useEffect(() => {
+    fetch('https://jsonplaceholder.typicode.com/users')
+    .then(r => r.json())
+    .then(setUsers)
+  }, [])
+
+  const loading = users === false
+  const onChange = setValue
+
+  const filteredUsers =
+    loading ? [] :
+    users.filter(u =>
+      u.name.toLowerCase().includes(value.toLowerCase()))
+  const options = filteredUsers.map(u =>
+    <List.Item key={u.id}>
+      <Box compact horizontal>
+        <Box.Fill style={{ minWidth: 200 }}>
+          {u.name}
+        </Box.Fill>
+        <Label muted>{u.phone}</Label>
+      </Box>
+    </List.Item>
+  )
+
+  return (
+    <Box>
+      <Autocomplete
+        icon='system-search'
+        placeholder='Autocomplete...'
+        loading={loading}
+        options={options}
+        onChange={onChange}
+      />
+    </Box>
   )
 }
 
@@ -532,7 +649,7 @@ function DemoInput() {
 function DemoButtons() {
   return (
     <Box>
-      <p className='row'>
+      <div className='row'>
         <Button text>Normal</Button>
         <Button text hover>Hover</Button>
         <Button text disabled>Disabled</Button>
@@ -541,8 +658,8 @@ function DemoButtons() {
         <Button text flat>Flat</Button>
         <Button text flat disabled>Flat</Button>
         <Button text link>Link</Button>
-      </p>
-      <p className='row'>
+      </div>
+      <div className='row'>
         <Button icon='list-add'>Icon</Button>
         <Button>No Icon</Button>
         <Button text icon='list-add' circular />
@@ -553,13 +670,13 @@ function DemoButtons() {
           <Button>3</Button>
           <Button>4</Button>
         </span>
-      </p>
-      <p className='row'>
+      </div>
+      <div className='row'>
         <Button text>Normal</Button>
         <Button text primary>Primary</Button>
         <Button text danger>Danger</Button>
-      </p>
-      <p className='row'>
+      </div>
+      <div className='row'>
         <Button className='osd'>
           OSD Button
         </Button>
@@ -569,17 +686,102 @@ function DemoButtons() {
           <Button text>Page 3</Button>
           <Button text className='needs-attention'><span className='Label'>Page 4</span></Button>
         </span>
-      </p>
+      </div>
     </Box>
+  )
+}
+
+function DemoSize() {
+  return (
+    <>
+      <Box vertical>
+        <Box horizontal>
+          <Input
+            size='mini'
+            icon='folder-saved-search'
+            iconAfter='edit-clear'
+            placeholder='Text input...'
+          />
+          <Button size='mini' icon='list-add' />
+          <Checkbox size='mini' label='check' />
+          <Radio size='mini' label='radio' />
+          <Switch size='mini' />
+          <Range size='mini' style={{ width: 120 }} />
+        </Box>
+        <Box horizontal>
+          <Input
+            size='small'
+            icon='folder-saved-search'
+            iconAfter='edit-clear'
+            placeholder='Text input...'
+          />
+          <Button size='small' icon='list-add' />
+          <Checkbox size='small' label='check' />
+          <Radio size='small' label='radio' />
+          <Switch size='small' />
+          <Range size='small' style={{ width: 120 }} />
+        </Box>
+        <Box horizontal>
+          <Input
+            size='medium'
+            icon='folder-saved-search'
+            iconAfter='edit-clear'
+            placeholder='Text input...'
+          />
+          <Button size='medium' icon='list-add' />
+          <Checkbox size='medium' label='check' />
+          <Radio size='medium' label='radio' />
+          <Switch size='medium' />
+          <Range size='medium' style={{ width: 120 }} />
+        </Box>
+        <Box horizontal>
+          <Input
+            size='large'
+            icon='folder-saved-search'
+            iconAfter='edit-clear'
+            placeholder='Text input...'
+          />
+          <Button size='large' icon='list-add' />
+          <Checkbox size='large' label='check' />
+          <Radio size='large' label='radio' />
+          <Switch size='large' />
+          <Range size='large' style={{ width: 120 }} />
+        </Box>
+        <Box horizontal>
+          <Input
+            size='huge'
+            icon='folder-saved-search'
+            iconAfter='edit-clear'
+            placeholder='Text input...'
+          />
+          <Button size='huge' icon='list-add' />
+          <Checkbox size='huge' label='check' />
+          <Radio size='huge' label='radio' />
+          <Switch size='huge' />
+          <Range size='huge' style={{ width: 120 }} />
+        </Box>
+      </Box>
+    </>
+  )
+}
+
+function InputFilter({ column: { filterValue, setFilter, id } }) {
+  return (
+    <Input
+      id={id}
+      value={filterValue}
+      onChange={setFilter}
+    />
   )
 }
 
 function DemoTable({ users }) {
   const columns = [
     {
-      Header: 'Row Index',
+      Header: 'Row',
       accessor: (row, i) => i,
       width: 50,
+      disableFilters: true,
     },
     {
       Header: 'Name',
@@ -587,10 +789,13 @@ function DemoTable({ users }) {
         {
           Header: 'Username',
           accessor: 'username',
+          Filter: InputFilter,
+          filter: 'includes',
         },
         {
           Header: 'Full Name',
           accessor: 'name',
+          disableFilters: true,
         },
       ],
     },
@@ -600,16 +805,18 @@ function DemoTable({ users }) {
         {
           Header: 'Phone',
           accessor: 'phone',
-          width: 150,
+          disableFilters: true,
         },
         {
           Header: 'Website',
           accessor: 'website',
+          disableFilters: true,
         },
         {
           Header: 'Address',
           accessor: row =>
             `${row.address.street}${row.address.suite ? ' ' + row.address.suite : ''}, ${row.address.city}`,
+          disableFilters: true,
         },
       ],
     },
@@ -620,6 +827,8 @@ function DemoTable({ users }) {
       <Table
         columns={columns}
         data={users}
+        sortable={true}
+        filterable={true}
       />
     </div>
   )
@@ -769,7 +978,8 @@ function ComplexMenu({ onClickShare }) {
       <Menu.Button checkbox={true}>Pin</Menu.Button>
       <Menu.Button>Select Labels...</Menu.Button>
       <Menu.Button menu={<div>Some menu</div>} onClick={onClickShare}>
-        Share
+        Share{' '}
+        {onClickShare && <span className='text-muted'>(Click Me)</span> }
       </Menu.Button>
       <Menu.Separator />
       <Menu.Title>Size</Menu.Title>
@@ -826,6 +1036,33 @@ function DemoMenu() {
         </div>
       </div>
     </div>
+  )
+}
+
+function DemoTypography() {
+  return (
+    <Box>
+      <h1>Heading 1</h1>
+      <h2>Heading 2</h2>
+      <h3>Heading 3</h3>
+      <h4>Heading 4</h4>
+      <h5>Heading 5</h5>
+      <h6>Heading 6</h6>
+
+      <Box horizontal>
+        <Label>Label</Label>
+        <Label selected>Label</Label>
+        <Label separator>Label</Label>
+        <Label disabled>Label</Label>
+        <Label error>Label</Label>
+        <Label error disabled>Label</Label>
+
+        <Spinner />
+        <Spinner disabled />
+        <Spinner hidden />
+      </Box>
+
+    </Box>
   )
 }
 

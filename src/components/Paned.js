@@ -3,15 +3,10 @@
  */
 
 
-import React, { useState, useRef } from 'react'
+import React from 'react'
 import cx from 'clsx'
 import prop from 'prop-types'
 import AutoSizer from 'react-virtualized-auto-sizer'
-
-const inverse = {
-  horizontal: 'vertical',
-  vertical: 'horizontal',
-}
 
 const properties = {
   horizontal: {
@@ -32,9 +27,9 @@ class Paned extends React.Component {
     className: prop.string,
     orientation: prop.oneOf(['horizontal', 'vertical']),
     size: prop.number,
-    defaultSize: prop.oneOf([prop.string, prop.number]),
-    border: prop.oneOf([prop.bool, 'handle']),
-    fill: prop.oneOf([prop.bool, 'width', 'height']),
+    defaultSize: prop.number,
+    border: prop.oneOf([true, false, 'handle']),
+    fill: prop.oneOf([true, false, 'width', 'height']),
   }
 
   static defaultProps = {
@@ -95,6 +90,8 @@ class Paned extends React.Component {
   }
 
   onMouseDown = (event) => {
+    if (event.button !== 0)
+      return
     event.preventDefault();
     this.setState({ dragging: true })
     document.addEventListener('mousemove', this.onTouchMove);
@@ -146,6 +143,7 @@ class Paned extends React.Component {
       orientation,
       border,
       fill,
+      defaultSize,
       ...rest
     } = this.props
     const { size } = this.state
@@ -202,7 +200,7 @@ export default Paned
 
 function handleStyle(orientation, size) {
   return {
-    [properties[orientation].position]: size,
+    [properties[orientation].position]: size - 1,
   }
 }
 
@@ -213,8 +211,12 @@ function firstStyle(orientation, size) {
 }
 
 function secondStyle(orientation, size, dimensions) {
+  const totalSize = dimensions[properties[orientation].size]
+  if (typeof totalSize !== 'number' || typeof size !== 'number')
+    return undefined
+  const secondSize = totalSize - size
   return {
-    [properties[orientation].size]: dimensions[properties[orientation].size] - size,
+    [properties[orientation].size]: secondSize,
   }
 }
 

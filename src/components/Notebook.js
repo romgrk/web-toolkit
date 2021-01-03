@@ -55,6 +55,7 @@ function Notebook({
           }
           {pages.map((page, i) =>
             <div
+              key={page.key}
               className={cx('Notebook__tab', {
                 selected: i === activePage,
                 reorderable: true,

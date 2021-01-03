@@ -39,9 +39,10 @@ class Popover extends React.PureComponent {
     placement: prop.oneOf(PLACEMENTS),
     align: prop.oneOf(['right', 'left']),
     method: prop.oneOf(['mouseover', 'click', 'click-controlled', 'none']),
-    width: prop.oneOf(['trigger']),
+    width: prop.oneOf(['trigger', 'trigger-min']),
     delay: prop.number,
     shouldUpdatePlacement: prop.bool,
+    shouldAttachEarly: prop.bool,
     onOpen: prop.func,
     onClose: prop.func,
     onDidOpen: prop.func,
@@ -61,12 +62,6 @@ class Popover extends React.PureComponent {
     onDidClose: NOOP,
   }
 
-  static getDerivedStateFromProps(props, state) {
-    if (props.open !== state.previousOpen)
-      return { previousOpen: props.open, closing: props.open === false }
-    return null
-  }
-
   constructor(props) {
     super(props)
 
@@ -74,6 +69,7 @@ class Popover extends React.PureComponent {
     this.domNode.className = 'Popover__domNode'
 
     this.isDomNodeAttached = false
+    this.isEventListening = false
 
     this.openTimeout = undefined
     this.closeTimeout = undefined
@@ -99,6 +95,8 @@ class Popover extends React.PureComponent {
 
   componentDidMount() {
     this.attachPopper()
+    if (this.props.shouldAttachEarly)
+      this.attachDomNode()
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -157,6 +155,8 @@ class Popover extends React.PureComponent {
 
   getPopperOptions() {
     const hasArrow = this.props.arrow
+    const isOpen = this.isOpen()
+    this.isEventListening = isOpen
     return {
       placement: this.props.placement,
       modifiers: [
@@ -186,7 +186,7 @@ class Popover extends React.PureComponent {
         {
           /* Custom modifier */
           name: 'eventListeners',
-          enabled: this.isOpen(),
+          enabled: isOpen,
         },
         {
           /* Custom modifier */
@@ -240,15 +240,24 @@ class Popover extends React.PureComponent {
       this.setState({ actualPlacement: state.placement })
     }
 
-    if (this.props.width === 'trigger') {
+    if (this.props.width) {
       const trigger = state.elements.reference
       const rect = trigger.getBoundingClientRect()
 
-      const currentWidth = this.state.styles.width
-      const newWidth = rect.width - 1
+      if (this.props.width === 'trigger') {
+        const currentWidth = this.state.styles.width
+        const newWidth = rect.width - 1
 
-      if (currentWidth !== newWidth)
-        this.setState({ styles: { width: newWidth } })
+        if (currentWidth !== newWidth)
+          this.setState({ styles: { width: newWidth } })
+      }
+      else if (this.props.width === 'trigger-min') {
+        const currentWidth = this.state.styles.minWidth
+        const newWidth = rect.width - 1
+
+        if (currentWidth !== newWidth)
+          this.setState({ styles: { minWidth: newWidth } })
+      }
     }
   }
 
@@ -361,8 +370,8 @@ class Popover extends React.PureComponent {
     if (this.props.open && !this.state.open)
       setTimeout(this.open, 0)
 
-    if (!open && this.popper)
-      setTimeout(this.close, 0)
+    if (open !== this.isEventListening)
+      this.updatePopperOptions()
 
     const eventListeners = this.getEventListeners()
     const props = {
@@ -370,9 +379,9 @@ class Popover extends React.PureComponent {
       ...eventListeners,
       className: cx(
         trigger.props.className,
+        open ? `with-popover` : undefined,
         open ? `popover-${actualPlacement}` : undefined,
       ),
-      active: open,
       ref: node => {
         if (node) this.triggerRef.current = findDOMNode(node)
         if (trigger.ref) trigger.ref(node)

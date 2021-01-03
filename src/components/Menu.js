@@ -33,7 +33,7 @@ function Button({
   ...rest
 }) {
   return (
-    <button className={cx('ModelButton flat Menu__button', className)} {...rest}>
+    <button className={cx('ModelButton Menu__button', className)} {...rest}>
       {checkbox !== undefined &&
         <Icon name='emblem-ok' className='Menu__icon' />
       }
@@ -56,7 +56,7 @@ function Button({
 
 function Back({ children, className, ...rest }) {
   return (
-    <button className={cx('ModelButton flat Menu__button Menu__back', className)} {...rest}>
+    <button className={cx('ModelButton Menu__button Menu__back', className)} {...rest}>
       <Icon name='go-previous' className='Menu__icon submenu' />
       <span className='Label Menu__button__text'>{children}</span>
     </button>

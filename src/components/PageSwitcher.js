@@ -11,14 +11,15 @@ class PageSwitcher extends React.Component {
   static propTypes = {
     className: prop.string,
     pages: prop.arrayOf(prop.shape({
-      key: prop.string.isRequired,
-      label: prop.node.isRequired,
+      key: prop.oneOfType([prop.string, prop.number]).isRequired,
+      label: prop.node,
       content: prop.node.isRequired,
     })),
     mainPage: prop.number,
     activePage: prop.number,
-    transition: prop.oneOf(['horizontal', 'vertical', 'opacity']),
+    transition: prop.oneOf(['horizontal', 'vertical', 'opacity', false]),
     expand: prop.bool,
+    padded: prop.bool,
     useMainPageDimensions: prop.oneOf([prop.bool, 'width', 'height']),
   }
 
@@ -40,8 +41,11 @@ class PageSwitcher extends React.Component {
   }
 
   getPagesToRender() {
-    const { activePage: activePageProp } = this.props
+    const { activePage: activePageProp, transition } = this.props
     const { activePage } = this.state
+
+    if (transition === false)
+      return [activePageProp]
 
     const pages = Array.from(new Set([activePage, activePageProp]
       .filter(n => n !== undefined)))
@@ -93,6 +97,7 @@ class PageSwitcher extends React.Component {
       mainPage,
       transition,
       expand,
+      padded,
       style,
       useMainPageDimensions,
       ...rest
@@ -135,6 +140,7 @@ class PageSwitcher extends React.Component {
             className={cx('PageSwitcher__page', {
               active: n === activePageValue,
               main: n === mainPage,
+              padded,
             })}
             onTransitionEnd={this.onTransitionEnd}
             ref={expand && n === activePageValue ? this.onRef : undefined}

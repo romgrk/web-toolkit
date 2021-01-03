@@ -1,3 +1,12 @@
+/*************
+* Constants  *
+*************/
+/*************
+* Colors     *
+*************/
+/*************
+* Dimensions *
+*************/
 /***************************
  * Check and Radio buttons *
  ***************************/
@@ -73,7 +82,8 @@ button {
  * Scrollbars  *
  ***************/
 *::-webkit-scrollbar {
-  width: 10px; }
+  width: 8px;
+  height: 8px; }
 
 *::-webkit-scrollbar-track {
   background-color: transparent;
@@ -160,8 +170,20 @@ button {
 .Box.align {
   align-items: center; }
 
+.Box.align-start {
+  align-items: start; }
+
+.Box.align-end {
+  align-items: end; }
+
 .Box.justify {
   justify-content: center; }
+
+.Box.justify-start {
+  justify-content: start; }
+
+.Box.justify-end {
+  justify-content: end; }
 
 .Box.space-around {
   justify-content: space-around; }
@@ -187,6 +209,9 @@ button {
 
 .Box.expand-children > * {
   flex: 1; }
+
+.Box.border {
+  border: 1px solid #cdc7c2; }
 
 .Box__fill {
   flex: 1; }
@@ -254,7 +279,7 @@ button {
     border-spacing: 8px;
     margin: 12px; }
 
-.SelectionArea, .content-view > .SelectionArea, .table.content-view > .SelectionArea, .table > .SelectionArea, .Flowbox.table > .SelectionArea, .Grid.table > .SelectionArea, .Flowbox > .SelectionArea, .Grid > .SelectionArea {
+.SelectionArea, .content-view > .SelectionArea, .table > .SelectionArea, .Flowbox > .SelectionArea, .Grid > .SelectionArea {
   border: 1px solid #1b6acb;
   background-color: rgba(27, 106, 203, 0.2); }
 
@@ -1462,17 +1487,17 @@ row.selected button.sidebar-button:not(:active):not(:checked):not(:hover):not(di
   .Button.circular .Label {
     padding: 0; }
 
-stacksidebar row.needs-attention > .Label, .StackSwitcher > .Button.needs-attention > .Label,
+.stack-sidebar .List__item.needs-attention > .Label, .StackSwitcher > .Button.needs-attention > .Label,
 .StackSwitcher > .Button.needs-attention > .Image {
   animation: needs_attention 150ms ease-in;
   background-image: radial-gradient(farthest-side, #3584e4 96%, rgba(53, 132, 228, 0));
   background-size: 5px 5px, 5px 5px;
   background-repeat: no-repeat;
   background-position: right 3px, right 4px; }
-  stacksidebar row.needs-attention > .Label:backdrop, .StackSwitcher > .Button.needs-attention > .Label:backdrop,
+  .stack-sidebar .List__item.needs-attention > .Label:backdrop, .StackSwitcher > .Button.needs-attention > .Label:backdrop,
   .StackSwitcher > .Button.needs-attention > .Image:backdrop {
     background-size: 6px 6px, 0 0; }
-  stacksidebar row.needs-attention > .Label:dir(rtl), .StackSwitcher > .Button.needs-attention > .Label:dir(rtl),
+  .stack-sidebar .List__item.needs-attention > .Label:dir(rtl), .StackSwitcher > .Button.needs-attention > .Label:dir(rtl),
   .StackSwitcher > .Button.needs-attention > .Image:dir(rtl) {
     background-position: left 3px, left 4px; }
 
@@ -1529,12 +1554,13 @@ stacksidebar row.needs-attention > .Label, .StackSwitcher > .Button.needs-attent
 
 /* menu buttons */
 .ModelItem,
-.ModelButton.flat {
+.ModelButton,
+.navigation-sidebar:not(.increase-specificity) > .List__item {
   min-height: 26px;
   padding-left: 5px;
   padding-right: 5px; }
 
-.ModelButton.flat {
+.ModelButton, .navigation-sidebar:not(.increase-specificity) > .List__item {
   border-color: transparent;
   background-color: transparent;
   box-shadow: inset 0 1px rgba(255, 255, 255, 0);
@@ -1543,19 +1569,19 @@ stacksidebar row.needs-attention > .Label, .StackSwitcher > .Button.needs-attent
   border: none;
   border-radius: 0;
   text-align: left; }
-  .ModelButton.flat::before {
+  .ModelButton::before, .navigation-sidebar:not(.increase-specificity) > .List__item::before {
     opacity: 0; }
-  .ModelButton.flat.focus, .ModelButton.flat:focus, .ModelButton.flat.hover, .ModelButton.flat:hover {
+  .ModelButton.focus, .navigation-sidebar:not(.increase-specificity) > .focus.List__item, .ModelButton:focus, .navigation-sidebar:not(.increase-specificity) > .List__item:focus, .ModelButton.hover, .navigation-sidebar:not(.increase-specificity) > .hover.List__item, .ModelButton:hover, .navigation-sidebar:not(.increase-specificity) > .List__item:hover {
     outline: none;
     background-color: #efedec; }
-  .ModelButton.flat.active, .ModelButton.flat:active {
+  .ModelButton.active, .navigation-sidebar:not(.increase-specificity) > .active.List__item, .ModelButton:active, .navigation-sidebar:not(.increase-specificity) > .List__item:active {
     border-color: transparent;
     box-shadow: none;
     text-shadow: none;
     background-color: #b1a9a0; }
-    .ModelButton.flat.active::before, .ModelButton.flat:active::before {
+    .ModelButton.active::before, .navigation-sidebar:not(.increase-specificity) > .active.List__item::before, .ModelButton:active::before, .navigation-sidebar:not(.increase-specificity) > .List__item:active::before {
       opacity: 0; }
-  .ModelButton.flat.disabled, .ModelButton.flat:disabled {
+  .ModelButton.disabled, .navigation-sidebar:not(.increase-specificity) > .disabled.List__item, .ModelButton:disabled, .navigation-sidebar:not(.increase-specificity) > .List__item:disabled {
     color: #929595; }
 
 /* oldstyle toolbar buttons */
@@ -2038,16 +2064,11 @@ input::-webkit-outer-spin-button {
   padding-right: 9px;
   padding: 0 12px; }
 
-.Dropdown__menu.Popover .Popover__container .ModelButton.selected {
+.Dropdown__menu.Popover .Popover__container .ModelButton.selected, .Dropdown__menu.Popover .Popover__container .navigation-sidebar:not(.increase-specificity) > .selected.List__item {
   font-weight: 700;
   outline-color: rgba(255, 255, 255, 0.8);
   color: black;
   background-color: #efedec; }
-
-.Dropdown__menu.Popover .list {
-  margin: 8px 0; }
-  .Dropdown__menu.Popover .list > .row {
-    padding: 8px; }
 
 .Dropdown__menu.Popover .dropdown-searchbar {
   padding: 6px;
@@ -2404,6 +2425,8 @@ pathbar > button.slider-button {
   flex-direction: column;
   width: 100%;
   height: 100%;
+  max-width: 100%;
+  overflow: hidden;
   border: 1px solid #d7d2ce;
   background-color: #ffffff; }
   .table {
@@ -2413,9 +2436,6 @@ pathbar > button.slider-button {
     outline-color: rgba(53, 132, 228, 0.5);
     outline-width: 2px;
     outline-offset: -2px; }
-  .table.selected:focus, .table.selected {
-    border-radius: 0;
-    outline-color: rgba(255, 255, 255, 0.8); }
   .table.disabled {
     color: #929595; }
     .table.disabled.selected {
@@ -2437,6 +2457,7 @@ pathbar > button.slider-button {
       overflow: overlay; }
       .table .table__body > div > div::-webkit-scrollbar {
         width: 8px;
+        height: 8px;
         z-index: 1000; }
       .table .table__body > div > div::-webkit-scrollbar-thumb {
         background-clip: padding-box;
@@ -2451,6 +2472,7 @@ pathbar > button.slider-button {
         background-color: rgba(0, 0, 0, 0.4); } }
   .table .th {
     color: #979a9b;
+    --icon-color: #979a9b;
     background-color: #ffffff;
     font-weight: bold;
     text-shadow: none;
@@ -2465,6 +2487,8 @@ pathbar > button.slider-button {
     .table .th:active {
       color: #2e3436;
       transition: none; }
+    .table .th > .Label {
+      flex: 1; }
   .table .td {
     padding: 4px;
     overflow: hidden;
@@ -2473,6 +2497,19 @@ pathbar > button.slider-button {
     height: 28px; }
   .table .td:not(:last-child) {
     border-right: 1px solid #d7d2ce; }
+  .table .table__resizer {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 10px;
+    height: 100%;
+    z-index: 1;
+    touch-action: none;
+    border-right: 4px solid transparent; }
+    .table .table__resizer:hover {
+      border-right: 4px solid rgba(205, 199, 194, 0.3); }
+    .table .table__resizer.isResizing {
+      border-right: 4px solid #3584e4; }
   .table.separator {
     min-height: 2px;
     color: #d7d2ce; }
@@ -2544,6 +2581,21 @@ pathbar > button.slider-button {
     background-image: none; }
   .table .th:last-child {
     border-right-style: none; }
+
+/********************************************************
+ * Data Tables                                          *
+ * treeview like tables with individual focusable cells *
+ * https://gitlab.gnome.org/GNOME/gtk/-/issues/2929     *
+ ********************************************************/
+columnview row:not(.selected) cell editablelabel:not(.editing):focus-within {
+  outline: 2px solid rgba(53, 132, 228, 0.5); }
+
+columnview row:not(.selected) cell editablelabel.editing:focus-within {
+  outline: 2px solid #3584e4; }
+
+columnview row:not(.selected) cell editablelabel.editing text selection {
+  color: #ffffff;
+  background-color: #3584e4; }
 
 /***************
  * Popovers   *
@@ -2861,6 +2913,7 @@ pathbar > button.slider-button {
     display: flex;
     justify-content: center;
     align-items: center;
+    white-space: nowrap;
     color: #2e3436;
     font-weight: normal;
     cursor: default;
@@ -2989,6 +3042,7 @@ pathbar > button.slider-button {
         overflow: overlay; }
         .Notebook .Notebook__content > .PageSwitcher > .PageSwitcher__page::-webkit-scrollbar {
           width: 8px;
+          height: 8px;
           z-index: 1000; }
         .Notebook .Notebook__content > .PageSwitcher > .PageSwitcher__page::-webkit-scrollbar-thumb {
           background-clip: padding-box;
@@ -3018,6 +3072,8 @@ pathbar > button.slider-button {
     width: 100%;
     height: 100%;
     transition: all 150ms cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+    .PageSwitcher .PageSwitcher__page.padded {
+      padding: 8px; }
   .PageSwitcher .PageSwitcher__page.active {
     opacity: 1;
     transform: translate3d(0, 0, 0); }
@@ -3115,6 +3171,12 @@ pathbar > button.slider-button {
 .Expander.horizontal:not(.open) .Expander__container {
   width: 0; }
 
+.Expander.fit-content.vertical .Expander__content {
+  width: max-content; }
+
+.Expander.fit-content.horizontal .Expander__content {
+  height: max-content; }
+
 /************
  * Paned    *
  ************/
@@ -3163,19 +3225,13 @@ pathbar > button.slider-button {
       left: -2px;
       width: 100%;
       height: 100%; }
-    .Paned .Paned__handle::before {
-      content: '';
-      position: absolute;
-      display: inline-block;
-      outline: none;
-      border-width: 0;
-      border-style: solid;
-      border-color: #d8d4d0; }
   .Paned .Paned__wrapper.horizontal {
     display: flex;
     flex-direction: row; }
     .Paned .Paned__wrapper.horizontal > .Paned__pane {
       width: 50%; }
+      .Paned .Paned__wrapper.horizontal > .Paned__pane:first-child {
+        border-right: 1px solid #cdc7c2; }
     .Paned .Paned__wrapper.horizontal > .Paned__handle {
       top: 0;
       left: 50%;
@@ -3183,19 +3239,13 @@ pathbar > button.slider-button {
       cursor: ew-resize;
       padding: 0 5px;
       transform: translateX(-50%); }
-      .Paned .Paned__wrapper.horizontal > .Paned__handle::before {
-        top: 0;
-        left: 50%;
-        width: 1px;
-        height: 100%;
-        border-right-width: 1px; }
-      .Paned .Paned__wrapper.horizontal > .Paned__handle:active::before {
-        width: 4px; }
   .Paned .Paned__wrapper.vertical {
     display: flex;
     flex-direction: column; }
     .Paned .Paned__wrapper.vertical > .Paned__pane {
       height: 50%; }
+      .Paned .Paned__wrapper.vertical > .Paned__pane:first-child {
+        border-bottom: 1px solid #cdc7c2; }
     .Paned .Paned__wrapper.vertical > .Paned__handle {
       top: 50%;
       left: 0;
@@ -3203,14 +3253,20 @@ pathbar > button.slider-button {
       cursor: ns-resize;
       padding: 5px 0;
       transform: translateY(-50%); }
-      .Paned .Paned__wrapper.vertical > .Paned__handle::before {
-        top: 50%;
-        left: 0;
-        width: 100%;
-        height: 1px;
-        border-bottom-width: 1px; }
-      .Paned .Paned__wrapper.vertical > .Paned__handle:active::before {
-        height: 4px; }
+
+/****************
+ * Autocomplete *
+ ****************/
+.Autocomplete__popover .Popover__wrapper {
+  transition: all 150ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  opacity: 0;
+  transform: none; }
+
+.Autocomplete__popover .List__item {
+  padding-left: 8px;
+  padding-right: 8px; }
+  .Autocomplete__popover .List__item > * {
+    white-space: nowrap; }
 
 /**********
  * Switch *
@@ -3254,8 +3310,8 @@ pathbar > button.slider-button {
     transition: all 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
     top: -2px;
     left: -2px;
-    width: calc(100% - 0);
-    height: calc(100% - 0); }
+    width: calc(100% - 0px);
+    height: calc(100% - 0px); }
   .Switch input:focus:focus-visible + label {
     outline: none; }
   .Switch input:focus:focus-visible + label::before {
@@ -3390,8 +3446,8 @@ pathbar > button.slider-button {
     transition: all 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
     top: -2px;
     left: -2px;
-    width: calc(100% - 0);
-    height: calc(100% - 0); }
+    width: calc(100% - 0px);
+    height: calc(100% - 0px); }
   .Checkbox input:focus:focus-visible + label,
   .Radio input:focus:focus-visible + label {
     outline: none; }
@@ -3835,9 +3891,9 @@ pathbar > button.slider-button {
 listview,
 list,
 .List {
+  display: inline-block;
   color: black;
   background-color: #ffffff;
-  border: 1px solid #cdc7c2;
   margin: 0;
   padding: 0;
   overflow: auto; }
@@ -3850,6 +3906,7 @@ list,
       list::-webkit-scrollbar,
       .List::-webkit-scrollbar {
         width: 8px;
+        height: 8px;
         z-index: 1000; }
       listview::-webkit-scrollbar-thumb,
       list::-webkit-scrollbar-thumb,
@@ -3872,36 +3929,61 @@ list,
     color: #323232;
     background-color: #fcfcfc;
     border-color: #d5d0cc; }
-  listview.horizontal .List__item.separator, listview.separators.horizontal > .List__item:not(.separator),
+  listview.horizontal .List__item.separator, listview.separators.horizontal > .List__item:not(.separator):not(:last-child),
   list.horizontal .List__item.separator,
-  list.separators.horizontal > .List__item:not(.separator),
+  list.separators.horizontal > .List__item:not(.separator):not(:last-child),
   .List.horizontal .List__item.separator,
-  .List.separators.horizontal > .List__item:not(.separator) {
+  .List.separators.horizontal > .List__item:not(.separator):not(:last-child) {
     border-left: 1px solid #d7d2ce; }
-  listview:not(.horizontal) .List__item.separator, listview.separators:not(.horizontal) > .List__item:not(.separator),
+  listview:not(.horizontal) .List__item.separator, listview.separators:not(.horizontal) > .List__item:not(.separator):not(:last-child),
   list:not(.horizontal) .List__item.separator,
-  list.separators:not(.horizontal) > .List__item:not(.separator),
+  list.separators:not(.horizontal) > .List__item:not(.separator):not(:last-child),
   .List:not(.horizontal) .List__item.separator,
-  .List.separators:not(.horizontal) > .List__item:not(.separator) {
+  .List.separators:not(.horizontal) > .List__item:not(.separator):not(:last-child) {
     border-bottom: 1px solid #d7d2ce; }
+  listview.border,
+  list.border,
+  .List.border {
+    border: 1px solid #cdc7c2; }
+  listview.border-top,
+  list.border-top,
+  .List.border-top {
+    border-top: 1px solid #cdc7c2; }
+  listview.border-bottom,
+  list.border-bottom,
+  .List.border-bottom {
+    border-bottom: 1px solid #cdc7c2; }
+  listview.border-left,
+  list.border-left,
+  .List.border-left {
+    border-left: 1px solid #cdc7c2; }
+  listview.border-right,
+  list.border-right,
+  .List.border-right {
+    border-right: 1px solid #cdc7c2; }
   listview.border-none,
   list.border-none,
   .List.border-none {
     border: none; }
+  listview.rounded,
+  list.rounded,
+  .List.rounded {
+    border-radius: 12px; }
 
 .List__item {
-  list-style: none;
+  display: flex;
+  flex-direction: row;
   padding: 2px; }
-  .List__item {
-    outline: 0 solid transparent;
-    outline-offset: 4px; }
-  .List__item:focus:focus-visible {
-    outline-color: rgba(53, 132, 228, 0.5);
-    outline-width: 2px;
-    outline-offset: -2px; }
   .List__item.activatable {
     user-select: none;
     transition: all 150ms cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+    .List__item.activatable {
+      outline: 0 solid transparent;
+      outline-offset: 4px; }
+    .List__item.activatable:focus:focus-visible {
+      outline-color: rgba(53, 132, 228, 0.5);
+      outline-width: 2px;
+      outline-offset: -2px; }
     .List__item.activatable:hover {
       background-color: rgba(46, 52, 54, 0.05); }
     .List__item.activatable:active {
@@ -3914,6 +3996,20 @@ list,
         background-color: #347cd3; }
   .List__item.selected {
     outline-color: rgba(255, 255, 255, 0.8); }
+  .List__item .Label {
+    flex: 1; }
+
+button.List__item {
+  border-color: transparent;
+  background-color: transparent;
+  box-shadow: inset 0 1px rgba(255, 255, 255, 0);
+  text-shadow: none;
+  --icon-shadow: none;
+  border: none;
+  width: 100%;
+  text-align: left; }
+  button.List__item::before {
+    opacity: 0; }
 
 /*******************************************************
  * Rich Lists                                          *
@@ -3957,23 +4053,72 @@ list,
       .List.rich > .List__item .Button.active::before, .List.rich > .List__item .Button:active::before {
         opacity: 0; }
 
-.List.sidebar {
-  background-color: #f6f5f4; }
+.List.sublist {
+  width: 100%;
+  background-color: #f1f0ee;
+  border-bottom: 1px solid #cdc7c2;
+  box-shadow: inset 0 1px rgba(0, 0, 0, 0.07); }
 
-/********************************************************
- * Data Tables                                          *
- * treeview like tables with individual focusable cells *
- * https://gitlab.gnome.org/GNOME/gtk/-/issues/2929     *
- ********************************************************/
-columnview row:not(.selected) cell editablelabel:not(.editing):focus-within {
-  outline: 2px solid rgba(53, 132, 228, 0.5); }
+.List__item.expandable .Icon.arrow {
+  opacity: 0.3;
+  transition: all 150ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transform: rotate(0); }
 
-columnview row:not(.selected) cell editablelabel.editing:focus-within {
-  outline: 2px solid #3584e4; }
+.List__item.expandable.expanded .Icon.arrow {
+  color: #3584e4;
+  --icon-color: #3584e4;
+  opacity: 1;
+  transform: rotate(90deg); }
 
-columnview row:not(.selected) cell editablelabel.editing text selection {
-  color: #ffffff;
-  background-color: #3584e4; }
+/***********
+ * Sidebar *
+ ***********/
+.sidebar {
+  background-color: #fbfafa; }
+  .sidebar:not(separator):dir(ltr), .sidebar.left:not(separator), .sidebar.left:not(separator):dir(rtl) {
+    border-right: 1px solid #cdc7c2;
+    border-left-style: none; }
+  .sidebar:not(separator):dir(rtl), .sidebar.right:not(separator) {
+    border-left: 1px solid #cdc7c2;
+    border-right-style: none; }
+  .sidebar listview.view, .sidebar listview.IconView,
+  .sidebar list {
+    background-color: transparent; }
+
+.stack-sidebar {
+  background-color: #fbfafa; }
+  .stack-sidebar.separators:not(.horizontal) > .List__item:not(.separator):not(.increase-specificity) {
+    border-bottom: none; }
+    .stack-sidebar.separators:not(.horizontal) > .List__item:not(.separator):not(.increase-specificity):not(:first-child) {
+      border-top: 1px solid #cdc7c2; }
+  .stack-sidebar .List__item {
+    padding: 10px 4px; }
+    .stack-sidebar .List__item > .Label {
+      padding-left: 6px;
+      padding-right: 6px; }
+    .stack-sidebar .List__item.needs-attention > .Label {
+      background-size: 6px 6px, 0 0; }
+    .stack-sidebar .List__item.activatable:active, .stack-sidebar .List__item.activatable.selected:active {
+      box-shadow: none; }
+
+/**********************
+ * Navigation Sidebar *
+ **********************/
+.navigation-sidebar:not(.increase-specificity) {
+  padding: 5px 0;
+  background-color: #fbfafa;
+  border-color: #dfdcd8 !important; }
+  .navigation-sidebar:not(.increase-specificity) > .separator {
+    margin: 5px; }
+  .navigation-sidebar:not(.increase-specificity) > .List__item {
+    min-height: 36px;
+    padding: 0 8px;
+    align-items: center;
+    border-color: #dfdcd8 !important; }
+    .navigation-sidebar:not(.increase-specificity) > .List__item.selected:not(.increase-specificity) {
+      color: inherit;
+      background-color: #e1dedb;
+      text-shadow: none; }
 
 /*********************
  * App Notifications *
@@ -3987,44 +4132,6 @@ columnview row:not(.selected) cell editablelabel.editing text selection {
   background-clip: padding-box; }
   .app-notification border {
     border: none; }
-
-/*************
- * Expanders *
- *************/
-expander {
-  min-width: 16px;
-  min-height: 16px;
-  -gtk-icon-source: -gtk-icontheme("pan-end-symbolic"); }
-  expander:dir(rtl) {
-    -gtk-icon-source: -gtk-icontheme("pan-end-symbolic-rtl"); }
-  expander:disabled {
-    color: #929595; }
-  expander:checked {
-    -gtk-icon-source: -gtk-icontheme("pan-down-symbolic"); }
-
-expander-widget > box > title {
-  outline: 0 solid transparent;
-  outline-offset: 4px; }
-
-expander-widget:focus:focus-visible > box > title {
-  outline-color: rgba(53, 132, 228, 0.5);
-  outline-width: 2px;
-  outline-offset: -2px; }
-
-expander-widget > box > title {
-  transition: all 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  border-radius: 5px; }
-  expander-widget > box > title:hover > expander {
-    color: #748489; }
-
-.navigation-sidebar.dnd-active:not(decoration):not(.Window):focus, .navigation-sidebar.dnd-active:not(decoration):not(.Window),
-placessidebar.dnd-active:not(decoration):not(.Window):focus,
-placessidebar.dnd-active:not(decoration):not(.Window),
-.StackSwitcher.dnd-active:not(decoration):not(.Window):focus,
-.StackSwitcher.dnd-active:not(decoration):not(.Window),
-expander-widget.dnd-active:not(decoration):not(.Window):focus,
-expander-widget.dnd-active:not(decoration):not(.Window) {
-  box-shadow: none; }
 
 /************
  * Calendar *
@@ -4117,77 +4224,6 @@ filechooserbutton > button > box {
 filechooserbutton.dnd-active {
   box-shadow: none;
   border-color: transparent; }
-
-/***********
- * Sidebar *
- ***********/
-.sidebar {
-  background-color: #fbfafa; }
-  .sidebar:not(separator):dir(ltr), .sidebar.left:not(separator), .sidebar.left:not(separator):dir(rtl) {
-    border-right: 1px solid #cdc7c2;
-    border-left-style: none; }
-  .sidebar:not(separator):dir(rtl), .sidebar.right:not(separator) {
-    border-left: 1px solid #cdc7c2;
-    border-right-style: none; }
-  .sidebar listview.view, .sidebar listview.IconView,
-  .sidebar list {
-    background-color: transparent; }
-  paned .sidebar.left, paned .sidebar.right, paned .sidebar.left:dir(rtl), paned .sidebar:dir(rtl), paned .sidebar:dir(ltr), paned .sidebar {
-    border-style: none; }
-
-stacksidebar list.separators:not(.horizontal) > row:not(.separator) {
-  border-bottom: none; }
-
-stacksidebar row {
-  padding: 10px 4px; }
-  stacksidebar row > .Label {
-    padding-left: 6px;
-    padding-right: 6px; }
-  stacksidebar row.needs-attention > .Label {
-    background-size: 6px 6px, 0 0; }
-  stacksidebar row.selected {
-    background-color: #efedec;
-    border-radius: 5px;
-    color: #2e3436; }
-  stacksidebar row.selected:hover:dir(ltr), stacksidebar row.selected:hover:dir(rtl) {
-    background-color: #e4e1de; }
-  stacksidebar row:focus:focus-visible {
-    outline-width: 0;
-    background-color: #3584e4;
-    color: #ffffff; }
-  stacksidebar row.activatable:active, stacksidebar row.activatable.selected:active {
-    box-shadow: none; }
-
-separator.sidebar {
-  background-color: #cdc7c2; }
-
-/**********************
- * Navigation Sidebar *
- **********************/
-.navigation-sidebar {
-  padding: 5px 0; }
-  .navigation-sidebar > separator {
-    margin: 5px; }
-  .navigation-sidebar > row {
-    min-height: 36px;
-    padding: 0 8px;
-    border-radius: 5px;
-    margin: 0 5px 2px; }
-    .navigation-sidebar > row:hover, .navigation-sidebar > row:focus-visible:focus-within {
-      background-color: #e4e1de; }
-    .navigation-sidebar > row.selected {
-      background-color: #efedec;
-      color: inherit; }
-      .navigation-sidebar > row.selected:hover {
-        background-color: #e4e1de; }
-      .navigation-sidebar > row.selected:focus-visible:focus-within {
-        outline-width: 0;
-        color: #ffffff;
-        background-color: #3584e4; }
-        .navigation-sidebar > row.selected:focus-visible:focus-within:hover {
-          background-color: #1b6acb; }
-    .navigation-sidebar > row:disabled {
-      color: #929595; }
 
 /****************
  * File chooser *
@@ -4453,16 +4489,16 @@ tooltip.csd {
 .view.selected:focus, .view.selected, .selected.IconView:focus, .selected.IconView, .Flowbox > .Flowbox__child.selected, .Grid > .Grid__child.selected,
 .Input > .Input__area > input::selection,
 .TextView > textarea.selected:focus,
-.TextView > textarea.selected, .TextView > textarea::selection, .ModelButton.flat.selected, .InputNumber:not(.vertical) > .Input__area > input::selection, .InputNumber.vertical > .Input__area > input > .Input__area > input::selection, .InputNumber.vertical > .Input__area > input::selection, .table.selected:focus, .table.selected, .List__item.selected, calendar > grid > .Label.day-number.selected {
+.TextView > textarea.selected, .TextView > textarea::selection, .ModelButton.selected, .InputNumber:not(.vertical) > .Input__area > input::selection, .InputNumber.vertical > .Input__area > input > .Input__area > input::selection, .InputNumber.vertical > .Input__area > input::selection, .List__item.selected, .navigation-sidebar:not(.increase-specificity) > .selected.List__item, calendar > grid > .Label.day-number.selected {
   background-color: #3584e4; }
   .Label.selected, .view.selected:focus, .view.selected, .selected.IconView:focus, .selected.IconView, .Flowbox > .Flowbox__child.selected, .Grid > .Grid__child.selected,
   .Input > .Input__area > input::selection,
   .TextView > textarea.selected:focus,
-  .TextView > textarea.selected, .TextView > textarea::selection, .ModelButton.flat.selected, .InputNumber:not(.vertical) > .Input__area > input::selection, .InputNumber.vertical > .Input__area > input > .Input__area > input::selection, .InputNumber.vertical > .Input__area > input::selection, .table.selected:focus, .table.selected, .List__item.selected, calendar > grid > .Label.day-number.selected {
+  .TextView > textarea.selected, .TextView > textarea::selection, .ModelButton.selected, .InputNumber:not(.vertical) > .Input__area > input::selection, .InputNumber.vertical > .Input__area > input > .Input__area > input::selection, .InputNumber.vertical > .Input__area > input::selection, .List__item.selected, .navigation-sidebar:not(.increase-specificity) > .selected.List__item, calendar > grid > .Label.day-number.selected {
     color: #ffffff; }
     .Label.disabled::selection, .Label.selected:disabled, .view.selected:disabled, .selected.IconView:disabled, .Flowbox > .Flowbox__child.selected:disabled, .Grid > .Grid__child.selected:disabled,
     .Input > .Input__area > input:disabled::selection,
-    .TextView > textarea.selected:disabled, .TextView > textarea:disabled::selection, .ModelButton.flat.selected:disabled, .InputNumber:not(.vertical) > .Input__area > input:disabled::selection, .InputNumber.vertical > .Input__area > input > .Input__area > input:disabled::selection, .InputNumber.vertical > .Input__area > input:disabled::selection, .table.selected:disabled, .List__item.selected:disabled, calendar > grid > .Label.day-number.selected:disabled {
+    .TextView > textarea.selected:disabled, .TextView > textarea:disabled::selection, .ModelButton.selected:disabled, .InputNumber:not(.vertical) > .Input__area > input:disabled::selection, .InputNumber.vertical > .Input__area > input > .Input__area > input:disabled::selection, .InputNumber.vertical > .Input__area > input:disabled::selection, .List__item.selected:disabled, calendar > grid > .Label.day-number.selected:disabled {
       color: #9ac2f2; }
 
 .monospace {

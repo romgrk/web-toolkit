@@ -434,6 +434,7 @@ const Range = React.forwardRef(function Range(props, ref) {
 
           return (
             <ThumbComponent
+              key={index}
               className={cx('Range__thumb', {
                 active: active === index,
                 disabled: disabled,

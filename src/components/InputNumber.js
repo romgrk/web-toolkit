@@ -14,10 +14,11 @@ function InputNumber({
   vertical,
   disabled,
   value: valueProp,
+  defaultValue,
   onChange,
   ...rest
 }) {
-  const [valueState, setValueState] = useState(rest.defaultValue ?? '')
+  const [valueState, setValueState] = useState(defaultValue ?? '')
   const value = valueProp ?? valueState
   const step = rest.step ?? 1
   const min = rest.min ?? -Infinity

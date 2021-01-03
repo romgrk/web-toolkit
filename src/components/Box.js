@@ -2,6 +2,7 @@
  * Box.js
  */
 
+import prop from 'prop-types'
 import cx from 'clsx'
 
 function Box({
@@ -10,6 +11,7 @@ function Box({
   inline,
   compact,
   fill,
+  border = false,
   horizontal,
   vertical,
   align,
@@ -26,13 +28,14 @@ function Box({
         className,
         space ? `space-${space}` : undefined,
         typeof fill === 'string' ? `fill-${fill}` : fill ? 'fill' : undefined,
+        alignClass(align),
+        justifyClass(justify),
         {
           inline,
           compact,
           vertical,
           horizontal,
-          align,
-          justify,
+          border,
           padded,
           'expand-children': expandChildren,
         }
@@ -42,6 +45,11 @@ function Box({
       {children}
     </div>
   )
+}
+
+Box.propTypes = {
+  align: prop.oneOf([true, 'start', 'end']),
+  justify: prop.oneOf([true, 'start', 'end']),
 }
 
 function Fill({
@@ -70,3 +78,22 @@ function Fill({
 Box.Fill = Fill
 
 export default Box
+
+
+// Helpers
+
+function alignClass(align) {
+  if (align === true)
+    return 'align'
+  if (typeof align === 'string')
+    return `align-${align}`
+  return undefined
+}
+
+function justifyClass(justify) {
+  if (justify === true)
+    return 'justify'
+  if (typeof justify === 'string')
+    return `justify-${justify}`
+  return undefined
+}

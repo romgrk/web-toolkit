@@ -2,8 +2,6 @@
   @return unquote("alpha(#{$c},#{$a})");
 }
 
-$height: 30px;
-
 $ease-out-quad: cubic-bezier(0.25, 0.46, 0.45, 0.94);
 $asset_suffix: if($variant=='dark', '-dark', '');
 $backdrop_transition: 200ms ease-out;
@@ -15,6 +13,7 @@ $button_radius: 5px;
 $menu_radius: 5px;
 $menu_margin: $menu_radius; //margin around menuitems & sidebar items
 $menu_padding: 12px; // inner menuitem padding
+$frame_padding: 8px;
 // global $menu-margin for outside menuitems // XXX define this
 $window_radius: $button_radius + 3;
 $popover_radius: $button_radius + 4;
@@ -33,7 +32,8 @@ $popover_radius: $button_radius + 4;
  ***************/
 
 *::-webkit-scrollbar {
-  width: 10px;
+  width: 8px;
+  height: 8px;
 }
 *::-webkit-scrollbar-track {
   background-color: transparent;
@@ -60,6 +60,7 @@ $popover_radius: $button_radius + 4;
 
     &::-webkit-scrollbar {
       width: 8px;
+      height: 8px;
       z-index: 1000;
     }
     &::-webkit-scrollbar-thumb {
@@ -156,8 +157,20 @@ $popover_radius: $button_radius + 4;
   &.align {
     align-items: center;
   }
+  &.align-start {
+    align-items: start;
+  }
+  &.align-end {
+    align-items: end;
+  }
   &.justify {
     justify-content: center;
+  }
+  &.justify-start {
+    justify-content: start;
+  }
+  &.justify-end {
+    justify-content: end;
   }
   &.space-around {
     justify-content: space-around;
@@ -186,6 +199,10 @@ $popover_radius: $button_radius + 4;
 
   &.expand-children > * {
     flex: 1;
+  }
+
+  &.border {
+    border: 1px solid $borders_color;
   }
 }
 .Box__fill {
@@ -431,9 +448,11 @@ $popover_radius: $button_radius + 4;
   }
 }
 
+$_input_padding: 8px;
+
 %entry,
 .Input {
-  --input-padding: 8px;
+  --input-padding: #{$_input_padding};
   --progress-indeterminate-width: 50px;
 
   %entry_basic, & {
@@ -1076,12 +1095,12 @@ $_dot_color: if($variant=='light', $selected_bg_color,
 // TODO validate this
 /* menu buttons */
 .ModelItem,
-.ModelButton.flat {
+.ModelButton {
   min-height: 26px;
   padding-left: 5px;
   padding-right: 5px;
 }
-.ModelButton.flat {
+.ModelButton {
   @include button('undecorated');
 
   // border-radius: $button_radius;
@@ -1532,13 +1551,6 @@ input::-webkit-outer-spin-button {
     }
   }
 
-  .list {
-    margin: 8px 0;
-    & > .row {
-      padding: 8px;
-    }
-  }
-
   // drodowns with searchboxes on top
   .dropdown-searchbar {
     padding: 6px;
@@ -1884,21 +1896,13 @@ $_treeview_backdrop_borders_color: if($variant=='light',mix($backdrop_borders_co
   flex-direction: column;
   width: 100%;
   height: 100%;
+  max-width: 100%;
+  overflow: hidden;
 
   border: 1px solid $_treeview_borders_color;
   background-color: $background_light;
 
   @include focus-ring();
-
-  // TODO validate this
-  &.selected {
-    &:focus, & {
-      border-radius: 0;
-      outline-color: $alt_focus_border_color;
-
-      @extend %selected_items;
-    }
-  }
 
   // TODO validate this
   &.disabled {
@@ -1917,9 +1921,13 @@ $_treeview_backdrop_borders_color: if($variant=='light',mix($backdrop_borders_co
 
   .table__header {
     flex: 0;
+    // overflow-y: auto;
+    // overflow-x: hidden;
   }
   .table__body {
     flex: 1;
+    // overflow-y: scroll;
+    // overflow-x: hidden;
   }
   .table__body > div {
     width: 100%;
@@ -1933,6 +1941,7 @@ $_treeview_backdrop_borders_color: if($variant=='light',mix($backdrop_borders_co
     @extend %column_header_button;
 
     color: $fg_color_title;
+    --icon-color: #{$fg_color_title};
     background-color: $base_color;
     font-weight: bold;
     text-shadow: none;
@@ -1957,6 +1966,10 @@ $_treeview_backdrop_borders_color: if($variant=='light',mix($backdrop_borders_co
       color: $fg_color;
       transition: none; //I shouldn't need this
     }
+
+    > .Label {
+      flex: 1;
+    }
   }
   .td {
     padding: 4px;
@@ -1967,6 +1980,24 @@ $_treeview_backdrop_borders_color: if($variant=='light',mix($backdrop_borders_co
   }
   .td:not(:last-child) {
     border-right: 1px solid $_treeview_borders_color;
+  }
+
+  .table__resizer {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 10px;
+    height: 100%;
+    z-index: 1;
+    touch-action :none;
+
+    border-right: 4px solid transparent;
+    &:hover {
+      border-right: 4px solid rgba($borders_color, 0.3);
+    }
+    &.isResizing {
+      border-right: 4px solid $selected_bg_color;
+    }
   }
 
   // TODO validate this
@@ -2092,6 +2123,26 @@ $_treeview_backdrop_borders_color: if($variant=='light',mix($backdrop_borders_co
 
   &:last-child { &:backdrop, & { border-right-style: none; }}
 }
+
+/********************************************************
+ * Data Tables                                          *
+ * treeview like tables with individual focusable cells *
+ * https://gitlab.gnome.org/GNOME/gtk/-/issues/2929     *
+ ********************************************************/
+
+columnview row:not(.selected) cell editablelabel:not(.editing):focus-within {
+  outline: 2px solid $focus_border_color;
+}
+
+columnview row:not(.selected) cell editablelabel.editing:focus-within {
+  outline: 2px solid $selected_bg_color;
+}
+
+columnview row:not(.selected) cell editablelabel.editing text selection {
+  color: $selected_fg_color;
+  background-color: $selected_bg_color;
+}
+
 
 /***************
  * Popovers   *
@@ -2300,6 +2351,7 @@ $_treeview_backdrop_borders_color: if($variant=='light',mix($backdrop_borders_co
     margin-left: $menu_padding;
   }
 
+  // TODO validate this
   check,
   radio {
     @include check('menu', 'transparent', $text_color);
@@ -2504,6 +2556,7 @@ $_treeview_backdrop_borders_color: if($variant=='light',mix($backdrop_borders_co
     display: flex;
     justify-content: center;
     align-items: center;
+    white-space: nowrap;
 
     color: $fg_color;
     font-weight: normal;
@@ -2677,6 +2730,9 @@ $_treeview_backdrop_borders_color: if($variant=='light',mix($backdrop_borders_co
     width: 100%;
     height: 100%;
     transition: $page_switcher_transition;
+    &.padded {
+      padding: $frame_padding;
+    }
   }
   .PageSwitcher__page.active {
     opacity: 1;
@@ -2787,6 +2843,19 @@ $_treeview_backdrop_borders_color: if($variant=='light',mix($backdrop_borders_co
       width: 0;
     }
   }
+
+  &.fit-content {
+    &.vertical {
+      .Expander__content {
+        width: max-content;
+      }
+    }
+    &.horizontal {
+      .Expander__content {
+        height: max-content;
+      }
+    }
+  }
 }
 
 
@@ -2821,15 +2890,6 @@ $_treeview_backdrop_borders_color: if($variant=='light',mix($backdrop_borders_co
     @include focus-ring($method: 'after');
     position: absolute !important;
     touch-action: none;
-    &::before {
-      content: '';
-      position: absolute;
-      display: inline-block;
-      outline: none;
-      border-width: 0;
-      border-style: solid;
-      border-color: lighten($borders_color, 5%);
-    }
   }
 
   .Paned__wrapper.horizontal {
@@ -2837,6 +2897,9 @@ $_treeview_backdrop_borders_color: if($variant=='light',mix($backdrop_borders_co
     flex-direction: row;
     > .Paned__pane {
       width: 50%;
+      &:first-child {
+        border-right: 1px solid $borders_color;
+      }
     }
     > .Paned__handle {
       top: 0;
@@ -2845,16 +2908,6 @@ $_treeview_backdrop_borders_color: if($variant=='light',mix($backdrop_borders_co
       cursor: ew-resize;
       padding: 0 5px;
       transform: translateX(-50%);
-      &::before {
-        top: 0;
-        left: 50%;
-        width: 1px;
-        height: 100%;
-        border-right-width: 1px;
-      }
-      &:active::before {
-        width: 4px;
-      }
     }
   }
   .Paned__wrapper.vertical {
@@ -2862,6 +2915,9 @@ $_treeview_backdrop_borders_color: if($variant=='light',mix($backdrop_borders_co
     flex-direction: column;
     > .Paned__pane {
       height: 50%;
+      &:first-child {
+        border-bottom: 1px solid $borders_color;
+      }
     }
     > .Paned__handle {
       top: 50%;
@@ -2870,20 +2926,30 @@ $_treeview_backdrop_borders_color: if($variant=='light',mix($backdrop_borders_co
       cursor: ns-resize;
       padding: 5px 0;
       transform: translateY(-50%);
-      &::before {
-        top: 50%;
-        left: 0;
-        width: 100%;
-        height: 1px;
-        border-bottom-width: 1px;
-      }
-      &:active::before {
-        height: 4px;
-      }
     }
   }
 }
 
+
+/****************
+ * Autocomplete *
+ ****************/
+
+.Autocomplete__popover {
+  .Popover__wrapper {
+    transition: $page_switcher_transition;
+    opacity: 0;
+    transform: none;
+  }
+
+  .List__item {
+    padding-left: $_input_padding;
+    padding-right: $_input_padding;
+    > * {
+      white-space: nowrap;
+    }
+  }
+}
 
 /**********
  * Switch *
@@ -3578,9 +3644,9 @@ $levelbar_border_radius: 3px;
 listview,
 list,
 .List {
+  display: inline-block;
   color: $text_color;
   background-color: $base_color;
-  border: 1px solid $borders_color;
   margin: 0;
   padding: 0;
   overflow: auto;
@@ -3594,29 +3660,50 @@ list,
   }
 
   &.horizontal .List__item.separator,
-  &.separators.horizontal > .List__item:not(.separator) {
+  &.separators.horizontal > .List__item:not(.separator):not(:last-child) {
     border-left: 1px solid $_treeview_borders_color;
   }
   &:not(.horizontal) .List__item.separator,
-  &.separators:not(.horizontal) > .List__item:not(.separator) {
+  &.separators:not(.horizontal) > .List__item:not(.separator):not(:last-child) {
     border-bottom: 1px solid $_treeview_borders_color;
   }
 
+  &.border {
+    border: 1px solid $borders_color;
+  }
+  &.border-top {
+    border-top: 1px solid $borders_color;
+  }
+  &.border-bottom {
+    border-bottom: 1px solid $borders_color;
+  }
+  &.border-left {
+    border-left: 1px solid $borders_color;
+  }
+  &.border-right {
+    border-right: 1px solid $borders_color;
+  }
   &.border-none {
     border: none;
+  }
+
+  &.rounded {
+    border-radius: 12px;
   }
 }
 
 .List__item {
-  list-style: none;
+  display: flex;
+  flex-direction: row;
   padding: 2px;
-
-  // TODO validate if we want focusable rows
-  @include focus-ring();
 
   &.activatable {
     user-select: none;
     transition: $button_transition;
+
+    // TODO validate if we want focusable rows
+    @include focus-ring();
+
     &:hover {
       background-color: if(variant == light, transparentize($fg_color, 0.9), transparentize($fg_color, 0.95));
     }
@@ -3639,9 +3726,20 @@ list,
     @extend %selected_items;
   }
 
+  & .Label {
+    flex: 1;
+  }
+
   // TODO validate this
   // > .List__item.expander { padding: 0px; }
   // > .List__item.expander .row-header { padding: 2px; }
+}
+
+button.List__item {
+  @include button('undecorated');
+  border: none;
+  width: 100%;
+  text-align: left;
 }
 
 /*******************************************************
@@ -3680,31 +3778,117 @@ list,
   }
 }
 
+// Expandable list item's sublist
+.List.sublist {
+  width: 100%;
+  background-color: $background_dark;
+  border-bottom: 1px solid $borders_color;
+  box-shadow: inset 0 1px rgba(black, 0.07);
+}
+
+.List__item.expandable {
+  .Icon.arrow {
+    opacity: 0.3;
+    transition: $button_transition;
+    transform: rotate(0);
+  }
+  &.expanded .Icon.arrow {
+    color: $selected_bg_color;
+    --icon-color: #{$selected_bg_color};
+    opacity: 1;
+    transform: rotate(90deg);
+  }
+}
+
 // XXX: implement other styles
 // https://gitlab.gnome.org/GNOME/gtk/-/issues/2929#note_879049
 
-// XXX sidebar styles defined more below
-.List.sidebar {
-  background-color: $background_default;
+/***********
+ * Sidebar *
+ ***********/
+// XXX validate this
+.sidebar {
+  background-color: mix($bg_color, $base_color, 50%);
+
+  &:not(separator) {
+    @at-root %sidebar_left,
+    &:dir(ltr),
+    &.left,
+    &.left:dir(rtl) {
+      border-right: 1px solid $borders_color;
+      border-left-style: none;
+    }
+
+    @at-root %sidebar_right,
+    &:dir(rtl),
+    &.right {
+      border-left: 1px solid $borders_color;
+      border-right-style: none;
+    }
+  }
+
+  listview.view,
+  list { background-color: transparent; }
 }
 
-/********************************************************
- * Data Tables                                          *
- * treeview like tables with individual focusable cells *
- * https://gitlab.gnome.org/GNOME/gtk/-/issues/2929     *
- ********************************************************/
+.stack-sidebar { // not a regular list
+  background-color: mix($background_light, $background_default, 50%);
 
-columnview row:not(.selected) cell editablelabel:not(.editing):focus-within {
-  outline: 2px solid $focus_border_color;
+  &.separators:not(.horizontal) > .List__item:not(.separator):not(.increase-specificity) {
+    border-bottom: none;
+    &:not(:first-child) {
+      border-top: 1px solid $borders_color;
+    }
+  }
+  .List__item {
+    padding: 10px 4px;
+
+    > .Label {
+      padding-left: 6px;
+      padding-right: 6px;
+    }
+
+    &.needs-attention > .Label {
+      @extend %needs_attention;
+      background-size: 6px 6px, 0 0;
+    }
+    &.activatable:active, &.activatable.selected:active {
+      box-shadow: none; // #3413
+    }
+  }
 }
 
-columnview row:not(.selected) cell editablelabel.editing:focus-within {
-  outline: 2px solid $selected_bg_color;
-}
 
-columnview row:not(.selected) cell editablelabel.editing text selection {
-  color: $selected_fg_color;
-  background-color: $selected_bg_color;
+/**********************
+ * Navigation Sidebar *
+ **********************/
+
+.navigation-sidebar:not(.increase-specificity) {
+  $_navigation_border_color: lighten($borders_color, 8%);
+
+  padding: $menu-margin 0; //only vertical padding. horizontal row size would clip
+  background-color: mix($background_light, $background_default, 50%);
+  border-color: $_navigation_border_color !important;
+
+  > .separator {
+    margin: $menu-margin;
+  }
+
+  > .List__item {
+    min-height: 36px;
+    padding: 0 8px;
+    align-items: center;
+
+    @extend .ModelButton;
+
+    border-color: $_navigation_border_color !important;
+
+    &.selected:not(.increase-specificity) {
+      color: inherit;
+      background-color: darken($background_default, 9%);
+      text-shadow: none;
+    }
+  }
 }
 
 
@@ -3725,44 +3909,6 @@ columnview row:not(.selected) cell editablelabel.editing text selection {
   button { @extend %osd_button; }
 
   border { border: none; }
-}
-
-
-/*************
- * Expanders *
- *************/
-expander {
-  min-width: 16px;
-  min-height: 16px;
-  -gtk-icon-source: -gtk-icontheme('pan-end-symbolic');
-  &:dir(rtl) { -gtk-icon-source: -gtk-icontheme('pan-end-symbolic-rtl'); }
-
-  &:disabled { color: $insensitive_fg_color; }
-
-  &:checked { -gtk-icon-source: -gtk-icontheme('pan-down-symbolic'); }
-}
-
-expander-widget {
-  @include focus-ring("> box > title");
-
-  > box > title {
-    transition: $focus_transition;
-    border-radius: $button_radius;
-
-    &:hover > expander {
-      color: lighten($fg_color,30%); //only lightens the icon
-    }
-  }
-}
-
-.navigation-sidebar,
-placessidebar,
-.StackSwitcher,
-expander-widget {
-  &:not(decoration):not(.Window).dnd-active:focus,
-  &:not(decoration):not(.Window).dnd-active {
-    box-shadow: none;
-  }
 }
 
 
@@ -3906,119 +4052,6 @@ filechooserbutton>button>box {
 filechooserbutton.dnd-active {
   box-shadow: none;
   border-color: transparent;
-}
-
-
-/***********
- * Sidebar *
- ***********/
-.sidebar {
-  background-color: mix($bg_color, $base_color, 50%);
-
-  &:not(separator) {
-    @at-root %sidebar_left,
-    &:dir(ltr),
-    &.left,
-    &.left:dir(rtl) {
-      border-right: 1px solid $borders_color;
-      border-left-style: none;
-    }
-
-    @at-root %sidebar_right,
-    &:dir(rtl),
-    &.right {
-      border-left: 1px solid $borders_color;
-      border-right-style: none;
-    }
-  }
-
-  listview.view,
-  list { background-color: transparent; }
-
-  paned & { &.left, &.right, &.left:dir(rtl), &:dir(rtl), &:dir(ltr), & { border-style: none; }}
-}
-
-stacksidebar {
-  //not a regular list
-  list.separators:not(.horizontal) > row:not(.separator) {
-    border-bottom: none;
-  }
-  row {
-    padding: 10px 4px;
-
-    > .Label {
-      padding-left: 6px;
-      padding-right: 6px;
-    }
-
-    &.needs-attention > .Label {
-      @extend %needs_attention;
-       background-size: 6px 6px, 0 0;
-    }
-    &.selected {
-      background-color: $menu_selected_color;
-      border-radius: $menu_radius;
-      color: $fg_color;
-    }
-    &.selected:hover:dir(ltr), &.selected:hover:dir(rtl) {
-      background-color: darken($menu_selected_color,5%);
-    }
-    &:focus:focus-visible {
-      outline-width: 0;
-      background-color: $selected_bg_color;
-      color: $selected_fg_color;
-    }
-    &.activatable:active, &.activatable.selected:active {
-      box-shadow: none; // #3413
-    }
-  }
-}
-
-separator.sidebar {
-  background-color: $borders_color;
-}
-
-
-/**********************
- * Navigation Sidebar *
- **********************/
-
-.navigation-sidebar {
-  padding: $menu-margin 0; //only vertical padding. horizontal row size would clip
-
-  > separator {
-    margin: $menu-margin;
-  }
-
-  > row {
-    min-height: 36px;
-    padding: 0 8px;
-    border-radius: $menu-margin;
-    margin: 0 $menu-margin 2px;
-
-    &:hover,
-    &:focus-visible:focus-within {
-      background-color: darken($menu_selected_color, 5%);
-    }
-
-    &.selected {
-      background-color: $menu_selected_color;
-      color: inherit;
-
-      &:hover {
-        background-color: darken($menu_selected_color,5%);
-      }
-
-      &:focus-visible:focus-within {
-        outline-width: 0;
-        color: $selected_fg_color;
-        background-color: $selected_bg_color;
-        &:hover { background-color: darken($selected_bg_color,10%); }
-      }
-    }
-
-    &:disabled { color: $insensitive_fg_color; }
-  }
 }
 
 

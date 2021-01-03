@@ -17,7 +17,6 @@ const Progress = React.forwardRef(function Progress(props, ref) {
   const {
     className,
     vertical = false,
-    track = 'normal',
     label = false,
     value,
     ...rest
@@ -27,7 +26,7 @@ const Progress = React.forwardRef(function Progress(props, ref) {
   const isRtl = false;
 
   let axis = orientation
-  if (isRtl && vertical == false) {
+  if (isRtl && vertical === false) {
     axis += '-reverse';
   }
 
@@ -77,7 +76,7 @@ Progress.propTypes = {
   /** The value of the slider. For indeterminate pass undefined. */
   value: prop.number,
   /** If a label should be shown */
-  label: prop.oneOf([prop.bool, prop.node]),
+  label: prop.oneOfType([prop.bool, prop.node]),
 }
 
 export default Progress

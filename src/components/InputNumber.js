@@ -11,6 +11,7 @@ const noop = () => {}
 
 function InputNumber({
   className,
+  size,
   vertical,
   disabled,
   value: valueProp,
@@ -29,8 +30,8 @@ function InputNumber({
     setValue(Number(ev.target.value), ev)
   }
 
-  const onUp   = () => setValue(value + step)
-  const onDown = () => setValue(value - step)
+  const onUp   = () => setValue(Number(value) + step)
+  const onDown = () => setValue(Number(value) - step)
 
   const downDisabled = disabled || (value - step < min)
   const upDisabled   = disabled || (value + step > max)
@@ -39,7 +40,7 @@ function InputNumber({
     'Button image-button' : undefined
 
   return (
-    <div className={cx('InputNumber', className, { disabled, vertical })}>
+    <div className={cx('InputNumber', className, size, { disabled, vertical })}>
       <div className='Input__area'>
         <input
           type='number'
@@ -71,6 +72,7 @@ function InputNumber({
 
 InputNumber.propTypes = {
   className: prop.string,
+  size: prop.oneOf(['mini', 'small', 'medium', 'large', 'huge']),
   vertical: prop.bool,
   disabled: prop.bool,
   value: prop.number,
@@ -82,6 +84,7 @@ InputNumber.propTypes = {
 }
 
 InputNumber.defaultProps = {
+  size: 'medium',
   onChange: noop,
 }
 

@@ -103,8 +103,35 @@ $alt_focus_border_color: if($variant == 'light', transparentize(white, 0.2), tra
 *************/
 
 $height_mini:   18px;
-$height_small:  20px;
+$height_small:  22px;
 $height_medium: 28px;
-$height_large:  28px;
-$height_huge:   28px;
+$height_large:  36px;
+$height_huge:   42px;
 
+$heights: (
+  "mini":   $height_mini,
+  "small":  $height_small,
+  "medium": $height_medium,
+  "large":  $height_large,
+  "huge":   $height_huge,
+);
+
+$font_sizes: (
+  "mini":   10px,
+  "small":  12px,
+  "medium": 13.333333px,
+  "large":  15px,
+  "huge":   18px,
+);
+
+$icon_sizes: (
+  "mini":   11px,
+  "small":  13px,
+  "medium": 16px,
+  "large":  20px,
+  "huge":   23px,
+);
+
+@function ratio_to_medium($value, $size) {
+  @return $value * (map-get($heights, $size) / map-get($heights, 'medium'));
+}

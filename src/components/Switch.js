@@ -5,7 +5,7 @@
 
 import React from 'react'
 import prop from 'prop-types'
-import cx from 'classname'
+import cx from 'clsx'
 
 const noop = () => {}
 
@@ -17,12 +17,14 @@ class Switch extends React.Component {
   static propTypes = {
     label: prop.string,
     labels: prop.oneOfType([prop.bool, prop.arrayOf(prop.string)]),
+    size: prop.oneOf(['mini', 'small', 'medium', 'large', 'huge']),
     value: prop.bool,
     defaultValue: prop.bool,
     onChange: prop.func,
   }
 
   static defaultProps = {
+    size: 'medium',
     onChange: noop,
   }
 
@@ -42,6 +44,7 @@ class Switch extends React.Component {
       labels: labelsValue,
       children,
       className,
+      size,
       value,
       defaultValue,
       disabled,
@@ -51,7 +54,7 @@ class Switch extends React.Component {
     const labels = Array.isArray(labelsValue) ? labelsValue : DEFAULT_LABELS
 
     return (
-      <div className={cx('Switch', className, { disabled })}>
+      <div className={cx('Switch', className, size, { disabled })}>
         <input
           type='checkbox'
           id={id || this.id}

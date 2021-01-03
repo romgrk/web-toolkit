@@ -5,7 +5,7 @@
 
 import React from 'react'
 import prop from 'prop-types'
-import cx from 'classname'
+import cx from 'clsx'
 
 const noop = () => {}
 
@@ -14,6 +14,7 @@ let nextId = 1
 class Radio extends React.Component {
   static propTypes = {
     label: prop.string,
+    size: prop.oneOf(['mini', 'small', 'medium', 'large', 'huge']),
     showLabel: prop.bool,
     value: prop.bool,
     defaultValue: prop.bool,
@@ -22,6 +23,7 @@ class Radio extends React.Component {
 
   static defaultProps = {
     showLabel: true,
+    size: 'medium',
     onChange: noop,
   }
 
@@ -42,6 +44,7 @@ class Radio extends React.Component {
       showLabel,
       children,
       className,
+      size,
       value,
       defaultValue,
       disabled,
@@ -50,7 +53,7 @@ class Radio extends React.Component {
     } = this.props
 
     return (
-      <div className={cx('Radio', className, { disabled })}>
+      <div className={cx('Radio', className, size, { disabled })}>
         <input
           type='radio'
           id={id || this.id}

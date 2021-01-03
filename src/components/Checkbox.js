@@ -5,7 +5,7 @@
 
 import React from 'react'
 import prop from 'prop-types'
-import cx from 'classname'
+import cx from 'clsx'
 
 const noop = () => {}
 
@@ -14,6 +14,7 @@ let nextId = 1
 class Checkbox extends React.Component {
   static propTypes = {
     label: prop.string,
+    size: prop.oneOf(['mini', 'small', 'medium', 'large', 'huge']),
     showLabel: prop.bool,
     value: prop.bool,
     defaultValue: prop.bool,
@@ -22,6 +23,7 @@ class Checkbox extends React.Component {
 
   static defaultProps = {
     showLabel: true,
+    size: 'medium',
     onChange: noop,
   }
 
@@ -41,6 +43,7 @@ class Checkbox extends React.Component {
       showLabel,
       children,
       className,
+      size,
       value,
       defaultValue,
       disabled,
@@ -49,7 +52,7 @@ class Checkbox extends React.Component {
     } = this.props
 
     return (
-      <div className={cx('Checkbox', className, { disabled })}>
+      <div className={cx('Checkbox', className, size, { disabled })}>
         <input
           type='checkbox'
           id={id || this.id}

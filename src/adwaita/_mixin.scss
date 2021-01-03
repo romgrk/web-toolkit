@@ -58,3 +58,15 @@
   &:not(:last-child) { @include linked_not_bottom; }
 }
 
+
+@mixin with_sizes {
+  @each $size in (mini, small, medium, large, huge) {
+    &.#{$size} {
+      $height: map-get($heights, $size) !global;
+      $font_size: map-get($font_sizes, $size) !global;
+      $icon_size: map-get($icon_sizes, $size) !global;
+      $size: $size !global;
+      @content;
+    }
+  }
+}

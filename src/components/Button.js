@@ -3,7 +3,8 @@
  */
 
 import { forwardRef } from 'react'
-import cx from 'classname'
+import prop from 'prop-types'
+import cx from 'clsx'
 
 import Icon from './Icon'
 import Spinner from './Spinner'
@@ -12,6 +13,7 @@ function Button({
   children,
   icon,
   className,
+  size,
   disabled,
   loading,
   circular,
@@ -28,7 +30,7 @@ function Button({
   const isImageButton = image !== undefined ? image : Boolean(!children)
   return (
     <button
-      className={cx('Button', {
+      className={cx('Button', size, {
         disabled,
         circular,
         flat,
@@ -56,4 +58,15 @@ function Button({
   )
 }
 
-export default forwardRef(Button)
+const Export = forwardRef(Button)
+
+Export.propTypes = {
+  className: prop.string,
+  size: prop.oneOf(['mini', 'small', 'medium', 'large', 'huge']),
+}
+
+Export.defaultProps = {
+  size: 'medium',
+}
+
+export default Export

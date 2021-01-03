@@ -34,6 +34,7 @@ const Range = React.forwardRef(function Range(props, ref) {
     'aria-labelledby': ariaLabelledby,
     'aria-valuetext': ariaValuetext,
     className,
+    size = 'medium',
     defaultValue = 0,
     disabled = false,
     marks: marksProp = false,
@@ -371,6 +372,7 @@ const Range = React.forwardRef(function Range(props, ref) {
       ref={handleRef}
       className={cx(
         'Range',
+        size,
         {
           disabled,
           marked: marksProp,
@@ -472,6 +474,7 @@ Range.propTypes = {
   /** A string value that provides a user-friendly name for the current value of the slider. */
   'aria-valuetext': prop.string,
   className: prop.string,
+  size: prop.oneOf(['mini', 'small', 'medium', 'large', 'huge']),
   /** The default element value. Use when the component is not controlled. */
   defaultValue: prop.oneOfType([prop.number, prop.arrayOf(prop.number)]),
   /** If `true`, the slider will be disabled. */

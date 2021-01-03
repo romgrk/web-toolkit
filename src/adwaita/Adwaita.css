@@ -366,6 +366,9 @@ button {
   justify-content: center;
   align-items: center;
   display: inline-flex; }
+  .Icon svg {
+    width: auto;
+    height: var(--icon-size, 16px); }
   .Icon:not(.colored) svg * {
     fill: var(--icon-color, unset) !important; }
   *:disabled .Icon:not(.colored):not(.increase-specificity), .disabled .Icon:not(.colored):not(.increase-specificity) {
@@ -414,16 +417,17 @@ button {
     display: inline-flex;
     flex-direction: row;
     align-items: center;
-    min-height: 28px;
-    padding-left: var(--input-padding);
-    padding-right: var(--input-padding);
     border: 1px solid;
     border-radius: 5px;
     border-spacing: 6px;
     transition: all 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
     color: black;
     border-color: #cdc7c2;
-    background-color: #ffffff; }
+    background-color: #ffffff;
+    height: 28px;
+    min-height: 28px;
+    padding-left: var(--input-padding);
+    padding-right: var(--input-padding); }
     .InputNumber.vertical > .Input__area > input, .InputNumber:not(.vertical),
     .Input {
       position: relative;
@@ -453,6 +457,41 @@ button {
       left: -2px;
       width: 100%;
       height: 100%; }
+    .InputNumber.vertical > .Input__area > input.mini, .mini.InputNumber:not(.vertical),
+    .Input.mini {
+      height: 18px;
+      min-height: 18px;
+      --input-padding: 4.5px;
+      font-size: 10px;
+      --icon-size: 11px; }
+    .InputNumber.vertical > .Input__area > input.small, .small.InputNumber:not(.vertical),
+    .Input.small {
+      height: 22px;
+      min-height: 22px;
+      --input-padding: 5.5px;
+      font-size: 12px;
+      --icon-size: 13px; }
+    .InputNumber.vertical > .Input__area > input.medium, .medium.InputNumber:not(.vertical),
+    .Input.medium {
+      height: 28px;
+      min-height: 28px;
+      --input-padding: 7px;
+      font-size: 13.333333px;
+      --icon-size: 16px; }
+    .InputNumber.vertical > .Input__area > input.large, .large.InputNumber:not(.vertical),
+    .Input.large {
+      height: 36px;
+      min-height: 36px;
+      --input-padding: 9px;
+      font-size: 15px;
+      --icon-size: 20px; }
+    .InputNumber.vertical > .Input__area > input.huge, .huge.InputNumber:not(.vertical),
+    .Input.huge {
+      height: 42px;
+      min-height: 42px;
+      --input-padding: 10.5px;
+      font-size: 18px;
+      --icon-size: 23px; }
     .InputNumber.vertical > .Input__area > input > .Input__area, .InputNumber:not(.vertical) > .Input__area,
     .Input > .Input__area {
       position: relative;
@@ -464,8 +503,9 @@ button {
         width: 100%;
         height: 100%;
         border: none;
+        color: inherit;
         background: none;
-        color: inherit; }
+        font-size: inherit; }
         .InputNumber.vertical > .Input__area > input > .Input__area > input:focus, .InputNumber:not(.vertical) > .Input__area > input:focus,
         .Input > .Input__area > input:focus {
           outline: none; }
@@ -786,12 +826,13 @@ editablelabel > stack > text {
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  min-height: 28px;
-  min-width: 16px;
-  padding: 4px 9px;
   border: 1px solid;
   border-radius: 5px;
   transition: all 150ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  height: 28px;
+  min-height: 28px;
+  min-width: 16px;
+  padding: 4px 9px;
   user-select: none;
   color: #2e3436;
   outline-color: rgba(53, 132, 228, 0.5);
@@ -799,6 +840,41 @@ editablelabel > stack > text {
   border-bottom-color: #bfb8b1;
   background-color: #f6f5f4;
   box-shadow: inset 0 1px white, 0 1px 2px rgba(0, 0, 0, 0.07); }
+  .Notebook .mini.Notebook__arrow, .control-buttons button.mini,
+  .Button.mini {
+    height: 18px;
+    min-height: 18px;
+    min-width: 18px;
+    font-size: 10px;
+    --icon-size: 11px; }
+  .Notebook .small.Notebook__arrow, .control-buttons button.small,
+  .Button.small {
+    height: 22px;
+    min-height: 22px;
+    min-width: 22px;
+    font-size: 12px;
+    --icon-size: 13px; }
+  .Notebook .medium.Notebook__arrow, .control-buttons button.medium,
+  .Button.medium {
+    height: 28px;
+    min-height: 28px;
+    min-width: 28px;
+    font-size: 13.333333px;
+    --icon-size: 16px; }
+  .Notebook .large.Notebook__arrow, .control-buttons button.large,
+  .Button.large {
+    height: 36px;
+    min-height: 36px;
+    min-width: 36px;
+    font-size: 15px;
+    --icon-size: 20px; }
+  .Notebook .huge.Notebook__arrow, .control-buttons button.huge,
+  .Button.huge {
+    height: 42px;
+    min-height: 42px;
+    min-width: 42px;
+    font-size: 18px;
+    --icon-size: 23px; }
   .Notebook .Notebook__arrow, .control-buttons button, .Notebook .Notebook__arrow > .Label, .control-buttons button > .Label,
   .Button,
   .Button > .Label {
@@ -993,7 +1069,6 @@ editablelabel > stack > text {
         opacity: 0; }
   .Notebook .image-button.Notebook__arrow, .control-buttons button.image-button,
   .Button.image-button {
-    min-width: 24px;
     padding-left: 5px;
     padding-right: 5px; }
   .Notebook .text-button.Notebook__arrow, .control-buttons button.text-button,
@@ -1783,14 +1858,44 @@ input::-webkit-outer-spin-button {
 .InputNumber {
   font-feature-settings: "tnum"; }
   .InputNumber:not(.vertical) {
-    width: 100px;
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
     padding: 0;
     border-spacing: 0;
+    width: 100px;
     /* :not here just to bump specificity above that of the list button styling */ }
+    .InputNumber.mini:not(.vertical) {
+      width: 54px; }
+      .InputNumber.mini:not(.vertical) > .Input__area > input,
+      .InputNumber.mini:not(.vertical) > button.InputNumber__button.up:not(.flat),
+      .InputNumber.mini:not(.vertical) > button.InputNumber__button.down:not(.flat) {
+        width: 16px; }
+    .InputNumber.small:not(.vertical) {
+      width: 66px; }
+      .InputNumber.small:not(.vertical) > .Input__area > input,
+      .InputNumber.small:not(.vertical) > button.InputNumber__button.up:not(.flat),
+      .InputNumber.small:not(.vertical) > button.InputNumber__button.down:not(.flat) {
+        width: 20px; }
+    .InputNumber.medium:not(.vertical) {
+      width: 84px; }
+      .InputNumber.medium:not(.vertical) > .Input__area > input,
+      .InputNumber.medium:not(.vertical) > button.InputNumber__button.up:not(.flat),
+      .InputNumber.medium:not(.vertical) > button.InputNumber__button.down:not(.flat) {
+        width: 26px; }
+    .InputNumber.large:not(.vertical) {
+      width: 108px; }
+      .InputNumber.large:not(.vertical) > .Input__area > input,
+      .InputNumber.large:not(.vertical) > button.InputNumber__button.up:not(.flat),
+      .InputNumber.large:not(.vertical) > button.InputNumber__button.down:not(.flat) {
+        width: 34px; }
+    .InputNumber.huge:not(.vertical) {
+      width: 126px; }
+      .InputNumber.huge:not(.vertical) > .Input__area > input,
+      .InputNumber.huge:not(.vertical) > button.InputNumber__button.up:not(.flat),
+      .InputNumber.huge:not(.vertical) > button.InputNumber__button.down:not(.flat) {
+        width: 40px; }
     .osd .InputNumber:not(.vertical) > .Input__area > input, .InputNumber:not(.vertical) > .Input__area > input {
       min-width: 28px;
       margin: 0;
@@ -1807,7 +1912,6 @@ input::-webkit-outer-spin-button {
       display: flex;
       justify-content: center;
       align-items: center;
-      min-height: 26px;
       height: 100%;
       margin: 0;
       padding-bottom: 0;
@@ -1905,6 +2009,36 @@ input::-webkit-outer-spin-button {
     flex-direction: column;
     min-width: 40px;
     width: 40px; }
+    .InputNumber.vertical.mini {
+      width: 26px; }
+      .InputNumber.vertical.mini > .Input__area > input,
+      .InputNumber.vertical.mini > button.InputNumber__button.up:not(.flat),
+      .InputNumber.vertical.mini > button.InputNumber__button.down:not(.flat) {
+        min-height: 18px; }
+    .InputNumber.vertical.small {
+      width: 31px; }
+      .InputNumber.vertical.small > .Input__area > input,
+      .InputNumber.vertical.small > button.InputNumber__button.up:not(.flat),
+      .InputNumber.vertical.small > button.InputNumber__button.down:not(.flat) {
+        min-height: 22px; }
+    .InputNumber.vertical.medium {
+      width: 40px; }
+      .InputNumber.vertical.medium > .Input__area > input,
+      .InputNumber.vertical.medium > button.InputNumber__button.up:not(.flat),
+      .InputNumber.vertical.medium > button.InputNumber__button.down:not(.flat) {
+        min-height: 28px; }
+    .InputNumber.vertical.large {
+      width: 51px; }
+      .InputNumber.vertical.large > .Input__area > input,
+      .InputNumber.vertical.large > button.InputNumber__button.up:not(.flat),
+      .InputNumber.vertical.large > button.InputNumber__button.down:not(.flat) {
+        min-height: 36px; }
+    .InputNumber.vertical.huge {
+      width: 60px; }
+      .InputNumber.vertical.huge > .Input__area > input,
+      .InputNumber.vertical.huge > button.InputNumber__button.up:not(.flat),
+      .InputNumber.vertical.huge > button.InputNumber__button.down:not(.flat) {
+        min-height: 42px; }
     .InputNumber.vertical.dnd-active {
       border-color: transparent;
       box-shadow: none; }
@@ -1936,8 +2070,6 @@ input::-webkit-outer-spin-button {
         width: 100%;
         height: 100%; }
     .InputNumber.vertical > .Input__area > input {
-      min-height: 32px;
-      min-width: 32px;
       width: 100%;
       padding: 0;
       border-radius: 0;
@@ -1946,8 +2078,6 @@ input::-webkit-outer-spin-button {
         color: #ffffff;
         background-color: black; }
     .InputNumber.vertical > button {
-      min-height: 32px;
-      min-width: 32px;
       width: 100%;
       padding: 0; }
       .InputNumber.vertical > button.up {
@@ -3273,8 +3403,36 @@ columnview row:not(.selected) cell editablelabel.editing text selection {
  **********/
 .Switch {
   --switch-size: 20px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
   font-weight: bold;
-  font-size: smaller; }
+  height: 28px; }
+  .Switch.mini {
+    height: 18px;
+    min-height: 18px;
+    font-size: 0px;
+    --switch-size: 13px; }
+  .Switch.small {
+    height: 22px;
+    min-height: 22px;
+    font-size: 8px;
+    --switch-size: 16px; }
+  .Switch.medium {
+    height: 28px;
+    min-height: 28px;
+    font-size: 10px;
+    --switch-size: 20px; }
+  .Switch.large {
+    height: 36px;
+    min-height: 36px;
+    font-size: 13px;
+    --switch-size: 26px; }
+  .Switch.huge {
+    height: 42px;
+    min-height: 42px;
+    font-size: 16px;
+    --switch-size: 30px; }
   .Switch input {
     position: absolute;
     width: 1px;
@@ -3382,7 +3540,7 @@ columnview row:not(.selected) cell editablelabel.editing text selection {
     .Switch input:disabled + label::after::before {
       opacity: 0; }
   .Switch label > span {
-    font-size: 10px;
+    font-size: inherit;
     user-select: none;
     position: absolute;
     top: 50%;
@@ -3406,7 +3564,81 @@ columnview row:not(.selected) cell editablelabel.editing text selection {
   --element-size: 20px;
   --element-padding-size: calc(var(--element-size) * 0.19);
   --element-inner-size: calc(var(--element-size) - 2 * var(--element-padding-size));
-  font-size: 14px; }
+  font-size: 14px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 28px; }
+  .Checkbox.mini,
+  .Radio.mini {
+    height: 18px;
+    min-height: 18px;
+    font-size: 10px;
+    --icon-size: 11px;
+    --element-size: 14.4px; }
+    .Checkbox.mini > label > .label__text,
+    .Radio.mini > label > .label__text {
+      height: 100%;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center; }
+  .Checkbox.small,
+  .Radio.small {
+    height: 22px;
+    min-height: 22px;
+    font-size: 12px;
+    --icon-size: 13px;
+    --element-size: 17.6px; }
+    .Checkbox.small > label > .label__text,
+    .Radio.small > label > .label__text {
+      height: 100%;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center; }
+  .Checkbox.medium,
+  .Radio.medium {
+    height: 28px;
+    min-height: 28px;
+    font-size: 13.333333px;
+    --icon-size: 16px;
+    --element-size: 22.4px; }
+    .Checkbox.medium > label > .label__text,
+    .Radio.medium > label > .label__text {
+      height: 100%;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center; }
+  .Checkbox.large,
+  .Radio.large {
+    height: 36px;
+    min-height: 36px;
+    font-size: 15px;
+    --icon-size: 20px;
+    --element-size: 28.8px; }
+    .Checkbox.large > label > .label__text,
+    .Radio.large > label > .label__text {
+      height: 100%;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center; }
+  .Checkbox.huge,
+  .Radio.huge {
+    height: 42px;
+    min-height: 42px;
+    font-size: 18px;
+    --icon-size: 23px;
+    --element-size: 33.6px; }
+    .Checkbox.huge > label > .label__text,
+    .Radio.huge > label > .label__text {
+      height: 100%;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center; }
   .Checkbox input,
   .Radio input {
     position: absolute;
@@ -3495,6 +3727,7 @@ columnview row:not(.selected) cell editablelabel.editing text selection {
   .Radio input:checked:disabled + label > .element {
     color: #ffffff;
     border-color: #185fb4;
+    background-color: #5094e8;
     background-image: linear-gradient(to top, #3987e5, #5094e8); }
   .Checkbox input:checked:not(:disabled) + label:hover > .element,
   .Radio input:checked:not(:disabled) + label:hover > .element {
@@ -3523,23 +3756,53 @@ columnview row:not(.selected) cell editablelabel.editing text selection {
     row.selected .Checkbox > slider:checked, row.selected .Checkbox > slider, row.selected .Radio > slider:checked, row.selected .Radio > slider {
       border-color: #185fb4; }
 
-.Checkbox {
+.Checkbox.mini {
+  --element-stroke-width: 2px; }
+
+.Checkbox.small {
+  --element-stroke-width: 2px; }
+
+.Checkbox.medium {
   --element-stroke-width: 3px; }
-  .Checkbox label .element {
-    border-radius: 3px; }
-    .Checkbox label .element::before {
-      transition: all 150ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
-      transition-property: transform;
-      transform: translate(3px, 0px) rotate(45deg) scale(0); }
-  .Checkbox input:checked + label .element::before {
-    border: var(--element-stroke-width) solid white;
-    border-top-width: 0;
-    border-left-width: 0;
-    width: calc(var(--element-inner-size) / 6);
-    height: calc(var(--element-inner-size) / 2.5);
-    transform: translate(3px, 0px) rotate(45deg); }
-  .Checkbox input:checked:disabled + label .element::before {
-    border-color: rgba(255, 255, 255, 0.5); }
+
+.Checkbox.large {
+  --element-stroke-width: 4px; }
+
+.Checkbox.huge {
+  --element-stroke-width: 5px; }
+
+.Checkbox label .element {
+  border-radius: 3px; }
+  .Checkbox label .element::before {
+    transition: all 150ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transition-property: transform;
+    transform: translate(3px, 0px) rotate(45deg) scale(0); }
+
+.Checkbox input:checked + label .element::before {
+  border: var(--element-stroke-width) solid white;
+  border-top-width: 0;
+  border-left-width: 0;
+  width: calc(var(--element-inner-size) / 6);
+  height: calc(var(--element-inner-size) / 2.5);
+  transform: translate(3px, 0px) rotate(45deg); }
+
+.Checkbox input:checked:disabled + label .element::before {
+  border-color: rgba(255, 255, 255, 0.5); }
+
+.Checkbox.mini input:checked + label .element::before {
+  transform: translate(2.5714285714px, 0px) rotate(45deg); }
+
+.Checkbox.small input:checked + label .element::before {
+  transform: translate(3.1428571429px, 0px) rotate(45deg); }
+
+.Checkbox.medium input:checked + label .element::before {
+  transform: translate(4px, 0px) rotate(45deg); }
+
+.Checkbox.large input:checked + label .element::before {
+  transform: translate(5.1428571429px, 0px) rotate(45deg); }
+
+.Checkbox.huge input:checked + label .element::before {
+  transform: translate(6px, 0px) rotate(45deg); }
 
 .Radio label .element {
   border-radius: 50%; }
@@ -3577,13 +3840,15 @@ columnview row:not(.selected) cell editablelabel.editing text selection {
  * GtkScale *
  ************/
 .Range {
+  cursor: pointer;
   position: relative;
   display: inline-flex;
-  cursor: pointer;
-  padding: 12px;
-  height: 28px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 16px;
+  padding: var(--range-padding);
   width: 100%;
-  border-radius: 16px; }
+  height: var(--range-size); }
   .Range {
     position: relative;
     outline: none;
@@ -3609,8 +3874,39 @@ columnview row:not(.selected) cell editablelabel.editing text selection {
     left: -2px;
     width: 100%;
     height: 100%; }
+  body {
+    /* Also used in Progress and LevelBar */
+    --range-track-width: 4px;
+    --range-size: 28px;
+    --range-padding: calc(var(--range-size) / 2 - var(--range-track-width));
+    --range-thumb-size: 16px; }
+  .Range.mini {
+    --range-track-width: 4px;
+    --range-size: 18px;
+    --range-thumb-size: 10px;
+    border-radius: 10px; }
+  .Range.small {
+    --range-track-width: 4px;
+    --range-size: 22px;
+    --range-thumb-size: 13px;
+    border-radius: 13px; }
+  .Range.medium {
+    --range-track-width: 4px;
+    --range-size: 28px;
+    --range-thumb-size: 16px;
+    border-radius: 16px; }
+  .Range.large {
+    --range-track-width: 6px;
+    --range-size: 36px;
+    --range-thumb-size: 21px;
+    border-radius: 21px; }
+  .Range.huge {
+    --range-track-width: 8px;
+    --range-size: 42px;
+    --range-thumb-size: 24px;
+    border-radius: 24px; }
   .Range.vertical {
-    width: 28px;
+    width: var(--range-size);
     height: 100%; }
   .Range.marked {
     margin-bottom: 20px; }
@@ -3625,9 +3921,9 @@ columnview row:not(.selected) cell editablelabel.editing text selection {
     position: relative;
     display: inline-block;
     width: 100%;
-    height: 4px; }
+    height: var(--range-track-width); }
   .LevelBar.vertical .LevelBar__content, .Progress.vertical .Progress__content, .Range.vertical .Range__content {
-    width: 4px;
+    width: var(--range-track-width);
     height: 100%; }
   .LevelBar .LevelBar__rail, .Progress .Progress__rail,
   .Range__rail {
@@ -3636,13 +3932,13 @@ columnview row:not(.selected) cell editablelabel.editing text selection {
     top: 0;
     left: 0;
     width: 100%;
-    height: 4px;
-    border-radius: 1px;
+    height: var(--range-track-width);
+    border-radius: 2px;
     border: 1px solid #c8c2bc;
     background-color: #ebe8e6; }
   .LevelBar.vertical .LevelBar__rail, .Progress.vertical .Progress__rail, .Range.vertical .Range__rail {
     height: 100%;
-    width: 4px; }
+    width: var(--range-track-width); }
   .LevelBar.disabled .LevelBar__rail, .Progress.disabled .Progress__rail, .Range.disabled .Range__rail {
     color: #929595;
     border-color: #d5d0cc;
@@ -3658,13 +3954,13 @@ columnview row:not(.selected) cell editablelabel.editing text selection {
     display: block;
     position: absolute;
     content: '';
-    height: 4px;
+    height: var(--range-track-width);
     border-radius: 2px;
     border: 1px solid #185fb4;
     background-color: #3584e4;
     transition: all 150ms cubic-bezier(0.25, 0.46, 0.45, 0.94); }
   .Progress.vertical .Progress__track, .Range.vertical .Range__track {
-    width: 4px; }
+    width: var(--range-track-width); }
   .Range.no-track .Range__track {
     display: none; }
   .Range.disabled .Range__track {
@@ -3674,10 +3970,10 @@ columnview row:not(.selected) cell editablelabel.editing text selection {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 16px;
-    height: 16px;
-    margin-left: -8px;
-    margin-top: -6px;
+    width: var(--range-thumb-size);
+    height: var(--range-thumb-size);
+    margin-left: calc(var(--range-thumb-size) / -2);
+    margin-top: calc(var(--range-thumb-size) / -2.5);
     color: #2e3436;
     outline-color: rgba(53, 132, 228, 0.5);
     border-color: #cdc7c2;
@@ -3996,8 +4292,6 @@ list,
         background-color: #347cd3; }
   .List__item.selected {
     outline-color: rgba(255, 255, 255, 0.8); }
-  .List__item .Label {
-    flex: 1; }
 
 button.List__item {
   border-color: transparent;
@@ -4019,7 +4313,11 @@ button.List__item {
 .List.rich > .List__item {
   padding: 8px 12px;
   min-height: 32px;
-  /* should be tall even when only containing a .Label */ }
+  /* should be tall even when only containing a .Label */
+  align-items: center; }
+  .List.rich > .List__item > .Label {
+    flex: 1;
+    line-height: 28px; }
   .List.rich > .List__item > .Box {
     border-spacing: 12px;
     align-items: center; }
@@ -4058,6 +4356,9 @@ button.List__item {
   background-color: #f1f0ee;
   border-bottom: 1px solid #cdc7c2;
   box-shadow: inset 0 1px rgba(0, 0, 0, 0.07); }
+
+.List__item.expandable.expanded:not(:hover) {
+  background-color: rgba(0, 0, 0, 0.02); }
 
 .List__item.expandable .Icon.arrow {
   opacity: 0.3;

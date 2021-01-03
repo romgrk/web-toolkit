@@ -4,7 +4,8 @@
 
 
 import { useState, useRef, forwardRef } from 'react'
-import cx from 'classname'
+import prop from 'prop-types'
+import cx from 'clsx'
 
 import Icon from './Icon'
 import Spinner from './Spinner'
@@ -17,6 +18,7 @@ function useForceUpdate(){
 function Input({
   type = 'text',
   className,
+  size,
   loading,
   icon: iconValue,
   iconAfter,
@@ -40,7 +42,7 @@ function Input({
   const value = isControlled ? rest.value : (inputRef.current?.value || rest.defaultValue || '')
 
   const inputClassName =
-    cx('Input', { flat, disabled, error, warning, progress: progress !== undefined })
+    cx('Input', size, { flat, disabled, error, warning, progress: progress !== undefined })
     + ' ' + cx(className)
 
   const onInputChange = ev => {
@@ -112,5 +114,13 @@ function Group({ children, className }, ref) {
 
 const ExportedInput = forwardRef(Input)
 ExportedInput.Group = forwardRef(Group)
+
+ExportedInput.propTypes = {
+  size: prop.oneOf(['mini', 'small', 'medium', 'large', 'huge']),
+}
+
+ExportedInput.defaultProps = {
+  size: 'medium',
+}
 
 export default ExportedInput

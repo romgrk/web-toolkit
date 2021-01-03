@@ -119,9 +119,6 @@ function AppContent() {
       <DemoTable users={users} />
       <br/>
 
-      <DemoSize />
-      <br/>
-
       <DemoList />
       <br/>
 
@@ -138,6 +135,9 @@ function AppContent() {
       <br/>
 
       <DemoInput />
+      <br/>
+
+      <DemoSize />
       <br/>
 
       <Box horizontal>
@@ -195,7 +195,7 @@ function DemoList() {
 
   const richItems = [
     <><Label>Row 1</Label><Switch /></>,
-    <><Label>Row 2</Label><Range value={number} onChange={setNumber} /></>,
+    <><Label>Row 2</Label><Range value={number} onChange={setNumber} style={{ width: 100 }} /></>,
     <><Label>Row 3</Label><InputNumber value={number} onChange={setNumber} /></>,
     <><Label>Row 4</Label><Button icon='mail-mark-important' /></>,
     <><Label>Row 5</Label><Checkbox /></>,
@@ -240,13 +240,13 @@ function DemoList() {
       >
         <List rich border={false} sublist>
           <List.Item activatable as='label'>
-            <Radio defaultValue={true} name='settings-1' /> <Label className='Box__fill'>Option 1</Label>
+            <Radio defaultValue={true} name='settings-1' /> <Label className='Box__fill'>Option 2.1</Label>
           </List.Item>
           <List.Item activatable as='label'>
-            <Radio defaultValue={false} name='settings-1' /> <Label className='Box__fill'>Option 1</Label>
+            <Radio defaultValue={false} name='settings-1' /> <Label className='Box__fill'>Option 2.2</Label>
           </List.Item>
           <List.Item activatable as='label'>
-            <Radio defaultValue={false} name='settings-1' /> <Label className='Box__fill'>Option 1</Label>
+            <Radio defaultValue={false} name='settings-1' /> <Label className='Box__fill'>Option 2.3</Label>
           </List.Item>
         </List>
       </Expander>
@@ -692,82 +692,36 @@ function DemoButtons() {
 }
 
 function DemoSize() {
+  const sizes = ['mini', 'small', 'medium', 'large', 'huge']
   return (
     <>
       <Box vertical>
-        <Box horizontal>
-          <Input
-            size='mini'
-            icon='folder-saved-search'
-            iconAfter='edit-clear'
-            placeholder='Text input...'
-          />
-          <Button size='mini' icon='list-add' />
-          <Checkbox size='mini' label='check' />
-          <Radio size='mini' label='radio' />
-          <Switch size='mini' />
-          <Range size='mini' style={{ width: 120 }} />
-        </Box>
-        <Box horizontal>
-          <Input
-            size='small'
-            icon='folder-saved-search'
-            iconAfter='edit-clear'
-            placeholder='Text input...'
-          />
-          <Button size='small' icon='list-add' />
-          <Checkbox size='small' label='check' />
-          <Radio size='small' label='radio' />
-          <Switch size='small' />
-          <Range size='small' style={{ width: 120 }} />
-        </Box>
-        <Box horizontal>
-          <Input
-            size='medium'
-            icon='folder-saved-search'
-            iconAfter='edit-clear'
-            placeholder='Text input...'
-          />
-          <Button size='medium' icon='list-add' />
-          <Checkbox size='medium' label='check' />
-          <Radio size='medium' label='radio' />
-          <Switch size='medium' />
-          <Range size='medium' style={{ width: 120 }} />
-        </Box>
-        <Box horizontal>
-          <Input
-            size='large'
-            icon='folder-saved-search'
-            iconAfter='edit-clear'
-            placeholder='Text input...'
-          />
-          <Button size='large' icon='list-add' />
-          <Checkbox size='large' label='check' />
-          <Radio size='large' label='radio' />
-          <Switch size='large' />
-          <Range size='large' style={{ width: 120 }} />
-        </Box>
-        <Box horizontal>
-          <Input
-            size='huge'
-            icon='folder-saved-search'
-            iconAfter='edit-clear'
-            placeholder='Text input...'
-          />
-          <Button size='huge' icon='list-add' />
-          <Checkbox size='huge' label='check' />
-          <Radio size='huge' label='radio' />
-          <Switch size='huge' />
-          <Range size='huge' style={{ width: 120 }} />
-        </Box>
+        {sizes.map(size =>
+          <Box horizontal>
+            <Input.Group>
+              <Input
+                size={size}
+                iconAfter='edit-clear'
+                placeholder='Text input...'
+              />
+              <Button size={size} icon='list-add' />
+            </Input.Group>
+            <InputNumber size={size} />
+            <Checkbox defaultValue={true} size={size} label='check' />
+            <Radio defaultValue={true} size={size} label='radio' />
+            <Switch labels size={size} />
+            <Range size={size} style={{ width: 120 }} />
+          </Box>
+        )}
       </Box>
     </>
   )
 }
 
-function InputFilter({ column: { filterValue, setFilter, id } }) {
+function DemoInputFilter({ column: { filterValue, setFilter, id } }) {
   return (
     <Input
+      size='mini'
       id={id}
       value={filterValue}
       onChange={setFilter}
@@ -789,7 +743,7 @@ function DemoTable({ users }) {
         {
           Header: 'Username',
           accessor: 'username',
-          Filter: InputFilter,
+          Filter: DemoInputFilter,
           filter: 'includes',
         },
         {

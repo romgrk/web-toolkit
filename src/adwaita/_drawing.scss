@@ -46,8 +46,8 @@
       transition: $focus_transition;
       top:  $offset - 2px;
       left: $offset - 2px;
-      width:  calc(100% - #{2 * $offset});
-      height: calc(100% - #{2 * $offset});
+      width:  calc(100% - #{if($offset != 0, 2 * $offset, '0px')});
+      height: calc(100% - #{if($offset != 0, 2 * $offset, '0px')});
     }
 
     &#{$focus-state}#{$target} {

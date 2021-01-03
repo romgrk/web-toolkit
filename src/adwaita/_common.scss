@@ -2342,7 +2342,9 @@ columnview row:not(.selected) cell editablelabel.editing text selection {
     .Button.circular {
       @extend %list_button;
 
-      padding: 11px;
+      padding: 7px;
+      margin: 0;
+
       &:focus {
          background-color: $menu_selected_color;
       }
@@ -2385,7 +2387,7 @@ columnview row:not(.selected) cell editablelabel.editing text selection {
     flex: 1;
   }
   .Menu__button__accelerator {
-    color: rgba($text_color, 0.55);
+    color: rgba($text_color, 0.4);
     margin-left: $menu_padding;
   }
 

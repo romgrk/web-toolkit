@@ -922,8 +922,8 @@ function ComplexMenu({ onClickShare }) {
   return (
     <Menu icons>
       <Menu.CircularButtons>
-        <Button circular icon='printer' />
-        <Button circular icon='emblem-shared' />
+        <Button size='large' circular icon='printer' />
+        <Button size='large' circular icon='emblem-shared' />
       </Menu.CircularButtons>
       <Menu.Separator />
       <Menu.Button accelerator='Ctrl+N'>Open in New Window</Menu.Button>

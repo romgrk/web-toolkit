@@ -2849,7 +2849,8 @@ columnview row:not(.selected) cell editablelabel.editing text selection {
 .Menu .Box.circular-buttons {
   padding: 12px 12px 6px; }
   .Menu .Box.circular-buttons .Button.circular {
-    padding: 11px; }
+    padding: 7px;
+    margin: 0; }
     .Menu .Box.circular-buttons .Button.circular:focus {
       background-color: #efedec; }
     .Menu .Box.circular-buttons .Button.circular:active {
@@ -2890,7 +2891,7 @@ columnview row:not(.selected) cell editablelabel.editing text selection {
   flex: 1; }
 
 .Menu .Menu__button__accelerator {
-  color: rgba(0, 0, 0, 0.55);
+  color: rgba(0, 0, 0, 0.4);
   margin-left: 12px; }
 
 .Menu check,

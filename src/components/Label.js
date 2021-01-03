@@ -2,7 +2,7 @@
  * Label.js
  */
 
-import cx from 'classname'
+import cx from 'clsx'
 
 function Label({
   children,
@@ -11,6 +11,7 @@ function Label({
   fill,
   ellipsis,
   title,
+  disabled,
   muted,
   info,
   success,
@@ -29,11 +30,12 @@ function Label({
           {
             ellipsis,
             title,
+            disabled,
+            info,
+            success,
+            warning,
+            danger,
             'text-muted': muted,
-            'text-info': info,
-            'text-success': success,
-            'text-warning': warning,
-            'text-danger': danger,
             'text-italic': italic,
             'user-select-none': noSelect,
           }

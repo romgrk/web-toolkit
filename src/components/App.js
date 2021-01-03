@@ -255,8 +255,18 @@ function DemoList() {
       </List.Item>
     </List>
 
+  const richList =
+    <List style={{ width: 220, height: 150 }} rich>
+      {richItems.map((item, i) =>
+        <List.Item key={i} as='label' activatable>
+          {item}
+        </List.Item>
+      )}
+    </List>
+
   return (
     <>
+      {/*
       <Box horizontal>
         <List style={{ width: 200, height: 150 }} separators={false}>
           {items.map((item, i) =>
@@ -269,15 +279,9 @@ function DemoList() {
             </List.Item>
           )}
         </List>
-        <List style={{ width: 220, height: 150 }} rich>
-          {richItems.map((item, i) =>
-            <List.Item key={i} as='label' activatable>
-              {item}
-            </List.Item>
-          )}
-        </List>
       </Box>
       <br/>
+      */}
       <Box horizontal align='start'>
         {switchList}
         {checkboxList}
@@ -304,6 +308,7 @@ function DemoList() {
             pages={stackItems}
           />
         </Box>
+        {richList}
       </Box>
     </>
   )
@@ -1005,11 +1010,15 @@ function DemoTypography() {
 
       <Box horizontal>
         <Label>Label</Label>
-        <Label selected>Label</Label>
-        <Label separator>Label</Label>
-        <Label disabled>Label</Label>
-        <Label error>Label</Label>
-        <Label error disabled>Label</Label>
+        <Label muted>Label</Label>
+        <Label info>Label</Label>
+        <Label info disabled>Label</Label>
+        <Label success>Label</Label>
+        <Label success disabled>Label</Label>
+        <Label warning>Label</Label>
+        <Label warning disabled>Label</Label>
+        <Label danger>Label</Label>
+        <Label danger disabled>Label</Label>
 
         <Spinner />
         <Spinner disabled />

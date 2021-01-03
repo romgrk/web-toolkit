@@ -303,8 +303,6 @@ $popover_radius: $button_radius + 4;
     @extend .dim-label;
   }
 
-  &.selected { @extend %nobg_selected_items; }
-
   &::selection {
     background-color: $selected_bg_color;
     color: $selected_fg_color;
@@ -318,9 +316,11 @@ $popover_radius: $button_radius + 4;
     &::selection { @extend %selected_items_disabled; }
   }
 
-  &.error {
-   color: $error_color;
-   &.disabled { color: transparentize($error_color,0.5); }
+  @each $type, $color in $colors {
+    &.#{$type} {
+      color: $color;
+      &.disabled { color: transparentize($color, 0.5); }
+    }
   }
 
   &.title {

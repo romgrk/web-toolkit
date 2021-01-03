@@ -2664,8 +2664,11 @@ columnview row:not(.selected) cell editablelabel.editing text selection {
     margin-bottom: -2px;
 
     // FIXME: generalize .small-button?
-    min-width: 16px;
+    width:  16px;
+    height: 16px;
+    min-width:  16px;
     min-height: 16px;
+    --icon-size: 16px;
 
     opacity: 0.3;
     transition: $button_transition !important;

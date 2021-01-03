@@ -69,7 +69,7 @@ function Notebook({
               </Label>
               {page.closable &&
                 <Button
-                  small
+                  size='small'
                   icon='window-close'
                   tabIndex='-1'
                   onClick={ev => (ev.stopPropagation(), onClose(i))}

@@ -90,6 +90,8 @@ class Paned extends React.Component {
   }
 
   onMouseDown = (event) => {
+    if (event.button !== 0)
+      return
     event.preventDefault();
     this.setState({ dragging: true })
     document.addEventListener('mousemove', this.onTouchMove);
@@ -198,7 +200,7 @@ export default Paned
 
 function handleStyle(orientation, size) {
   return {
-    [properties[orientation].position]: size,
+    [properties[orientation].position]: size - 1,
   }
 }
 

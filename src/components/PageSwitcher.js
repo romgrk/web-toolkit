@@ -26,7 +26,6 @@ class PageSwitcher extends React.Component {
   static defaultProps = {
     transition: 'horizontal',
     expand: false,
-    padded: true,
     useMainPageDimensions: false,
   }
 

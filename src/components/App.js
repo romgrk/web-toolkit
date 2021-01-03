@@ -59,10 +59,10 @@ function AppSidebar() {
   ]
 
   return (
-    <List border={false} fill sidebar>
+    <List border={false} fill sidebar='navigation'>
       {sections.map(s =>
-        <List.Item key={s.label}>
-          {s.label}
+        <List.Item key={s.label} className='align' activatable selected={s.label === 'Notebook'}>
+          <Label>{s.label}</Label>
         </List.Item>
       )}
     </List>
@@ -115,6 +115,9 @@ function AppContent() {
 
       <h1>Demo</h1>
 
+      <DemoList />
+      <br/>
+
       <DemoPopover />
       <br/>
 
@@ -145,9 +148,6 @@ function AppContent() {
       <DemoTable users={users} />
       <br/>
 
-      <DemoList />
-      <br/>
-
       <DemoTypography />
       <br/>
 
@@ -157,6 +157,7 @@ function AppContent() {
 }
 
 function DemoList() {
+  const [stackPage, setStackPage] = useState(0)
   const [number, setNumber] = useState(0)
   const [active, setActive] = useState(-1)
 
@@ -174,42 +175,98 @@ function DemoList() {
   ]
 
   const richItems = [
-    <Box horizontal><Label>Row 1</Label><Switch /></Box>,
-    <Box horizontal><Label>Row 2</Label><Range value={number} onChange={setNumber} /></Box>,
-    <Box horizontal><Label>Row 3</Label><InputNumber value={number} onChange={setNumber} /></Box>,
-    <Box horizontal><Label>Row 4</Label><Button icon='mail-mark-important' /></Box>,
-    <Box horizontal><Label>Row 5</Label><Checkbox /></Box>,
-    <Box horizontal><Label>Row 6</Label></Box>,
-    <Box horizontal><Label>Row 7</Label></Box>,
-    <Box horizontal><Label>Row 8</Label></Box>,
-    <Box horizontal><Label>Row 9</Label></Box>,
-    <Box horizontal><Label>Row 10</Label></Box>,
+    <><Label>Row 1</Label><Switch /></>,
+    <><Label>Row 2</Label><Range value={number} onChange={setNumber} /></>,
+    <><Label>Row 3</Label><InputNumber value={number} onChange={setNumber} /></>,
+    <><Label>Row 4</Label><Button icon='mail-mark-important' /></>,
+    <><Label>Row 5</Label><Checkbox /></>,
+    <><Label>Row 6</Label></>,
+    <><Label>Row 7</Label></>,
+    <><Label>Row 8</Label></>,
+    <><Label>Row 9</Label></>,
+    <><Label>Row 10</Label></>,
+  ]
+
+  const stackItems = [
+    { key: 1, label: 'One', content: 'One' },
+    { key: 2, label: 'Two', content: 'Two' },
+    { key: 3, label: 'Three', content: 'Three' },
   ]
 
   return (
-    <Box horizontal>
-      <List style={{ width: 200, height: 150 }} separators={false}>
-        {items.map((item, i) =>
-          <List.Item
-            key={i}
-            selected={active === i}
-            onClick={i !== 0 ? () => setActive(i) : undefined}
-          >
-            {item}
+    <>
+      <Box horizontal>
+        <List style={{ width: 200, height: 150 }} separators={false}>
+          {items.map((item, i) =>
+            <List.Item
+              key={i}
+              selected={active === i}
+              onClick={i !== 0 ? () => setActive(i) : undefined}
+            >
+              {item}
+            </List.Item>
+          )}
+        </List>
+        <List style={{ width: 220, height: 150 }} rich>
+          {richItems.map((item, i) =>
+            <List.Item
+              key={i}
+              activatable={[0, 1, 3, 4].some(n => n === i) ? false : true}
+            >
+              {item}
+            </List.Item>
+          )}
+        </List>
+      </Box>
+      <br/>
+      <Box horizontal align='start'>
+        <List style={{ width: 200 }} rich rounded>
+          <List.Item activatable as='label'>
+            <Label className='Box__fill'>Option 1</Label> <Switch />
           </List.Item>
-        )}
-      </List>
-      <List style={{ width: 220, height: 150 }} rich>
-        {richItems.map((item, i) =>
-          <List.Item
-            key={i}
-            activatable={[0, 1, 3, 4].some(n => n === i) ? false : true}
-          >
-            {item}
+          <List.Item activatable expandable>
+            <Label className='Box__fill'>Option 2</Label>
           </List.Item>
-        )}
-      </List>
-    </Box>
+          <List.Item activatable as='label'>
+            <Label className='Box__fill'>Option 3</Label> <Switch />
+          </List.Item>
+        </List>
+        <List style={{ width: 200 }} rich rounded>
+          <List.Item activatable as='label'>
+            <Radio defaultValue={true} name='settings-1' /> <Label className='Box__fill'>Option 1</Label>
+          </List.Item>
+          <List.Item activatable as='label'>
+            <Radio defaultValue={false} name='settings-1' /> <Label className='Box__fill'>Option 1</Label>
+          </List.Item>
+          <List.Item activatable as='label'>
+            <Radio defaultValue={false} name='settings-1' /> <Label className='Box__fill'>Option 1</Label>
+          </List.Item>
+        </List>
+      </Box>
+      <br/>
+      <Box horizontal>
+        <Box horizontal compact border>
+          <List style={{ width: 220, height: 150 }} sidebar='stack' border='right'>
+            {stackItems.map((item, i) =>
+              <List.Item
+                key={i}
+                selected={stackPage === i}
+                needsAttention={i === 2}
+                activatable
+                onClick={() => setStackPage(i)}
+              >
+                <Label>{item.label}</Label>
+              </List.Item>
+            )}
+          </List>
+          <PageSwitcher
+            transition={false}
+            activePage={stackPage}
+            pages={stackItems}
+          />
+        </Box>
+      </Box>
+    </>
   )
 }
 

@@ -10,36 +10,40 @@ function List({
   className,
   separators,
   horizontal,
-  border,
+  border = true,
+  rounded,
   fill,
   rich,
   sidebar,
   ...rest
 }) {
   return (
-    <ul
+    <div
       className={
         cx(
           'List',
           className,
+          borderClass(border),
           {
             'fill': fill === true,
             'fill-width': fill === 'width',
             'fill-height': fill === 'height',
-            'border-none': border === false,
           },
           {
             separators,
             horizontal,
+            rounded,
             rich,
-            sidebar,
+            sidebar: sidebar,
+            'stack-sidebar': sidebar === 'stack',
+            'navigation-sidebar': sidebar === 'navigation',
           }
         )
       }
       {...rest}
     >
       {children}
-    </ul>
+    </div>
   )
 }
 
@@ -55,30 +59,34 @@ List.defaultProps = {
 }
 
 function Item({
+  as,
   children,
   className,
   selected,
   activatable,
+  needsAttention,
   ...rest
 }) {
-  const hasClickHandler = rest.onClick || rest.onDblClick
+  const Element = as ? as : activatable ? 'button' : 'div'
   return (
-    <li
+    <Element
       className={
         cx(
           'List__item',
           className,
           {
-            activatable: activatable ?? hasClickHandler,
+            activatable: activatable ?? activatable,
             selected,
+            'needs-attention': needsAttention,
           }
         )
       }
-      role={hasClickHandler ? 'button' : undefined}
+      role={activatable ? 'button' : undefined}
+      tabIndex={activatable ? '0' : undefined}
       {...rest}
     >
       {children}
-    </li>
+    </Element>
   )
 }
 
@@ -91,3 +99,18 @@ Item.propTypes = {
 List.Item = Item
 
 export default List
+
+// Helpers
+
+function borderClass(border) {
+  if (border === false)
+    return 'border-none'
+  if (border === true)
+    return 'border'
+  if (typeof border === 'string')
+    return `border-${border}`
+  if (Array.isArray(border))
+    return border.map(borderClass).join(' ')
+  return undefined
+}
+

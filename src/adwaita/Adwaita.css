@@ -4010,6 +4010,23 @@ button.List__item {
       .List.rich > .List__item .Button.active::before, .List.rich > .List__item .Button:active::before {
         opacity: 0; }
 
+.Expander__content > .List {
+  width: 100%;
+  background-color: #f1f0ee;
+  border-bottom: 1px solid #cdc7c2;
+  box-shadow: inset 0 1px rgba(0, 0, 0, 0.07); }
+
+.List__item.expandable .Icon.arrow {
+  opacity: 0.3;
+  transition: all 150ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transform: rotate(0); }
+
+.List__item.expandable.expanded .Icon.arrow {
+  color: #3584e4;
+  --icon-color: #3584e4;
+  opacity: 1;
+  transform: rotate(90deg); }
+
 /***********
  * Sidebar *
  ***********/

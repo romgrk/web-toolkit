@@ -193,6 +193,49 @@ function DemoList() {
     { key: 3, label: 'Three', content: 'Three' },
   ]
 
+  const checkboxList =
+    <List style={{ width: 200 }} rich rounded>
+      <List.Item activatable as='label'>
+        <Radio defaultValue={true} name='settings-1' /> <Label className='Box__fill'>Option 1</Label>
+      </List.Item>
+      <List.Item activatable as='label'>
+        <Radio defaultValue={false} name='settings-1' /> <Label className='Box__fill'>Option 1</Label>
+      </List.Item>
+      <List.Item activatable as='label'>
+        <Radio defaultValue={false} name='settings-1' /> <Label className='Box__fill'>Option 1</Label>
+      </List.Item>
+    </List>
+
+  const switchList = 
+    <List style={{ width: 200 }} rich rounded>
+      <List.Item activatable as='label'>
+        <Label className='Box__fill'>Option 1</Label> <Switch />
+      </List.Item>
+      <Expander
+        contents
+        label={
+          <List.Item activatable expandable>
+            <Label className='Box__fill'>Option 2</Label>
+          </List.Item>
+        }
+      >
+        <List rich border={false}>
+          <List.Item activatable as='label'>
+            <Radio defaultValue={true} name='settings-1' /> <Label className='Box__fill'>Option 1</Label>
+          </List.Item>
+          <List.Item activatable as='label'>
+            <Radio defaultValue={false} name='settings-1' /> <Label className='Box__fill'>Option 1</Label>
+          </List.Item>
+          <List.Item activatable as='label'>
+            <Radio defaultValue={false} name='settings-1' /> <Label className='Box__fill'>Option 1</Label>
+          </List.Item>
+        </List>
+      </Expander>
+      <List.Item activatable as='label'>
+        <Label className='Box__fill'>Option 3</Label> <Switch />
+      </List.Item>
+    </List>
+
   return (
     <>
       <Box horizontal>
@@ -220,28 +263,8 @@ function DemoList() {
       </Box>
       <br/>
       <Box horizontal align='start'>
-        <List style={{ width: 200 }} rich rounded>
-          <List.Item activatable as='label'>
-            <Label className='Box__fill'>Option 1</Label> <Switch />
-          </List.Item>
-          <List.Item activatable expandable>
-            <Label className='Box__fill'>Option 2</Label>
-          </List.Item>
-          <List.Item activatable as='label'>
-            <Label className='Box__fill'>Option 3</Label> <Switch />
-          </List.Item>
-        </List>
-        <List style={{ width: 200 }} rich rounded>
-          <List.Item activatable as='label'>
-            <Radio defaultValue={true} name='settings-1' /> <Label className='Box__fill'>Option 1</Label>
-          </List.Item>
-          <List.Item activatable as='label'>
-            <Radio defaultValue={false} name='settings-1' /> <Label className='Box__fill'>Option 1</Label>
-          </List.Item>
-          <List.Item activatable as='label'>
-            <Radio defaultValue={false} name='settings-1' /> <Label className='Box__fill'>Option 1</Label>
-          </List.Item>
-        </List>
+        {switchList}
+        {checkboxList}
       </Box>
       <br/>
       <Box horizontal>

@@ -20,6 +20,7 @@ class Expander extends React.Component {
     label: prop.oneOfType([prop.node, prop.func]),
     transition: prop.oneOf(['horizontal', 'vertical']),
     size: prop.number,
+    contents: prop.bool,
     fitContent: prop.number,
     onChange: prop.func,
   }
@@ -99,6 +100,7 @@ class Expander extends React.Component {
     const {
       children,
       className,
+      contents,
       open: openProp,
       defaultOpen,
       label,
@@ -116,6 +118,48 @@ class Expander extends React.Component {
     const contentStyle = size === undefined ? undefined : { [property]: size }
     const containerStyle = this.getContainerStyle()
 
+    const triggerClassName = cx('Expander__button', { expanded: open })
+    const trigger =
+      !label ? null :
+        typeof label === 'function' ?
+          label({ toggle }) :
+        typeof label === 'string' ?
+          <button className={triggerClassName} onClick={toggle}>
+            <Label>{label}</Label>
+            <Icon name='pan-start' className='arrow' />
+          </button> :
+          React.Children.map(label, child =>
+            React.cloneElement(child, {
+              className: cx(child.props.className, triggerClassName),
+              onClick: child.props.onClick || toggle,
+            })
+          )
+
+    const container =
+        <div className='Expander__container' style={containerStyle}>
+          <div className='Expander__content' style={contentStyle} ref={this.onRef}>
+            {children}
+          </div>
+        </div>
+
+    if (contents)
+      return (
+        <>
+          {trigger}
+          <div
+            className={cx(
+              'Expander',
+              className,
+              transition,
+              { open, 'fit-content': fitContent }
+            )}
+            {...rest}
+          >
+            {container}
+          </div>
+        </>
+      )
+
     return (
       <div
         className={cx(
@@ -126,19 +170,8 @@ class Expander extends React.Component {
         )}
         {...rest}
       >
-        {!label ? null :
-          typeof label === 'function' ?
-            label({ toggle }) :
-            <button className='Expander__button' onClick={toggle}>
-              <Label>{label}</Label>
-              <Icon name='pan-start' className='arrow' />
-            </button>
-        }
-        <div className='Expander__container' style={containerStyle}>
-          <div className='Expander__content' style={contentStyle} ref={this.onRef}>
-            {children}
-          </div>
-        </div>
+        {trigger}
+        {container}
       </div>
     )
   }

@@ -3739,6 +3739,27 @@ button.List__item {
   }
 }
 
+.Expander__content > .List {
+  width: 100%;
+  background-color: $background_dark;
+  border-bottom: 1px solid $borders_color;
+  box-shadow: inset 0 1px rgba(black, 0.07);
+}
+
+.List__item.expandable {
+  .Icon.arrow {
+    opacity: 0.3;
+    transition: $button_transition;
+    transform: rotate(0);
+  }
+  &.expanded .Icon.arrow {
+    color: $selected_bg_color;
+    --icon-color: #{$selected_bg_color};
+    opacity: 1;
+    transform: rotate(90deg);
+  }
+}
+
 // XXX: implement other styles
 // https://gitlab.gnome.org/GNOME/gtk/-/issues/2929#note_879049
 

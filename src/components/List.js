@@ -5,6 +5,8 @@
 import cx from 'clsx'
 import prop from 'prop-types'
 
+import Icon from './Icon'
+
 function List({
   children,
   className,
@@ -63,6 +65,7 @@ function Item({
   children,
   className,
   selected,
+  expandable,
   activatable,
   needsAttention,
   ...rest
@@ -76,6 +79,7 @@ function Item({
           className,
           {
             activatable: activatable ?? activatable,
+            expandable,
             selected,
             'needs-attention': needsAttention,
           }
@@ -86,6 +90,9 @@ function Item({
       {...rest}
     >
       {children}
+      {expandable &&
+        <Icon name='go-next' className='arrow' colored={false} />
+      }
     </Element>
   )
 }

@@ -2861,6 +2861,7 @@ pathbar > button.slider-button {
     display: flex;
     justify-content: center;
     align-items: center;
+    white-space: nowrap;
     color: #2e3436;
     font-weight: normal;
     cursor: default;

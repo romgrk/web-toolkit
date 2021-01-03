@@ -3,7 +3,7 @@
  */
 
 
-import { useState, useRef, forwardRef } from 'react'
+import { useState, forwardRef } from 'react'
 import cx from 'clsx'
 
 import Expander from './Expander'

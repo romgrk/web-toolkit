@@ -55,10 +55,3 @@ LevelBar.propTypes = {
 }
 
 export default LevelBar
-
-
-// Helpers
-
-function valueToPercent(value, min, max) {
-  return ((value - min) * 100) / (max - min);
-}

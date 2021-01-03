@@ -3,7 +3,7 @@
  */
 
 
-import React, { useState, useRef } from 'react'
+import React from 'react'
 import cx from 'clsx'
 import prop from 'prop-types'
 import { equals } from 'rambda'

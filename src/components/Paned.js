@@ -3,15 +3,10 @@
  */
 
 
-import React, { useState, useRef } from 'react'
+import React from 'react'
 import cx from 'clsx'
 import prop from 'prop-types'
 import AutoSizer from 'react-virtualized-auto-sizer'
-
-const inverse = {
-  horizontal: 'vertical',
-  vertical: 'horizontal',
-}
 
 const properties = {
   horizontal: {

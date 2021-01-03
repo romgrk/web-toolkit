@@ -2,7 +2,7 @@
  * InputNumber.js
  */
 
-import { useState, useCallback } from 'react'
+import { useState } from 'react'
 import prop from 'prop-types'
 import cx from 'clsx'
 import Icon from './Icon'

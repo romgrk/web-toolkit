@@ -2506,6 +2506,7 @@ $_treeview_backdrop_borders_color: if($variant=='light',mix($backdrop_borders_co
     display: flex;
     justify-content: center;
     align-items: center;
+    white-space: nowrap;
 
     color: $fg_color;
     font-weight: normal;

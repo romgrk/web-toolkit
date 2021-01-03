@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import Autocomplete from './Autocomplete'
 import Box from './Box'
 import Button from './Button'
@@ -29,6 +29,7 @@ import Spinner from './Spinner'
 import Switch from './Switch'
 import Table from './Table'
 import Toolbar from './Toolbar'
+import * as Icons from './icons'
 
 function App() {
   return (
@@ -156,6 +157,21 @@ function AppContent() {
 
       <IconGrid />
     </div>
+  )
+}
+
+function IconGrid() {
+  return (
+    <>
+      {Object.entries(Icons).map(entry => 
+        <Box horizontal inline style={{ width: 250 }}>
+          {React.createElement(entry[1], {style: { transform: 'scale(1.5)' }, colored: true})}
+          <Label muted>
+            {entry[0]}
+          </Label>
+        </Box>
+      )}
+    </>
   )
 }
 
@@ -1047,21 +1063,6 @@ function DemoTypography() {
       </Box>
 
     </Box>
-  )
-}
-
-function IconGrid() {
-  return (
-    <>
-      {iconNames.map((name, i) =>
-      <Box key={i} horizontal inline style={{ width: 250 }}>
-        <Icon name={name} style={{ transform: 'scale(1.5)' }} colored />
-        <Label muted>
-          {name}
-        </Label>
-      </Box>
-      )}
-    </>
   )
 }
 

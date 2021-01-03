@@ -18,7 +18,7 @@ import { ReactComponent as AlarmSymbolic } from '../assets/icons/alarm-symbolic.
 import { ReactComponent as AppletsScreenshooterSymbolic } from '../assets/icons/applets-screenshooter-symbolic.svg'
 import { ReactComponent as ApplicationCertificateSymbolic } from '../assets/icons/application-certificate-symbolic.svg'
 import { ReactComponent as ApplicationExitSymbolic } from '../assets/icons/application-exit-symbolic.svg'
-import { ReactComponent as ApplicationRssXmlSymbolic } from '../assets/icons/application-rss+xml-symbolic.svg'
+import { ReactComponent as ApplicationRssXmlSymbolic } from '../assets/icons/application-rss-xml-symbolic.svg'
 import { ReactComponent as ApplicationsEngineeringSymbolic } from '../assets/icons/applications-engineering-symbolic.svg'
 import { ReactComponent as ApplicationsGamesSymbolic } from '../assets/icons/applications-games-symbolic.svg'
 import { ReactComponent as ApplicationsGraphicsSymbolic } from '../assets/icons/applications-graphics-symbolic.svg'
@@ -458,8 +458,8 @@ import { ReactComponent as SoftwareUpdateUrgentSymbolic } from '../assets/icons/
 import { ReactComponent as StarNewSymbolic } from '../assets/icons/star-new-symbolic.svg'
 import { ReactComponent as StarredSymbolic } from '../assets/icons/starred-symbolic.svg'
 import { ReactComponent as StartHereSymbolic } from '../assets/icons/start-here-symbolic.svg'
-import { ReactComponent as SwitchOff } from '../assets/icons/switch-off.symbolic.svg'
-import { ReactComponent as SwitchOn } from '../assets/icons/switch-on.symbolic.svg'
+import { ReactComponent as SwitchOff } from '../assets/icons/switch-off-symbolic.svg'
+import { ReactComponent as SwitchOn } from '../assets/icons/switch-on-symbolic.svg'
 import { ReactComponent as SystemFileManagerSymbolic } from '../assets/icons/system-file-manager-symbolic.svg'
 import { ReactComponent as SystemHelpSymbolic } from '../assets/icons/system-help-symbolic.svg'
 import { ReactComponent as SystemLockScreenSymbolic } from '../assets/icons/system-lock-screen-symbolic.svg'
@@ -568,7 +568,7 @@ const icons = {
   'applets-screenshooter': AppletsScreenshooterSymbolic,
   'application-certificate': ApplicationCertificateSymbolic,
   'application-exit': ApplicationExitSymbolic,
-  'application-rss+xml': ApplicationRssXmlSymbolic,
+  'application-rss-xml': ApplicationRssXmlSymbolic,
   'applications-engineering': ApplicationsEngineeringSymbolic,
   'applications-games': ApplicationsGamesSymbolic,
   'applications-graphics': ApplicationsGraphicsSymbolic,

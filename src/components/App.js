@@ -118,6 +118,9 @@ function AppContent() {
       <DemoTable users={users} />
       <br/>
 
+      <DemoSize />
+      <br/>
+
       <DemoList />
       <br/>
 
@@ -672,12 +675,97 @@ function DemoButtons() {
   )
 }
 
+function DemoSize() {
+  return (
+    <>
+      <Box vertical>
+        <Box horizontal>
+          <Input
+            size='mini'
+            icon='folder-saved-search'
+            iconAfter='edit-clear'
+            placeholder='Text input...'
+          />
+          <Button size='mini' icon='list-add' />
+          <Checkbox size='mini' label='check' />
+          <Radio size='mini' label='radio' />
+          <Switch size='mini' />
+          <Range size='mini' style={{ width: 120 }} />
+        </Box>
+        <Box horizontal>
+          <Input
+            size='small'
+            icon='folder-saved-search'
+            iconAfter='edit-clear'
+            placeholder='Text input...'
+          />
+          <Button size='small' icon='list-add' />
+          <Checkbox size='small' label='check' />
+          <Radio size='small' label='radio' />
+          <Switch size='small' />
+          <Range size='small' style={{ width: 120 }} />
+        </Box>
+        <Box horizontal>
+          <Input
+            size='medium'
+            icon='folder-saved-search'
+            iconAfter='edit-clear'
+            placeholder='Text input...'
+          />
+          <Button size='medium' icon='list-add' />
+          <Checkbox size='medium' label='check' />
+          <Radio size='medium' label='radio' />
+          <Switch size='medium' />
+          <Range size='medium' style={{ width: 120 }} />
+        </Box>
+        <Box horizontal>
+          <Input
+            size='large'
+            icon='folder-saved-search'
+            iconAfter='edit-clear'
+            placeholder='Text input...'
+          />
+          <Button size='large' icon='list-add' />
+          <Checkbox size='large' label='check' />
+          <Radio size='large' label='radio' />
+          <Switch size='large' />
+          <Range size='large' style={{ width: 120 }} />
+        </Box>
+        <Box horizontal>
+          <Input
+            size='huge'
+            icon='folder-saved-search'
+            iconAfter='edit-clear'
+            placeholder='Text input...'
+          />
+          <Button size='huge' icon='list-add' />
+          <Checkbox size='huge' label='check' />
+          <Radio size='huge' label='radio' />
+          <Switch size='huge' />
+          <Range size='huge' style={{ width: 120 }} />
+        </Box>
+      </Box>
+    </>
+  )
+}
+
+function InputFilter({ column: { filterValue, setFilter, id } }) {
+  return (
+    <Input
+      id={id}
+      value={filterValue}
+      onChange={setFilter}
+    />
+  )
+}
+
 function DemoTable({ users }) {
   const columns = [
     {
-      Header: 'Row Index',
+      Header: 'Row',
       accessor: (row, i) => i,
       width: 50,
+      disableFilters: true,
     },
     {
       Header: 'Name',
@@ -685,10 +773,13 @@ function DemoTable({ users }) {
         {
           Header: 'Username',
           accessor: 'username',
+          Filter: InputFilter,
+          filter: 'includes',
         },
         {
           Header: 'Full Name',
           accessor: 'name',
+          disableFilters: true,
         },
       ],
     },
@@ -698,16 +789,18 @@ function DemoTable({ users }) {
         {
           Header: 'Phone',
           accessor: 'phone',
-          width: 150,
+          disableFilters: true,
         },
         {
           Header: 'Website',
           accessor: 'website',
+          disableFilters: true,
         },
         {
           Header: 'Address',
           accessor: row =>
             `${row.address.street}${row.address.suite ? ' ' + row.address.suite : ''}, ${row.address.city}`,
+          disableFilters: true,
         },
       ],
     },
@@ -718,6 +811,8 @@ function DemoTable({ users }) {
       <Table
         columns={columns}
         data={users}
+        sortable={true}
+        filterable={true}
       />
     </div>
   )

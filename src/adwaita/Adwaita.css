@@ -1,3 +1,12 @@
+/*************
+* Constants  *
+*************/
+/*************
+* Colors     *
+*************/
+/*************
+* Dimensions *
+*************/
 /***************************
  * Check and Radio buttons *
  ***************************/
@@ -73,7 +82,8 @@ button {
  * Scrollbars  *
  ***************/
 *::-webkit-scrollbar {
-  width: 10px; }
+  width: 8px;
+  height: 8px; }
 
 *::-webkit-scrollbar-track {
   background-color: transparent;
@@ -269,7 +279,7 @@ button {
     border-spacing: 8px;
     margin: 12px; }
 
-.SelectionArea, .content-view > .SelectionArea, .table.content-view > .SelectionArea, .table > .SelectionArea, .Flowbox.table > .SelectionArea, .Grid.table > .SelectionArea, .Flowbox > .SelectionArea, .Grid > .SelectionArea {
+.SelectionArea, .content-view > .SelectionArea, .table > .SelectionArea, .Flowbox > .SelectionArea, .Grid > .SelectionArea {
   border: 1px solid #1b6acb;
   background-color: rgba(27, 106, 203, 0.2); }
 
@@ -2415,6 +2425,8 @@ pathbar > button.slider-button {
   flex-direction: column;
   width: 100%;
   height: 100%;
+  max-width: 100%;
+  overflow: hidden;
   border: 1px solid #d7d2ce;
   background-color: #ffffff; }
   .table {
@@ -2424,9 +2436,6 @@ pathbar > button.slider-button {
     outline-color: rgba(53, 132, 228, 0.5);
     outline-width: 2px;
     outline-offset: -2px; }
-  .table.selected:focus, .table.selected {
-    border-radius: 0;
-    outline-color: rgba(255, 255, 255, 0.8); }
   .table.disabled {
     color: #929595; }
     .table.disabled.selected {
@@ -2448,6 +2457,7 @@ pathbar > button.slider-button {
       overflow: overlay; }
       .table .table__body > div > div::-webkit-scrollbar {
         width: 8px;
+        height: 8px;
         z-index: 1000; }
       .table .table__body > div > div::-webkit-scrollbar-thumb {
         background-clip: padding-box;
@@ -2462,6 +2472,7 @@ pathbar > button.slider-button {
         background-color: rgba(0, 0, 0, 0.4); } }
   .table .th {
     color: #979a9b;
+    --icon-color: #979a9b;
     background-color: #ffffff;
     font-weight: bold;
     text-shadow: none;
@@ -2476,6 +2487,8 @@ pathbar > button.slider-button {
     .table .th:active {
       color: #2e3436;
       transition: none; }
+    .table .th > .Label {
+      flex: 1; }
   .table .td {
     padding: 4px;
     overflow: hidden;
@@ -2484,6 +2497,19 @@ pathbar > button.slider-button {
     height: 28px; }
   .table .td:not(:last-child) {
     border-right: 1px solid #d7d2ce; }
+  .table .table__resizer {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 10px;
+    height: 100%;
+    z-index: 1;
+    touch-action: none;
+    border-right: 4px solid transparent; }
+    .table .table__resizer:hover {
+      border-right: 4px solid rgba(205, 199, 194, 0.3); }
+    .table .table__resizer.isResizing {
+      border-right: 4px solid #3584e4; }
   .table.separator {
     min-height: 2px;
     color: #d7d2ce; }
@@ -2555,6 +2581,21 @@ pathbar > button.slider-button {
     background-image: none; }
   .table .th:last-child {
     border-right-style: none; }
+
+/********************************************************
+ * Data Tables                                          *
+ * treeview like tables with individual focusable cells *
+ * https://gitlab.gnome.org/GNOME/gtk/-/issues/2929     *
+ ********************************************************/
+columnview row:not(.selected) cell editablelabel:not(.editing):focus-within {
+  outline: 2px solid rgba(53, 132, 228, 0.5); }
+
+columnview row:not(.selected) cell editablelabel.editing:focus-within {
+  outline: 2px solid #3584e4; }
+
+columnview row:not(.selected) cell editablelabel.editing text selection {
+  color: #ffffff;
+  background-color: #3584e4; }
 
 /***************
  * Popovers   *
@@ -3001,6 +3042,7 @@ pathbar > button.slider-button {
         overflow: overlay; }
         .Notebook .Notebook__content > .PageSwitcher > .PageSwitcher__page::-webkit-scrollbar {
           width: 8px;
+          height: 8px;
           z-index: 1000; }
         .Notebook .Notebook__content > .PageSwitcher > .PageSwitcher__page::-webkit-scrollbar-thumb {
           background-clip: padding-box;
@@ -3864,6 +3906,7 @@ list,
       list::-webkit-scrollbar,
       .List::-webkit-scrollbar {
         width: 8px;
+        height: 8px;
         z-index: 1000; }
       listview::-webkit-scrollbar-thumb,
       list::-webkit-scrollbar-thumb,
@@ -4076,21 +4119,6 @@ button.List__item {
       color: inherit;
       background-color: #e1dedb;
       text-shadow: none; }
-
-/********************************************************
- * Data Tables                                          *
- * treeview like tables with individual focusable cells *
- * https://gitlab.gnome.org/GNOME/gtk/-/issues/2929     *
- ********************************************************/
-columnview row:not(.selected) cell editablelabel:not(.editing):focus-within {
-  outline: 2px solid rgba(53, 132, 228, 0.5); }
-
-columnview row:not(.selected) cell editablelabel.editing:focus-within {
-  outline: 2px solid #3584e4; }
-
-columnview row:not(.selected) cell editablelabel.editing text selection {
-  color: #ffffff;
-  background-color: #3584e4; }
 
 /*********************
  * App Notifications *
@@ -4461,16 +4489,16 @@ tooltip.csd {
 .view.selected:focus, .view.selected, .selected.IconView:focus, .selected.IconView, .Flowbox > .Flowbox__child.selected, .Grid > .Grid__child.selected,
 .Input > .Input__area > input::selection,
 .TextView > textarea.selected:focus,
-.TextView > textarea.selected, .TextView > textarea::selection, .ModelButton.selected, .InputNumber:not(.vertical) > .Input__area > input::selection, .InputNumber.vertical > .Input__area > input > .Input__area > input::selection, .InputNumber.vertical > .Input__area > input::selection, .table.selected:focus, .table.selected, .List__item.selected, .navigation-sidebar:not(.increase-specificity) > .selected.List__item, calendar > grid > .Label.day-number.selected {
+.TextView > textarea.selected, .TextView > textarea::selection, .ModelButton.selected, .InputNumber:not(.vertical) > .Input__area > input::selection, .InputNumber.vertical > .Input__area > input > .Input__area > input::selection, .InputNumber.vertical > .Input__area > input::selection, .List__item.selected, .navigation-sidebar:not(.increase-specificity) > .selected.List__item, calendar > grid > .Label.day-number.selected {
   background-color: #3584e4; }
   .Label.selected, .view.selected:focus, .view.selected, .selected.IconView:focus, .selected.IconView, .Flowbox > .Flowbox__child.selected, .Grid > .Grid__child.selected,
   .Input > .Input__area > input::selection,
   .TextView > textarea.selected:focus,
-  .TextView > textarea.selected, .TextView > textarea::selection, .ModelButton.selected, .InputNumber:not(.vertical) > .Input__area > input::selection, .InputNumber.vertical > .Input__area > input > .Input__area > input::selection, .InputNumber.vertical > .Input__area > input::selection, .table.selected:focus, .table.selected, .List__item.selected, .navigation-sidebar:not(.increase-specificity) > .selected.List__item, calendar > grid > .Label.day-number.selected {
+  .TextView > textarea.selected, .TextView > textarea::selection, .ModelButton.selected, .InputNumber:not(.vertical) > .Input__area > input::selection, .InputNumber.vertical > .Input__area > input > .Input__area > input::selection, .InputNumber.vertical > .Input__area > input::selection, .List__item.selected, .navigation-sidebar:not(.increase-specificity) > .selected.List__item, calendar > grid > .Label.day-number.selected {
     color: #ffffff; }
     .Label.disabled::selection, .Label.selected:disabled, .view.selected:disabled, .selected.IconView:disabled, .Flowbox > .Flowbox__child.selected:disabled, .Grid > .Grid__child.selected:disabled,
     .Input > .Input__area > input:disabled::selection,
-    .TextView > textarea.selected:disabled, .TextView > textarea:disabled::selection, .ModelButton.selected:disabled, .InputNumber:not(.vertical) > .Input__area > input:disabled::selection, .InputNumber.vertical > .Input__area > input > .Input__area > input:disabled::selection, .InputNumber.vertical > .Input__area > input:disabled::selection, .table.selected:disabled, .List__item.selected:disabled, calendar > grid > .Label.day-number.selected:disabled {
+    .TextView > textarea.selected:disabled, .TextView > textarea:disabled::selection, .ModelButton.selected:disabled, .InputNumber:not(.vertical) > .Input__area > input:disabled::selection, .InputNumber.vertical > .Input__area > input > .Input__area > input:disabled::selection, .InputNumber.vertical > .Input__area > input:disabled::selection, .List__item.selected:disabled, calendar > grid > .Label.day-number.selected:disabled {
       color: #9ac2f2; }
 
 .monospace {

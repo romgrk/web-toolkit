@@ -2,8 +2,6 @@
   @return unquote("alpha(#{$c},#{$a})");
 }
 
-$height: 30px;
-
 $ease-out-quad: cubic-bezier(0.25, 0.46, 0.45, 0.94);
 $asset_suffix: if($variant=='dark', '-dark', '');
 $backdrop_transition: 200ms ease-out;
@@ -34,7 +32,8 @@ $popover_radius: $button_radius + 4;
  ***************/
 
 *::-webkit-scrollbar {
-  width: 10px;
+  width: 8px;
+  height: 8px;
 }
 *::-webkit-scrollbar-track {
   background-color: transparent;
@@ -61,6 +60,7 @@ $popover_radius: $button_radius + 4;
 
     &::-webkit-scrollbar {
       width: 8px;
+      height: 8px;
       z-index: 1000;
     }
     &::-webkit-scrollbar-thumb {
@@ -1896,21 +1896,13 @@ $_treeview_backdrop_borders_color: if($variant=='light',mix($backdrop_borders_co
   flex-direction: column;
   width: 100%;
   height: 100%;
+  max-width: 100%;
+  overflow: hidden;
 
   border: 1px solid $_treeview_borders_color;
   background-color: $background_light;
 
   @include focus-ring();
-
-  // TODO validate this
-  &.selected {
-    &:focus, & {
-      border-radius: 0;
-      outline-color: $alt_focus_border_color;
-
-      @extend %selected_items;
-    }
-  }
 
   // TODO validate this
   &.disabled {
@@ -1929,9 +1921,13 @@ $_treeview_backdrop_borders_color: if($variant=='light',mix($backdrop_borders_co
 
   .table__header {
     flex: 0;
+    // overflow-y: auto;
+    // overflow-x: hidden;
   }
   .table__body {
     flex: 1;
+    // overflow-y: scroll;
+    // overflow-x: hidden;
   }
   .table__body > div {
     width: 100%;
@@ -1945,6 +1941,7 @@ $_treeview_backdrop_borders_color: if($variant=='light',mix($backdrop_borders_co
     @extend %column_header_button;
 
     color: $fg_color_title;
+    --icon-color: #{$fg_color_title};
     background-color: $base_color;
     font-weight: bold;
     text-shadow: none;
@@ -1969,6 +1966,10 @@ $_treeview_backdrop_borders_color: if($variant=='light',mix($backdrop_borders_co
       color: $fg_color;
       transition: none; //I shouldn't need this
     }
+
+    > .Label {
+      flex: 1;
+    }
   }
   .td {
     padding: 4px;
@@ -1979,6 +1980,24 @@ $_treeview_backdrop_borders_color: if($variant=='light',mix($backdrop_borders_co
   }
   .td:not(:last-child) {
     border-right: 1px solid $_treeview_borders_color;
+  }
+
+  .table__resizer {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 10px;
+    height: 100%;
+    z-index: 1;
+    touch-action :none;
+
+    border-right: 4px solid transparent;
+    &:hover {
+      border-right: 4px solid rgba($borders_color, 0.3);
+    }
+    &.isResizing {
+      border-right: 4px solid $selected_bg_color;
+    }
   }
 
   // TODO validate this
@@ -2104,6 +2123,26 @@ $_treeview_backdrop_borders_color: if($variant=='light',mix($backdrop_borders_co
 
   &:last-child { &:backdrop, & { border-right-style: none; }}
 }
+
+/********************************************************
+ * Data Tables                                          *
+ * treeview like tables with individual focusable cells *
+ * https://gitlab.gnome.org/GNOME/gtk/-/issues/2929     *
+ ********************************************************/
+
+columnview row:not(.selected) cell editablelabel:not(.editing):focus-within {
+  outline: 2px solid $focus_border_color;
+}
+
+columnview row:not(.selected) cell editablelabel.editing:focus-within {
+  outline: 2px solid $selected_bg_color;
+}
+
+columnview row:not(.selected) cell editablelabel.editing text selection {
+  color: $selected_fg_color;
+  background-color: $selected_bg_color;
+}
+
 
 /***************
  * Popovers   *
@@ -3850,26 +3889,6 @@ button.List__item {
       text-shadow: none;
     }
   }
-}
-
-
-/********************************************************
- * Data Tables                                          *
- * treeview like tables with individual focusable cells *
- * https://gitlab.gnome.org/GNOME/gtk/-/issues/2929     *
- ********************************************************/
-
-columnview row:not(.selected) cell editablelabel:not(.editing):focus-within {
-  outline: 2px solid $focus_border_color;
-}
-
-columnview row:not(.selected) cell editablelabel.editing:focus-within {
-  outline: 2px solid $selected_bg_color;
-}
-
-columnview row:not(.selected) cell editablelabel.editing text selection {
-  color: $selected_fg_color;
-  background-color: $selected_bg_color;
 }
 
 

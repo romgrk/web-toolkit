@@ -49,7 +49,7 @@ function Autocomplete({
   const [isFocused, setIsFocused] = useState(false)
   const onFocus = () => setIsFocused(true)
   const onBlur = ev => {
-    const newValue = ev?.relatedTarget.getAttribute('data-value')
+    const newValue = ev?.relatedTarget?.getAttribute('data-value')
     if (newValue) {
       setValue(newValue)
     }

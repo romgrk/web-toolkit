@@ -458,15 +458,16 @@ function DemoAutocomplete() {
     loading ? [] :
     users.filter(u =>
       u.name.toLowerCase().includes(value.toLowerCase()))
-  const options = filteredUsers.map(u =>
-    <List.Item key={u.id}>
+  const options = filteredUsers.map(u => ({
+    value: u.name,
+    label:
       <Box compact horizontal>
         <Box.Fill style={{ minWidth: 200 }}>
           {u.name}
         </Box.Fill>
         <Label muted>{u.phone}</Label>
       </Box>
-    </List.Item>
+    })
   )
 
   return (

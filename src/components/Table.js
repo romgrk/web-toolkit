@@ -61,6 +61,7 @@ function Table({
     useResizeColumns,
     useFlexLayout,
   ].filter(Boolean))
+  console.log(getTableBodyProps())
 
   const RenderRow = React.useCallback(
     ({ index, style }) => {
@@ -94,9 +95,9 @@ function Table({
             {headerGroup.headers.map(column => (
               <div
                 className='th'
-                {...column.getHeaderProps(sortable ? column.getSortByToggleProps() : undefined)}
+                {...column.getHeaderProps()}
               >
-                <Box horizontal compact>
+                <Box horizontal compact {...(sortable ? column.getSortByToggleProps() : undefined)}>
                   <Box.Fill>
                     {column.render('Header')}
                   </Box.Fill>

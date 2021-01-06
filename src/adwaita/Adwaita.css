@@ -2573,7 +2573,8 @@ pathbar > button.slider-button {
   max-width: 100%;
   overflow: hidden;
   border: 1px solid #d7d2ce;
-  background-color: #ffffff; }
+  background-color: #ffffff;
+  overflow-x: hidden; }
   .table {
     outline: 0 solid transparent;
     outline-offset: 4px; }
@@ -2591,29 +2592,31 @@ pathbar > button.slider-button {
     border-left-color: #ddd9d6;
     border-top: #ddd9d6; }
   .table .table__header {
-    flex: 0; }
+    flex: 0 0; }
   .table .table__body {
-    flex: 1; }
+    flex: 1;
+    overflow-y: hidden;
+    overflow-x: scroll; }
   .table .table__body > div {
     width: 100%;
     margin: 0; }
   @media screen and (-webkit-min-device-pixel-ratio: 0) {
-    .table .table__body > div > div {
+    .table .table__body > div:not(.resize-triggers) > div {
       overflow: overlay; }
-      .table .table__body > div > div::-webkit-scrollbar {
+      .table .table__body > div:not(.resize-triggers) > div::-webkit-scrollbar {
         width: 8px;
         height: 8px;
         z-index: 1000; }
-      .table .table__body > div > div::-webkit-scrollbar-thumb {
+      .table .table__body > div:not(.resize-triggers) > div::-webkit-scrollbar-thumb {
         background-clip: padding-box;
         border-radius: 16px;
         border: 2px solid transparent;
         background-color: rgba(0, 0, 0, 0.2);
         -webkit-transition: background-color 0.5s ease;
         transition: background-color 0.5s ease; }
-      .table .table__body > div > div::-webkit-scrollbar-thumb:hover {
+      .table .table__body > div:not(.resize-triggers) > div::-webkit-scrollbar-thumb:hover {
         background-color: rgba(0, 0, 0, 0.3); }
-      .table .table__body > div > div::-webkit-scrollbar-thumb:active {
+      .table .table__body > div:not(.resize-triggers) > div::-webkit-scrollbar-thumb:active {
         background-color: rgba(0, 0, 0, 0.4); } }
   .table .th {
     color: #979a9b;

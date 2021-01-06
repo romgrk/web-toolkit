@@ -1958,20 +1958,21 @@ $_treeview_backdrop_borders_color: if($variant=='light',mix($backdrop_borders_co
   }
 
   .table__header {
-    flex: 0;
+    flex: 0 0;
     // overflow-y: auto;
     // overflow-x: hidden;
   }
   .table__body {
     flex: 1;
-    // overflow-y: scroll;
-    // overflow-x: hidden;
+    overflow-y: hidden;
+    overflow-x: scroll;
   }
+    overflow-x: hidden;
   .table__body > div {
     width: 100%;
     margin: 0;
   }
-  .table__body > div > div { // scrollable element
+  .table__body > div:not(.resize-triggers) > div { // scrollable element
     @include small_scrollbar;
   }
 

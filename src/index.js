@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './adwaita/Adwaita.css'
+import './adwaita/build.css'
 import './index.css';
 import App from './components/App';
 

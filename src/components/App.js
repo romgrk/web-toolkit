@@ -7,7 +7,7 @@ import Dropdown from './Dropdown'
 import Expander from './Expander'
 import HeaderBar from './HeaderBar'
 import Frame from './Frame'
-import Icon, { names as iconNames } from './Icon'
+import Icon, { Icons } from './Icon'
 import InfoBar from './InfoBar'
 import Input from './Input'
 import InputNumber from './InputNumber'
@@ -29,7 +29,6 @@ import Spinner from './Spinner'
 import Switch from './Switch'
 import Table from './Table'
 import Toolbar from './Toolbar'
-import * as Icons from './icons'
 
 function App() {
   return (

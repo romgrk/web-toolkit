@@ -555,7 +555,7 @@ import { ReactComponent as ZoomInSymbolic } from '../assets/icons/zoom-in-symbol
 import { ReactComponent as ZoomOriginalSymbolic } from '../assets/icons/zoom-original-symbolic.svg'
 import { ReactComponent as ZoomOutSymbolic } from '../assets/icons/zoom-out-symbolic.svg'
 
-const icons = {
+export const Icons = {
   'ac-adapter': AcAdapterSymbolic,
   'accessories-calculator': AccessoriesCalculatorSymbolic,
   'accessories-character-map': AccessoriesCharacterMapSymbolic,
@@ -1107,18 +1107,16 @@ const icons = {
 }
 
 function Icon({ className, name, colored, ...rest }) {
-  const element = icons[name]
+  const Element = Icons[name]
 
-  if (!element)
+  if (!Element) 
     return <span>Invalid name: {name}</span>
 
   return (
     <span className={cx('Icon', className, { colored })} {...rest}>
-      {React.createElement(element)}
+      <Element />
     </span>
   )
 }
-
-export const names = Object.keys(icons)
 
 export default Icon

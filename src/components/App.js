@@ -162,11 +162,11 @@ function AppContent() {
 function IconGrid() {
   return (
     <>
-      {Object.entries(Icons).map(entry => 
-        <Box horizontal inline style={{ width: 250 }}>
-          {React.createElement(entry[1], {style: { transform: 'scale(1.5)' }, colored: true})}
+      {Object.entries(Icons).map(([label, Element]) => 
+        <Box horizontal inline style={{ width: 250, marginBottom: '1rem' }}>
+          <Element colored style={{ width: '16px', transform: 'scale(1.5)'}} />
           <Label muted>
-            {entry[0]}
+            {label}
           </Label>
         </Box>
       )}

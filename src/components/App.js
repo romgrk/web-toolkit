@@ -164,7 +164,7 @@ function IconGrid() {
     <>
       {Object.entries(Icons).map(([label, Element]) => 
         <Box horizontal inline style={{ width: 250, marginBottom: '1rem' }}>
-          <Element colored style={{ width: '16px', transform: 'scale(1.5)'}} />
+          <Icon colored name={label} style={{ width: '16px', transform: 'scale(1.5)'}} />
           <Label muted>
             {label}
           </Label>

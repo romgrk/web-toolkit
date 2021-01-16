@@ -1,0 +1,69 @@
+{
+  "name": "web-toolkit-react",
+  "version": "1.0.0",
+  "description": "Made with create-react-library",
+  "author": "romgrk",
+  "license": "MIT",
+  "repository": "romgrk/web-toolkit",
+  "main": "dist/index.js",
+  "module": "dist/index.modern.js",
+  "source": "src/index.js",
+  "engines": {
+    "node": ">=10"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not op_mini all"
+  ],
+  "scripts": {
+    "build": "rm -r ./dist/* && microbundle-crl --no-compress --format modern,cjs --jsxFragment React.Fragment",
+    "start": "microbundle-crl watch --no-compress --format modern,cjs --jsxFragment React.Fragment",
+    "prepare": "run-s build",
+    "test": "run-s test:unit test:lint test:build",
+    "test:build": "run-s build",
+    "test:lint": "eslint .",
+    "test:unit": "cross-env CI=1 react-scripts test --env=jsdom",
+    "test:watch": "react-scripts test --env=jsdom",
+    "predeploy": "cd example && npm install && npm run build",
+    "deploy": "gh-pages -d example/build"
+  },
+  "peerDependencies": {
+    "@popperjs/core": "^2.6.0",
+    "rambda": "^6.4.0",
+    "react": "^17.0.0",
+    "react-dom": "^17.0.0",
+    "react-popper": "^2.2.4",
+    "react-table": "^7.6.2",
+    "react-window": "^1.8.6"
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-nullish-coalescing-operator": "^7.12.1",
+    "@babel/plugin-proposal-object-rest-spread": "^7.12.1",
+    "@babel/plugin-proposal-optional-chaining": "^7.12.7",
+    "@babel/plugin-transform-react-jsx": "^7.12.12",
+    "@babel/plugin-transform-typescript": "^7.12.1",
+    "@babel/preset-react": "^7.12.10",
+    "babel-eslint": "^10.0.3",
+    "cross-env": "^7.0.2",
+    "eslint-config-prettier": "^6.7.0",
+    "eslint-config-standard": "^14.1.0",
+    "eslint-config-standard-react": "^9.2.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-node": "^11.0.0",
+    "eslint-plugin-prettier": "^3.1.1",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-react": "^7.17.0",
+    "eslint-plugin-standard": "^4.0.1",
+    "gh-pages": "^2.2.0",
+    "microbundle-crl": "^0.13.10",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^2.0.4",
+    "react": "^17",
+    "react-dom": "^17",
+    "react-scripts": "^4.0.1"
+  },
+  "files": [
+    "dist"
+  ]
+}

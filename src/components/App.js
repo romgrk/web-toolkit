@@ -7,7 +7,7 @@ import Dropdown from './Dropdown'
 import Expander from './Expander'
 import HeaderBar from './HeaderBar'
 import Frame from './Frame'
-import Icon, { names as iconNames } from './Icon'
+import Icon, { Icons } from './Icon'
 import InfoBar from './InfoBar'
 import Input from './Input'
 import InputNumber from './InputNumber'
@@ -29,7 +29,6 @@ import Spinner from './Spinner'
 import Switch from './Switch'
 import Table from './Table'
 import Toolbar from './Toolbar'
-import * as Icons from './icons'
 
 function App() {
   return (
@@ -163,11 +162,11 @@ function AppContent() {
 function IconGrid() {
   return (
     <>
-      {Object.entries(Icons).map(entry => 
-        <Box horizontal inline style={{ width: 250 }}>
-          {React.createElement(entry[1], {style: { transform: 'scale(1.5)' }, colored: true})}
+      {Object.entries(Icons).map(([label, Element]) => 
+        <Box horizontal inline style={{ width: 250, marginBottom: '1rem' }}>
+          <Element colored style={{ width: '16px', transform: 'scale(1.5)'}} />
           <Label muted>
-            {entry[0]}
+            {label}
           </Label>
         </Box>
       )}

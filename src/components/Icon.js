@@ -1106,7 +1106,7 @@ export const Icons = {
   'zoom-out': ZoomOutSymbolic,
 };
 
-function Icon({ className, name, colored, ...rest }) {
+export default function Icon({ className, name, colored, ...rest }) {
   const Element = Icons[name]
 
   if (!Element) 

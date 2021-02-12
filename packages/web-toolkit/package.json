@@ -1,6 +1,6 @@
 {
   "name": "web-toolkit",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "repository": "https://github.com/romgrk/web-toolkit",
   "main": "build/index.js",
   "scripts": {
@@ -26,14 +26,16 @@
     "classname": "^0.0.0",
     "clsx": "^1.1.1",
     "rambda": "^6.4.0",
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1",
     "react-popper": "^2.2.4",
     "react-scripts": "4.0.1",
     "react-table": "^7.6.2",
     "react-virtualized-auto-sizer": "^1.0.3",
     "react-window": "^1.8.6",
     "scrollbar-size": "^2.1.0"
+  },
+  "peerDependencies": {
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1"
   },
   "devDependencies": {
     "@babel/core": "7.6.0",
@@ -79,10 +81,10 @@
     "postcss-normalize": "7.0.1",
     "postcss-preset-env": "6.7.0",
     "postcss-safe-parser": "4.0.1",
-    "react": "^16.10.2",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
     "react-app-polyfill": "^1.0.4",
     "react-dev-utils": "^9.1.0",
-    "react-dom": "^16.10.2",
     "resolve": "1.12.0",
     "resolve-url-loader": "3.1.0",
     "sass-loader": "7.2.0",

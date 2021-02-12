@@ -31,8 +31,10 @@ version. But the first goal should allow any UI framework to reuse the CSS class
 
 ## Contributions
 
-To start coding, clone the project, run `npm install`, then run `npm start` to spawn the
-dev server. You need to have `sassc` installed.
+To start coding, clone the project, go to `./packages/web-toolkit`, run `pnpm install`,
+then run `pnpm start` to spawn the dev server. You need to have `sassc` installed.
+
+**IMPORTANT**: This project uses [pnpm](https://pnpm.js.org/) for development.
 
 ## License
 

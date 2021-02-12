@@ -1,38 +1,43 @@
-This project was bootstrapped with [Create React Library](https://github.com/dimimikadze/create-react-library).
+# web-toolkit
 
-All library files are located inside **src/lib** folder.
+This is a work in progress web toolkit using GTK's default theme, Adwaita.
 
-Inside **src/demo** folder, you can test your library while developing.
+[See live demo](https://romgrk.github.io/web-toolkit/)
 
-## Available Scripts
+**HELP WANTED**: I need help to make this into a production-ready library.
+Come help me! Checkout the open issues or [ask here](https://github.com/romgrk/web-toolkit/issues/2)
+if you're unsure how you can help.
 
-In the project directory, you can run:
+## Why
 
-### `npm start` or `yarn start`
+All UI design frameworks suck. No one knows how to design. Except for Gnome designers
+strangely.  And maybe Apple too, but they're not in the OSS business so I avoid them.
 
-Runs the library in development mode. Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Screenshots
 
-### `npm run test` or `yarn run test`
+![demo-1](https://raw.githubusercontent.com/romgrk/web-toolkit/master/static/demo-1.png)
+![demo-2](https://raw.githubusercontent.com/romgrk/web-toolkit/master/static/demo-2.png)
+![demo-3](https://raw.githubusercontent.com/romgrk/web-toolkit/master/static/demo-3.png)
+![demo-4](https://raw.githubusercontent.com/romgrk/web-toolkit/master/static/demo-4.png)
 
-Runs the test watcher in an interactive mode.
+## Roadmap
 
-### `npm run build` or `yarn build`
+The first goal is to port Adwaita.css for web usage, which means removing every GTK+ CSS
+proprietary quirks.
 
-Builds the library for production to the `build` folder.
-It correctly bundles React in production mode and optimizes the build for the best performance.
+The second goal is to create components to make it easy to use the framework. For now the
+demo components are being created with React but I've been thinking about making a Solid
+version. But the first goal should allow any UI framework to reuse the CSS classes.
 
-### `npm publish`
+## Contributions
 
-Publishes the library to NPM.
+To start coding, clone the project, go to `./packages/web-toolkit`, run `pnpm install`,
+then run `pnpm start` to spawn the dev server. You need to have `sassc` installed.
 
-## Typescript
+**IMPORTANT**: This project uses [pnpm](https://pnpm.js.org/) for development.
 
-[Adding Typescript support](https://gist.github.com/DimiMikadze/f25e1c5c70fa003953afd40fa9042517)
+## License
 
-## Troubleshooting
-
-### Usage of other libraries within your library
-
-- Add the library as a peer dependency in package.json (effectively requiring the calling project to provide this dependency)
-- Add the library as a dev dependency in package.json (effectively allowing this library to successfully build without complaining about not having this dependency)
-- Add the library to the externals config in your webpack.config file(s). By default, only react and react-dom are there, meaning that those are the only two libraries that you can use within your new shared library.
+Undecided yet. I use MIT usually but the CSS files of the GTK project were reused so I'm not
+sure it can be licensed as MIT or if it needs to be LGPL. Either way, best case it's MIT
+worst case it's LGPL, which is still permissive and allows commercial use so it's fine.

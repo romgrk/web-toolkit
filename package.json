@@ -1,58 +1,7 @@
 {
-  "name": "web-toolkit",
+  "name": "web-toolkit-root",
   "version": "0.1.2",
+  "private": true,
   "repository": "https://github.com/romgrk/web-toolkit",
-  "dependencies": {
-    "@popperjs/core": "^2.6.0",
-    "@testing-library/jest-dom": "^5.11.4",
-    "@testing-library/react": "^11.1.0",
-    "@testing-library/user-event": "^12.1.10",
-    "classname": "^0.0.0",
-    "clsx": "^1.1.1",
-    "rambda": "^6.4.0",
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1",
-    "react-popper": "^2.2.4",
-    "react-scripts": "4.0.1",
-    "react-table": "^7.6.2",
-    "react-virtualized-auto-sizer": "^1.0.3",
-    "react-window": "^1.8.6",
-    "scrollbar-size": "^2.1.0"
-  },
-  "scripts": {
-    "start": "nf start",
-    "start:js": "react-scripts start",
-    "build:js": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "start:css": "nodemon --exec 'npm run build:css' -e 'scss'",
-    "build:css": "sassc src/adwaita/adwaita.scss src/adwaita/build.css",
-    "predeploy": "PUBLIC_URL=/web-toolkit npm run build:js",
-    "deploy": "gh-pages -d build",
-    "nop": "true"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
-  "devDependencies": {
-    "foreman": "^3.0.1",
-    "gh-pages": "^3.1.0",
-    "nodemon": "^2.0.6",
-    "xml-js": "^1.6.11"
-  }
+  "// EOF": null
 }

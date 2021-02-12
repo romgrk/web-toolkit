@@ -15,7 +15,7 @@ process.on('unhandledRejection', err => {
 require('../config/env');
 
 
-// const path = require('path');
+const path = require('path');
 const chalk = require('react-dev-utils/chalk');
 const fs = require('fs-extra');
 const webpack = require('webpack');
@@ -59,8 +59,8 @@ checkBrowsers(paths.appPath, isInteractive)
     // Remove all content but keep the directory so that
     // if you're in it, you don't end up in Trash
     fs.emptyDirSync(paths.appBuild);
-    // Merge with the public folder
-    // copyPublicFolder();  // CRL: No need to copy PublicFolder, it's a library after all ;)
+    // Copy built css
+    copyCss();  // CRL
     // Start the webpack build
     return build(previousFileSizes);
   })
@@ -192,9 +192,6 @@ function build(previousFileSizes) {
   });
 }
 
-// function copyPublicFolder() {
-//   fs.copySync(paths.appPublic, paths.appBuild, {
-//     dereference: true,
-//     filter: file => file !== paths.appHtml,
-//   });
-// }
+function copyCss() {
+  fs.copySync(paths.appLibIndexCss, path.join(paths.appBuild, 'index.css'));
+}

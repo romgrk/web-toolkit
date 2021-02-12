@@ -532,6 +532,11 @@ module.exports = function(webpackEnv) {
       ],
     },
     plugins: [
+      // CRL: Makes the library work, which doesn't when multiple chunks are produced
+      // https://github.com/DimiMikadze/create-react-library/issues/73
+      new webpack.optimize.LimitChunkCountPlugin({
+        maxChunks: 1,
+      }),
       // Generates an `index.html` file with the <script> injected.
       (isEnvDemo || isEnvDevelopment) && new HtmlWebpackPlugin(  // CRL
         Object.assign(

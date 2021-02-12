@@ -53,7 +53,7 @@ const moduleFileExtensions = [
 ];
 
 // Resolve file paths in the same order as webpack
-const resolveModule = (resolveFn, filePath) => {
+const resolveModule = (resolveFn, filePath, defaultExt = 'js') => {
   const extension = moduleFileExtensions.find(extension =>
     fs.existsSync(resolveFn(`${filePath}.${extension}`))
   );
@@ -62,7 +62,7 @@ const resolveModule = (resolveFn, filePath) => {
     return resolveFn(`${filePath}.${extension}`);
   }
 
-  return resolveFn(`${filePath}.js`);
+  return resolveFn(`${filePath}.${defaultExt}`);
 };
 
 // config after eject: we're in ./config/
@@ -92,6 +92,9 @@ module.exports = {
   // CRL: New paths for library
   appLibIndexJs: resolveModule(resolveApp, 'src/lib/index'),
   appLibSrc: resolveApp('src/lib'),
+
+  // CRL: New paths for library
+  appLibIndexCss: resolveModule(resolveApp, 'src/lib/adwaita/build', 'css'),
 };
 
 

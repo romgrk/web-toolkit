@@ -5,6 +5,7 @@
   "main": "build/index.js",
   "scripts": {
     "start": "nf start",
+    "build": "npm run build:css && npm run build:js",
     "start:js": "node scripts/start.js",
     "build:js": "node scripts/build.js",
     "demo": "node scripts/demo.js",
@@ -16,6 +17,7 @@
     "nop": "true"
   },
   "license": "MIT",
+  "sideEffects": false,
   "dependencies": {
     "@popperjs/core": "^2.6.0",
     "@testing-library/jest-dom": "^5.11.4",

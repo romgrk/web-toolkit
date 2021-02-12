@@ -3,5 +3,8 @@
   "version": "0.1.2",
   "private": true,
   "repository": "https://github.com/romgrk/web-toolkit",
+  "workspaces": [
+    "./packages/*"
+  ],
   "// EOF": null
 }

@@ -1,6 +1,6 @@
 {
   "name": "web-toolkit",
-  "version": "0.2.2",
+  "version": "0.3.0",
   "repository": "https://github.com/romgrk/web-toolkit",
   "main": "lib/index.js",
   "scripts": {
@@ -14,6 +14,7 @@
     "start:css": "nodemon --exec 'npm run build:css' -e 'scss'",
     "build:css": "sassc src/lib/adwaita/adwaita.scss src/lib/adwaita/build.css && cp src/lib/adwaita/build.css lib/index.css",
     "build:icons": "cp -r src/lib/assets lib/",
+    "prepare": "npm run build",
     "predeploy": "PUBLIC_URL=/web-toolkit npm run build:js",
     "deploy": "gh-pages -d build",
     "nop": "true"

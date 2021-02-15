@@ -7,7 +7,7 @@ const path = require('path')
 const fs = require('fs')
 const { xml2js, js2xml } = require('xml-js')
 
-const iconDirectory = path.join(__dirname, '../src/assets/icons')
+const iconDirectory = path.join(__dirname, '../src/lib/assets/icons')
 const iconFilenames = fs.readdirSync(iconDirectory)
 
 const filepaths = iconFilenames.map(f => path.join(iconDirectory, f))

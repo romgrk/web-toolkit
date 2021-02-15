@@ -3,24 +3,28 @@ importers:
     specifiers: {}
   packages/web-toolkit:
     dependencies:
+      '@babel/runtime': 7.12.13
       '@popperjs/core': 2.6.0
       '@testing-library/jest-dom': 5.11.9
       '@testing-library/react': 11.2.5_react-dom@17.0.1+react@17.0.1
       '@testing-library/user-event': 12.7.0
       classname: 0.0.0
       clsx: 1.1.1
+      mkdirp: 1.0.4
       rambda: 6.5.3
       react-popper: 2.2.4_3da0a162a96308e0a1fa93a02ed91581
       react-scripts: 4.0.1
       react-table: 7.6.3_react@17.0.1
       react-virtualized-auto-sizer: 1.0.4_react-dom@17.0.1+react@17.0.1
       react-window: 1.8.6_react-dom@17.0.1+react@17.0.1
+      rimraf: 3.0.2
       scrollbar-size: 2.1.0
     devDependencies:
       '@babel/cli': 7.12.16_@babel+core@7.12.16
       '@babel/core': 7.12.16
       '@babel/plugin-proposal-optional-chaining': 7.12.16_@babel+core@7.12.16
       '@babel/plugin-transform-modules-commonjs': 7.12.13_@babel+core@7.12.16
+      '@svgr/core': 5.5.0
       '@svgr/webpack': 4.3.2
       '@typescript-eslint/eslint-plugin': 2.34.0_e2a9af8878cf356a53ecf756a3789cd9
       '@typescript-eslint/parser': 2.34.0_eslint@7.19.0
@@ -84,7 +88,9 @@ importers:
       '@babel/core': ^7.12.16
       '@babel/plugin-proposal-optional-chaining': ^7.12.16
       '@babel/plugin-transform-modules-commonjs': ^7.12.13
+      '@babel/runtime': ^7.12.13
       '@popperjs/core': ^2.6.0
+      '@svgr/core': ^5.5.0
       '@svgr/webpack': 4.3.2
       '@testing-library/jest-dom': ^5.11.4
       '@testing-library/react': ^11.1.0
@@ -123,6 +129,7 @@ importers:
       jest-resolve: 24.9.0
       jest-watch-typeahead: 0.4.0
       mini-css-extract-plugin: 0.8.0
+      mkdirp: ^1.0.4
       nodemon: ^2.0.7
       optimize-css-assets-webpack-plugin: 5.0.3
       pnp-webpack-plugin: 1.5.0
@@ -143,6 +150,7 @@ importers:
       react-window: ^1.8.6
       resolve: 1.12.0
       resolve-url-loader: 3.1.0
+      rimraf: ^3.0.2
       sass-loader: 7.2.0
       scrollbar-size: ^2.1.0
       semver: 6.3.0
@@ -233,7 +241,6 @@ packages:
       lodash: 4.17.20
       semver: 5.7.1
       source-map: 0.5.7
-    dev: true
     engines:
       node: '>=6.9.0'
     resolution:
@@ -2849,7 +2856,6 @@ packages:
     resolution:
       integrity: sha512-j7KnilGyZzYr/jhcrSYS3FGWMZVaqyCG0vzMCwzvei0coIkczuYMcniK07nI0aHJINciujjH11T72ICW5eL5Ig==
   /@svgr/babel-plugin-add-jsx-attribute/5.4.0:
-    dev: false
     engines:
       node: '>=10'
     resolution:
@@ -2861,7 +2867,6 @@ packages:
     resolution:
       integrity: sha512-3XHLtJ+HbRCH4n28S7y/yZoEQnRpl0tvTZQsHqvaeNXPra+6vE5tbRliH3ox1yZYPCxrlqaJT/Mg+75GpDKlvQ==
   /@svgr/babel-plugin-remove-jsx-attribute/5.4.0:
-    dev: false
     engines:
       node: '>=10'
     resolution:
@@ -2873,7 +2878,6 @@ packages:
     resolution:
       integrity: sha512-yTr2iLdf6oEuUE9MsRdvt0NmdpMBAkgK8Bjhl6epb+eQWk6abBaX3d65UZ3E3FWaOwePyUgNyNCMVG61gGCQ7w==
   /@svgr/babel-plugin-remove-jsx-empty-expression/5.0.1:
-    dev: false
     engines:
       node: '>=10'
     resolution:
@@ -2885,7 +2889,6 @@ packages:
     resolution:
       integrity: sha512-U9m870Kqm0ko8beHawRXLGLvSi/ZMrl89gJ5BNcT452fAjtF2p4uRzXkdzvGJJJYBgx7BmqlDjBN/eCp5AAX2w==
   /@svgr/babel-plugin-replace-jsx-attribute-value/5.0.1:
-    dev: false
     engines:
       node: '>=10'
     resolution:
@@ -2897,7 +2900,6 @@ packages:
     resolution:
       integrity: sha512-w3Be6xUNdwgParsvxkkeZb545VhXEwjGMwExMVBIdPQJeyMQHqm9Msnb2a1teHBqUYL66qtwfhNkbj1iarCG7w==
   /@svgr/babel-plugin-svg-dynamic-title/5.4.0:
-    dev: false
     engines:
       node: '>=10'
     resolution:
@@ -2909,7 +2911,6 @@ packages:
     resolution:
       integrity: sha512-C0Uy+BHolCHGOZ8Dnr1zXy/KgpBOkEUYY9kI/HseHVPeMbluaX3CijJr7D4C5uR8zrc1T64nnq/k63ydQuGt4w==
   /@svgr/babel-plugin-svg-em-dimensions/5.4.0:
-    dev: false
     engines:
       node: '>=10'
     resolution:
@@ -2921,7 +2922,6 @@ packages:
     resolution:
       integrity: sha512-7YvynOpZDpCOUoIVlaaOUU87J4Z6RdD6spYN4eUb5tfPoKGSF9OG2NuhgYnq4jSkAxcpMaXWPf1cePkzmqTPNw==
   /@svgr/babel-plugin-transform-react-native-svg/5.4.0:
-    dev: false
     engines:
       node: '>=10'
     resolution:
@@ -2933,7 +2933,6 @@ packages:
     resolution:
       integrity: sha512-hYfYuZhQPCBVotABsXKSCfel2slf/yvJY8heTVX1PCTaq/IgASq1IyxPPKJ0chWREEKewIU/JMSsIGBtK1KKxw==
   /@svgr/babel-plugin-transform-svg-component/5.5.0:
-    dev: false
     engines:
       node: '>=10'
     resolution:
@@ -2963,7 +2962,6 @@ packages:
       '@svgr/babel-plugin-svg-em-dimensions': 5.4.0
       '@svgr/babel-plugin-transform-react-native-svg': 5.4.0
       '@svgr/babel-plugin-transform-svg-component': 5.5.0
-    dev: false
     engines:
       node: '>=10'
     resolution:
@@ -2983,7 +2981,6 @@ packages:
       '@svgr/plugin-jsx': 5.5.0
       camelcase: 6.2.0
       cosmiconfig: 7.0.0
-    dev: false
     engines:
       node: '>=10'
     resolution:
@@ -2999,7 +2996,6 @@ packages:
   /@svgr/hast-util-to-babel-ast/5.5.0:
     dependencies:
       '@babel/types': 7.12.13
-    dev: false
     engines:
       node: '>=10'
     resolution:
@@ -3017,11 +3013,10 @@ packages:
       integrity: sha512-cLOCSpNWQnDB1/v+SUENHH7a0XY09bfuMKdq9+gYvtuwzC2rU4I0wKGFEp1i24holdQdwodCtDQdFtJiTCWc+w==
   /@svgr/plugin-jsx/5.5.0:
     dependencies:
-      '@babel/core': 7.12.3
+      '@babel/core': 7.12.16
       '@svgr/babel-preset': 5.5.0
       '@svgr/hast-util-to-babel-ast': 5.5.0
       svg-parser: 2.0.4
-    dev: false
     engines:
       node: '>=10'
     resolution:
@@ -5296,7 +5291,6 @@ packages:
       parse-json: 5.2.0
       path-type: 4.0.0
       yaml: 1.10.0
-    dev: false
     engines:
       node: '>=10'
     resolution:

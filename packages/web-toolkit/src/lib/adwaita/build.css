@@ -1034,6 +1034,7 @@ editablelabel > stack > text {
         opacity: 0; }
   button.sidebar-button, .Notebook .Notebook__arrow, .control-buttons button,
   .Button.flat {
+    color: inherit;
     border-color: transparent;
     background-color: transparent;
     box-shadow: inset 0 1px rgba(255, 255, 255, 0);
@@ -1072,6 +1073,7 @@ editablelabel > stack > text {
     .Button.flat:backdrop,
     .Button.flat:disabled,
     .Button.flat:backdrop:disabled {
+      color: inherit;
       border-color: transparent;
       background-color: transparent;
       box-shadow: inset 0 1px rgba(255, 255, 255, 0);
@@ -1213,6 +1215,7 @@ row.selected button.sidebar-button:not(:active):not(:checked):not(:hover):not(di
     .app-notification button:disabled::before, .osd .Button:disabled:backdrop::before, .osd .Button:disabled::before {
       opacity: 0; }
   .app-notification button.flat, .osd .Button.flat {
+    color: inherit;
     border-color: transparent;
     background-color: transparent;
     box-shadow: inset 0 1px rgba(255, 255, 255, 0);
@@ -1287,6 +1290,7 @@ row.selected button.sidebar-button:not(:active):not(:checked):not(:hover):not(di
     outline-offset: -2px; }
   
   .Button.suggested-action.flat {
+    color: inherit;
     border-color: transparent;
     background-color: transparent;
     box-shadow: inset 0 1px rgba(255, 255, 255, 0);
@@ -1325,6 +1329,7 @@ row.selected button.sidebar-button:not(:active):not(:checked):not(:hover):not(di
       opacity: 0; }
   
   .Button.suggested-action.flat:disabled {
+    color: inherit;
     border-color: transparent;
     background-color: transparent;
     box-shadow: inset 0 1px rgba(255, 255, 255, 0);
@@ -1429,6 +1434,7 @@ row.selected button.sidebar-button:not(:active):not(:checked):not(:hover):not(di
     outline-offset: -2px; }
   
   .Button.destructive-action.flat {
+    color: inherit;
     border-color: transparent;
     background-color: transparent;
     box-shadow: inset 0 1px rgba(255, 255, 255, 0);
@@ -1467,6 +1473,7 @@ row.selected button.sidebar-button:not(:active):not(:checked):not(:hover):not(di
       opacity: 0; }
   
   .Button.destructive-action.flat:disabled {
+    color: inherit;
     border-color: transparent;
     background-color: transparent;
     box-shadow: inset 0 1px rgba(255, 255, 255, 0);
@@ -1651,6 +1658,7 @@ row.selected button.sidebar-button:not(:active):not(:checked):not(:hover):not(di
   padding-right: 5px; }
 
 .ModelButton, .navigation-sidebar:not(.increase-specificity) > .List__item {
+  color: inherit;
   border-color: transparent;
   background-color: transparent;
   box-shadow: inset 0 1px rgba(255, 255, 255, 0);
@@ -1677,6 +1685,7 @@ row.selected button.sidebar-button:not(:active):not(:checked):not(:hover):not(di
 /* oldstyle toolbar buttons */
 .Toolbar button {
   margin: 1px;
+  color: inherit;
   border-color: transparent;
   background-color: transparent;
   box-shadow: inset 0 1px rgba(255, 255, 255, 0);
@@ -1745,6 +1754,7 @@ button.color {
 /* tone down as per new designs, see issue #1473 */
 .Menu .Box.circular-buttons .Button.circular,
 .list > .Row button.image-button:not(.flat) {
+  color: inherit;
   border-color: transparent;
   background-color: transparent;
   box-shadow: inset 0 1px rgba(255, 255, 255, 0);
@@ -1842,6 +1852,7 @@ button.link,
     color: #d1e1f5; }
 
 button.link {
+  color: inherit;
   border-color: transparent;
   background-color: transparent;
   box-shadow: inset 0 1px rgba(255, 255, 255, 0);
@@ -1850,6 +1861,7 @@ button.link {
   button.link::before {
     opacity: 0; }
   button.link:not(:disabled):not(.disabled), button.link:not(:disabled):not(.disabled):hover, button.link:not(:disabled):not(.disabled):active, button.link:not(:disabled):not(.disabled):checked {
+    color: inherit;
     border-color: transparent;
     background-color: transparent;
     box-shadow: inset 0 1px rgba(255, 255, 255, 0);
@@ -1968,6 +1980,7 @@ input::-webkit-outer-spin-button {
         border-radius: 5px 0 0 5px; }
   .osd .InputNumber:not(.vertical) > button.InputNumber__button.up:not(.flat),
   .osd .InputNumber:not(.vertical) > button.InputNumber__button.down:not(.flat) {
+    color: inherit;
     border-color: transparent;
     background-color: transparent;
     box-shadow: inset 0 1px rgba(255, 255, 255, 0);
@@ -1988,6 +2001,7 @@ input::-webkit-outer-spin-button {
       border-style: none solid none none; }
     .osd .InputNumber:not(.vertical) > button.InputNumber__button.up:not(.flat):hover,
     .osd .InputNumber:not(.vertical) > button.InputNumber__button.down:not(.flat):hover {
+      color: inherit;
       border-color: transparent;
       background-color: transparent;
       box-shadow: inset 0 1px rgba(255, 255, 255, 0);
@@ -2003,6 +2017,7 @@ input::-webkit-outer-spin-button {
         opacity: 0; }
     .osd .InputNumber:not(.vertical) > button.InputNumber__button.up:not(.flat):disabled,
     .osd .InputNumber:not(.vertical) > button.InputNumber__button.down:not(.flat):disabled {
+      color: inherit;
       border-color: transparent;
       background-color: transparent;
       box-shadow: inset 0 1px rgba(255, 255, 255, 0);
@@ -2973,6 +2988,7 @@ columnview row:not(.selected) cell editablelabel.editing text selection {
   box-shadow: inset 0 -1px rgba(0, 0, 0, 0.1);
   background-color: #f6f5f4; }
   .MenuBar > .MenuBar__button {
+    color: inherit;
     border-color: transparent;
     background-color: transparent;
     box-shadow: inset 0 1px rgba(255, 255, 255, 0);
@@ -3127,6 +3143,7 @@ columnview row:not(.selected) cell editablelabel.editing text selection {
     --icon-size: 16px;
     opacity: 0.3;
     transition: all 150ms cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+    color: inherit;
     border-color: transparent;
     background-color: transparent;
     box-shadow: inset 0 1px rgba(255, 255, 255, 0);
@@ -3155,6 +3172,7 @@ columnview row:not(.selected) cell editablelabel.editing text selection {
     .Notebook .Notebook__arrow:not(:disabled):not(.disabled):active {
       background-color: #cecac5; }
     .Notebook .Notebook__arrow:disabled {
+      color: inherit;
       border-color: transparent;
       background-color: transparent;
       box-shadow: inset 0 1px rgba(255, 255, 255, 0);
@@ -3179,6 +3197,7 @@ columnview row:not(.selected) cell editablelabel.editing text selection {
   .Notebook.right .Notebook__arrow {
     border-right-style: none; }
   .Notebook .Notebook__action button {
+    color: inherit;
     border-color: transparent;
     background-color: transparent;
     box-shadow: inset 0 1px rgba(255, 255, 255, 0);
@@ -3257,6 +3276,7 @@ columnview row:not(.selected) cell editablelabel.editing text selection {
  * Expander *
  ************/
 .Expander .Expander__button {
+  color: inherit;
   border-color: transparent;
   background-color: transparent;
   box-shadow: inset 0 1px rgba(255, 255, 255, 0);
@@ -4318,6 +4338,7 @@ list,
     outline-color: rgba(255, 255, 255, 0.8); }
 
 button.List__item {
+  color: inherit;
   border-color: transparent;
   background-color: transparent;
   box-shadow: inset 0 1px rgba(255, 255, 255, 0);
@@ -4349,6 +4370,7 @@ button.List__item {
       flex: 1;
       white-space: nowrap; }
   .List.rich > .List__item .Button {
+    color: inherit;
     border-color: transparent;
     background-color: transparent;
     box-shadow: inset 0 1px rgba(255, 255, 255, 0);
@@ -4553,6 +4575,10 @@ filechooserbutton.dnd-active {
 /****************
  * File chooser *
  ****************/
+.DropZone {
+  color: #cdc7c2;
+  border-color: #cdc7c2; }
+
 row image.sidebar-icon {
   opacity: 0.7; }
 
@@ -4764,6 +4790,7 @@ colorchooser .Popover.osd {
   border-radius: 5px; }
 
 .scale-popup button:hover {
+  color: inherit;
   border-color: transparent;
   background-color: transparent;
   box-shadow: inset 0 1px rgba(255, 255, 255, 0);

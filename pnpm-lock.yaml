@@ -81,7 +81,7 @@ importers:
       xml-js: 1.6.11
     specifiers:
       '@babel/cli': ^7.12.16
-      '@babel/core': ~7.12.16
+      '@babel/core': ^7.12.16
       '@babel/plugin-proposal-optional-chaining': ^7.12.16
       '@babel/plugin-transform-modules-commonjs': ^7.12.13
       '@popperjs/core': ^2.6.0

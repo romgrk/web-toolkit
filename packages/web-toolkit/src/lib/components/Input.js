@@ -10,9 +10,9 @@ import cx from 'clsx'
 import Icon from './Icon'
 import Spinner from './Spinner'
 
-function useForceUpdate(){
-    const [_, setValue] = useState(0)
-    return () => setValue(value => ++value)
+function useForceUpdate() {
+  const [_, setValue] = useState(0)
+  return () => setValue(value => ++value)
 }
 
 function Input({

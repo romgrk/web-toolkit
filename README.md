@@ -20,6 +20,35 @@ strangely.  And maybe Apple too, but they're not in the OSS business so I avoid 
 ![demo-3](https://raw.githubusercontent.com/romgrk/web-toolkit/master/static/demo-3.png)
 ![demo-4](https://raw.githubusercontent.com/romgrk/web-toolkit/master/static/demo-4.png)
 
+## Usage
+
+```javascript
+import React from 'react'
+import {
+  Box,
+  Button,
+  Input,
+  Paned,
+} from 'web-toolkit'
+import 'web-toolkit/lib/index.css'
+
+function App() {
+  return (
+    <div className='App background Box vertical compact'>
+      <Paned defaultSize={200} fill border='handle'>
+        Sidebar
+        <Box fill>
+          <Button>Click Me</Button>
+          <Input />
+        </Box>
+      </Paned>
+    </div>
+  )
+}
+
+export default App
+```
+
 ## Roadmap
 
 The first goal is to port Adwaita.css for web usage, which means removing every GTK+ CSS

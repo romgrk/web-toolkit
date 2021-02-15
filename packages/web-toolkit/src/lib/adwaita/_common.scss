@@ -2850,6 +2850,10 @@ columnview row:not(.selected) cell editablelabel.editing text selection {
     display: flex;
     justify-content: center;
     align-items: center;
+
+    padding: 0;
+    margin: 0;
+    border: none;
   }
   .Expander__button .Icon.arrow {
     transition: $page_switcher_transition;

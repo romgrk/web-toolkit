@@ -4185,6 +4185,11 @@ filechooserbutton.dnd-active {
  * File chooser *
  ****************/
 
+.DropZone {
+  color: $borders_color;
+  border-color: $borders_color;
+}
+
 $_placesidebar_icons_opacity: 0.7;
 
 row image.sidebar-icon { opacity: $_placesidebar_icons_opacity; } // dim the sidebar icons

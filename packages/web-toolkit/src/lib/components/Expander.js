@@ -124,7 +124,7 @@ class Expander extends React.Component {
         typeof label === 'function' ?
           label({ toggle }) :
         typeof label === 'string' ?
-          <button className={triggerClassName} onClick={toggle}>
+          <button type='button' className={triggerClassName} onClick={toggle}>
             <Label>{label}</Label>
             <Icon name='pan-start' className='arrow' />
           </button> :

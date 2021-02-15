@@ -2,16 +2,18 @@
   "name": "web-toolkit",
   "version": "0.2.2",
   "repository": "https://github.com/romgrk/web-toolkit",
-  "main": "build/index.js",
+  "main": "lib/index.js",
   "scripts": {
     "start": "nf start",
-    "build": "npm run build:css && npm run build:js",
+    "build": "npm run build:css && npm run build:icons && npm run build:js",
     "start:js": "node scripts/start.js",
-    "build:js": "node scripts/build.js",
+    "build:js": "NODE_ENV=production npx babel src/lib --out-dir lib",
+    "// build:js": "node scripts/build.js",
     "demo": "node scripts/demo.js",
     "test": "node scripts/test.js",
     "start:css": "nodemon --exec 'npm run build:css' -e 'scss'",
-    "build:css": "sassc src/lib/adwaita/adwaita.scss src/lib/adwaita/build.css",
+    "build:css": "sassc src/lib/adwaita/adwaita.scss src/lib/adwaita/build.css && cp src/lib/adwaita/build.css lib/index.css",
+    "build:icons": "cp -r src/lib/assets lib/",
     "predeploy": "PUBLIC_URL=/web-toolkit npm run build:js",
     "deploy": "gh-pages -d build",
     "nop": "true"
@@ -38,8 +40,10 @@
     "react-dom": "^17.0.1"
   },
   "devDependencies": {
-    "@babel/core": "7.6.0",
+    "@babel/cli": "^7.12.16",
+    "@babel/core": "^7.12.16",
     "@babel/plugin-proposal-optional-chaining": "^7.12.16",
+    "@babel/plugin-transform-modules-commonjs": "^7.12.13",
     "@svgr/webpack": "4.3.2",
     "@typescript-eslint/eslint-plugin": "^2.2.0",
     "@typescript-eslint/parser": "^2.2.0",
@@ -82,9 +86,9 @@
     "postcss-preset-env": "6.7.0",
     "postcss-safe-parser": "4.0.1",
     "react": "^17.0.1",
-    "react-dom": "^17.0.1",
     "react-app-polyfill": "^1.0.4",
     "react-dev-utils": "^9.1.0",
+    "react-dom": "^17.0.1",
     "resolve": "1.12.0",
     "resolve-url-loader": "3.1.0",
     "sass-loader": "7.2.0",
@@ -167,7 +171,8 @@
       "react-app"
     ],
     "plugins": [
-      "@babel/plugin-proposal-optional-chaining"
+      "@babel/plugin-proposal-optional-chaining",
+      "@babel/plugin-transform-modules-commonjs"
     ]
   }
 }

@@ -178,7 +178,7 @@ module.exports = function(webpackEnv) {
       // There will be one main bundle, and one file per asynchronous chunk.
       // In development, it does not produce real files.
       filename: isEnvProduction
-        ? 'index.js'
+        ? '[name].js'
         : isEnvDemo 
             ? 'static/js/[name].[contenthash:8].js'
             : isEnvDevelopment && 'static/js/bundle.js', // CRL: Updated output.filename
@@ -211,7 +211,8 @@ module.exports = function(webpackEnv) {
       globalObject: 'this',
     },
     optimization: {
-      minimize: (isEnvDemo || isEnvProduction), // CRL
+      minimize: false, // CRL
+      // minimize: (isEnvDemo || isEnvProduction), // CRL
       minimizer: [
         // This is only used in production mode
         new TerserPlugin({

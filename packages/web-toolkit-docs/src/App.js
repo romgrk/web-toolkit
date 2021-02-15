@@ -1,10 +1,11 @@
+import React from 'react'
 import {
   Box,
   Button,
   Input,
   Paned,
 } from 'web-toolkit'
-import 'web-toolkit/build/index.css'
+import 'web-toolkit/lib/index.css'
 import './App.css'
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
         Sidebar
         <Box fill>
           <Button>Click Me</Button>
+          <Input />
         </Box>
       </Paned>
     </div>

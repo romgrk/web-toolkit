@@ -19,6 +19,7 @@ yarn-error.log*
 # but keep the rest for source-maps
 src/demo
 src/lib/assets
+lib/assets/icons/*.svg
 
 # Development folders and files
 public

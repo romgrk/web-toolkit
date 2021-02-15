@@ -20,31 +20,35 @@ function Label({
   danger,
   italic,
   noSelect,
+  ...rest
 }) {
+  const as = rest.htmlFor ? 'label' : 'span'
   return (
-    <span
-      className={
-        cx(
-          'Label',
-          align ? `align-${align}` : undefined,
-          fill === undefined ? undefined : fill === true ? 'fill' : `fill-${fill}`,
-          {
-            ellipsis,
-            title,
-            disabled,
-            info,
-            success,
-            warning,
-            danger,
-            'text-muted': muted,
-            'text-italic': italic,
-            'user-select-none': noSelect,
-          }
-        ) + ' ' + cx(className)
-      }
-    >
-      {children}
-    </span>
+    React.createElement(
+      as,
+      {
+        className:
+          cx(
+            'Label',
+            align ? `align-${align}` : undefined,
+            fill === undefined ? undefined : fill === true ? 'fill' : `fill-${fill}`,
+            {
+              ellipsis,
+              title,
+              disabled,
+              info,
+              success,
+              warning,
+              danger,
+              'text-muted': muted,
+              'text-italic': italic,
+              'user-select-none': noSelect,
+            }
+          ) + ' ' + cx(className),
+        ...rest
+      },
+      children
+    )
   )
 }
 

@@ -15,9 +15,13 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
+# Ignore demo & assets which are copied in /lib,
+# but keep the rest for source-maps
+src/demo
+src/lib/assets
+
 # Development folders and files
 public
-src
 scripts
 config
 demo

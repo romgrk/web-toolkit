@@ -7,7 +7,7 @@
     "start": "nf start",
     "build": "npm run build:css && npm run build:icons && npm run build:js",
     "start:js": "node scripts/start.js",
-    "build:js": "NODE_ENV=production npx babel src/lib --out-dir lib",
+    "build:js": "NODE_ENV=production npx babel src/lib --out-dir lib --source-maps",
     "// build:js": "node scripts/build.js",
     "demo": "node scripts/demo.js",
     "test": "node scripts/test.js",

@@ -54,19 +54,24 @@ button {
   font-family: inherit; }
 
 .text-info {
-  color: #3584e4; }
+  color: #3584e4;
+  --icon-color: #3584e4; }
 
 .text-success {
-  color: #33d17a; }
+  color: #33d17a;
+  --icon-color: #33d17a; }
 
 .text-warning {
-  color: #f57900; }
+  color: #f57900;
+  --icon-color: #f57900; }
 
 .text-danger {
-  color: #e01b24; }
+  color: #e01b24;
+  --icon-color: #e01b24; }
 
 .text-muted {
-  color: #929595; }
+  color: #929595;
+  --icon-color: #929595; }
 
 .text-italic {
   font-style: italic; }

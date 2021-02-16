@@ -56,7 +56,6 @@ function Table({
     useResizeColumns,
     useFlexLayout,
   ].filter(Boolean))
-  console.log(getTableBodyProps())
 
   const RenderRow = React.useCallback(
     ({ index, style }) => {

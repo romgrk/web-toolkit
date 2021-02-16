@@ -20,7 +20,7 @@ class Dropdown extends React.Component {
   static propTypes = {
     className: prop.string,
     triggerClassName: prop.string,
-    size: prop.oneOf(['small', 'medium', 'large']),
+    size: prop.oneOf(['mini', 'small', 'medium', 'large', 'huge']),
     align: prop.oneOf(['left', 'right']),
     label: prop.node,
     options: prop.arrayOf(prop.shape({
@@ -173,6 +173,7 @@ class Dropdown extends React.Component {
       })
       trigger =
         <Button
+          size={size}
           className={buttonClassName}
           loading={loading}
           disabled={disabled}

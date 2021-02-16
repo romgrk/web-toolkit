@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import prop from 'prop-types'
 import {
   useTable,
@@ -26,20 +26,15 @@ const propTypes = {
 
 function Table({
   className,
-  columns,
+  columns: columnsValue,
   data,
   sortable,
   filterable,
   ...rest
 }) {
 
-  const defaultColumn = React.useMemo(
-    () => ({
-      width: 150,
-    }),
-    []
-  )
-
+  const defaultColumn = useMemo(() => ({ width: 150, }), [])
+  const columns = useMemo(() => transformColumns(columnsValue), [columnsValue])
   // const scrollbarWidth = getScrollbarWidth()
 
   const {
@@ -143,3 +138,13 @@ function Table({
 Table.propTyes = propTypes
 
 export default Table
+
+
+function transformColumns(cs) {
+  return cs.map(c => {
+    const nc = { ...c }
+    if (nc.disableFilters !== false)
+      nc.disableFilters = true
+    return nc
+  })
+}

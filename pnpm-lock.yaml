@@ -1,6 +1,8 @@
 importers:
   .:
     specifiers: {}
+  ../../.cache/npm-packages/pnpm-global:
+    specifiers: {}
   packages/web-toolkit:
     dependencies:
       '@babel/runtime': 7.12.13

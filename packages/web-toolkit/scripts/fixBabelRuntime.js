@@ -5,24 +5,29 @@
 const util = require('util')
 util.inspect.defaultOptions = {
   colors: true,
-  depth: 2
+  depth: 2,
+  maxArrayLength: Infinity,
 }
 
 module.exports = function(fileInfo, api, options) {
   const i = api.jscodeshift(fileInfo.source)
 
-  return i.find(api.j.VariableDeclaration)
+  // console.log(Object.keys(api.j))
+
+  return i.find(api.j.CallExpression)
     .replaceWith((node, ...rest) => {
-      const name = node.value.declarations[0].id.name
-      const init = node.value.declarations[0].init
-      if (name === '_interopRequireWildcard') {
-        init.arguments[0].value = '@babel/runtime/helpers/interopRequireWildcard'
-        init.arguments[0].raw = '"@babel/runtime/helpers/interopRequireWildcard"'
-      }
-      if (name === '_interopRequireDefault') {
-        init.arguments[0].value = '@babel/runtime/helpers/interopRequireDefault'
-        init.arguments[0].raw = '"@babel/runtime/helpers/interopRequireDefault"'
-      }
+      if (node.value.callee.name !== 'require')
+        return node.value
+      const arg = node.value.arguments[0]
+      const moduleName = arg.value
+      const pos = moduleName.lastIndexOf('@babel/runtime')
+      if (pos === -1)
+        return node.value
+      const partialName = moduleName.slice(pos)
+      // console.log([node.value.callee.name, moduleName, partialName])
+
+      arg.value = partialName
+      arg.raw = `"${partialName}"`
       return node.value
     })
     .toSource()

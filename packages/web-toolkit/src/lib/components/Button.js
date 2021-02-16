@@ -13,6 +13,7 @@ function Button({
   children,
   icon,
   className,
+  type,
   size,
   disabled,
   loading,
@@ -43,6 +44,7 @@ function Button({
         'destructive-action': danger,
       }) + ' ' + cx(className)}
       disabled={disabled || loading}
+      type={type}
       ref={ref}
       {...rest}
     >
@@ -67,6 +69,7 @@ Export.propTypes = {
 
 Export.defaultProps = {
   size: 'medium',
+  type: 'button',
 }
 
 export default Export

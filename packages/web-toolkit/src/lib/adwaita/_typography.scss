@@ -47,23 +47,23 @@ button {
 
 .text-info {
   color: $info_color;
-  --icon-color: $info_color;
+  --icon-color: #{$info_color};
 }
 .text-success {
   color: $success_color;
-  --icon-color: $success_color;
+  --icon-color: #{$success_color};
 }
 .text-warning {
   color: $warning_color;
-  --icon-color: $warning_color;
+  --icon-color: #{$warning_color};
 }
 .text-danger {
   color: $destructive_color;
-  --icon-color: $destructive_color;
+  --icon-color: #{$destructive_color};
 }
 .text-muted {
   color: $insensitive_fg_color;
-  --icon-color: $insensitive_fg_color;
+  --icon-color: #{$insensitive_fg_color};
 }
 
 .text-italic {

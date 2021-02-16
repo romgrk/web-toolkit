@@ -3286,7 +3286,10 @@ columnview row:not(.selected) cell editablelabel.editing text selection {
   border-radius: 5px;
   display: flex;
   justify-content: center;
-  align-items: center; }
+  align-items: center;
+  padding: 0;
+  margin: 0;
+  border: none; }
   .Expander .Expander__button::before {
     opacity: 0; }
   .Expander .Expander__button {

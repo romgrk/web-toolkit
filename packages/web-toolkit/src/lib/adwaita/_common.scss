@@ -711,24 +711,20 @@ $_input_padding: 8px;
 }
 
 // textarea component
-.TextView {
+.TextArea {
+  display: inline-block;
+  padding: 0;
+  height: min-content !important;
+  width: min-content !important;
+
   > textarea {
-    @extend %view;
-
-    border-color: $borders_color;
-    border-radius: $button_radius;
-    border-spacing: 6px;
-    transition: all 200ms $ease-out-quad;
-
-    @include entry(normal);
-
-    @include focus-ring($focus-state: ':focus-within', $method: 'after');
-
-    &::selection { @extend %selected_items; }
-  }
-
-  &.dnd-active {
-    caret-color: $drop_target_color;
+    border: none;
+    background: transparent;
+    padding: 0 0.5em;
+    line-height: 1.5em;
+    &:focus {
+      outline: none;
+    }
   }
 }
 

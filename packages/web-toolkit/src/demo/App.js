@@ -32,7 +32,7 @@ import {
   Spinner,
   Switch,
   Table,
-  Template,
+  TextArea,
   Toolbar,
 } from '../lib'
 
@@ -597,6 +597,7 @@ function DemoInput() {
             <Input placeholder='City' />
             <Input placeholder='Country' />
           </div>
+          <TextArea />
           <LevelBar value={0} />
           <LevelBar value={1} />
           <LevelBar value={2} />

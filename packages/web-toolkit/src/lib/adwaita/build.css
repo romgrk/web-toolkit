@@ -220,17 +220,13 @@ button {
   width: 100%;
   height: 100%; }
 
-.view, .IconView,
-.TextView > textarea {
+.view, .IconView {
   color: black;
   background-color: #ffffff; }
-  .view:disabled, .IconView:disabled,
-  .TextView > textarea:disabled {
+  .view:disabled, .IconView:disabled {
     color: #929595;
     background-color: #f7f6f5; }
-  .view.selected:focus, .selected.IconView:focus, .view.selected, .selected.IconView,
-  .TextView > textarea.selected:focus,
-  .TextView > textarea.selected {
+  .view.selected:focus, .selected.IconView:focus, .view.selected, .selected.IconView {
     border-radius: 3px; }
 
 .IconView {
@@ -781,42 +777,18 @@ button {
   .table .Input.flat:focus-within, .table .Input:focus-within {
     border-color: #3584e4; }
 
-.TextView > textarea {
-  border-color: #cdc7c2;
-  border-radius: 5px;
-  border-spacing: 6px;
-  transition: all 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  color: black;
-  border-color: #cdc7c2;
-  background-color: #ffffff; }
-  .TextView > textarea {
-    position: relative;
-    outline: none;
-    overflow: visible; }
-  .TextView > textarea::after {
-    content: '';
-    position: absolute;
-    pointer-events: none;
-    z-index: 2;
-    display: inline-block;
-    border: 2px solid transparent;
-    border-radius: inherit;
-    transition: all 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    top: -4px;
-    left: -4px;
-    width: calc(100% - -4px);
-    height: calc(100% - -4px); }
-  .TextView > textarea:focus-within {
-    outline: none; }
-  .TextView > textarea:focus-within::after {
-    border: 2px solid rgba(53, 132, 228, 0.5);
-    top: -2px;
-    left: -2px;
-    width: 100%;
-    height: 100%; }
-
-.TextView.dnd-active {
-  caret-color: #2ec27e; }
+.TextArea {
+  display: inline-block;
+  padding: 0;
+  height: min-content !important;
+  width: min-content !important; }
+  .TextArea > textarea {
+    border: none;
+    background: transparent;
+    padding: 0 0.5em;
+    line-height: 1.5em; }
+    .TextArea > textarea:focus {
+      outline: none; }
 
 /*******************
  * Editable Labels *
@@ -1092,6 +1064,9 @@ editablelabel > stack > text {
   .Button.text-button {
     padding-left: 16px;
     padding-right: 16px; }
+    .Notebook .text-button.Notebook__arrow > .Button__icon, .control-buttons button.text-button > .Button__icon,
+    .Button.text-button > .Button__icon {
+      margin-right: 0.5em; }
   .Notebook .text-button.image-button.Notebook__arrow, .control-buttons button.text-button.image-button,
   .Button.text-button.image-button {
     padding-left: 8px;
@@ -4842,18 +4817,13 @@ tooltip.csd {
   box-shadow: none; }
 
 .view.selected:focus, .view.selected, .selected.IconView:focus, .selected.IconView, .Flowbox > .Flowbox__child.selected, .Grid > .Grid__child.selected,
-.Input > .Input__area > input::selection,
-.TextView > textarea.selected:focus,
-.TextView > textarea.selected, .TextView > textarea::selection, .ModelButton.selected, .InputNumber:not(.vertical) > .Input__area > input::selection, .InputNumber.vertical > .Input__area > input > .Input__area > input::selection, .InputNumber.vertical > .Input__area > input::selection, .List__item.selected, .navigation-sidebar:not(.increase-specificity) > .selected.List__item, calendar > grid > .Label.day-number.selected {
+.Input > .Input__area > input::selection, .ModelButton.selected, .InputNumber:not(.vertical) > .Input__area > input::selection, .InputNumber.vertical > .Input__area > input > .Input__area > input::selection, .InputNumber.vertical > .Input__area > input::selection, .List__item.selected, .navigation-sidebar:not(.increase-specificity) > .selected.List__item, calendar > grid > .Label.day-number.selected {
   background-color: #3584e4; }
   .view.selected:focus, .view.selected, .selected.IconView:focus, .selected.IconView, .Flowbox > .Flowbox__child.selected, .Grid > .Grid__child.selected,
-  .Input > .Input__area > input::selection,
-  .TextView > textarea.selected:focus,
-  .TextView > textarea.selected, .TextView > textarea::selection, .ModelButton.selected, .InputNumber:not(.vertical) > .Input__area > input::selection, .InputNumber.vertical > .Input__area > input > .Input__area > input::selection, .InputNumber.vertical > .Input__area > input::selection, .List__item.selected, .navigation-sidebar:not(.increase-specificity) > .selected.List__item, calendar > grid > .Label.day-number.selected {
+  .Input > .Input__area > input::selection, .ModelButton.selected, .InputNumber:not(.vertical) > .Input__area > input::selection, .InputNumber.vertical > .Input__area > input > .Input__area > input::selection, .InputNumber.vertical > .Input__area > input::selection, .List__item.selected, .navigation-sidebar:not(.increase-specificity) > .selected.List__item, calendar > grid > .Label.day-number.selected {
     color: #ffffff; }
     .Label.disabled::selection, .view.selected:disabled, .selected.IconView:disabled, .Flowbox > .Flowbox__child.selected:disabled, .Grid > .Grid__child.selected:disabled,
-    .Input > .Input__area > input:disabled::selection,
-    .TextView > textarea.selected:disabled, .TextView > textarea:disabled::selection, .ModelButton.selected:disabled, .InputNumber:not(.vertical) > .Input__area > input:disabled::selection, .InputNumber.vertical > .Input__area > input > .Input__area > input:disabled::selection, .InputNumber.vertical > .Input__area > input:disabled::selection, .List__item.selected:disabled, calendar > grid > .Label.day-number.selected:disabled {
+    .Input > .Input__area > input:disabled::selection, .ModelButton.selected:disabled, .InputNumber:not(.vertical) > .Input__area > input:disabled::selection, .InputNumber.vertical > .Input__area > input > .Input__area > input:disabled::selection, .InputNumber.vertical > .Input__area > input:disabled::selection, .List__item.selected:disabled, calendar > grid > .Label.day-number.selected:disabled {
       color: #9ac2f2; }
 
 .monospace {

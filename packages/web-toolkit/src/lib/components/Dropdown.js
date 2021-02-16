@@ -23,6 +23,7 @@ class Dropdown extends React.Component {
     size: prop.oneOf(['mini', 'small', 'medium', 'large', 'huge']),
     align: prop.oneOf(['left', 'right']),
     label: prop.node,
+    value: prop.any,
     options: prop.arrayOf(prop.shape({
       value: prop.any.isRequired,
       label: prop.node.isRequired,
@@ -31,6 +32,7 @@ class Dropdown extends React.Component {
     disabled: prop.bool,
     loading: prop.bool,
     open: prop.bool,
+    input: prop.bool,
     filterKey: prop.string,
     filter: prop.func,
     onClose: prop.func,
@@ -153,11 +155,22 @@ class Dropdown extends React.Component {
 
   render() {
     const {
-      size,
       className,
+      triggerClassName,
+      size,
+      align,
+      label: _label,
+      value: _value,
+      options: _options,
       disabled,
       loading,
+      open: _open,
       input,
+      filterKey,
+      filter,
+      onClose,
+      onOpen,
+      ...rest
     } = this.props
     const open = this.isOpen()
     const value = this.getValue()
@@ -179,6 +192,7 @@ class Dropdown extends React.Component {
           disabled={disabled}
           onClick={this.onToggle}
           ref={ref => ref && (this.trigger = ref)}
+          {...rest}
         >
           <Label align='left' className='Box__fill'>
             {label}
@@ -203,6 +217,7 @@ class Dropdown extends React.Component {
           onChange={this.onInputChange}
           iconAfter='pan-down'
           ref={ref => ref && (this.trigger = ref)}
+          {...rest}
         >
           {wrapLabel(label)}
         </Input>

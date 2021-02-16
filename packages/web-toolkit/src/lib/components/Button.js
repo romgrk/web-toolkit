@@ -53,7 +53,7 @@ function Button({
       }
       {icon &&
         (typeof icon === 'string' ?
-          <Icon name={icon} colored /> : icon)
+          <Icon name={icon} colored className='Button__icon' /> : icon)
       }
       {children}
     </button>

@@ -869,6 +869,10 @@ $_dot_color: if($variant=='light', $selected_bg_color,
     &.text-button {
       padding-left: 16px;
       padding-right: 16px;
+
+      & > .Button__icon {
+        margin-right: 0.5em;
+      }
     }
 
     &.text-button.image-button {

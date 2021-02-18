@@ -32,6 +32,7 @@ class Dropdown extends React.Component {
     disabled: prop.bool,
     loading: prop.bool,
     open: prop.bool,
+    allowClear: prop.bool,
     input: prop.bool,
     filterKey: prop.string,
     filter: prop.func,
@@ -165,6 +166,7 @@ class Dropdown extends React.Component {
       disabled,
       loading,
       open: _open,
+      allowClear,
       input,
       filterKey,
       filter,
@@ -241,6 +243,17 @@ class Dropdown extends React.Component {
           <Label muted italic>No option found</Label>
         </Menu.Item>
       )
+
+    if (allowClear) {
+      actualChildren.unshift(
+        <Menu.Button
+          key='null_item'
+          onClick={() => this.select(undefined, undefined)}
+        >
+          <Label muted italic>None</Label>
+        </Menu.Button>
+      )
+    }
 
     const popoverClassName = cx('Dropdown__menu', size)
     const menu =

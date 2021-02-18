@@ -17,8 +17,8 @@
     "build:css": "sassc src/lib/adwaita/adwaita.scss src/lib/adwaita/build.css && cp src/lib/adwaita/build.css lib/index.css",
     "build:icons": "node scripts/svgToJs.js",
     "prepare": "npm run build",
-    "predeploy": "PUBLIC_URL=/web-toolkit npm run build:js",
-    "deploy": "gh-pages -d build",
+    "predeploy": "PUBLIC_URL=/web-toolkit npm run demo",
+    "deploy": "gh-pages -d demo",
     "nop": "true"
   },
   "license": "MIT",

@@ -1,19 +1,17 @@
 # web-toolkit
 
-This is a work in progress web toolkit using GTK's default theme, Adwaita.
-
-[See live demo](https://romgrk.github.io/web-toolkit/)
-
-**HELP WANTED**: I need help to make this into a production-ready library.
-Come help me! Checkout the open issues or [ask here](https://github.com/romgrk/web-toolkit/issues/2)
-if you're unsure how you can help.
+This is a web toolkit using GTK's default theme, Adwaita. The framework is currently
+usable but is to be considered in **alpha** state, as a few parts are still raw and
+the API is subject to change until the 1.0.0 release.
 
 ## Why
 
 All UI design frameworks suck. No one knows how to design. Except for Gnome designers
-strangely.  And maybe Apple too, but they're not in the OSS business so I avoid them.
+strangely. And maybe Apple too, but they're not in the OSS business so I avoid them.
 
-## Screenshots
+## Showcase
+
+[See live demo](https://romgrk.github.io/web-toolkit/)
 
 ![demo-1](https://raw.githubusercontent.com/romgrk/web-toolkit/master/static/demo-1.png)
 ![demo-2](https://raw.githubusercontent.com/romgrk/web-toolkit/master/static/demo-2.png)
@@ -36,10 +34,14 @@ function App() {
   return (
     <div className='App background Box vertical compact'>
       <Paned defaultSize={200} fill border='handle'>
-        Sidebar
-        <Box fill>
-          <Button>Click Me</Button>
-          <Input />
+        <Box vertical>
+          I'm a sidebar
+        </Box>
+        <Box fill vertical>
+          <Input.Group>
+            <Input />
+            <Button>Submit</Button>
+          </Input.Group>
         </Box>
       </Paned>
     </div>
@@ -49,6 +51,9 @@ function App() {
 export default App
 ```
 
+At the moment, the [source code](https://github.com/romgrk/web-toolkit/blob/master/packages/web-toolkit/src/demo/App.js)
+for the [live demo](https://romgrk.github.io/web-toolkit/) is the best place to understand how to use the framework.
+
 ## Roadmap
 
 The first goal is to port Adwaita.css for web usage, which means removing every GTK+ CSS
@@ -57,6 +62,12 @@ proprietary quirks.
 The second goal is to create components to make it easy to use the framework. For now the
 demo components are being created with React but I've been thinking about making a Solid
 version. But the first goal should allow any UI framework to reuse the CSS classes.
+
+## Help Wanted!
+
+I need help to make this into a production-ready library.
+Come help me! Checkout the open issues or [ask here](https://github.com/romgrk/web-toolkit/issues/2)
+if you're unsure how you can help.
 
 ## Contributions
 

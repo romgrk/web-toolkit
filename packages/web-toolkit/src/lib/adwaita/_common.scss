@@ -135,7 +135,7 @@ $popover_radius: $button_radius + 4;
     display: flex;
     flex-direction: row;
     & > *:not(:last-child) {
-      margin-right: 1em;
+      margin-right: 1rem;
     }
     &.compact > *:not(:last-child) {
       margin-right: 0;
@@ -145,7 +145,7 @@ $popover_radius: $button_radius + 4;
     display: flex;
     flex-direction: column;
     & > *:not(:last-child) {
-      margin-bottom: 1em;
+      margin-bottom: 1rem;
     }
     &.compact > *:not(:last-child) {
       margin-bottom: 0;

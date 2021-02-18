@@ -3,11 +3,17 @@
  */
 
 import React from 'react'
+import prop from 'prop-types'
 import cx from 'clsx'
+
+const propTypes = {
+  size: prop.oneOf(['mini', 'small', 'medium', 'large', 'huge']),
+}
 
 function Label({
   children,
   className,
+  size,
   align,
   fill,
   ellipsis,
@@ -19,6 +25,7 @@ function Label({
   warning,
   danger,
   italic,
+  bold,
   noSelect,
   ...rest
 }) {
@@ -30,6 +37,7 @@ function Label({
         className:
           cx(
             'Label',
+            size,
             align ? `align-${align}` : undefined,
             fill === undefined ? undefined : fill === true ? 'fill' : `fill-${fill}`,
             {
@@ -42,6 +50,7 @@ function Label({
               danger,
               'text-muted': muted,
               'text-italic': italic,
+              'text-bold': bold,
               'user-select-none': noSelect,
             }
           ) + ' ' + cx(className),
@@ -51,5 +60,7 @@ function Label({
     )
   )
 }
+
+Label.propTypes = propTypes
 
 export default Label

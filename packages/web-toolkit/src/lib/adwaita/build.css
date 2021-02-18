@@ -76,6 +76,9 @@ button {
 .text-italic {
   font-style: italic; }
 
+.text-bold {
+  font-weight: 700; }
+
 /***************
  * Selections  *
  ***************/
@@ -157,7 +160,7 @@ button {
   display: flex;
   flex-direction: row; }
   .Box.horizontal > *:not(:last-child) {
-    margin-right: 1em; }
+    margin-right: 1rem; }
   .Box.horizontal.compact > *:not(:last-child) {
     margin-right: 0; }
 
@@ -165,7 +168,7 @@ button {
   display: flex;
   flex-direction: column; }
   .Box.vertical > *:not(:last-child) {
-    margin-bottom: 1em; }
+    margin-bottom: 1rem; }
   .Box.vertical.compact > *:not(:last-child) {
     margin-bottom: 0; }
 

@@ -53,6 +53,22 @@ button {
   font-size: inherit;
   font-family: inherit; }
 
+code {
+  font-size: 0.8em;
+  padding: 1px 4px;
+  color: black;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 3px; }
+
+pre {
+  font-size: 0.8em;
+  padding: 1px 4px;
+  color: black;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 3px; }
+
 .text-info {
   color: #3584e4;
   --icon-color: #3584e4; }

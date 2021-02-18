@@ -21,7 +21,7 @@ class Expander extends React.Component {
     transition: prop.oneOf(['horizontal', 'vertical']),
     size: prop.number,
     contents: prop.bool,
-    fitContent: prop.number,
+    fitContent: prop.bool,
     onChange: prop.func,
   }
 

@@ -7,8 +7,12 @@ import React, { useState, useRef, forwardRef } from 'react'
 import prop from 'prop-types'
 import cx from 'clsx'
 
+import useControlled from '../utils/useControlled'
+import Button from './Button'
 import Icon from './Icon'
 import Spinner from './Spinner'
+
+const noop = () => {}
 
 function useForceUpdate() {
   const [_, setValue] = useState(0)
@@ -17,6 +21,8 @@ function useForceUpdate() {
 
 function Input({
   type = 'text',
+  value: valueProp,
+  defaultValue,
   className,
   size,
   loading,
@@ -29,7 +35,9 @@ function Input({
   warning,
   progress,
   children,
+  allowClear,
   onChange,
+  onClickIconAfter,
   ...rest
 }, ref) {
 
@@ -39,7 +47,7 @@ function Input({
   const forceUpdate = useForceUpdate()
   const inputRef = useRef()
   const isControlled = typeof rest.value === 'string'
-  const value = isControlled ? rest.value : (inputRef.current?.value || rest.defaultValue || '')
+  const [value, setValue] = useControlled(valueProp, defaultValue, onChange)
 
   const inputClassName =
     cx('Input', size, { flat, disabled, error, warning, progress: progress !== undefined })
@@ -48,13 +56,28 @@ function Input({
   const onInputChange = ev => {
     if (!isControlled)
       forceUpdate()
-    onChange && onChange(ev.target.value, ev)
+    setValue(ev.target.value, ev)
   }
 
   const onClickContainer = ev => {
     if (ev.target !== inputRef.current && inputRef.current)
       inputRef.current.focus()
   }
+
+  if (allowClear) {
+    if (value) {
+      iconAfter = 'window-close'
+      onClickIconAfter = () => setValue('')
+    }
+    else {
+      iconAfter = undefined
+    }
+  }
+
+  const iconAfterChildren =
+    typeof iconAfter === 'string' ? 
+      <Icon name={iconAfter} /> :
+      iconAfter
 
   return (
     <div className={inputClassName} ref={ref} onClick={onClickContainer}>
@@ -74,6 +97,7 @@ function Input({
           disabled={disabled}
           className={value === '' ? 'empty' : undefined}
           ref={inputRef}
+          value={value}
           onChange={onInputChange}
           {...rest}
         />
@@ -92,13 +116,20 @@ function Input({
         </div>
       }
       {iconAfter &&
-        <span  className='Input__right'>
-          {
-            typeof iconAfter === 'string' ? 
-              <Icon name={iconAfter} /> :
-              iconAfter
-          }
-        </span>
+        (onClickIconAfter ?
+          <Button
+            className='Input__right'
+            flat
+            size={size}
+            onClick={onClickIconAfter}
+          >
+            {iconAfterChildren}
+          </Button>
+          :
+          <span className='Input__right'>
+            {iconAfterChildren}
+          </span>
+        )
       }
     </div>
   )
@@ -117,10 +148,13 @@ ExportedInput.Group = forwardRef(Group)
 
 ExportedInput.propTypes = {
   size: prop.oneOf(['mini', 'small', 'medium', 'large', 'huge']),
+  allowClear: prop.bool,
+  onChange: prop.func,
 }
 
 ExportedInput.defaultProps = {
   size: 'medium',
+  onChange: noop,
 }
 
 export default ExportedInput

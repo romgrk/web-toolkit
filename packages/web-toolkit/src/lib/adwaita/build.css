@@ -560,7 +560,12 @@ button {
       margin-right: 6px; }
     .InputNumber.vertical > .Input__area > input .Input__right, .InputNumber:not(.vertical) .Input__right,
     .Input .Input__right {
-      margin-left: 6px; }
+      margin: 0;
+      margin-left: 6px;
+      padding: 0; }
+    .InputNumber.vertical > .Input__area > input .Input__right.Button, .InputNumber:not(.vertical) .Input__right.Button,
+    .Input .Input__right.Button {
+      opacity: 0.8; }
     .InputNumber.vertical > .Input__area > input.flat, .flat.InputNumber:not(.vertical),
     .Input.flat:focus-within, .window-inactive .Input.flat,
     .Input.flat:disabled, .window-inactive .Input.flat:disabled,

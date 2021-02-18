@@ -44,6 +44,23 @@ button {
   font-family: inherit;
 }
 
+code {
+  font-size: 0.8em;
+  padding: 1px 4px;
+  color: #222;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+pre {
+  font-size: 0.8em;
+  padding: 1px 4px;
+  color: #222;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
 
 .text-info {
   color: $info_color;

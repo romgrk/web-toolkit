@@ -2575,8 +2575,7 @@ pathbar > button.slider-button {
   max-width: 100%;
   overflow: hidden;
   border: 1px solid #d7d2ce;
-  background-color: #ffffff;
-  overflow-x: hidden; }
+  background-color: #ffffff; }
   .table {
     outline: 0 solid transparent;
     outline-offset: 4px; }
@@ -2594,11 +2593,21 @@ pathbar > button.slider-button {
     border-left-color: #ddd9d6;
     border-top: #ddd9d6; }
   .table .table__header {
-    flex: 0 0; }
+    flex: 0 0 auto;
+    width: 100%;
+    height: min-content;
+    overflow: hidden;
+    user-select: none; }
+  .table .table__header__content {
+    min-width: 100%;
+    width: min-content;
+    height: min-content;
+    overflow-x: scroll;
+    overflow-y: hidden; }
   .table .table__body {
     flex: 1;
     overflow-y: hidden;
-    overflow-x: scroll; }
+    overflow-x: hidden; }
   .table .table__body > div {
     width: 100%;
     margin: 0; }
@@ -2630,15 +2639,33 @@ pathbar > button.slider-button {
     cursor: default; }
     .table .th:first-child {
       border-left: none; }
-    .table .th:hover {
+    .table .th.activatable:hover {
       color: #636769;
       box-shadow: none;
       transition: none; }
-    .table .th:active {
+    .table .th.activatable:active {
       color: #2e3436;
       transition: none; }
     .table .th > .Label {
       flex: 1; }
+    .table .th .table__sortIcon {
+      transition: all 150ms cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+    .table .th .table__sortIcon:not(.descending) {
+      transform: rotate(180deg); }
+    .table .th .table__sortIcon.hidden {
+      opacity: 0; }
+    .table .th:hover .table__sortIcon.hidden {
+      opacity: 0.5; }
+    .table .th .table__filter {
+      padding: 0.25rem 0;
+      text-align: center; }
+    .table .th .table__filter > * {
+      width: 100%; }
+    .table .th .InputFilter {
+      padding-left: 2px;
+      padding-right: 2px; }
+    .table .th .DropdownFilter .Dropdown {
+      margin-right: 0.5rem; }
   .table .td {
     padding: 4px;
     overflow: hidden;
@@ -2718,7 +2745,7 @@ pathbar > button.slider-button {
     text-shadow: none;
     transition: none; }
 
-.table .th, .table .th:hover, .table .th:active {
+.table .th, .table .th.activatable:hover, .table .th.activatable:active {
   padding: 0 4px;
   background-image: none;
   border-width: 1px;
@@ -2726,10 +2753,10 @@ pathbar > button.slider-button {
   border-color: #d7d2ce;
   border-radius: 0;
   text-shadow: none; }
-  .table .th:disabled {
+  .table .th:disabled, .table .th.activatable:disabled:hover, .table .th.activatable:disabled:active {
     border-color: #f6f5f4;
     background-image: none; }
-  .table .th:last-child {
+  .table .th:last-child, .table .th.activatable:last-child:hover, .table .th.activatable:last-child:active {
     border-right-style: none; }
 
 /********************************************************
@@ -4137,7 +4164,6 @@ columnview row:not(.selected) cell editablelabel.editing text selection {
 .LevelBar {
   position: relative;
   display: inline-flex;
-  cursor: pointer;
   padding: 12px;
   height: 28px;
   width: 100%; }

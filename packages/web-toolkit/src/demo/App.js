@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import faker from 'faker'
 
 import {
   Autocomplete,
@@ -104,11 +105,7 @@ function AppHeader() {
 function AppContent() {
   const [users, setUsers] = useState([])
   useEffect(() => {
-    setTimeout(() => {
-      fetch('https://jsonplaceholder.typicode.com/users')
-      .then(r => r.json())
-      .then(setUsers)
-    }, 1000)
+    generateUsers().then(setUsers)
   }, [])
 
   return (
@@ -451,9 +448,7 @@ function DemoAutocomplete() {
   const [value, setValue] = useState('')
   const [users, setUsers] = useState(false)
   useEffect(() => {
-    fetch('https://jsonplaceholder.typicode.com/users')
-    .then(r => r.json())
-    .then(setUsers)
+    generateUsers().then(setUsers)
   }, [])
 
   const loading = users === false
@@ -733,9 +728,10 @@ function DemoSize() {
 function DemoInputFilter({ column: { filterValue, setFilter, id } }) {
   return (
     <Input
+      allowClear
       size='mini'
       id={id}
-      value={filterValue}
+      value={filterValue || ''}
       onChange={setFilter}
     />
   )
@@ -747,7 +743,6 @@ function DemoTable({ users }) {
       Header: 'Row',
       accessor: (row, i) => i,
       width: 50,
-      disableFilters: true,
     },
     {
       Header: 'Name',
@@ -761,7 +756,8 @@ function DemoTable({ users }) {
         {
           Header: 'Full Name',
           accessor: 'name',
-          disableFilters: true,
+          Filter: Table.InputFilter,
+          filter: 'includes',
         },
       ],
     },
@@ -771,25 +767,31 @@ function DemoTable({ users }) {
         {
           Header: 'Phone',
           accessor: 'phone',
-          disableFilters: true,
         },
         {
           Header: 'Website',
           accessor: 'website',
-          disableFilters: true,
+          Filter: Table.DropdownFilter,
+          filter: 'includes',
+          options: [
+            { label: '.com', value: '.com' },
+            { label: '.org', value: '.org' },
+            { label: '.net', value: '.net' },
+            { label: '.info', value: '.info' },
+            { label: '.biz', value: '.biz' },
+          ],
         },
         {
           Header: 'Address',
           accessor: row =>
             `${row.address.street}${row.address.suite ? ' ' + row.address.suite : ''}, ${row.address.city}`,
-          disableFilters: true,
         },
       ],
     },
   ]
 
   return (
-    <div style={{ height: 200 }}>
+    <div style={{ height: 400 }}>
       <Table
         columns={columns}
         data={users}
@@ -1038,6 +1040,28 @@ function DemoTypography() {
 
 export default App;
 
+
+function generateUsers() {
+  /* return new Promise(resolve => setTimeout(resolve, 1000))
+   * .then(() => fetch('https://jsonplaceholder.typicode.com/users'))
+   * .then(r => r.json()) */
+  // Table data as an array of objects
+  const list = new Array(10000).fill(true).map((_, n) => ({
+    id: n + 1,
+    name: faker.name.findName(),
+    username: faker.internet.userName(),
+    email: faker.internet.email(),
+    address: {
+      street: faker.address.streetName(),
+      suite: faker.address.streetSuffix(),
+      city: faker.address.city(),
+      zipcode: faker.address.zipCode(),
+    },
+    phone: faker.phone.phoneNumber(),
+    website: faker.internet.url(),
+  }))
+  return Promise.resolve(list)
+}
 
 /* function blur() {
  *   document.body.classList.add('window-inactive');

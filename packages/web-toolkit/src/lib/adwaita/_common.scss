@@ -1966,16 +1966,25 @@ $_treeview_backdrop_borders_color: if($variant=='light',mix($backdrop_borders_co
   }
 
   .table__header {
-    flex: 0 0;
-    // overflow-y: auto;
-    // overflow-x: hidden;
+    flex: 0 0 auto;
+    width: 100%;
+    height: min-content;
+    overflow: hidden;
+    user-select: none;
+  }
+  .table__header__content {
+    min-width: 100%;
+    width: min-content;
+    height: min-content;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    // box-sizing: content-box;
   }
   .table__body {
     flex: 1;
     overflow-y: hidden;
-    overflow-x: scroll;
-  }
     overflow-x: hidden;
+  }
   .table__body > div {
     width: 100%;
     margin: 0;
@@ -1999,7 +2008,7 @@ $_treeview_backdrop_borders_color: if($variant=='light',mix($backdrop_borders_co
       border-left: none;
     }
 
-    &:hover {
+    &.activatable:hover {
       @extend %column_header_button;
 
       color: mix($fg_color_title, $fg_color, 50%);
@@ -2007,7 +2016,7 @@ $_treeview_backdrop_borders_color: if($variant=='light',mix($backdrop_borders_co
       transition: none; //I shouldn't need this
     }
 
-    &:active {
+    &.activatable:active {
       @extend %column_header_button;
 
       color: $fg_color;
@@ -2017,7 +2026,38 @@ $_treeview_backdrop_borders_color: if($variant=='light',mix($backdrop_borders_co
     > .Label {
       flex: 1;
     }
+
+    .table__sortIcon {
+      transition: $button_transition;
+    }
+    .table__sortIcon:not(.descending) {
+      transform: rotate(180deg);
+    }
+    .table__sortIcon.hidden {
+      opacity: 0;
+    }
+    &:hover .table__sortIcon.hidden {
+      opacity: 0.5;
+    }
+
+    // Filters
+    .table__filter {
+      padding: 0.25rem 0;
+      text-align: center;
+    }
+    .table__filter > * {
+      width: 100%;
+    }
+    .InputFilter {
+      padding-left: 2px;
+      padding-right: 2px;
+    }
+    .DropdownFilter .Dropdown {
+      margin-right: 0.5rem;
+    }
   }
+
+
   .td {
     padding: 4px;
     overflow: hidden;

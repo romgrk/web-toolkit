@@ -39,7 +39,6 @@ function Table({
   const defaultColumn = useMemo(() => ({ width: 150, }), [])
   const columns = useMemo(() => transformColumns(columnsValue), [columnsValue])
   const scrollbarWidth = getScrollbarWidth()
-  console.log(columns)
 
   const {
     getTableProps,
@@ -114,7 +113,6 @@ function Table({
           {headerGroups.map(headerGroup => (
             <div {...headerGroup.getHeaderGroupProps()} className='tr'>
               {headerGroup.headers.map(column => (
-                console.log(column) ||
                 <div
                   className={cx(
                     'th',

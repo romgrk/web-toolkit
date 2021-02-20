@@ -53,6 +53,22 @@ button {
   font-size: inherit;
   font-family: inherit; }
 
+code {
+  font-size: 0.8em;
+  padding: 1px 4px;
+  color: black;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 3px; }
+
+pre {
+  font-size: 0.8em;
+  padding: 1px 4px;
+  color: black;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 3px; }
+
 .text-info {
   color: #3584e4;
   --icon-color: #3584e4; }
@@ -4569,33 +4585,97 @@ button.List__item {
 /************
  * Calendar *
  ***********/
-calendar {
+.Calendar {
+  display: inline-flex !important;
   color: black;
-  border: 1px solid #cdc7c2; }
-  calendar > header {
-    border-bottom: 1px solid #cdc7c2; }
-    calendar > header > button {
+  border: 1px solid #cdc7c2;
+  width: 226px;
+  /* Day mode */
+  /* Month mode */ }
+  .Calendar > .Calendar__header {
+    padding: 2px; }
+    .Calendar > .Calendar__header > .Button {
       border: none;
       box-shadow: none;
       background: none;
-      border-radius: 0; }
-    calendar > header > button:backdrop {
+      border-radius: 5px; }
+    .Calendar > .Calendar__header > .Button:backdrop {
       background: none; }
-  calendar > grid > .Label.today {
-    box-shadow: inset 0px -2px #cdc7c2; }
-    calendar > grid > .Label.today.selected {
+    .Calendar > .Calendar__header > .Calendar__previous,
+    .Calendar > .Calendar__header > .Calendar__next {
+      border-radius: 5px; }
+    .Calendar.mode-month .Calendar__previous,
+    .Calendar.mode-month .Calendar__next,
+    .Calendar.mode-year .Calendar__previous,
+    .Calendar.mode-year .Calendar__next {
+      opacity: 0; }
+    .Calendar > .Calendar__header > .Calendar__monthLabel,
+    .Calendar > .Calendar__header > .Calendar__yearLabel {
+      display: flex;
+      align-items: center; }
+    .Calendar > .Calendar__header > .Calendar__monthLabel {
+      flex: 3 1;
+      justify-content: center; }
+    .Calendar > .Calendar__header > .Calendar__yearLabel {
+      flex: 2 1;
+      justify-content: flex-start; }
+  .Calendar .Calendar__grid {
+    border: none;
+    height: 222px; }
+  .Calendar .Calendar__grid > * {
+    width: 100%;
+    height: 100%; }
+  .Calendar .Calendar__weekDays {
+    font-size: 9px;
+    font-weight: 700;
+    opacity: 0.4; }
+    .Calendar .Calendar__weekDays > .Calendar__day {
+      padding-top: 0.75rem;
+      padding-bottom: 0.75rem; }
+  .Calendar .Calendar__day {
+    width: 100%;
+    text-align: center; }
+    .Calendar .Calendar__day.day-0, .Calendar .Calendar__day.day-6 {
+      color: #829095; }
+    .Calendar .Calendar__day.other-month {
+      color: rgba(130, 144, 149, 0.5); }
+    .Calendar .Calendar__day > .Button {
+      display: inline-block;
+      border: none;
+      font-weight: inherit;
+      font-size: 12px;
+      width: 28px;
+      height: 28px;
+      min-width: 28px;
+      min-height: 28px; }
+    .Calendar .Calendar__day.today > .Button {
+      font-weight: 600;
       box-shadow: none; }
-  calendar > grid > .Label:focus {
-    outline-color: rgba(53, 132, 228, 0.5);
-    outline-offset: -2px;
-    outline-width: 2px;
-    outline-style: solid; }
-  calendar > grid > .Label.day-number {
-    padding: 4px; }
-    calendar > grid > .Label.day-number.selected {
-      border-radius: 3px; }
-  calendar > grid > .Label.day-number.other-month {
-    color: alpha(currentColor,0.3); }
+    .Calendar .Calendar__day.selected > .Button {
+      box-shadow: inset 0px 1px #cdc7c2;
+      background-color: #dad6d2; }
+  .Calendar .Calendar__grid .Calendar__month {
+    width: 33%; }
+  .Calendar .Calendar__grid .Calendar__month .Button {
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-size: 12px; }
+
+.YearPicker .YearPicker__year .Button {
+  width: 100%;
+  padding: 0;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  height: unset;
+  font-size: 12px; }
+
+.YearPicker .YearPicker__input {
+  padding: 0 0.25rem; }
+  .YearPicker .YearPicker__input input[type=number] {
+    text-align: center; }
 
 /***********
  * Dialogs *
@@ -4925,13 +5005,13 @@ tooltip.csd {
   box-shadow: none; }
 
 .view.selected:focus, .view.selected, .selected.IconView:focus, .selected.IconView, .Flowbox > .Flowbox__child.selected, .Grid > .Grid__child.selected,
-.Input > .Input__area > input::selection, .ModelButton.selected, .InputNumber:not(.vertical) > .Input__area > input::selection, .InputNumber.vertical > .Input__area > input > .Input__area > input::selection, .InputNumber.vertical > .Input__area > input::selection, .List__item.selected, .navigation-sidebar:not(.increase-specificity) > .selected.List__item, calendar > grid > .Label.day-number.selected {
+.Input > .Input__area > input::selection, .ModelButton.selected, .InputNumber:not(.vertical) > .Input__area > input::selection, .InputNumber.vertical > .Input__area > input > .Input__area > input::selection, .InputNumber.vertical > .Input__area > input::selection, .List__item.selected, .navigation-sidebar:not(.increase-specificity) > .selected.List__item, .Calendar .Calendar__day.today > .Button {
   background-color: #3584e4; }
   .view.selected:focus, .view.selected, .selected.IconView:focus, .selected.IconView, .Flowbox > .Flowbox__child.selected, .Grid > .Grid__child.selected,
-  .Input > .Input__area > input::selection, .ModelButton.selected, .InputNumber:not(.vertical) > .Input__area > input::selection, .InputNumber.vertical > .Input__area > input > .Input__area > input::selection, .InputNumber.vertical > .Input__area > input::selection, .List__item.selected, .navigation-sidebar:not(.increase-specificity) > .selected.List__item, calendar > grid > .Label.day-number.selected {
+  .Input > .Input__area > input::selection, .ModelButton.selected, .InputNumber:not(.vertical) > .Input__area > input::selection, .InputNumber.vertical > .Input__area > input > .Input__area > input::selection, .InputNumber.vertical > .Input__area > input::selection, .List__item.selected, .navigation-sidebar:not(.increase-specificity) > .selected.List__item, .Calendar .Calendar__day.today > .Button {
     color: #ffffff; }
     .Label.disabled::selection, .view.selected:disabled, .selected.IconView:disabled, .Flowbox > .Flowbox__child.selected:disabled, .Grid > .Grid__child.selected:disabled,
-    .Input > .Input__area > input:disabled::selection, .ModelButton.selected:disabled, .InputNumber:not(.vertical) > .Input__area > input:disabled::selection, .InputNumber.vertical > .Input__area > input > .Input__area > input:disabled::selection, .InputNumber.vertical > .Input__area > input:disabled::selection, .List__item.selected:disabled, calendar > grid > .Label.day-number.selected:disabled {
+    .Input > .Input__area > input:disabled::selection, .ModelButton.selected:disabled, .InputNumber:not(.vertical) > .Input__area > input:disabled::selection, .InputNumber.vertical > .Input__area > input > .Input__area > input:disabled::selection, .InputNumber.vertical > .Input__area > input:disabled::selection, .List__item.selected:disabled, .Calendar .Calendar__day.today > .Button:disabled {
       color: #9ac2f2; }
 
 .monospace {
@@ -5198,4 +5278,4 @@ html, body, #root {
 }
 
 
-/*# sourceMappingURL=main.25802c9f.chunk.css.map*/
+/*# sourceMappingURL=main.f77933ef.chunk.css.map*/

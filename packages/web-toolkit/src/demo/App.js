@@ -5,6 +5,7 @@ import {
   Autocomplete,
   Box,
   Button,
+  Calendar,
   Checkbox,
   Dropdown,
   Expander,
@@ -118,7 +119,7 @@ function AppContent() {
 
       <h1>Demo</h1>
 
-      <DemoTable users={users} />
+      <DemoCalendar />
       <br/>
 
       <DemoList />
@@ -448,7 +449,9 @@ function DemoAutocomplete() {
   const [value, setValue] = useState('')
   const [users, setUsers] = useState(false)
   useEffect(() => {
-    generateUsers().then(setUsers)
+    generateUsers()
+    .then(u => u.slice(0, 20))
+    .then(setUsers)
   }, [])
 
   const loading = users === false
@@ -725,15 +728,13 @@ function DemoSize() {
   )
 }
 
-function DemoInputFilter({ column: { filterValue, setFilter, id } }) {
+function DemoCalendar() {
   return (
-    <Input
-      allowClear
-      size='mini'
-      id={id}
-      value={filterValue || ''}
-      onChange={setFilter}
-    />
+    <div>
+      <Calendar
+        value={new Date('2021-02-17')}
+      />
+    </div>
   )
 }
 
@@ -799,6 +800,18 @@ function DemoTable({ users }) {
         filterable={true}
       />
     </div>
+  )
+}
+
+function DemoInputFilter({ column: { filterValue, setFilter, id } }) {
+  return (
+    <Input
+      allowClear
+      size='mini'
+      id={id}
+      value={filterValue || ''}
+      onChange={setFilter}
+    />
   )
 }
 
@@ -1046,7 +1059,7 @@ function generateUsers() {
    * .then(() => fetch('https://jsonplaceholder.typicode.com/users'))
    * .then(r => r.json()) */
   // Table data as an array of objects
-  const list = new Array(10000).fill(true).map((_, n) => ({
+  const list = new Array(30).fill(true).map((_, n) => ({
     id: n + 1,
     name: faker.name.findName(),
     username: faker.internet.userName(),

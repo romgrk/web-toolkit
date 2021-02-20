@@ -10,6 +10,7 @@ importers:
       '@testing-library/user-event': 12.7.0
       classname: 0.0.0
       clsx: 1.1.1
+      date-fns: 2.17.0
       mkdirp: 1.0.4
       rambda: 6.5.3
       react-popper: 2.2.4_3da0a162a96308e0a1fa93a02ed91581
@@ -109,6 +110,7 @@ importers:
       classname: ^0.0.0
       clsx: ^1.1.1
       css-loader: 2.1.1
+      date-fns: ^2.17.0
       dotenv: 6.2.0
       dotenv-expand: 5.1.0
       eslint: ^7.11.0
@@ -5775,6 +5777,12 @@ packages:
       node: '>=10'
     resolution:
       integrity: sha512-X5eWTSXO/BJmpdIKCRuKUgSCgAN0OwliVK3yPKbwIWU1Tdw5BRajxlzMidvh+gwko9AfQ9zIj52pzF91Q3YAvQ==
+  /date-fns/2.17.0:
+    dev: false
+    engines:
+      node: '>=0.11'
+    resolution:
+      integrity: sha512-ZEhqxUtEZeGgg9eHNSOAJ8O9xqSgiJdrL0lzSSfMF54x6KXWJiOH/xntSJ9YomJPrYH/p08t6gWjGWq1SDJlSA==
   /debug/2.6.9:
     dependencies:
       ms: 2.0.0

@@ -5,6 +5,7 @@
 import Autocomplete from './components/Autocomplete'
 import Box          from './components/Box'
 import Button       from './components/Button'
+import Calendar     from './components/Calendar'
 import Checkbox     from './components/Checkbox'
 import Dropdown     from './components/Dropdown'
 import Expander     from './components/Expander'
@@ -38,6 +39,7 @@ export {
   Autocomplete,
   Box,
   Button,
+  Calendar,
   Checkbox,
   Dropdown,
   Expander,

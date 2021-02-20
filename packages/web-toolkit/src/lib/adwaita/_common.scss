@@ -4091,60 +4091,148 @@ button.List__item {
 /************
  * Calendar *
  ***********/
-calendar {
+.Calendar {
+  display: inline-flex !important;
   color: $text_color;
   border: 1px solid $borders_color;
+  width: 226px;
 
-  > header {
-    border-bottom: 1px solid $borders_color;
+  > .Calendar__header {
+    padding: 2px;
+    // border-bottom: 1px solid $borders_color;
 
-    > button {
+    > .Button {
       border: none;
       box-shadow: none;
       background: none;
-      border-radius: 0;
+      border-radius: $button_radius;
     }
-    > button:backdrop {
+    > .Button:backdrop {
       background: none;
     }
-  }
 
-  > grid {
-    > .Label.day-name {
+    > .Calendar__previous,
+    > .Calendar__next {
+      border-radius: $button_radius;
     }
-
-    > .Label.week-number {
-    }
-
-    > .Label.today {
-      box-shadow: inset 0px -2px $borders_color;
-
-      &.selected {
-        box-shadow: none;
+    @at-root
+    .Calendar.mode-month,
+    .Calendar.mode-year {
+      .Calendar__previous,
+      .Calendar__next {
+        opacity: 0;
       }
     }
 
-    > .Label:focus {
-      outline-color: $focus_border_color;
-      outline-offset: -2px;
-      outline-width: 2px;
-      outline-style: solid;
+    > .Calendar__monthLabel,
+    > .Calendar__yearLabel {
+      display: flex;
+      align-items: center;
+      // font-weight: 600;
+      // color: $fg_color_title;
     }
-
-    > .Label.day-number {
-      padding: 4px;
-
-      &.selected{
-        @extend %selected_items;
-        border-radius: 3px;
-      }
+    > .Calendar__monthLabel {
+      flex: 3;
+      justify-content: center;
     }
-
-    > .Label.day-number.other-month {
-      color: gtkalpha(currentColor, 0.3);
+    > .Calendar__yearLabel {
+      flex: 2;
+      justify-content: flex-start;
     }
   }
 
+  .Calendar__grid {
+    border: none;
+    height: 222px;
+  }
+  .Calendar__grid > * {
+    width: 100%;
+    height: 100%;
+  }
+
+  /* Day mode */
+  .Calendar__weekDays {
+    font-size: 9px;
+    font-weight: 700;
+    opacity: 0.4;
+    > .Calendar__day {
+      padding-top:    0.75rem;
+      padding-bottom: 0.75rem;
+    }
+  }
+  .Calendar__day {
+    width: 100%;
+    text-align: center;
+
+    &.day-0,
+    &.day-6 {
+      color: $muted_color;
+    }
+
+    &.other-month {
+      color: rgba($muted_color, 0.5);
+    }
+
+    > .Button {
+      display: inline-block;
+      border: none;
+      font-weight: inherit;
+      font-size: 12px;
+      width:      28px;
+      height:     28px;
+      min-width:  28px;
+      min-height: 28px;
+    }
+
+    // > .Button.day-name {}
+
+    // > .Button.week-number {}
+
+    &.today > .Button {
+      @extend %selected_items;
+      font-weight: 600;
+      box-shadow: none;
+    }
+
+    &.selected > .Button {
+      box-shadow: inset 0px 1px $borders_color;
+      background-color: darken($bg_color, 12%);
+    }
+
+    // > .Button.day-number.other-month {
+    //   color: gtkalpha(currentColor, 0.3);
+    // }
+  }
+
+  /* Month mode */
+  .Calendar__grid .Calendar__month {
+    width: 33%;
+  }
+  .Calendar__grid .Calendar__month .Button {
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    padding-top:    10px;
+    padding-bottom: 10px;
+    font-size: 12px;
+  }
+}
+
+.YearPicker {
+  .YearPicker__year .Button {
+    width: 100%;
+    padding: 0;
+    padding-top:    0px;
+    padding-bottom: 0px;
+    height: unset;
+    font-size: 12px;
+  }
+  .YearPicker__input {
+    padding: 0 0.25rem;
+    input[type=number] {
+      text-align: center;
+    }
+  }
 }
 
 

@@ -33,6 +33,7 @@ $selected_bg_color: if($variant == 'light', #3584e4, darken(#3584e4, 20%));
 $selected_borders_color: if($variant== 'light', darken($selected_bg_color, 15%), darken($selected_bg_color, 30%));
 $selected_text_shadow: 0 1px transparentize($selected_bg_color, 0.5), 0 0 2px transparentize(white, 0.4);
 
+$muted_color: if($variant == 'light', lighten($fg_color, 35%), darken($fg_color, 8%));
 $info_color: $selected_bg_color;
 $warning_color: #f57900;
 $error_color: #cc0000;

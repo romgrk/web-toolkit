@@ -4160,7 +4160,7 @@ button.List__item {
       padding-bottom: 0.75rem;
     }
   }
-  .Calendar__day {
+  .Calendar__day:not(.increase-specificity) { // specificity to counter Button:hover
     width: 100%;
     text-align: center;
 
@@ -4196,7 +4196,11 @@ button.List__item {
 
     &.selected > .Button {
       box-shadow: inset 0px 1px $borders_color;
-      background-color: darken($bg_color, 12%);
+      background-color: darken($bg_color, 20%);
+    }
+
+    &.today.selected > .Button {
+      background-color: darken($selected_bg_color, 10%);
     }
 
     // > .Button.day-number.other-month {
@@ -4235,6 +4239,19 @@ button.List__item {
   }
 }
 
+.DatePicker__input {
+  .Icon {
+    opacity: 0.5;
+  }
+}
+.DatePicker__popover {
+  .Popover__container {
+    padding: 0;
+  }
+  .Calendar {
+    border: none;
+  }
+}
 
 /***********
  * Dialogs *

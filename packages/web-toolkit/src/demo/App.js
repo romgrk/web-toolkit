@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import faker from 'faker'
+import { addDays } from 'date-fns'
 
 import {
   Autocomplete,
@@ -7,6 +8,7 @@ import {
   Button,
   Calendar,
   Checkbox,
+  DatePicker,
   Dropdown,
   Expander,
   Frame,
@@ -727,12 +729,15 @@ function DemoSize() {
 }
 
 function DemoCalendar() {
+  const [value, setValue] = useState(addDays(new Date(), -3))
   return (
-    <div>
+    <Box horizontal>
       <Calendar
-        value={new Date('2021-02-17')}
+        value={value}
+        onChange={setValue}
       />
-    </div>
+      <DatePicker />
+    </Box>
   )
 }
 

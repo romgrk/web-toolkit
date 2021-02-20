@@ -11,7 +11,6 @@ import cx from 'clsx'
 
 import Box from './Box'
 import Button from './Button'
-import Icon from './Icon'
 import Input from './Input'
 import Label from './Label'
 
@@ -79,6 +78,14 @@ class Calendar extends React.Component {
     this.setCurrent(addMonths(this.state.current, +1))
   }
 
+  select = item => {
+    const value = toDate(item)
+    if (this.props.onChange)
+      this.props.onChange(value)
+    else
+      this.setState({ value })
+  }
+
   getValue() {
     return this.props.value ?? this.state.value
   }
@@ -121,7 +128,7 @@ class Calendar extends React.Component {
                   )}
                 >
                   {item !== undefined &&
-                    <Button flat circular>
+                    <Button flat circular onClick={() => this.select(item)}>
                       {item.date}
                     </Button>
                   }
@@ -236,7 +243,7 @@ function YearPicker({ value, onChange, onAccept }) {
   const [ticks, setTicks] = useState(0)
   const onWheel = ev => {
     ev.preventDefault()
-    const direction = ev.deltaY < 0 ? -1 : +1
+    const direction = ev.deltaY < 0 ? -1 : ev.deltaY > 0 ? +1 : 0
     const newTicks = ticks + direction
     if (Math.abs(newTicks) > 5) {
       onChange(value + direction)
@@ -364,11 +371,13 @@ function getWeeks(current) {
   }
 
   if (weeks.length <= 5) {
-    const nextMonth = addMonths(current, -1)
+    const nextMonth = addMonths(current, 1)
     const lastDayOfCalendar = weeks[weeks.length - 1][6]
     const currentWeek = []
     weeks.push(currentWeek)
-    const lastDayOfWeekDate = lastDayOfCalendar.date 
+    const lastDayOfWeekDate =
+      lastDayOfCalendar.month === nextMonth.getMonth() ?
+        lastDayOfCalendar.date : 1
     for (let i = 0; i <= 6; i++) {
       currentWeek[i] = {
         year: nextMonth.getFullYear(),

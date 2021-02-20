@@ -4563,14 +4563,14 @@ button.List__item {
     .Calendar .Calendar__weekDays > .Calendar__day {
       padding-top: 0.75rem;
       padding-bottom: 0.75rem; }
-  .Calendar .Calendar__day {
+  .Calendar .Calendar__day:not(.increase-specificity) {
     width: 100%;
     text-align: center; }
-    .Calendar .Calendar__day.day-0, .Calendar .Calendar__day.day-6 {
+    .Calendar .Calendar__day.day-0:not(.increase-specificity), .Calendar .Calendar__day.day-6:not(.increase-specificity) {
       color: #829095; }
-    .Calendar .Calendar__day.other-month {
+    .Calendar .Calendar__day.other-month:not(.increase-specificity) {
       color: rgba(130, 144, 149, 0.5); }
-    .Calendar .Calendar__day > .Button {
+    .Calendar .Calendar__day:not(.increase-specificity) > .Button {
       display: inline-block;
       border: none;
       font-weight: inherit;
@@ -4579,12 +4579,14 @@ button.List__item {
       height: 28px;
       min-width: 28px;
       min-height: 28px; }
-    .Calendar .Calendar__day.today > .Button {
+    .Calendar .Calendar__day.today:not(.increase-specificity) > .Button {
       font-weight: 600;
       box-shadow: none; }
-    .Calendar .Calendar__day.selected > .Button {
+    .Calendar .Calendar__day.selected:not(.increase-specificity) > .Button {
       box-shadow: inset 0px 1px #cdc7c2;
-      background-color: #dad6d2; }
+      background-color: #c8c2bc; }
+    .Calendar .Calendar__day.today.selected:not(.increase-specificity) > .Button {
+      background-color: #1b6acb; }
   .Calendar .Calendar__grid .Calendar__month {
     width: 33%; }
   .Calendar .Calendar__grid .Calendar__month .Button {
@@ -4607,6 +4609,15 @@ button.List__item {
   padding: 0 0.25rem; }
   .YearPicker .YearPicker__input input[type=number] {
     text-align: center; }
+
+.DatePicker__input .Icon {
+  opacity: 0.5; }
+
+.DatePicker__popover .Popover__container {
+  padding: 0; }
+
+.DatePicker__popover .Calendar {
+  border: none; }
 
 /***********
  * Dialogs *
@@ -4936,13 +4947,13 @@ tooltip.csd {
   box-shadow: none; }
 
 .view.selected:focus, .view.selected, .selected.IconView:focus, .selected.IconView, .Flowbox > .Flowbox__child.selected, .Grid > .Grid__child.selected,
-.Input > .Input__area > input::selection, .ModelButton.selected, .InputNumber:not(.vertical) > .Input__area > input::selection, .InputNumber.vertical > .Input__area > input > .Input__area > input::selection, .InputNumber.vertical > .Input__area > input::selection, .List__item.selected, .navigation-sidebar:not(.increase-specificity) > .selected.List__item, .Calendar .Calendar__day.today > .Button {
+.Input > .Input__area > input::selection, .ModelButton.selected, .InputNumber:not(.vertical) > .Input__area > input::selection, .InputNumber.vertical > .Input__area > input > .Input__area > input::selection, .InputNumber.vertical > .Input__area > input::selection, .List__item.selected, .navigation-sidebar:not(.increase-specificity) > .selected.List__item, .Calendar .Calendar__day.today:not(.increase-specificity) > .Button {
   background-color: #3584e4; }
   .view.selected:focus, .view.selected, .selected.IconView:focus, .selected.IconView, .Flowbox > .Flowbox__child.selected, .Grid > .Grid__child.selected,
-  .Input > .Input__area > input::selection, .ModelButton.selected, .InputNumber:not(.vertical) > .Input__area > input::selection, .InputNumber.vertical > .Input__area > input > .Input__area > input::selection, .InputNumber.vertical > .Input__area > input::selection, .List__item.selected, .navigation-sidebar:not(.increase-specificity) > .selected.List__item, .Calendar .Calendar__day.today > .Button {
+  .Input > .Input__area > input::selection, .ModelButton.selected, .InputNumber:not(.vertical) > .Input__area > input::selection, .InputNumber.vertical > .Input__area > input > .Input__area > input::selection, .InputNumber.vertical > .Input__area > input::selection, .List__item.selected, .navigation-sidebar:not(.increase-specificity) > .selected.List__item, .Calendar .Calendar__day.today:not(.increase-specificity) > .Button {
     color: #ffffff; }
     .Label.disabled::selection, .view.selected:disabled, .selected.IconView:disabled, .Flowbox > .Flowbox__child.selected:disabled, .Grid > .Grid__child.selected:disabled,
-    .Input > .Input__area > input:disabled::selection, .ModelButton.selected:disabled, .InputNumber:not(.vertical) > .Input__area > input:disabled::selection, .InputNumber.vertical > .Input__area > input > .Input__area > input:disabled::selection, .InputNumber.vertical > .Input__area > input:disabled::selection, .List__item.selected:disabled, .Calendar .Calendar__day.today > .Button:disabled {
+    .Input > .Input__area > input:disabled::selection, .ModelButton.selected:disabled, .InputNumber:not(.vertical) > .Input__area > input:disabled::selection, .InputNumber.vertical > .Input__area > input > .Input__area > input:disabled::selection, .InputNumber.vertical > .Input__area > input:disabled::selection, .List__item.selected:disabled, .Calendar .Calendar__day.today:not(.increase-specificity) > .Button:disabled {
       color: #9ac2f2; }
 
 .monospace {

@@ -7,6 +7,7 @@ import Box          from './components/Box'
 import Button       from './components/Button'
 import Calendar     from './components/Calendar'
 import Checkbox     from './components/Checkbox'
+import DatePicker   from './components/DatePicker'
 import Dropdown     from './components/Dropdown'
 import Expander     from './components/Expander'
 import Frame        from './components/Frame'
@@ -41,6 +42,7 @@ export {
   Button,
   Calendar,
   Checkbox,
+  DatePicker,
   Dropdown,
   Expander,
   Frame,

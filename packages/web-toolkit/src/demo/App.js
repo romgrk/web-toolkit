@@ -104,11 +104,6 @@ function AppHeader() {
 }
 
 function AppContent() {
-  const [users, setUsers] = useState([])
-  useEffect(() => {
-    generateUsers().then(setUsers)
-  }, [])
-
   return (
     <div className='App__content Box__fill' style={{ position: 'relative' }}>
       <div style={{ position: 'absolute', top: '2em', right: '2em' }}>
@@ -118,6 +113,9 @@ function AppContent() {
       </div>
 
       <h1>Demo</h1>
+
+      <DemoTable />
+      <br/>
 
       <DemoCalendar />
       <br/>
@@ -145,7 +143,7 @@ function AppContent() {
 
       <Box horizontal>
         <Box vertical>
-          <DemoDropdown users={users} />
+          <DemoDropdown />
           <DemoToolbar />
         </Box>
         <DemoFrame />
@@ -449,7 +447,7 @@ function DemoAutocomplete() {
   const [value, setValue] = useState('')
   const [users, setUsers] = useState(false)
   useEffect(() => {
-    generateUsers()
+    generateUsers(10)
     .then(u => u.slice(0, 20))
     .then(setUsers)
   }, [])
@@ -738,7 +736,12 @@ function DemoCalendar() {
   )
 }
 
-function DemoTable({ users }) {
+function DemoTable() {
+  const [users, setUsers] = useState([])
+  useEffect(() => {
+    generateUsers(1000).then(setUsers)
+  }, [])
+
   const columns = [
     {
       Header: 'Row',
@@ -815,7 +818,12 @@ function DemoInputFilter({ column: { filterValue, setFilter, id } }) {
   )
 }
 
-function DemoDropdown({ users }) {
+function DemoDropdown() {
+  const [users, setUsers] = useState([])
+  useEffect(() => {
+    generateUsers().then(setUsers)
+  }, [])
+
   const [value, setValue] = useState(2)
   const options = users.map(u =>
     ({
@@ -1054,12 +1062,12 @@ function DemoTypography() {
 export default App;
 
 
-function generateUsers() {
+function generateUsers(n = 30) {
   /* return new Promise(resolve => setTimeout(resolve, 1000))
    * .then(() => fetch('https://jsonplaceholder.typicode.com/users'))
    * .then(r => r.json()) */
   // Table data as an array of objects
-  const list = new Array(30).fill(true).map((_, n) => ({
+  const list = new Array(n).fill(true).map((_, n) => ({
     id: n + 1,
     name: faker.name.findName(),
     username: faker.internet.userName(),

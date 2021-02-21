@@ -178,7 +178,10 @@ class Dropdown extends React.Component {
     const open = this.isOpen()
     const value = this.getValue()
     const label =
-      this.props.label || this.props.options.find(o => o.value === value)?.label || value
+      this.props.label ||
+      this.props.options.find(o => o.value === value)?.label ||
+      this.props.placeholder ||
+      value
 
     let trigger
 

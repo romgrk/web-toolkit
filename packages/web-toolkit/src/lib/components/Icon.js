@@ -2,8 +2,9 @@
  * Icon.js
  */
 
-import React, { useState, useEffect } from 'react';
-import cx from 'clsx';
+import React, { useState, useEffect } from 'react'
+import prop from 'prop-types'
+import cx from 'clsx'
 
 import AcAdapterSymbolic from '../icons/ac-adapter-symbolic.js';
 import AccessoriesCalculatorSymbolic from '../icons/accessories-calculator-symbolic.js';
@@ -1106,7 +1107,7 @@ export const Icons = {
   'zoom-out': ZoomOutSymbolic,
 };
 
-export default function Icon({ className, name, colored, ...rest }) {
+function Icon({ className, name, colored, ...rest }) {
   const Element = Icons[name]
 
   if (!Element) 
@@ -1118,6 +1119,19 @@ export default function Icon({ className, name, colored, ...rest }) {
     </span>
   );
 }
+
+Icon.propTypes = {
+  className: prop.string,
+  /** The icon name */
+  name: prop.string.isRequired,
+  colored: prop.bool,
+}
+
+Icon.defaultProps = {
+  colored: false,
+}
+
+export default Icon
 
 
 const SVGR_LOADER = `!!@svgr/webpack?-svgo,+titleProp,+ref!`;

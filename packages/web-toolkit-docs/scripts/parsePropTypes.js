@@ -405,6 +405,7 @@ function serialize(moduleExports) {
     result[key] = {
       propTypes: propTypes && map(n => ({
         value: n.text,
+        required: n.text.trim().endsWith('isRequired'),
         description: n.comment.text
       }), propTypes),
       defaultProps: defaultProps && map(n => ({

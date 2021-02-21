@@ -1,10 +1,15 @@
 import React from 'react'
 import jss from 'react-jss'
+import { sortBy } from 'rambda'
 import prettier from 'prettier'
 import parserBabel from 'prettier/esm/parser-babel'
 
-const border = '#ccc'
+const DEFAULT_PROP_DESCRIPTIONS = {
+  'className': 'The class of the component',
+  'size': 'The size of the component',
+}
 
+const border = '#ccc'
 const styles = {
   root: {
     border: `1px solid ${border}`,
@@ -13,13 +18,28 @@ const styles = {
       border: `1px solid ${border}`,
     },
     '& th': {
-      padding: '10px 10px',
+      padding: '1rem 10px',
+      textAlign: 'left',
+      opacity: 0.5,
+      fontSize: 11,
+      letterSpacing: 0.2,
+      textTransform: 'uppercase',
     },
     '& td': {
-      padding: '5px 10px',
+      borderTop: 'none',
+      borderBottom: 'none',
+      padding: '10px 10px',
       verticalAlign: 'top',
+      fontSize: '15px',
     },
-    '& td:nth-child(3), & td:nth-child(3)': {
+    '& td:nth-child(1)': { // required
+      fontWeight: 'bold',
+      fontFamily: 'monospace',
+    },
+    '& td:nth-child(3)': { // required
+      textAlign: 'center',
+    },
+    '& td:nth-child(4)': { // description
       minWidth: 200,
     },
     '& pre': {
@@ -33,7 +53,10 @@ function DocTable({ classes, data }) {
     propTypes = {},
     defaultProps = {},
   } = data
-  const keys = Object.keys(propTypes)
+  const keys = sortBy(
+    k => !propTypes[k].required,
+    Object.keys(propTypes)
+  )
 
   return (
     <table className={classes.root}>
@@ -41,6 +64,7 @@ function DocTable({ classes, data }) {
         <tr>
           <th>Name</th>
           <th>Type</th>
+          <th>Required</th>
           <th>Description</th>
           <th>Default</th>
         </tr>
@@ -48,9 +72,10 @@ function DocTable({ classes, data }) {
       <tbody>
         {keys.map(key =>
           <tr key={key}>
-            <td><code>{key}</code></td>
+            <td>{key}</td>
             <td>{formatType(propTypes[key].value)}</td>
-            <td>{propTypes[key].description}</td>
+            <td>{propTypes[key].required ? 'Yes' : null}</td>
+            <td>{propTypes[key].description || DEFAULT_PROP_DESCRIPTIONS[key]}</td>
             <td>{formatDefault(defaultProps[key]?.value)}</td>
           </tr>
         )}
@@ -62,7 +87,7 @@ function DocTable({ classes, data }) {
 export default jss(styles)(DocTable)
 
 function formatType(type) {
-  const doc = type.replace(/prop\./g, '')
+  const doc = type.replace(/prop\./g, '').replace(/\.isRequired$/, '')
   const prettyDoc = prettier.format(doc, {
     parser: 'babel',
     plugins: [parserBabel],

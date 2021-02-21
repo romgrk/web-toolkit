@@ -18,8 +18,6 @@ export default function DocPage({ data }) {
           <Component />
         </div>
 
-        {/*<pre>{JSON.stringify(data.exports.default, null, 2)}</pre>*/}
-
         <h4>Props</h4>
         <DocTable
           data={data.exports.default}

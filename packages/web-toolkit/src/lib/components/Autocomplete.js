@@ -17,14 +17,19 @@ import Popover from './Popover'
 
 const propTypes = {
   className: prop.string,
+  /** The options shown in the list */
   options: prop.arrayOf(prop.shape({
     value: prop.oneOfType([prop.string, prop.number]),
     label: prop.node,
   })),
+  /** Enables basic filtering of options.
+   * Set to `false` if you want to implement your own filtering. */
   enableFilter: prop.bool,
   value: prop.string,
   defaultValue: prop.string,
+  /** Called when the value changes (passive) */
   onSearch: prop.func,
+  /** Called when the value changes (may prevent the value from updating, in conjuction with `value`) */
   onChange: prop.func,
 }
 

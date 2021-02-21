@@ -1,6 +1,6 @@
 {
   "name": "web-toolkit",
-  "version": "0.5.5",
+  "version": "0.5.6",
   "repository": "https://github.com/romgrk/web-toolkit",
   "main": "lib/index.js",
   "scripts": {
@@ -17,7 +17,6 @@
     "build:css": "sassc src/lib/adwaita/adwaita.scss src/lib/adwaita/build.css && cp src/lib/adwaita/build.css lib/index.css",
     "build:icons": "node scripts/svgToJs.js",
     "prepare": "npm run build",
-
     "predeploy:clean": "rm -rf gh-pages && mkdir -p gh-pages",
     "predeploy:build:demo": "PUBLIC_URL=/web-toolkit/demo npm run demo",
     "predeploy:build:docs": "cd ../web-toolkit-docs && PUBLIC_URL=/web-toolkit/docs npm run build",
@@ -25,7 +24,6 @@
     "predeploy:prepare": "mv demo gh-pages/demo && mv ../web-toolkit-docs/build gh-pages/docs",
     "predeploy": "npm run predeploy:clean && npm-run-all predeploy:build:* && npm run predeploy:prepare",
     "deploy": "gh-pages -d gh-pages",
-
     "nop": "true"
   },
   "license": "MIT",

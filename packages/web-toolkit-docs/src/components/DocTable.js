@@ -10,8 +10,14 @@ const styles = {
     border: `1px solid ${border}`,
     borderCollapse: 'collapse',
     '& td, & th': {
-      padding: '5px 10px',
       border: `1px solid ${border}`,
+    },
+    '& th': {
+      padding: '10px 10px',
+    },
+    '& td': {
+      padding: '5px 10px',
+      verticalAlign: 'top',
     },
     '& td:nth-child(3), & td:nth-child(3)': {
       minWidth: 200,

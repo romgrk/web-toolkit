@@ -31,6 +31,7 @@ const propTypes = {
 const defaultProps = {
   enableFilter: true,
   defaultValue: '',
+  options: [],
 }
 
 function Autocomplete({

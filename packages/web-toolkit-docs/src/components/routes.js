@@ -4,7 +4,7 @@ import metadata from '../properties.json'
 import DocPage from './DocPage'
 import Home from './Home'
 
-const basePath = ''
+const basePath = process.env.PUBLIC_URL
 
 const indexRoutes = [
   {

@@ -117,6 +117,19 @@ $popover_radius: $button_radius + 4;
   }
 }
 
+.background-light {
+  background-color: $background_light;
+}
+.background-default {
+  background-color: $background_default;
+}
+.background-dark {
+  background-color: $background_dark;
+}
+.background-darker {
+  background-color: $background_darker;
+}
+
 /***************
  * Layout      *
  ***************/

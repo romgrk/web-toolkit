@@ -163,6 +163,18 @@ pre {
     text-shadow: none;
     --icon-shadow: none; }
 
+.background-light {
+  background-color: #ffffff; }
+
+.background-default {
+  background-color: #f6f5f4; }
+
+.background-dark {
+  background-color: #f1f0ee; }
+
+.background-darker {
+  background-color: #e1dedb; }
+
 /***************
  * Layout      *
  ***************/

@@ -9,9 +9,11 @@ the API is subject to change until the 1.0.0 release.
 All UI design frameworks suck. No one knows how to design. Except for Gnome designers
 strangely. And maybe Apple too, but they're not in the OSS business so I avoid them.
 
-## Showcase
+## Links
+  - [Live Demo](https://romgrk.github.io/web-toolkit/demo)
+  - [Documentation (WIP)](https://romgrk.github.io/web-toolkit/docs)
 
-[See live demo](https://romgrk.github.io/web-toolkit/)
+## Showcase
 
 ![demo-1](https://raw.githubusercontent.com/romgrk/web-toolkit/master/static/demo-1.png)
 ![demo-2](https://raw.githubusercontent.com/romgrk/web-toolkit/master/static/demo-2.png)

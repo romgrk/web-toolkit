@@ -13,6 +13,14 @@
 /**********************
  * General Typography *
  **********************/
+body {
+  font-family: 'Ubuntu', 'Cantarell', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale; }
+
+code {
+  font-family: source-code-pro, 'Source Code Pro', Menlo, Monaco, Consolas, 'Courier New', monospace; }
+
 .title-large {
   font-weight: 300;
   font-size: 24pt; }
@@ -5281,23 +5289,6 @@ read if you used those and something break with a version upgrade you're on your
 /* Very contrasty background for text views (@theme_text_color foreground) */
 @define-color text_view_bg #ffffff;
 
-body {
-  font-family:
-    'Cantarell',
-    -apple-system, BlinkMacSystemFont,
-    'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu',
-    'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-}
-
 * {
   box-sizing: border-box;
 }
@@ -5337,4 +5328,4 @@ html, body, #root {
 }
 
 
-/*# sourceMappingURL=main.8390d626.chunk.css.map*/
+/*# sourceMappingURL=main.f84b67c7.chunk.css.map*/

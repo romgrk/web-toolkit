@@ -2,15 +2,28 @@ import React, { useState, useRef } from 'react'
 import { findDOMNode } from 'react-dom'
 import prop from 'prop-types'
 import { isEqual, parse, format } from 'date-fns'
-import cx from 'clsx'
 
 import useControlled from '../utils/useControlled'
 import Calendar from './Calendar'
 import Input from './Input'
 import Popover from './Popover'
 
+const propTypes = {
+  /** A date object */
+  value: prop.object,
+  /** A date object */
+  defaultValue: prop.object,
+  format: prop.string,
+  /** A function that receives a date object */
+  onChange: prop.func,
+}
+
+const defaultProps = {
+  format: 'd MMM yyyy',
+}
+
 function DatePicker({
-  format: formatString = 'd MMM yyyy',
+  format: formatString,
   value: valueProp,
   defaultValue,
   onChange,
@@ -72,5 +85,8 @@ function DatePicker({
     </Popover>
   )
 }
+
+DatePicker.propTypes = propTypes
+DatePicker.defaultProps = defaultProps
 
 export default DatePicker

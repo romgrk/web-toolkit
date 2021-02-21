@@ -78,6 +78,4 @@ then run `pnpm start` to spawn the dev server. You need to have `sassc` installe
 
 ## License
 
-Undecided yet. I use MIT usually but the CSS files of the GTK project were reused so I'm not
-sure it can be licensed as MIT or if it needs to be LGPL. Either way, best case it's MIT
-worst case it's LGPL, which is still permissive and allows commercial use so it's fine.
+MIT

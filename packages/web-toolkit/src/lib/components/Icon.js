@@ -556,7 +556,7 @@ import ZoomOriginalSymbolic from '../icons/zoom-original-symbolic.js';
 import ZoomOutSymbolic from '../icons/zoom-out-symbolic.js';
 
 
-export const Icons = {
+const byName = {
   'ac-adapter': AcAdapterSymbolic,
   'accessories-calculator': AccessoriesCalculatorSymbolic,
   'accessories-character-map': AccessoriesCharacterMapSymbolic,
@@ -1105,10 +1105,10 @@ export const Icons = {
   'zoom-in': ZoomInSymbolic,
   'zoom-original': ZoomOriginalSymbolic,
   'zoom-out': ZoomOutSymbolic,
-};
+}
 
 function Icon({ className, name, colored, ...rest }) {
-  const Element = Icons[name]
+  const Element = byName[name]
 
   if (!Element) 
     return <span>Invalid name: {name}</span>
@@ -1131,6 +1131,8 @@ Icon.defaultProps = {
   colored: false,
 }
 
+Icon.byName = byName
+
 export default Icon
 
 
@@ -1138,7 +1140,7 @@ const SVGR_LOADER = `!!@svgr/webpack?-svgo,+titleProp,+ref!`;
 const ICON_PATH = `../assets/icons/`;
 
 export function OptimizedIcon({ className, name, colored, ...rest }) {
-  const [Element, setElement] = useState('div'); //null; Icons[name]
+  const [Element, setElement] = useState('div'); //null; byName[name]
 
   useEffect(() => {
     if (!name) setElement(() => () => <span>Invalid name: {name}</span>);

@@ -12,7 +12,7 @@ import Dropdown     from './components/Dropdown'
 import Expander     from './components/Expander'
 import Frame        from './components/Frame'
 import HeaderBar    from './components/HeaderBar'
-import Icon, { Icons, OptimizedIcon } from './components/Icon'
+import Icon, { OptimizedIcon } from './components/Icon'
 import InfoBar      from './components/InfoBar'
 import Input        from './components/Input'
 import InputNumber  from './components/InputNumber'
@@ -48,7 +48,6 @@ export {
   Frame,
   HeaderBar,
   Icon,
-  Icons,
   OptimizedIcon,
   InfoBar,
   Input,

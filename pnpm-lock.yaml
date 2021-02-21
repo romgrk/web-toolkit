@@ -182,6 +182,7 @@ importers:
       rambda: 6.5.3
       react: 17.0.1
       react-dom: 17.0.1_react@17.0.1
+      react-highlight: 0.13.0_react-dom@17.0.1+react@17.0.1
       react-highlight-words: 0.17.0_react@17.0.1
       react-jss: 10.5.1_react@17.0.1
       react-router: 5.2.0_react@17.0.1
@@ -208,6 +209,7 @@ importers:
       rambda: ^6.5.3
       react: ^17.0.1
       react-dom: ^17.0.1
+      react-highlight: ^0.13.0
       react-highlight-words: ^0.17.0
       react-jss: ^10.5.1
       react-router: ^5.2.0
@@ -8437,6 +8439,10 @@ packages:
     dev: false
     resolution:
       integrity: sha512-BXUKIkUuh6cmmxzi5OIbUJxrG8OAk2MqoL1DtO3Wo9D2faJg2ph5ntyuQeLqaHJmzER6H5tllCDA9ZnNe9BVGg==
+  /highlight.js/10.6.0:
+    dev: false
+    resolution:
+      integrity: sha512-8mlRcn5vk/r4+QcqerapwBYTe+iPL5ih6xrNylxrnBdHQiijDETfXX7VIxC3UiCRiINBJfANBAsPzAvRQj8RpQ==
   /history/4.10.1:
     dependencies:
       '@babel/runtime': 7.12.18
@@ -12840,6 +12846,17 @@ packages:
       react: ^0.14.0 || ^15.0.0 || ^16.0.0-0 || ^17.0.0-0
     resolution:
       integrity: sha512-uX1Qh5IGjnLuJT0Zok234QDwRC8h4hcVMnB99Cb7aquB1NlPPDiWKm0XpSZOTdSactvnClCk8LOmVlP+75dgHA==
+  /react-highlight/0.13.0_react-dom@17.0.1+react@17.0.1:
+    dependencies:
+      highlight.js: 10.6.0
+      react: 17.0.1
+      react-dom: 17.0.1_react@17.0.1
+    dev: false
+    peerDependencies:
+      react: ^15.0.0 || ^16.0.0
+      react-dom: ^15.0.0 || ^16.0.0
+    resolution:
+      integrity: sha512-k8BfWsTN9mFy+ijXvg79Gk6qOtAX0HU4OHW25QQz339PDHbov6N+frJWygFOAR1rPxMeC9y9cvYJRjaAaXs9dw==
   /react-is/16.13.1:
     resolution:
       integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==

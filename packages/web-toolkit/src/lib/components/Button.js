@@ -15,27 +15,27 @@ const propTypes = {
   /** An icon name */
   icon: prop.string,
   /** HTML button type */
-  type,
+  type: prop.string,
   /** Shows a spinner and disables the button */
-  loading,
+  loading: prop.bool,
   /** Round style button */
-  circular,
+  circular: prop.bool,
   /** Flat style button */
-  flat,
+  flat: prop.bool,
   /** Link style button */
-  link,
+  link: prop.bool,
   /** Primary style button */
-  primary,
+  primary: prop.bool,
   /** Danger style button */
-  danger,
+  danger: prop.bool,
   /** Active state */
-  active,
+  active: prop.bool,
   /** Hover state */
-  hover,
+  hover: prop.bool,
   /** Button containing text */
-  text,
+  text: prop.bool,
   /** Button containing an image only */
-  image,
+  image: prop.bool,
 }
 
 const defaultProps = {

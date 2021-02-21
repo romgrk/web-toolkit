@@ -48,7 +48,7 @@ $_code_bg_color:     if($variant == 'light', #fff, lighten($bg_color, 4%));
 $_code_border_color: if($variant == 'light', #ccc, lighten($bg_color, 8%));
 
 code {
-  font-size: 0.8em;
+  font-size: 0.9em;
   padding: 1px 4px;
   color: $text_color;
   background-color: $_code_bg_color;
@@ -57,7 +57,7 @@ code {
 }
 
 pre {
-  font-size: 0.8em;
+  font-size: 0.9em;
   padding: 1px 4px;
   color: $text_color;
   background-color: $_code_bg_color;

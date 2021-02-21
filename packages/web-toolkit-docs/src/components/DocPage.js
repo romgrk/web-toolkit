@@ -8,11 +8,30 @@ import Content from './Content'
 import DocTable from './DocTable'
 
 const styles = {
+  title: {
+    marginTop: '2rem',
+    marginBottom: '1rem',
+    display: 'flex',
+    flexDirection: 'column',
+    // alignItems: 'center',
+    '& h1': {
+      display: 'inline-block',
+      margin: 0,
+    },
+    '& a': {
+      marginLeft: '1.5rem',
+      fontSize: 12,
+    },
+  },
+
   usage: {
     minHeight: 500,
     paddingBottom: '5rem',
-  }
+  },
 }
+
+const sourceBase =
+  'https://github.com/romgrk/web-toolkit/blob/master/packages/web-toolkit/'
 
 function DocPage({ classes, data }) {
   const Usage = USAGE[data.name]
@@ -20,7 +39,14 @@ function DocPage({ classes, data }) {
 
   return (
     <Content>
-      <h1>{`<${data.name} />`}</h1>
+      <div className={classes.title}>
+        <h1>
+          {`<${data.name} />`}
+        </h1>
+        <a href={`${sourceBase}${data.sourcePath}`}>
+          Open source
+        </a>
+      </div>
 
       <Box vertical>
         <h4>Props</h4>

@@ -10,12 +10,15 @@ const styles = {
   },
 }
 
-function Main({ classes, className, ...props }) {
+function Main({ classes, className, children, ...props }) {
   return (
     <div
+      id='main'
       className={cx(className, classes.root)}
       {...props}
-    />
+    >
+      {children}
+    </div>
   )
 }
 

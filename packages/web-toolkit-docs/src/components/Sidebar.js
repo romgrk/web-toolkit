@@ -41,6 +41,7 @@ function Sidebar({ classes }) {
     if (!selectedRoute)
       return
     history.push(selectedRoute.path)
+    setTimeout(() => document.getElementById('main').focus(), 200)
     setSearch('')
   }
 

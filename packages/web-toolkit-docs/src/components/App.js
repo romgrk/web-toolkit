@@ -11,7 +11,6 @@ import {
 import 'web-toolkit/lib/index.css'
 
 import routes from './routes'
-import Header from './Header'
 import Main from './Main'
 import Sidebar from './Sidebar'
 import './App.css'
@@ -19,8 +18,7 @@ import './App.css'
 function App() {
   return (
     <Router>
-      <div className='App background Box vertical compact'>
-        <Header />
+      <Box vertical compact className='App background'>
         <Paned defaultSize={230} fill border='handle'>
           <Sidebar />
           <Main>
@@ -36,7 +34,7 @@ function App() {
             </Switch>
           </Main>
         </Paned>
-      </div>
+      </Box>
     </Router>
   )
 }

@@ -6,6 +6,7 @@ $ease-out-quad: cubic-bezier(0.25, 0.46, 0.45, 0.94);
 $asset_suffix: if($variant=='dark', '-dark', '');
 $backdrop_transition: 200ms ease-out;
 $button_transition: all 150ms $ease-out-quad;
+$link_transition: color 150ms $ease-out-quad;
 $focus_transition: all 200ms $ease-out-quad;
 $popover_transition: all 80ms $ease-out-quad;
 $page_switcher_transition: all 150ms $ease-out-quad;
@@ -1264,7 +1265,7 @@ a,
   color: $link_color;
   text-decoration: underline;
   cursor: pointer;
-  transition: $button_transition;
+  transition: $link_transition;
   border-radius: $button_radius;
 
   @include focus-ring($method: 'after');

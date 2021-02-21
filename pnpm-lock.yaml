@@ -177,6 +177,7 @@ importers:
       '@testing-library/react': 11.2.5_react-dom@17.0.1+react@17.0.1
       '@testing-library/user-event': 12.7.1
       clsx: 1.1.1
+      faker: 5.4.0
       fzy.js: 0.4.1
       prettier: 2.2.1
       rambda: 6.5.3
@@ -203,6 +204,7 @@ importers:
       escope: ^3.6.0
       estree-walk: ^2.2.0
       estree-walker: '2'
+      faker: ^5.4.0
       fzy.js: ^0.4.1
       meriyah: ^4.1.2
       prettier: ^2.2.1
@@ -7635,7 +7637,6 @@ packages:
     resolution:
       integrity: sha1-lpGEQOMEGnpBT4xS48V06zw+HgU=
   /faker/5.4.0:
-    dev: true
     resolution:
       integrity: sha512-Y9n/Ky/xZx/Bj8DePvXspUYRtHl/rGQytoIT5LaxmNwSe3wWyOeOXb3lT6Dpipq240PVpeFaGKzScz/5fvff2g==
   /fast-deep-equal/3.1.3:

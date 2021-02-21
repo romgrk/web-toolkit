@@ -1,10 +1,14 @@
-const requireModule = require.context("./", false, /\.js$/)
+/*
+ * Export all files in the current directory
+ */
+
+const requireModule = require.context('./', false, /\.js$/)
+
 const api = {}
 
 requireModule.keys().forEach(filename => {
-  if (filename === './index.js')
+  if (filename.includes('index.js'))
     return
-
   const moduleName = filename.replace(/(\.\/|\.js)/g, '')
   api[moduleName] = requireModule(filename).default
 })

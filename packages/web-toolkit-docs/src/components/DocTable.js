@@ -5,8 +5,10 @@ import prettier from 'prettier'
 import parserBabel from 'prettier/esm/parser-babel'
 
 const DEFAULT_PROP_DESCRIPTIONS = {
+  'value': 'The value of the component',
+  'defaultValue': 'The initial value of the component',
   'className': 'The class of the component',
-  'size': 'The size of the component',
+  'size':      'The size of the component',
 }
 
 const border = '#ccc'
@@ -30,7 +32,7 @@ const styles = {
       borderBottom: 'none',
       padding: '10px 10px',
       verticalAlign: 'top',
-      fontSize: '15px',
+      fontSize: 14,
     },
     '& td:nth-child(1)': { // required
       fontWeight: 'bold',
@@ -87,7 +89,12 @@ function DocTable({ classes, data }) {
 export default jss(styles)(DocTable)
 
 function formatType(type) {
-  const doc = type.replace(/prop\./g, '').replace(/\.isRequired$/, '')
+  const doc =
+    type
+      .replace(/prop\./g, '')
+      .replace(/\.isRequired$/, '')
+      .replace(/\bshape\b/g, '')
+
   const prettyDoc = prettier.format(doc, {
     parser: 'babel',
     plugins: [parserBabel],

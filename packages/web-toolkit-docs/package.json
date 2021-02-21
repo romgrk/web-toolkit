@@ -7,6 +7,7 @@
     "@testing-library/react": "^11.2.5",
     "@testing-library/user-event": "^12.7.1",
     "clsx": "^1.1.1",
+    "faker": "^5.4.0",
     "fzy.js": "^0.4.1",
     "prettier": "^2.2.1",
     "rambda": "^6.5.3",

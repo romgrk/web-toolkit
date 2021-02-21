@@ -603,7 +603,8 @@ pre {
     .Input .Input__right.Button {
       opacity: 0.8;
       min-width: unset;
-      min-height: unset; }
+      min-height: unset;
+      height: min-content; }
     .InputNumber.vertical > .Input__area > input.flat, .flat.InputNumber:not(.vertical),
     .Input.flat:focus-within, .window-inactive .Input.flat,
     .Input.flat:disabled, .window-inactive .Input.flat:disabled,

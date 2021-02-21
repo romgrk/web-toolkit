@@ -1,5 +1,6 @@
 import React from 'react'
 import jss from 'react-jss'
+import { Link } from 'react-router-dom'
 import { Autocomplete, Box, Frame, Label } from 'web-toolkit'
 import generateUsers from '../../helpers/generateUsers'
 import CodeExample from '../CodeExample'
@@ -22,6 +23,8 @@ function AutocompleteUsage({ classes }) {
       <p>
         Autocomplete is a wrapper around <code>Input</code> and <code>Popover</code>{' '}
         that implement an autocompleting text field.
+        Also see <Link to={process.env.PUBLIC_URL + '/component/dropdown'}>Dropdown</Link> for
+        a filterable dropdown input (aka combobox).
       </p>
       <CodeExample
         text={`

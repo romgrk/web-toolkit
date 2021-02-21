@@ -155,13 +155,28 @@ class Dropdown extends React.Component {
     })
   }
 
+  getSelectedOption() {
+    const value = this.getValue()
+    if (value === this.lastValue && this.props.options === this.lastOptions)
+      return this.lastOption
+    const option = this.props.options.find(o => o.value === value)
+    if (option) {
+      this.lastValue = value
+      this.lastOption = option
+      this.lastOptions = this.props.options
+      return option
+    }
+    return undefined
+  }
+
   render() {
     const {
       className,
       triggerClassName,
       size,
       align,
-      label: _label,
+      placeholder,
+      label: labelValue,
       value: _value,
       options: _options,
       disabled,
@@ -178,9 +193,9 @@ class Dropdown extends React.Component {
     const open = this.isOpen()
     const value = this.getValue()
     const label =
-      this.props.label ||
-      this.props.options.find(o => o.value === value)?.label ||
-      this.props.placeholder ||
+      labelValue ||
+      this.getSelectedOption()?.label ||
+      placeholder ||
       value
 
     let trigger

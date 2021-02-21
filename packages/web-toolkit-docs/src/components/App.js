@@ -21,18 +21,21 @@ function App() {
       <Box vertical compact className='App background'>
         <Paned defaultSize={230} fill border='handle'>
           <Sidebar />
-          <Main>
-            <Switch>
-              {routes.map(route =>
-                <Route
-                  key={route.path}
-                  path={route.path}
-                  exact={route.exact}
-                  render={route.render}
-                />
-              )}
-            </Switch>
-          </Main>
+          <Switch>
+            {routes.map(route =>
+              <Route
+                key={route.path}
+                path={route.path}
+                exact={route.exact}
+                render={() =>
+                  /* Main is here with a `key` to reset the scroller on page change */
+                  <Main key={route.path}>
+                    {route.render()}
+                  </Main>
+              }
+              />
+            )}
+          </Switch>
         </Paned>
       </Box>
     </Router>

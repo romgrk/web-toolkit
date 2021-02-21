@@ -206,20 +206,26 @@ pre {
 .Box.align {
   align-items: center; }
 
+.Box.align-center {
+  align-items: center; }
+
 .Box.align-start {
-  align-items: start; }
+  align-items: flex-start; }
 
 .Box.align-end {
-  align-items: end; }
+  align-items: flex-end; }
 
 .Box.justify {
   justify-content: center; }
 
+.Box.justify-center {
+  justify-content: center; }
+
 .Box.justify-start {
-  justify-content: start; }
+  justify-content: flex-start; }
 
 .Box.justify-end {
-  justify-content: end; }
+  justify-content: flex-end; }
 
 .Box.space-around {
   justify-content: space-around; }

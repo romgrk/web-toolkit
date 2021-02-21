@@ -171,20 +171,26 @@ $popover_radius: $button_radius + 4;
   &.align {
     align-items: center;
   }
+  &.align-center {
+    align-items: center;
+  }
   &.align-start {
-    align-items: start;
+    align-items: flex-start;
   }
   &.align-end {
-    align-items: end;
+    align-items: flex-end;
   }
   &.justify {
     justify-content: center;
   }
+  &.justify-center {
+    justify-content: center;
+  }
   &.justify-start {
-    justify-content: start;
+    justify-content: flex-start;
   }
   &.justify-end {
-    justify-content: end;
+    justify-content: flex-end;
   }
   &.space-around {
     justify-content: space-around;

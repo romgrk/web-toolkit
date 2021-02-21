@@ -16,24 +16,24 @@ const componentsDir = path.join(__dirname, '../../web-toolkit/src/lib/components
 const componentFilepaths = fs.readdirSync(componentsDir).map(f => path.join(componentsDir, f))
 
 
-// { // Test one
-//   const filepath = path.join(componentsDir, 'Input.js')
-//   const moduleExports = parsePropTypes(filepath)
-//   console.log(moduleExports)
-//   console.log(JSON.stringify(serialize(moduleExports)))
-//   debugger
-// }
-
-{ // Run for all
-  const metadata = Object.fromEntries(componentFilepaths.map(filepath => {
-    const name = path.basename(filepath).replace('.js', '')
-    const sourcePath = filepath.replace(baseDir, '')
-    const moduleExports = serialize(parsePropTypes(filepath))
-    return [name, { name, sourcePath, exports: moduleExports }]
-  }))
-  fs.writeFileSync(metadataPath, JSON.stringify(metadata))
-  console.log('Metadata written to ' + metadataPath)
+{ // Test one
+  const filepath = path.join(componentsDir, 'Dropdown.js')
+  const moduleExports = parsePropTypes(filepath)
+  console.log(moduleExports)
+  console.log(JSON.stringify(serialize(moduleExports)))
+  debugger
 }
+
+// { // Run for all
+//   const metadata = Object.fromEntries(componentFilepaths.map(filepath => {
+//     const name = path.basename(filepath).replace('.js', '')
+//     const sourcePath = filepath.replace(baseDir, '')
+//     const moduleExports = serialize(parsePropTypes(filepath))
+//     return [name, { name, sourcePath, exports: moduleExports }]
+//   }))
+//   fs.writeFileSync(metadataPath, JSON.stringify(metadata))
+//   console.log('Metadata written to ' + metadataPath)
+// }
 
 
 function parsePropTypes(filepath) {
@@ -46,14 +46,25 @@ function parsePropTypes(filepath) {
     next: true,
     jsx: true,
     loc: true,
-    onComment: comments,
+    directives: true,
+    onComment: (type, value, start, end, loc) => {
+      comments.push({
+        type: type + 'Comment',
+        value,
+        start,
+        end,
+        range: [start, end],
+        loc,
+      })
+    },
   })
   const scopeManager = escope.analyze(ast, {
     ecmaVersion: 6,
     sourceType: 'module',
   })
-  
-  const context = { ast, scopeManager, source }
+
+  const context = { ast, scopeManager, source, comments }
+  attachComments(context)
 
   const moduleExports = buildExports(context)
 
@@ -66,6 +77,55 @@ function parsePropTypes(filepath) {
   // })
 
   return moduleExports
+}
+
+function attachComments(context) {
+  const nodePositions    = Array(context.ast.end).fill(null)
+  const commentPositions = Array(context.ast.end).fill(null)
+
+  const skipNode = new Set([
+    'Identifier',
+  ])
+
+  walk(context.ast, {
+    enter(node, parent, prop, index) {
+      if (skipNode.has(node.type))
+        return
+      nodePositions[node.start] = node
+    }
+  })
+
+  context.comments.forEach(node => {
+    node.comment = true
+    for (let i = node.start; i < node.end; i++) {
+      commentPositions[i] = node
+    }
+  })
+
+  for (let i = 0; i < commentPositions.length; i++) {
+    const comment = commentPositions[i]
+    if (!comment)
+      continue
+
+    // console.log(i, comment)
+    // console.log()
+
+    // Attach node
+    for (; i < commentPositions.length; i++) {
+      const node = nodePositions[i]
+      if (!node)
+        continue
+      console.log(node, getSourceLine(node, context))
+      node.comment = comment
+      break
+    }
+
+    // Advance until end of comment
+    for (; i < commentPositions.length; i++) {
+      if (comment !== commentPositions[i])
+        break
+    }
+  }
 }
 
 function buildExports(context) {
@@ -235,6 +295,10 @@ function getName(node) {
 
 function hasScope(node) {
   return /Function|Program/.test(node.type)
+}
+
+function isComment(node) {
+  return /Comment/.test(node.type)
 }
 
 function walkWithScope(context, options) {

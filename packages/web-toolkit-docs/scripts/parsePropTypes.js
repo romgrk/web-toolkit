@@ -16,24 +16,25 @@ const componentsDir = path.join(__dirname, '../../web-toolkit/src/lib/components
 const componentFilepaths = fs.readdirSync(componentsDir).map(f => path.join(componentsDir, f))
 
 
-{ // Test one
-  const filepath = path.join(componentsDir, 'Dropdown.js')
-  const moduleExports = parsePropTypes(filepath)
-  console.log(moduleExports)
-  console.log(JSON.stringify(serialize(moduleExports)))
-  debugger
-}
-
-// { // Run for all
-//   const metadata = Object.fromEntries(componentFilepaths.map(filepath => {
-//     const name = path.basename(filepath).replace('.js', '')
-//     const sourcePath = filepath.replace(baseDir, '')
-//     const moduleExports = serialize(parsePropTypes(filepath))
-//     return [name, { name, sourcePath, exports: moduleExports }]
-//   }))
-//   fs.writeFileSync(metadataPath, JSON.stringify(metadata))
-//   console.log('Metadata written to ' + metadataPath)
+// { // Test one
+//   const filepath = path.join(componentsDir, 'Dropdown.js')
+//   // const filepath = path.join(componentsDir, 'Input.js')
+//   const moduleExports = parsePropTypes(filepath)
+//   console.log(moduleExports)
+//   console.log(JSON.stringify(serialize(moduleExports)))
+//   debugger
 // }
+
+{ // Run for all
+  const metadata = Object.fromEntries(componentFilepaths.map(filepath => {
+    const name = path.basename(filepath).replace('.js', '')
+    const sourcePath = filepath.replace(baseDir, '')
+    const moduleExports = serialize(parsePropTypes(filepath))
+    return [name, { name, sourcePath, exports: moduleExports }]
+  }))
+  fs.writeFileSync(metadataPath, JSON.stringify(metadata))
+  console.log('Metadata written to ' + metadataPath)
+}
 
 
 function parsePropTypes(filepath) {
@@ -63,7 +64,7 @@ function parsePropTypes(filepath) {
     sourceType: 'module',
   })
 
-  const context = { ast, scopeManager, source, comments }
+  const context = { ast, scopeManager, source, comments, filepath }
   attachComments(context)
 
   const moduleExports = buildExports(context)
@@ -115,7 +116,7 @@ function attachComments(context) {
       const node = nodePositions[i]
       if (!node)
         continue
-      console.log(node, getSourceLine(node, context))
+      // console.log(node, getSourceLine(node, context))
       node.comment = comment
       break
     }
@@ -197,7 +198,12 @@ function buildExport(node, scope, context) {
       if (value.type === 'Identifier') {
         // eg: Input.propTypes = propTypes;
         const definition = getDefinition(value, context)
-        value = definition.init
+        switch(definition.type) {
+          case 'VariableDeclarator': value = definition.init; break
+          case 'FunctionDeclaration': value = definition; break
+          case 'ImportDefaultSpecifier': value = definition; break
+          default: assert(false)
+        }
       }
       else if (value.type === 'ObjectExpression') {
         // eg: Input.propTypes = { ... };
@@ -220,6 +226,21 @@ function buildExport(node, scope, context) {
       fields[fieldName] = value
     }
   })
+
+  // Check static fields
+  if (definition.node.type === 'ClassDeclaration') {
+    const classFields = definition.node.body.body
+    const staticFields = classFields.filter(f => f.type === 'PropertyDefinition' && f.static)
+    staticFields.forEach(f => {
+      fields[getName(f.key)] = f.value
+    })
+  }
+  else if (definition.node.type !== 'FunctionDeclaration'
+        && definition.node.type !== 'VariableDeclarator') {
+    debugger
+    assert(false)
+  }
+
 
   const propTypes =
     fields.propTypes && buildPropTypes(fields.propTypes, context)
@@ -259,7 +280,12 @@ function buildPropTypes(node, context) {
     const name = getName(node.key)
     const value = node.value
     const text = getSourceText(value, context)
-    propTypes[name] = { node: value, text }
+    const comment = node.comment ? parseJSDocComment(node.comment) : {}
+    propTypes[name] = {
+      node: value,
+      text,
+      comment,
+    }
   })
 
   return propTypes
@@ -299,6 +325,19 @@ function hasScope(node) {
 
 function isComment(node) {
   return /Comment/.test(node.type)
+}
+
+function parseJSDocComment(comment) {
+  assert(comment.type === 'MultiLineComment')
+  // eg "* className of the component"
+  const text =
+    comment.value.split('\n')
+      .map(line => line.replace(/^\s*\*/, '').trim())
+      .join('\n')
+  // for now, only trim the text and return
+  return {
+    text: text,
+  }
 }
 
 function walkWithScope(context, options) {
@@ -364,8 +403,13 @@ function serialize(moduleExports) {
     const value = moduleExports[key]
     const { propTypes, defaultProps } = value
     result[key] = {
-      propTypes: propTypes && map(n => n.text, propTypes),
-      defaultProps: defaultProps && map(n => n.text, defaultProps),
+      propTypes: propTypes && map(n => ({
+        value: n.text,
+        description: n.comment.text
+      }), propTypes),
+      defaultProps: defaultProps && map(n => ({
+        value: n.text,
+      }), defaultProps),
     }
   })
   return result

@@ -9,12 +9,46 @@ import cx from 'clsx'
 import Icon from './Icon'
 import Spinner from './Spinner'
 
+const propTypes = {
+  className: prop.string,
+  size: prop.oneOf(['mini', 'small', 'medium', 'large', 'huge']),
+  /** An icon name */
+  icon: prop.string,
+  /** HTML button type */
+  type,
+  /** Shows a spinner and disables the button */
+  loading,
+  /** Round style button */
+  circular,
+  /** Flat style button */
+  flat,
+  /** Link style button */
+  link,
+  /** Primary style button */
+  primary,
+  /** Danger style button */
+  danger,
+  /** Active state */
+  active,
+  /** Hover state */
+  hover,
+  /** Button containing text */
+  text,
+  /** Button containing an image only */
+  image,
+}
+
+const defaultProps = {
+  size: 'medium',
+  type: 'button',
+}
+
 function Button({
   children,
-  icon,
   className,
-  type,
   size,
+  icon,
+  type,
   disabled,
   loading,
   circular,
@@ -61,15 +95,7 @@ function Button({
 }
 
 const Export = forwardRef(Button)
-
-Export.propTypes = {
-  className: prop.string,
-  size: prop.oneOf(['mini', 'small', 'medium', 'large', 'huge']),
-}
-
-Export.defaultProps = {
-  size: 'medium',
-  type: 'button',
-}
+Export.propTypes = propTypes
+Export.defaultProps = defaultProps
 
 export default Export

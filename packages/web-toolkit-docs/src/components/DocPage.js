@@ -10,6 +10,7 @@ import DocTable from './DocTable'
 const styles = {
   usage: {
     minHeight: 500,
+    paddingBottom: '5rem',
   }
 }
 

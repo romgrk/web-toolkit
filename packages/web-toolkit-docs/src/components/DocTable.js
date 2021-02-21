@@ -30,7 +30,7 @@ const styles = {
     '& td': {
       borderTop: 'none',
       borderBottom: 'none',
-      padding: '10px 10px',
+      padding: '0.5rem 10px',
       verticalAlign: 'top',
       fontSize: 14,
     },

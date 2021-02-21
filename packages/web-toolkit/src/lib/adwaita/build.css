@@ -1090,6 +1090,10 @@ editablelabel > stack > text {
       .Button.flat:not(:disabled):not(.disabled):active::before,
       .Button.flat:not(:disabled):not(.disabled):checked::before {
         opacity: 0; }
+    button.sidebar-button:disabled, .Notebook .Notebook__arrow:disabled, .control-buttons button:disabled, button.disabled.sidebar-button, .Notebook .disabled.Notebook__arrow, .control-buttons button.disabled,
+    .Button.flat:disabled,
+    .Button.flat.disabled {
+      color: #829095; }
     button.sidebar-button:backdrop, .Notebook .Notebook__arrow:backdrop, .control-buttons button:backdrop, button.sidebar-button:disabled, .Notebook .Notebook__arrow:disabled, .control-buttons button:disabled,
     .Button.flat:backdrop,
     .Button.flat:disabled,
@@ -1105,6 +1109,43 @@ editablelabel > stack > text {
       .Button.flat:disabled::before,
       .Button.flat:backdrop:disabled::before {
         opacity: 0; }
+  .Notebook .link.Notebook__arrow, .control-buttons button.link,
+  .Button.link {
+    color: inherit;
+    border-color: transparent;
+    background-color: transparent;
+    box-shadow: inset 0 1px rgba(255, 255, 255, 0);
+    text-shadow: none;
+    --icon-shadow: none;
+    color: #1b6acb;
+    border-width: 0; }
+    .Notebook .link.Notebook__arrow::before, .control-buttons button.link::before,
+    .Button.link::before {
+      opacity: 0; }
+    .Notebook .link.Notebook__arrow:not(:disabled):not(.disabled), .control-buttons button.link:not(:disabled):not(.disabled),
+    .Button.link:not(:disabled):not(.disabled),
+    .Button.link:not(:disabled):not(.disabled):hover,
+    .Button.link:not(:disabled):not(.disabled):active,
+    .Button.link:not(:disabled):not(.disabled):checked {
+      color: inherit;
+      border-color: transparent;
+      background-color: transparent;
+      box-shadow: inset 0 1px rgba(255, 255, 255, 0);
+      text-shadow: none;
+      --icon-shadow: none;
+      color: #1b6acb;
+      text-shadow: none; }
+      .Notebook .link.Notebook__arrow:not(:disabled):not(.disabled)::before, .control-buttons button.link:not(:disabled):not(.disabled)::before,
+      .Button.link:not(:disabled):not(.disabled)::before,
+      .Button.link:not(:disabled):not(.disabled):hover::before,
+      .Button.link:not(:disabled):not(.disabled):active::before,
+      .Button.link:not(:disabled):not(.disabled):checked::before {
+        opacity: 0; }
+    .Notebook .link.Notebook__arrow:disabled, .control-buttons button.link:disabled, .Notebook .link.disabled.Notebook__arrow, .control-buttons button.link.disabled,
+    .Button.link:disabled,
+    .Button.link.disabled {
+      color: rgba(27, 106, 203, 0.6);
+      cursor: default; }
   .Notebook .image-button.Notebook__arrow, .control-buttons button.image-button,
   .Button.image-button {
     padding-left: 5px;
@@ -1816,7 +1857,6 @@ button.color {
  * Links *
  *********/
 a,
-button.link,
 .link {
   color: #1b6acb;
   text-decoration: underline;
@@ -1824,7 +1864,6 @@ button.link,
   transition: all 150ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
   border-radius: 5px; }
   a,
-  button.link,
   .link {
     position: relative;
     outline: none;
@@ -1874,28 +1913,6 @@ button.link,
   a.selected, *.selected a,
   .link.selected, *.selected .link {
     color: #d1e1f5; }
-
-button.link {
-  color: inherit;
-  border-color: transparent;
-  background-color: transparent;
-  box-shadow: inset 0 1px rgba(255, 255, 255, 0);
-  text-shadow: none;
-  --icon-shadow: none; }
-  button.link::before {
-    opacity: 0; }
-  button.link:not(:disabled):not(.disabled), button.link:not(:disabled):not(.disabled):hover, button.link:not(:disabled):not(.disabled):active, button.link:not(:disabled):not(.disabled):checked {
-    color: inherit;
-    border-color: transparent;
-    background-color: transparent;
-    box-shadow: inset 0 1px rgba(255, 255, 255, 0);
-    text-shadow: none;
-    --icon-shadow: none;
-    text-shadow: none; }
-    button.link:not(:disabled):not(.disabled)::before, button.link:not(:disabled):not(.disabled):hover::before, button.link:not(:disabled):not(.disabled):active::before, button.link:not(:disabled):not(.disabled):checked::before {
-      opacity: 0; }
-  button.link > .Label {
-    text-decoration: underline; }
 
 /*****************
  * GtkSpinButton *

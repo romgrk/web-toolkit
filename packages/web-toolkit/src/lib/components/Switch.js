@@ -15,16 +15,19 @@ let nextId = 1
 
 class Switch extends React.Component {
   static propTypes = {
-    label: prop.string,
-    labels: prop.oneOfType([prop.bool, prop.arrayOf(prop.string)]),
-    size: prop.oneOf(['mini', 'small', 'medium', 'large', 'huge']),
     value: prop.bool,
     defaultValue: prop.bool,
+    /** Not shown. For screen-readers only */
+    label: prop.string,
+    /** On/Off if `true`, or provide your own 2 labels */
+    labels: prop.oneOfType([prop.bool, prop.arrayOf(prop.string)]),
+    size: prop.oneOf(['mini', 'small', 'medium', 'large', 'huge']),
     onChange: prop.func,
   }
 
   static defaultProps = {
     size: 'medium',
+    labels: false,
     onChange: noop,
   }
 

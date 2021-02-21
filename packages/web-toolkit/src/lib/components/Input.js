@@ -147,6 +147,7 @@ const ExportedInput = forwardRef(Input)
 ExportedInput.Group = forwardRef(Group)
 
 ExportedInput.propTypes = {
+  /** Size of the input */
   size: prop.oneOf(['mini', 'small', 'medium', 'large', 'huge']),
   allowClear: prop.bool,
   onChange: prop.func,

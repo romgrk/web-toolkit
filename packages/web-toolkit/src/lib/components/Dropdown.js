@@ -18,6 +18,7 @@ import Separator from './Separator'
 
 class Dropdown extends React.Component {
   static propTypes = {
+    /** className of the component's popover */
     className: prop.string,
     triggerClassName: prop.string,
     size: prop.oneOf(['mini', 'small', 'medium', 'large', 'huge']),

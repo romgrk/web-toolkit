@@ -174,6 +174,7 @@ importers:
       '@testing-library/jest-dom': 5.11.9
       '@testing-library/react': 11.2.5_react-dom@17.0.1+react@17.0.1
       '@testing-library/user-event': 12.7.1
+      rambda: 6.5.3
       react: 17.0.1
       react-dom: 17.0.1_react@17.0.1
       react-scripts: 4.0.2_react@17.0.1
@@ -181,6 +182,7 @@ importers:
       web-vitals: 1.1.0
     devDependencies:
       escope: 3.6.0
+      estree-walk: 2.2.0
       estree-walker: 2.0.2
       meriyah: 4.1.2
     specifiers:
@@ -188,8 +190,10 @@ importers:
       '@testing-library/react': ^11.2.5
       '@testing-library/user-event': ^12.7.1
       escope: ^3.6.0
+      estree-walk: ^2.2.0
       estree-walker: '2'
       meriyah: ^4.1.2
+      rambda: ^6.5.3
       react: ^17.0.1
       react-dom: ^17.0.1
       react-scripts: 4.0.2
@@ -7368,6 +7372,12 @@ packages:
       node: '>=4.0'
     resolution:
       integrity: sha512-BxbNGGNm0RyRYvUdHpIwv9IWzeM9XClbOxwoATuFdOE7ZE6wHL+HQ5T8hoPM+zHvmKzzsEqhgy0GrQ5X13afiQ==
+  /estree-walk/2.2.0:
+    dev: true
+    engines:
+      node: '>=4'
+    resolution:
+      integrity: sha512-6gUr3kGNVEfL6pcIiGBrSkhoEQPkv8laQy1lUDpaxT4AvlBxf/UYSueOEb6Wq1cG5Ct6xQSkFCHoJcZlijpUAg==
   /estree-walker/0.6.1:
     dev: false
     resolution:

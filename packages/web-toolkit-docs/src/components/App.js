@@ -10,37 +10,28 @@ import {
 } from 'web-toolkit'
 import 'web-toolkit/lib/index.css'
 
-import metadata from '../properties.json'
-import DocPage from './DocPage'
+import routes from './routes'
 import Header from './Header'
-import Home from './Home'
 import Main from './Main'
 import Sidebar from './Sidebar'
 import './App.css'
-
-const routes = Object.values(metadata)
-  .map(component => ({
-    path: `/${component.name}`,
-    render: () => <DocPage data={component} />
-  }))
-
-routes.push({
-  path: '/',
-  exact: true,
-  render: () => <Home />
-})
 
 function App() {
   return (
     <Router>
       <div className='App background Box vertical compact'>
         <Header />
-        <Paned defaultSize={200} fill border='handle'>
+        <Paned defaultSize={230} fill border='handle'>
           <Sidebar />
           <Main>
             <Switch>
               {routes.map(route =>
-                <Route key={route.path} {...route} />
+                <Route
+                  key={route.path}
+                  path={route.path}
+                  exact={route.exact}
+                  render={route.render}
+                />
               )}
             </Switch>
           </Main>

@@ -177,10 +177,12 @@ importers:
       '@testing-library/react': 11.2.5_react-dom@17.0.1+react@17.0.1
       '@testing-library/user-event': 12.7.1
       clsx: 1.1.1
+      fzy.js: 0.4.1
       prettier: 2.2.1
       rambda: 6.5.3
       react: 17.0.1
       react-dom: 17.0.1_react@17.0.1
+      react-highlight-words: 0.17.0_react@17.0.1
       react-jss: 10.5.1_react@17.0.1
       react-router: 5.2.0_react@17.0.1
       react-router-dom: 5.2.0_react@17.0.1
@@ -200,11 +202,13 @@ importers:
       escope: ^3.6.0
       estree-walk: ^2.2.0
       estree-walker: '2'
+      fzy.js: ^0.4.1
       meriyah: ^4.1.2
       prettier: ^2.2.1
       rambda: ^6.5.3
       react: ^17.0.1
       react-dom: ^17.0.1
+      react-highlight-words: ^0.17.0
       react-jss: ^10.5.1
       react-router: ^5.2.0
       react-router-dom: ^5.2.0
@@ -8105,6 +8109,10 @@ packages:
   /functional-red-black-tree/1.0.1:
     resolution:
       integrity: sha1-GwqzvVU7Kg1jmdKcDj6gslIHgyc=
+  /fzy.js/0.4.1:
+    dev: false
+    resolution:
+      integrity: sha512-4sPVXf+9oGhzg2tYzgWe4hgAY0wEbkqeuKVEgdnqX8S8VcLosQsDjb0jV+f5uoQlf8INWId1w0IGoufAoik1TA==
   /gensync/1.0.0-beta.2:
     engines:
       node: '>=6.9.0'
@@ -8425,6 +8433,10 @@ packages:
   /hex-color-regex/1.1.0:
     resolution:
       integrity: sha512-l9sfDFsuqtOqKDsQdqrMRk0U85RZc0RtOR9yPI7mRVOa4FsR/BVnZ0shmQRM96Ji99kYZP/7hn1cedc1+ApsTQ==
+  /highlight-words-core/1.2.2:
+    dev: false
+    resolution:
+      integrity: sha512-BXUKIkUuh6cmmxzi5OIbUJxrG8OAk2MqoL1DtO3Wo9D2faJg2ph5ntyuQeLqaHJmzER6H5tllCDA9ZnNe9BVGg==
   /history/4.10.1:
     dependencies:
       '@babel/runtime': 7.12.18
@@ -10541,6 +10553,10 @@ packages:
       node: '>= 0.6'
     resolution:
       integrity: sha1-hxDXrwqmJvj/+hzgAWhUUmMlV0g=
+  /memoize-one/4.0.3:
+    dev: false
+    resolution:
+      integrity: sha512-QmpUu4KqDmX0plH4u+tf0riMc1KHE1+lw95cMrLlXQAFOx/xnBtwhZ52XJxd9X2O6kwKBqX32kmhbhlobD0cuw==
   /memoize-one/5.1.1:
     dev: false
     resolution:
@@ -12813,6 +12829,17 @@ packages:
     dev: false
     resolution:
       integrity: sha512-rtGImPZ0YyLrscKI9xTpV8psd6I8VAtjKCzQDlzyDvqJA8XOW78TXYQwNRNd8g8JZnDu8q9Fu/1v4HPAVwVdHA==
+  /react-highlight-words/0.17.0_react@17.0.1:
+    dependencies:
+      highlight-words-core: 1.2.2
+      memoize-one: 4.0.3
+      prop-types: 15.7.2
+      react: 17.0.1
+    dev: false
+    peerDependencies:
+      react: ^0.14.0 || ^15.0.0 || ^16.0.0-0 || ^17.0.0-0
+    resolution:
+      integrity: sha512-uX1Qh5IGjnLuJT0Zok234QDwRC8h4hcVMnB99Cb7aquB1NlPPDiWKm0XpSZOTdSactvnClCk8LOmVlP+75dgHA==
   /react-is/16.13.1:
     resolution:
       integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==

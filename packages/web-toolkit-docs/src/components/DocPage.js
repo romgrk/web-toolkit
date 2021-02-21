@@ -20,7 +20,7 @@ export default function DocPage({ data }) {
 
         {/*<pre>{JSON.stringify(data.exports.default, null, 2)}</pre>*/}
 
-        <h4>Proptypes</h4>
+        <h4>Props</h4>
         <DocTable
           data={data.exports.default}
         />

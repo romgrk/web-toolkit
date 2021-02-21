@@ -13,11 +13,16 @@ import metadata from '../properties.json'
 import routes from './routes'
 
 const styles = {
+  root: {
+    width: '100%',
+    height: '100%',
+  },
   mark: {
     backgroundColor: '#ffd54f',
   },
   list: {
-    overflow: 'hidden',
+    flex: 1,
+    overflow: 'auto',
   }
 }
 
@@ -46,7 +51,7 @@ function Sidebar({ classes }) {
   }
 
   return (
-    <div>
+    <Box vertical compact className={classes.root}>
       <Box vertical padded className='background-dark'>
         <form onSubmit={onSubmit}>
           <Input
@@ -88,7 +93,7 @@ function Sidebar({ classes }) {
           </List.Item>
         }
       </List>
-    </div>
+    </Box>
   )
 }
 

@@ -3867,6 +3867,11 @@ list,
   flex-direction: row;
   padding: 2px;
 
+  &, &:hover {
+    text-decoration: none !important;
+    color: inherit !important;
+  }
+
   &.activatable {
     user-select: none;
     transition: $button_transition;

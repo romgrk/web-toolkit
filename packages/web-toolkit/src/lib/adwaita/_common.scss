@@ -544,15 +544,21 @@ $_input_padding: 8px;
     }
 
     // icons inside the entry
-    .Input__left, .Input__right { @include flex_center; }
+    .Input__left,
+    .Input__right {
+      @include flex_center;
+    }
     .Input__left { margin-right: 6px; }
     .Input__right {
       margin: 0;
       margin-left: 6px;
       padding: 0;
     }
+    .Input__left.Button,
     .Input__right.Button {
       opacity: 0.8;
+      min-width: unset;
+      min-height: unset;
     }
 
     &.flat {

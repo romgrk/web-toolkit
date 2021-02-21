@@ -580,7 +580,9 @@ pre {
       .InputNumber.vertical > .Input__area > input > .Input__area > input:not(.empty) + .Input__children, .InputNumber:not(.vertical) > .Input__area > input:not(.empty) + .Input__children,
       .Input > .Input__area > input:not(.empty) + .Input__children {
         opacity: 0; }
-    .InputNumber.vertical > .Input__area > input .Input__left, .InputNumber:not(.vertical) .Input__left, .InputNumber.vertical > .Input__area > input .Input__right, .InputNumber:not(.vertical) .Input__right,
+    .InputNumber.vertical > .Input__area > input .Input__left, .InputNumber:not(.vertical) .Input__left,
+    .InputNumber.vertical > .Input__area > input .Input__right,
+    .InputNumber:not(.vertical) .Input__right,
     .Input .Input__left,
     .Input .Input__right {
       display: flex;
@@ -594,9 +596,14 @@ pre {
       margin: 0;
       margin-left: 6px;
       padding: 0; }
-    .InputNumber.vertical > .Input__area > input .Input__right.Button, .InputNumber:not(.vertical) .Input__right.Button,
+    .InputNumber.vertical > .Input__area > input .Input__left.Button, .InputNumber:not(.vertical) .Input__left.Button,
+    .InputNumber.vertical > .Input__area > input .Input__right.Button,
+    .InputNumber:not(.vertical) .Input__right.Button,
+    .Input .Input__left.Button,
     .Input .Input__right.Button {
-      opacity: 0.8; }
+      opacity: 0.8;
+      min-width: unset;
+      min-height: unset; }
     .InputNumber.vertical > .Input__area > input.flat, .flat.InputNumber:not(.vertical),
     .Input.flat:focus-within, .window-inactive .Input.flat,
     .Input.flat:disabled, .window-inactive .Input.flat:disabled,

@@ -10,7 +10,7 @@ const { walk } = require('estree-walker')
 const escope = require('escope')
 const getParent = require('./estree-get-parent')
 
-const metadataPath  = path.join(__dirname, 'metadata.json')
+const metadataPath  = path.join(__dirname, '../src/properties.json')
 const baseDir       = path.join(__dirname, '../../web-toolkit/')
 const componentsDir = path.join(__dirname, '../../web-toolkit/src/lib/components')
 const componentFilepaths = fs.readdirSync(componentsDir).map(f => path.join(componentsDir, f))
@@ -32,6 +32,7 @@ const componentFilepaths = fs.readdirSync(componentsDir).map(f => path.join(comp
     return [name, { name, sourcePath, exports: moduleExports }]
   }))
   fs.writeFileSync(metadataPath, JSON.stringify(metadata))
+  console.log('Metadata written to ' + metadataPath)
 }
 
 
@@ -51,8 +52,10 @@ function parsePropTypes(filepath) {
     ecmaVersion: 6,
     sourceType: 'module',
   })
+  
+  const context = { ast, scopeManager, source }
 
-  const moduleExports = buildExports(ast, scopeManager, source)
+  const moduleExports = buildExports(context)
 
   // console.log('\n\n------ SCOPES ------\n\n')
   // walkWithScope(ast, scopeManager, {
@@ -65,27 +68,26 @@ function parsePropTypes(filepath) {
   return moduleExports
 }
 
-function buildExports(ast, scopeManager, source) {
+function buildExports(context) {
   let moduleExports = {}
 
-  walkWithScope(ast, scopeManager, {
+  walkWithScope(context, {
     enter: (node, parent, prop, index, scope, api) => {
       if (node.type === 'ExportDefaultDeclaration') {
-        moduleExports.default = buildExport(node.declaration, scope, ast, source)
+        moduleExports.default = buildExport(node.declaration, scope, context)
       }
       else if (node.type === 'ExportNamedDeclaration') {
-        console.log(node)
         switch (node.declaration.type) {
           case 'VariableDeclaration':
             node.declaration.declarations.forEach(node => {
               if (isComponent(node))
-                moduleExports[node.id.name] = buildExport(node, scope, ast, source)
+                moduleExports[node.id.name] = buildExport(node, scope, context)
             })
             break;
           case 'FunctionDeclaration':
             if (isComponent(node.declaration))
               moduleExports[node.declaration.id.name] =
-                buildExport(node.declaration, scope, ast, source)
+                buildExport(node.declaration, scope, context)
             break;
           default:
             console.log(node)
@@ -98,7 +100,7 @@ function buildExports(ast, scopeManager, source) {
   return moduleExports
 }
 
-function buildExport(node, scope, ast, source) {
+function buildExport(node, scope, context) {
   const name = getName(node)
   const instance = scope.set.get(name)
   assert(instance.defs.length === 1)
@@ -109,27 +111,60 @@ function buildExport(node, scope, ast, source) {
 
   references.forEach(ref => {
     const node = ref.identifier
-    const parent = getParent(node, ast)
+    const parent = getParent(node, context.ast)
     if (parent.type === 'VariableDeclarator')
       return // skip declaration
-    console.log('----')
-    console.log(node, getSourceLine(node, source))
-    console.log(parent)
+
+    // console.log('----')
+    // console.log(node, getSourceLine(node, context))
+    // console.log(parent)
 
     if (parent.type === 'MemberExpression') {
       const fieldName = parent.property.name
-      const expression = getParent(parent, ast)
-      console.log(expression)
+      const expression = getParent(parent, context.ast)
+
+      // we want only assignments to our reference, not the other
+      // way around:
+      //   Input.propTypes = { ... } <--- yes
+      //   const Component = Input   <--- no
+      if (!contains(expression.id || expression.left, node))
+        return
+
+      // console.log(expression)
       assert(expression.type === 'AssignmentExpression')
-      const value = expression.right
+
+      let value = expression.right
+      if (value.type === 'Identifier') {
+        // eg: Input.propTypes = propTypes;
+        const definition = getDefinition(value, context)
+        value = definition.init
+      }
+      else if (value.type === 'ObjectExpression') {
+        // eg: Input.propTypes = { ... };
+        // value = value
+      }
+      else if (value.type === 'MemberExpression') {
+        // eg: Dropdown.Item = Menu.Item;
+        // value = value
+      }
+      else if (value.type === 'CallExpression') {
+        // eg: ExportedInput.Group = forwardRef(Group)
+        // value = value
+        // XXX: check if other cases hit this branch
+      }
+      else {
+        debugger
+        assert(false)
+      }
+
       fields[fieldName] = value
     }
   })
 
   const propTypes =
-    fields.propTypes && buildPropTypes(fields.propTypes, ast, source)
+    fields.propTypes && buildPropTypes(fields.propTypes, context)
   const defaultProps =
-    fields.defaultProps && buildDefaultProps(fields.defaultProps, ast, source)
+    fields.defaultProps && buildDefaultProps(fields.defaultProps, context)
 
   return {
     node,
@@ -139,26 +174,44 @@ function buildExport(node, scope, ast, source) {
   }
 }
 
-function buildPropTypes(node, ast, source) {
+function getDefinition(node, context) {
+  let parent = node
+  do  {
+    parent = getParent(parent, context.ast)
+  } while (parent && !hasScope(parent))
+  assert(parent)
+
+  const name = getName(node)
+  const scope = getScope(parent, context)
+
+  const instance = scope.set.get(name)
+  assert(instance.defs.length === 1)
+  const definition = instance.defs[0]
+  // const references = instance.references
+
+  return definition.node
+}
+
+function buildPropTypes(node, context) {
   const propTypes = {}
 
   node.properties.forEach(node => {
     const name = getName(node.key)
     const value = node.value
-    const text = getSourceText(value, source)
+    const text = getSourceText(value, context)
     propTypes[name] = { node: value, text }
   })
 
   return propTypes
 }
 
-function buildDefaultProps(node, ast, source) {
+function buildDefaultProps(node, context) {
   const defaultProps = {}
 
   node.properties.forEach(node => {
     const name = getName(node.key)
     const value = node.value
-    const text = getSourceText(value, source)
+    const text = getSourceText(value, context)
     defaultProps[name] = { node: value, text }
   })
 
@@ -174,22 +227,28 @@ function getName(node) {
     case 'Identifier': return node.name
     case 'VariableDeclarator': return node.id.name
     case 'FunctionDeclaration': return node.id.name
+    case 'Literal': return node.value
     default:
       throw new Error('Unknown node type')
   }
 }
 
-function walkWithScope(ast, scopeManager, options) {
-  let currentScope = scopeManager.acquire(ast)
-  walk(ast, {
+function hasScope(node) {
+  return /Function|Program/.test(node.type)
+}
+
+function walkWithScope(context, options) {
+  let currentScope = getScope(context.ast, context)
+
+  walk(context.ast, {
     enter(node, parent, prop, index) {
       options.enter?.(node, parent, prop, index, currentScope, this)
-      if (/Function/.test(node.type)) {
-        currentScope = scopeManager.acquire(node)
+      if (hasScope(node.type)) {
+        currentScope = getScope(node, context)
       }
     },
     leave(node, parent, prop, index) {
-      if (/Function/.test(node.type)) {
+      if (hasScope(node.type)) {
         currentScope = currentScope.upper
       }
       options.leave?.(node, parent, prop, index, currentScope, this)
@@ -197,12 +256,37 @@ function walkWithScope(ast, scopeManager, options) {
   })
 }
 
-function getSourceLine(node, source) {
-  return source.lines.slice(node.loc.start.line - 1, node.loc.end.line).join('\n')
+function getScope(node, context) {
+  const scope = context.scopeManager.acquire(context.ast)
+  // ProgramScope.childScopes[0] === ModuleScope
+  if (scope.type === 'global')
+    return scope.childScopes[0]
+  return scope
 }
 
-function getSourceText(node, source) {
-  return source.text.slice(node.start, node.end)
+function contains(parent, child) {
+  let didFind = {}
+  try {
+    walk(parent, {
+      enter(node) {
+        if (node === child)
+          throw didFind
+      },
+    })
+  } catch(err) {
+    if (err === didFind)
+      return true
+    throw err
+  }
+  return false
+}
+
+function getSourceLine(node, context) {
+  return context.source.lines.slice(node.loc.start.line - 1, node.loc.end.line).join('\n')
+}
+
+function getSourceText(node, context) {
+  return context.source.text.slice(node.start, node.end)
 }
 
 function assert(condition, message = 'Failed assertion') {

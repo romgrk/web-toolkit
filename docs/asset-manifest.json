@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/web-toolkit/docs/static/css/main.1442f513.chunk.css",
+    "main.js": "/web-toolkit/docs/static/js/main.4bd7a85d.chunk.js",
+    "main.js.map": "/web-toolkit/docs/static/js/main.4bd7a85d.chunk.js.map",
+    "runtime-main.js": "/web-toolkit/docs/static/js/runtime-main.e2e83da1.js",
+    "runtime-main.js.map": "/web-toolkit/docs/static/js/runtime-main.e2e83da1.js.map",
+    "static/js/2.59171f5a.chunk.js": "/web-toolkit/docs/static/js/2.59171f5a.chunk.js",
+    "static/js/2.59171f5a.chunk.js.map": "/web-toolkit/docs/static/js/2.59171f5a.chunk.js.map",
+    "static/js/3.8d9dc556.chunk.js": "/web-toolkit/docs/static/js/3.8d9dc556.chunk.js",
+    "static/js/3.8d9dc556.chunk.js.map": "/web-toolkit/docs/static/js/3.8d9dc556.chunk.js.map",
+    "index.html": "/web-toolkit/docs/index.html",
+    "static/css/main.1442f513.chunk.css.map": "/web-toolkit/docs/static/css/main.1442f513.chunk.css.map",
+    "static/js/2.59171f5a.chunk.js.LICENSE.txt": "/web-toolkit/docs/static/js/2.59171f5a.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.e2e83da1.js",
+    "static/js/2.59171f5a.chunk.js",
+    "static/css/main.1442f513.chunk.css",
+    "static/js/main.4bd7a85d.chunk.js"
+  ]
+}

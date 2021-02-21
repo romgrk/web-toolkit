@@ -14,7 +14,6 @@ import {
   Frame,
   HeaderBar,
   Icon,
-  Icons,
   OptimizedIcon,
   InfoBar,
   Input,
@@ -166,7 +165,7 @@ function AppContent() {
 function IconGrid() {
   return (
     <>
-      {Object.entries(Icons).map(([label, Element]) => 
+      {Object.entries(Icon.byName).map(([label, Element]) => 
         <Box horizontal inline style={{ width: 250, marginBottom: '1rem' }}>
           <Element colored style={{ width: '16px', transform: 'scale(1.5)'}} />
           <Label muted>

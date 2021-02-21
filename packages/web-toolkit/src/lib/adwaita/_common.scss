@@ -881,7 +881,35 @@ $_dot_color: if($variant=='light', $selected_bg_color,
           transition: $button_transition;
         }
       }
+      &:disabled,
+      &.disabled {
+        color: $muted_color;
+      }
       &:backdrop, &:disabled, &:backdrop:disabled { @include button(undecorated); }
+    }
+
+    &.link {
+      @include button(undecorated);
+
+      color: $link_color;
+      border-width: 0;
+
+      &:not(:disabled):not(.disabled) {
+        &,
+        &:hover,
+        &:active,
+        &:checked {
+          @include button(undecorated);
+          color: $link_color;
+          text-shadow: none;
+        }
+      } 
+
+      &:disabled,
+      &.disabled {
+        color: rgba($link_color, 0.6);
+        cursor: default;
+      }
     }
 
     &.image-button {
@@ -1267,27 +1295,6 @@ a,
   @at-root %link_selected,
   &.selected,
   *.selected & { color: mix($selected_fg_color, $link_color, 80%); }
-}
-
-button.link {
-  @extend %link;
-
-  @include button(undecorated);
-
-  &:not(:disabled):not(.disabled) {
-    &,
-    &:hover,
-    &:active,
-    &:checked {
-      @include button('undecorated');
-
-      text-shadow: none;
-    }
-  }
-
-  > .Label {
-    text-decoration: underline;
-  }
 }
 
 

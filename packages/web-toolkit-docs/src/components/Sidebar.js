@@ -9,7 +9,6 @@ import {
   Label,
   List,
 } from 'web-toolkit'
-import metadata from '../properties.json'
 import routes from './routes'
 
 const styles = {

@@ -6,6 +6,7 @@ import * as WT from 'web-toolkit'
 import USAGE from './usage'
 import Content from './Content'
 import DocTable from './DocTable'
+import ErrorBoundary from './ErrorBoundary'
 
 const styles = {
   title: {
@@ -59,7 +60,9 @@ function DocPage({ classes, data }) {
           {Usage ?
             <Usage /> :
             <div>
-              <Component />
+              <ErrorBoundary>
+                <Component />
+              </ErrorBoundary>
             </div>
           }
         </div>

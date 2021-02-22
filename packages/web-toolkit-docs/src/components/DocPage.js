@@ -43,7 +43,7 @@ function DocPage({ classes, data }) {
         <h1>
           {`<${data.name} />`}
         </h1>
-        <a href={`${sourceBase}${data.sourcePath}`}>
+        <a href={`${sourceBase}${data.sourcePath}`} className='link'>
           Open source
         </a>
       </div>

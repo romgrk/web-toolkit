@@ -1,6 +1,6 @@
-@function gtkalpha($c,$a) {
-  @return unquote("alpha(#{$c},#{$a})");
-}
+/***************
+ * Variables   *
+ ***************/
 
 $ease-out-quad: cubic-bezier(0.25, 0.46, 0.45, 0.94);
 $asset_suffix: if($variant=='dark', '-dark', '');
@@ -1265,7 +1265,6 @@ button.color {
  * Links *
  *********/
 
-a,
 %link,
 .link {
   color: $link_color;
@@ -3902,8 +3901,8 @@ list,
   padding: 2px;
 
   &, &:hover {
-    text-decoration: none !important;
-    color: inherit !important;
+    text-decoration: none;
+    color: $fg_color;
   }
 
   &.activatable {
@@ -4095,6 +4094,7 @@ button.List__item {
     align-items: center;
 
     @extend .ModelButton;
+    color: $fg_color;
 
     border-color: $_navigation_border_color !important;
 

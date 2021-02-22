@@ -2938,8 +2938,11 @@ columnview row:not(.selected) cell editablelabel.editing text selection {
   .Expander__button .Icon.arrow {
     transition: $page_switcher_transition;
   }
-  &.open .Expander__button .Icon.arrow {
+  &.open .Expander__button .Icon.arrow-after {
     transform: rotate(-90deg);
+  }
+  &.open .Expander__button .Icon.arrow-before {
+    transform: rotate(90deg);
   }
 
   .Expander__container {

@@ -15,18 +15,27 @@ class Expander extends React.Component {
   static propTypes = {
     children: prop.node,
     className: prop.string,
+    size: prop.number,
+    /** Expanded state */
     open: prop.bool,
     defaultOpen: prop.bool,
+    /** A node or a render function `({ toggle }) => React.Node` */
     label: prop.oneOfType([prop.node, prop.func]),
     transition: prop.oneOf(['horizontal', 'vertical']),
-    size: prop.number,
+    /** Arrow position */
+    iconPosition: prop.oneOf(['before', 'after']),
+    /** If true, the trigger is rendered outside the Expander container */
     contents: prop.bool,
+    /** If true, the container fits its content size */
     fitContent: prop.bool,
+    /** Called when the open state changes */
     onChange: prop.func,
   }
 
   static defaultProps = {
     transition: 'vertical',
+    iconPosition: 'after',
+    contents: false,
   }
 
   constructor(props) {
@@ -107,6 +116,7 @@ class Expander extends React.Component {
       transition,
       size,
       fitContent,
+      iconPosition,
       onChange,
       ...rest
     } = this.props
@@ -123,17 +133,15 @@ class Expander extends React.Component {
       !label ? null :
         typeof label === 'function' ?
           label({ toggle }) :
-        typeof label === 'string' ?
           <button type='button' className={triggerClassName} onClick={toggle}>
+            {iconPosition === 'before' &&
+              <Icon name='pan-end' className='arrow-before' />
+            }
             <Label>{label}</Label>
-            <Icon name='pan-start' className='arrow' />
-          </button> :
-          React.Children.map(label, child =>
-            React.cloneElement(child, {
-              className: cx(child.props.className, triggerClassName),
-              onClick: child.props.onClick || toggle,
-            })
-          )
+            {iconPosition === 'after' &&
+              <Icon name='pan-start' className='arrow-after' />
+            }
+          </button>
 
     const container =
         <div className='Expander__container' style={containerStyle}>

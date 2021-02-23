@@ -19,11 +19,16 @@ class Expander extends React.Component {
     /** Expanded state */
     open: prop.bool,
     defaultOpen: prop.bool,
-    /** A node or a render function `({ toggle }) => React.Node` */
-    label: prop.oneOfType([prop.node, prop.func]),
+    /** The element that triggers toggling the expander.
+     * If not set, a default unstyled button will be displayed.
+     * If it's a render function, it received an argument: ({ toggle: Fn }) */
+    trigger: prop.oneOfType([prop.node, prop.func]),
+    /** The label for the default button trigger element
+     * (only if `trigger` is not set) */
+    label: prop.node,
     transition: prop.oneOf(['horizontal', 'vertical']),
     /** Arrow position */
-    iconPosition: prop.oneOf(['before', 'after']),
+    iconPosition: prop.oneOf(['before', 'after', false]),
     /** If true, the trigger is rendered outside the Expander container */
     contents: prop.bool,
     /** If true, the container fits its content size */
@@ -112,6 +117,7 @@ class Expander extends React.Component {
       contents,
       open: openProp,
       defaultOpen,
+      trigger: triggerProp,
       label,
       transition,
       size,
@@ -130,18 +136,27 @@ class Expander extends React.Component {
 
     const triggerClassName = cx('Expander__button', { expanded: open })
     const trigger =
+      triggerProp ?
+        React.Children.map(
+          typeof triggerProp === 'function' ?
+            triggerProp({ toggle }) :
+            triggerProp,
+          child =>
+          React.cloneElement(child, {
+            className: cx(child.props.className, triggerClassName),
+            onClick: child.props.onClick || toggle,
+          })
+        ) :
       !label ? null :
-        typeof label === 'function' ?
-          label({ toggle }) :
-          <button type='button' className={triggerClassName} onClick={toggle}>
-            {iconPosition === 'before' &&
-              <Icon name='pan-end' className='arrow-before' />
-            }
-            <Label>{label}</Label>
-            {iconPosition === 'after' &&
-              <Icon name='pan-start' className='arrow-after' />
-            }
-          </button>
+        <button type='button' className={triggerClassName} onClick={toggle}>
+          {iconPosition === 'before' &&
+            <Icon name='pan-end' className='arrow-before' />
+          }
+          <Label>{label}</Label>
+          {iconPosition === 'after' &&
+            <Icon name='pan-start' className='arrow-after' />
+          }
+        </button>
 
     const container =
         <div className='Expander__container' style={containerStyle}>

@@ -115,12 +115,6 @@ function AppContent() {
 
       <h1>Demo</h1>
 
-      <DemoTable />
-      <br/>
-
-      <DemoCalendar />
-      <br/>
-
       <DemoList />
       <br/>
 
@@ -153,6 +147,12 @@ function AppContent() {
       <br/>
 
       <DemoHeaderBar />
+
+      <DemoTable />
+      <br/>
+
+      <DemoCalendar />
+      <br/>
 
       <DemoTypography />
       <br/>
@@ -234,7 +234,7 @@ function DemoList() {
       </List.Item>
       <Expander
         contents
-        label={
+        trigger={
           <List.Item activatable expandable>
             <Label className='Box__fill'>Option 2</Label>
           </List.Item>

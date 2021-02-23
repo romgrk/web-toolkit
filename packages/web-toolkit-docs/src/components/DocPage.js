@@ -20,6 +20,7 @@ const styles = {
       margin: 0,
     },
     '& a': {
+      alignSelf: 'flex-start',
       marginLeft: '1.5rem',
       fontSize: 12,
     },

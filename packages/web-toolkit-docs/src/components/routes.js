@@ -4,8 +4,6 @@ import metadata from '../properties.json'
 import DocPage from './DocPage'
 import Home from './Home'
 
-const basePath = process.env.PUBLIC_URL
-
 const indexRoutes = [
   {
     label: 'Home',
@@ -14,6 +12,61 @@ const indexRoutes = [
     render: () => <Home />
   },
 ]
+
+// FIXME: to be used
+export const categories = {
+  layout: {
+    name: 'Layout',
+    items: [
+      'Box',
+      'Frame',
+      'HeaderBar',
+      'List',
+      'PageSwitcher',
+      'Paned',
+    ]
+  },
+
+  input: {
+    name: 'Input',
+    items: [
+      'Autocomplete',
+      'Button',
+      'Calendar',
+      'Checkbox',
+      'DatePicker',
+      'Dropdown',
+      'Input',
+      'InputNumber',
+      'Radio',
+      'Range',
+      'Switch',
+      'TextArea',
+    ]
+  },
+
+  display: {
+    name: 'Display',
+    items: [
+      'Expander',
+      'Icon',
+      'InfoBar',
+      'Label',
+      'LevelBar',
+      'MenuBar',
+      'Menu',
+      'Notebook',
+      'Popover',
+      'PopoverMenu',
+      'Progress',
+      'Separator',
+      'Spinner',
+      'Table',
+      'Text',
+      'Toolbar',
+    ]
+  }
+}
 
 const componentRoutes =
   Object.values(metadata)
@@ -26,9 +79,5 @@ const componentRoutes =
 const routes = []
   .concat(indexRoutes)
   .concat(componentRoutes)
-    .map(r => {
-      r.path = basePath + r.path
-      return r
-    })
 
 export default routes

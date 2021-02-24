@@ -312,12 +312,19 @@ $popover_radius: $button_radius + 4;
   background-color: transparentize(darken($selected_bg_color, 10%), 0.8);
 }
 
-/****************
- * Labels       *
+/*****************
+ * Labels & Text *
  ****************/
 
 .Label {
   @include focus-ring();
+
+  @include with_sizes {
+    height: $height;
+    min-height: $height;
+    font-size: $font_size;
+    --icon-size: #{$icon_size};
+  }
 
   &.separator {
     @extend .dim-label;
@@ -373,6 +380,27 @@ $popover_radius: $button_radius + 4;
   }
   &.fill-height {
     height: 100%;
+  }
+}
+
+.Text {
+  margin: 0;
+  @include with_sizes {
+    // height: $height;
+    // min-height: $height;
+    font-size: $font_size * 1.2;
+    line-height: 1.4;
+    --icon-size: #{$icon_size};
+  }
+  &.hero {
+    font-size: 24px;
+    font-weight: 300;
+    line-height: 1.4;
+  }
+  @each $w in (100, 300, 400, 700, 900) {
+    &.weight-#{$w} {
+      font-weight: $w;
+    }
   }
 }
 

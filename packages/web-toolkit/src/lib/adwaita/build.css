@@ -335,8 +335,8 @@ pre {
   border: 1px solid #1b6acb;
   background-color: rgba(27, 106, 203, 0.2); }
 
-/****************
- * Labels       *
+/*****************
+ * Labels & Text *
  ****************/
 .Label {
   outline: 0 solid transparent;
@@ -346,6 +346,36 @@ pre {
   outline-color: rgba(53, 132, 228, 0.5);
   outline-width: 2px;
   outline-offset: -2px; }
+
+.Label.mini {
+  height: 18px;
+  min-height: 18px;
+  font-size: 10px;
+  --icon-size: 11px; }
+
+.Label.small {
+  height: 22px;
+  min-height: 22px;
+  font-size: 12px;
+  --icon-size: 13px; }
+
+.Label.medium {
+  height: 28px;
+  min-height: 28px;
+  font-size: 13.333333px;
+  --icon-size: 16px; }
+
+.Label.large {
+  height: 36px;
+  min-height: 36px;
+  font-size: 15px;
+  --icon-size: 20px; }
+
+.Label.huge {
+  height: 42px;
+  min-height: 42px;
+  font-size: 18px;
+  --icon-size: 23px; }
 
 .Label::selection {
   background-color: #3584e4;
@@ -403,6 +433,43 @@ pre {
 
 .Label.fill-height {
   height: 100%; }
+
+.Text {
+  margin: 0; }
+  .Text.mini {
+    font-size: 12px;
+    line-height: 1.4;
+    --icon-size: 11px; }
+  .Text.small {
+    font-size: 14.4px;
+    line-height: 1.4;
+    --icon-size: 13px; }
+  .Text.medium {
+    font-size: 15.9999996px;
+    line-height: 1.4;
+    --icon-size: 16px; }
+  .Text.large {
+    font-size: 18px;
+    line-height: 1.4;
+    --icon-size: 20px; }
+  .Text.huge {
+    font-size: 21.6px;
+    line-height: 1.4;
+    --icon-size: 23px; }
+  .Text.hero {
+    font-size: 24px;
+    font-weight: 300;
+    line-height: 1.4; }
+  .Text.weight-100 {
+    font-weight: 100; }
+  .Text.weight-300 {
+    font-weight: 300; }
+  .Text.weight-400 {
+    font-weight: 400; }
+  .Text.weight-700 {
+    font-weight: 700; }
+  .Text.weight-900 {
+    font-weight: 900; }
 
 .dim-label, .titlebar:not(.HeaderBar) .subtitle,
 .HeaderBar .subtitle, .InputNumber.vertical > .Input__area > input > .Input__area > input::placeholder, .InputNumber:not(.vertical) > .Input__area > input::placeholder,

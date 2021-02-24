@@ -17,7 +17,7 @@ import './App.css'
 
 function App() {
   return (
-    <Router>
+    <Router basename={process.env.PUBLIC_URL}>
       <Box vertical compact className='App background'>
         <Paned defaultSize={230} fill border='handle'>
           <Sidebar />

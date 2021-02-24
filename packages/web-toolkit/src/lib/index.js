@@ -33,6 +33,7 @@ import Separator    from './components/Separator'
 import Spinner      from './components/Spinner'
 import Switch       from './components/Switch'
 import Table        from './components/Table'
+import Text         from './components/Text'
 import TextArea     from './components/TextArea'
 import Toolbar      from './components/Toolbar'
 
@@ -69,6 +70,7 @@ export {
   Spinner,
   Switch,
   Table,
+  Text,
   TextArea,
   Toolbar,
 }

@@ -1,15 +1,30 @@
-# web-toolkit
+<h1 align="center">
+  web-toolkit
+</h1>
+
+<p align="center">
+  <b>A GTK inspired React UI framework</b>
+</p>
 
 This is a web toolkit using GTK's default theme, Adwaita. The framework is currently
 usable but is to be considered in **alpha** state, as a few parts are still raw and
 the API is subject to change until the 1.0.0 release.
 
-[Live Demo](https://romgrk.github.io/web-toolkit/demo) | [Documentation (WIP)](https://romgrk.github.io/web-toolkit/docs)
+
+<p align="center">
+  <a href="#installation">Installation</a> •
+  <a href="https://romgrk.github.io/web-toolkit/demo">Demo</a> •
+  <a href="https://romgrk.github.io/web-toolkit/docs">Documentation</a> •
+  <a href="#license">License</a>
+</p>
+
 
 ## Why
 
-All UI design frameworks suck. No one knows how to design. Except for Gnome designers
-strangely. And maybe Apple too, but they're not in the OSS business so I avoid them.
+There are quite a few alternatives, such as bootstrap, material-ui, semantic-ui or
+ant-design. I've however found that most of them fail in one way or another to
+satisfy what I'm looking for in a UI framework. Most important than anything, I
+want something that looks stunning by default, while being functional.
 
 ## Showcase
 
@@ -18,7 +33,11 @@ strangely. And maybe Apple too, but they're not in the OSS business so I avoid t
 ![demo-3](https://raw.githubusercontent.com/romgrk/web-toolkit/master/static/demo-3.png)
 ![demo-4](https://raw.githubusercontent.com/romgrk/web-toolkit/master/static/demo-4.png)
 
-## Usage
+## Installation
+
+```
+npm instal --save web-toolkit
+```
 
 ```javascript
 import React from 'react'
@@ -54,20 +73,21 @@ export default App
 At the moment, the [source code](https://github.com/romgrk/web-toolkit/blob/master/packages/web-toolkit/src/demo/App.js)
 for the [live demo](https://romgrk.github.io/web-toolkit/) is the best place to understand how to use the framework.
 
-## Roadmap
-
-The first goal is to port Adwaita.css for web usage, which means removing every GTK+ CSS
-proprietary quirks.
-
-The second goal is to create components to make it easy to use the framework. For now the
-demo components are being created with React but I've been thinking about making a Solid
-version. But the first goal should allow any UI framework to reuse the CSS classes.
+Some [documentation](https://romgrk.github.io/web-toolkit/docs) is also available
+but is a work in progress and not complete yet.
 
 ## Help Wanted!
 
 I need help to make this into a production-ready library.
 Come help me! Checkout the open issues or [ask here](https://github.com/romgrk/web-toolkit/issues/2)
 if you're unsure how you can help.
+
+## Roadmap
+
+All of the required components for a first usable version have been implemented. Some
+more complex components are being implemented, and the documention still needs to be
+completed. While the components are usable, most of them are missing accessibility
+ARIA attributes and may need fine-tuning for keyboard usage.
 
 ## Contributions
 

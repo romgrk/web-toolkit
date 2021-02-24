@@ -2,6 +2,8 @@
   "name": "web-toolkit",
   "version": "0.7.0",
   "repository": "https://github.com/romgrk/web-toolkit",
+  "description": "A GTK inspired toolkit designed to build awesome web apps",
+  "keywords": ["gtk", "react", "ui", "adwaita"],
   "main": "lib/index.js",
   "scripts": {
     "start": "nf start",

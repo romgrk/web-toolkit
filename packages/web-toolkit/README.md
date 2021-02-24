@@ -14,7 +14,7 @@ the API is subject to change until the 1.0.0 release.
 <p align="center">
   <a href="#installation">Installation</a> •
   <a href="https://romgrk.github.io/web-toolkit/demo">Demo</a> •
-  <a href="https://romgrk.github.io/web-toolkit/docs">Documentation</a> •
+  <a href="https://romgrk.github.io/web-toolkit/docs">📖 Docs</a> •
   <a href="#help-wanted">Help Wanted</a> •
   <a href="#license">License</a>
 </p>

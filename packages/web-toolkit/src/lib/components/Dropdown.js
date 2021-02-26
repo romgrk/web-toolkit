@@ -5,7 +5,7 @@
 
 import React from 'react'
 import prop from 'prop-types'
-import cx from 'classname'
+import cx from 'clsx'
 
 import Button from './Button'
 import Icon from './Icon'
@@ -59,6 +59,12 @@ class Dropdown extends React.Component {
     this.domNode = document.createElement('div')
     document.body.append(this.domNode)
 
+    this.lastValue = null
+    this.lastOption = null
+    this.lastOptions = null
+    this.lastRenderedOptions = []
+    this.lastRenderedOptionsArgs = []
+
     this.state = {
       value: undefined,
       selectedOption: undefined,
@@ -79,6 +85,17 @@ class Dropdown extends React.Component {
 
   onInputChange = inputValue => {
     this.setState({ inputValue })
+  }
+
+  onInputAccept = () => {
+    const options = this.getRenderedOptions()
+    if (options.length === 0)
+      return
+    const option = options[0]
+    this.select(option)
+    if (this.trigger) {
+      this.trigger.querySelector('input').blur()
+    }
   }
 
   onToggle = ev => {
@@ -114,13 +131,13 @@ class Dropdown extends React.Component {
     return 'value' in this.props
   }
 
-  select = (value, option) => {
+  select = (option) => {
     if (this.isControlled()) {
       if (this.props.onChange)
-        this.props.onChange(value)
+        this.props.onChange(option ? option.value : null)
     }
     else {
-      this.setState({ value, selectedOption: option })
+      this.setState({ value: option?.value, selectedOption: option })
     }
     this.close()
   }
@@ -131,28 +148,41 @@ class Dropdown extends React.Component {
     return this.state.value
   }
 
-  getOptions() {
-    const { options, filterKey, filter } = this.props
+  getRenderedOptions() {
+    const { options: optionsProp, filterKey, filter } = this.props
     const open = this.isOpen()
     const { inputValue, previousInputValue } = this.state
     const value = open ? inputValue : previousInputValue
 
-    if (!value)
-      return options
+    // Memoization
+    // IMPORTANT: variables used below must be include in `args`
+    const args = [optionsProp, value, filterKey, filter]
+    if (args.every((a, i) => this.lastRenderedOptionsArgs[i] === a)) {
+      return this.lastRenderedOptions
+    }
 
-    const needle = value.toLowerCase()
+    let options
+    if (!value) {
+      options = optionsProp
+    }
+    else {
+      const needle = value.toLowerCase()
+      options = optionsProp.filter(o => {
+        const optionValue = 
+          filterKey ?
+            o.data[filterKey] :
+          filter ?
+            filter(o) :
+          typeof o.label === 'string' ?
+            o.label :
+            o.value
+        return String(optionValue).toLowerCase().includes(needle)
+      })
+    }
 
-    return options.filter(o => {
-      const optionValue = 
-        filterKey ?
-          o.data[filterKey] :
-        filter ?
-          filter(o) :
-        typeof o.label === 'string' ?
-          o.label :
-          o.value
-      return String(optionValue).toLowerCase().includes(needle)
-    })
+    this.lastRenderedOptionsArgs = args
+    this.lastRenderedOptions = options
+    return options
   }
 
   getSelectedOption() {
@@ -188,6 +218,7 @@ class Dropdown extends React.Component {
       filter,
       onClose,
       onOpen,
+      onChange: _onChange,
       ...rest
     } = this.props
     const open = this.isOpen()
@@ -227,6 +258,7 @@ class Dropdown extends React.Component {
         open,
         hover: open,
       })
+      console.log(inputValue)
       trigger =
         <Input
           className={inputClassName}
@@ -236,6 +268,7 @@ class Dropdown extends React.Component {
           onFocus={this.open}
           onBlur={this.onInputBlur}
           onChange={this.onInputChange}
+          onAccept={this.onInputAccept}
           iconAfter='pan-down'
           ref={ref => ref && (this.trigger = ref)}
           {...rest}
@@ -244,13 +277,14 @@ class Dropdown extends React.Component {
         </Input>
     }
 
-    const options = this.getOptions()
+    const options = this.getRenderedOptions()
+    console.log(options)
     const actualChildren =
       options.map(o =>
         <Menu.Button
           key={o.value}
           selected={String(o.value) === String(value)}
-          onClick={() => this.select(o.value, o)}
+          onClick={() => this.select(o)}
         >
           {o.label}
         </Menu.Button>
@@ -267,7 +301,7 @@ class Dropdown extends React.Component {
       actualChildren.unshift(
         <Menu.Button
           key='null_item'
-          onClick={() => this.select(undefined, undefined)}
+          onClick={() => this.select(null)}
         >
           <Label muted italic>None</Label>
         </Menu.Button>

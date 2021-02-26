@@ -19,8 +19,50 @@ function useForceUpdate() {
   return () => setValue(value => ++value)
 }
 
+const propTypes = {
+  /** The HTML input type */
+  type: prop.string,
+  value: prop.string,
+  defaultValue: prop.string,
+  className: prop.string,
+  /** Size of the input */
+  size: prop.oneOf(['mini', 'small', 'medium', 'large', 'huge']),
+  /** Shows a loading indicator */
+  loading: prop.bool,
+  /** Icon name or node (left) */
+  icon: prop.node,
+  /** Icon name or node (right) */
+  iconAfter: prop.node,
+  placeholder: prop.string,
+  /** Disabled input */
+  disabled: prop.bool,
+  /** Flat style input */
+  flat: prop.bool,
+  /** Error style input */
+  error: prop.bool,
+  /** Warning style input */
+  warning: prop.bool,
+  /** Show a progress bar of `progress` percent size if it's a number,
+   * or an undeterminate (loading) bar if `true` */
+  progress: prop.oneOfType([prop.bool, prop.number]),
+  /** Show a button to clear the input value */
+  allowClear: prop.bool,
+  /** Called when the input value changes, with the new value */
+  onChange: prop.func,
+  /** Called when Enter is pressed (prevents default behavior) */
+  onAccept: prop.func,
+  /** Called when the `iconAfter` is clicked */
+  onClickIconAfter: prop.func,
+}
+
+const defaultProps = {
+  type: 'text',
+  size: 'medium',
+  onChange: noop,
+}
+
 function Input({
-  type = 'text',
+  type,
   value: valueProp,
   defaultValue,
   className,
@@ -36,6 +78,8 @@ function Input({
   progress,
   children,
   allowClear,
+  onAccept,
+  onKeyDown,
   onChange,
   onClickIconAfter,
   ...rest
@@ -57,6 +101,17 @@ function Input({
     if (!isControlled)
       forceUpdate()
     setValue(ev.target.value, ev)
+  }
+
+  const onInputKeyDown = ev => {
+    if (ev.code === 'Enter' && onAccept) {
+      onAccept(ev.target.value)
+      ev.preventDefault()
+      return
+    }
+    if (onKeyDown) {
+      onKeyDown(ev)
+    }
   }
 
   const onClickContainer = ev => {
@@ -99,6 +154,7 @@ function Input({
           ref={inputRef}
           value={value}
           onChange={onInputChange}
+          onKeyDown={onAccept ? onInputKeyDown : onKeyDown}
           {...rest}
         />
         {children &&
@@ -145,17 +201,7 @@ function Group({ children, className }, ref) {
 
 const ExportedInput = forwardRef(Input)
 ExportedInput.Group = forwardRef(Group)
-
-ExportedInput.propTypes = {
-  /** Size of the input */
-  size: prop.oneOf(['mini', 'small', 'medium', 'large', 'huge']),
-  allowClear: prop.bool,
-  onChange: prop.func,
-}
-
-ExportedInput.defaultProps = {
-  size: 'medium',
-  onChange: noop,
-}
+ExportedInput.propTypes = propTypes
+ExportedInput.defaultProps = defaultProps
 
 export default ExportedInput

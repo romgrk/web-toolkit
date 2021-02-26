@@ -118,17 +118,17 @@ $popover_radius: $button_radius + 4;
   }
 }
 
-.background-light {
-  background-color: $background_light;
+.background-low {
+  background-color: $background_low;
 }
 .background-default {
   background-color: $background_default;
 }
-.background-dark {
-  background-color: $background_dark;
+.background-medium {
+  background-color: $background_medium;
 }
-.background-darker {
-  background-color: $background_darker;
+.background-high {
+  background-color: $background_high;
 }
 
 /***************
@@ -2007,7 +2007,7 @@ $_treeview_backdrop_borders_color: if($variant=='light',mix($backdrop_borders_co
   overflow: hidden;
 
   border: 1px solid $_treeview_borders_color;
-  background-color: $background_light;
+  background-color: $background_low;
 
   @include focus-ring();
 
@@ -2636,7 +2636,7 @@ columnview row:not(.selected) cell editablelabel.editing text selection {
  * Notebooks *
  *************/
 .Notebook {
-  $_notebook_header_bg: $background_darker;
+  $_notebook_header_bg: $background_high;
   $_notebook_hover: lighten($_notebook_header_bg, 5%);
   $_notebook_tab_margin: 6px;
 
@@ -3153,7 +3153,7 @@ columnview row:not(.selected) cell editablelabel.editing text selection {
     border: 1px solid $borders_color;
     border-radius: 14px;
     color: rgba($fg_color, 0.2);
-    background-color: $background_darker;
+    background-color: $background_high;
     text-shadow: 0 1px transparentize(black, 0.9);
     transition: $focus_transition;
   }
@@ -3829,14 +3829,8 @@ $levelbar_border_radius: 3px;
     width: min-content;
   }
 
-  &.light {
-    background-color: $background_light;
-  }
-  &.dark {
-    background-color: $background_dark;
-  }
-  &.darker {
-    background-color: $background_darker;
+  &.padded {
+    padding: 1rem;
   }
 
   &.scrollable {
@@ -4022,7 +4016,7 @@ button.List__item {
 // Expandable list item's sublist
 .List.sublist {
   width: 100%;
-  background-color: $background_dark;
+  background-color: $background_medium;
   border-bottom: 1px solid $borders_color;
   box-shadow: inset 0 1px rgba(black, 0.07);
 }
@@ -4077,7 +4071,7 @@ button.List__item {
 }
 
 .stack-sidebar { // not a regular list
-  background-color: mix($background_light, $background_default, 50%);
+  background-color: mix($background_low, $background_default, 50%);
 
   &.separators:not(.horizontal) > .List__item:not(.separator):not(.increase-specificity) {
     border-bottom: none;
@@ -4112,7 +4106,7 @@ button.List__item {
   $_navigation_border_color: lighten($borders_color, 8%);
 
   padding: $menu-margin 0; //only vertical padding. horizontal row size would clip
-  background-color: mix($background_light, $background_default, 50%);
+  background-color: mix($background_low, $background_default, 50%);
   border-color: $_navigation_border_color !important;
 
   > .separator {

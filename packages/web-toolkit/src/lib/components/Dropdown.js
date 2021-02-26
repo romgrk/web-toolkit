@@ -258,7 +258,6 @@ class Dropdown extends React.Component {
         open,
         hover: open,
       })
-      console.log(inputValue)
       trigger =
         <Input
           className={inputClassName}
@@ -278,7 +277,6 @@ class Dropdown extends React.Component {
     }
 
     const options = this.getRenderedOptions()
-    console.log(options)
     const actualChildren =
       options.map(o =>
         <Menu.Button

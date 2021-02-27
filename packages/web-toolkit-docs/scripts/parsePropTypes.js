@@ -17,7 +17,7 @@ const componentFilepaths = fs.readdirSync(componentsDir).map(f => path.join(comp
 
 
 // { // Test one
-//   const filepath = path.join(componentsDir, 'Dropdown.js')
+//   const filepath = path.join(componentsDir, 'Radio.js')
 //   // const filepath = path.join(componentsDir, 'Input.js')
 //   const moduleExports = parsePropTypes(filepath)
 //   console.log(moduleExports)
@@ -162,7 +162,15 @@ function buildExports(context) {
 }
 
 function buildExport(node, scope, context) {
+  if (node.type === 'ImportDefaultSpecifier')
+    return { external: true, name: getName(node) }
+
+  // ExportedInput.Group = forwardRef(Group)
+  if (node.type === 'CallExpression' && node.callee.name === 'forwardRef')
+    node = node.arguments[0]
+
   const name = getName(node)
+
   const instance = scope.set.get(name)
   assert(instance.defs.length === 1)
   const definition = instance.defs[0]
@@ -247,11 +255,27 @@ function buildExport(node, scope, context) {
   const defaultProps =
     fields.defaultProps && buildDefaultProps(fields.defaultProps, context)
 
+  const subExports = {}
+  Object.keys(fields).filter(isComponent).forEach(componentName => {
+    const node = fields[componentName]
+    // import Menu from './Menu'
+    // Dropdown.Menu = Menu.Item <-----no
+    if (node.type === 'MemberExpression') {
+      subExports[componentName] = { external: true, name: getSourceText(node, context) }
+    }
+    // function Group() {...}
+    // Radio.Group = Group <-----yes
+    else {
+      subExports[componentName] = buildExport(node, scope, context)
+    }
+  })
+
   return {
     node,
     fields,
     propTypes,
     defaultProps,
+    exports: subExports,
   }
 }
 
@@ -305,7 +329,7 @@ function buildDefaultProps(node, context) {
 }
 
 function isComponent(node) {
-  return /^[A-Z]/.test(node.id.name)
+  return /^[A-Z]/.test(typeof node === 'string' ? node : getName(node))
 }
 
 function getName(node) {
@@ -314,6 +338,7 @@ function getName(node) {
     case 'VariableDeclarator': return node.id.name
     case 'FunctionDeclaration': return node.id.name
     case 'Literal': return node.value
+    case 'ImportDefaultSpecifier': return node.local.name
     default:
       throw new Error('Unknown node type')
   }
@@ -360,7 +385,7 @@ function walkWithScope(context, options) {
 }
 
 function getScope(node, context) {
-  const scope = context.scopeManager.acquire(context.ast)
+  const scope = context.scopeManager.acquire(node)
   // ProgramScope.childScopes[0] === ModuleScope
   if (scope.type === 'global')
     return scope.childScopes[0]
@@ -399,19 +424,36 @@ function assert(condition, message = 'Failed assertion') {
 
 function serialize(moduleExports) {
   const result = {}
+
   Object.keys(moduleExports).forEach(key => {
-    const value = moduleExports[key]
-    const { propTypes, defaultProps } = value
+    const x = moduleExports[key]
+
+    if (x.external) {
+      result[key] = x // { external: true, name: 'Menu.Item' }
+      return
+    }
+
     result[key] = {
-      propTypes: propTypes && map(n => ({
-        value: n.text,
-        required: n.text.trim().endsWith('isRequired'),
-        description: n.comment.text
-      }), propTypes),
-      defaultProps: defaultProps && map(n => ({
-        value: n.text,
-      }), defaultProps),
+      lineNumber: x.node.loc.start.line,
+      propTypes: x.propTypes && serializePropTypes(x.propTypes),
+      defaultProps: x.defaultProps && serializeDefaultProps(x.defaultProps),
+      exports: x.exports && serialize(x.exports),
     }
   })
+
   return result
+}
+
+function serializePropTypes(propTypes) {
+  return map(n => ({
+    value: n.text,
+    required: n.text.trim().endsWith('isRequired'),
+    description: n.comment.text
+  }), propTypes)
+}
+
+function serializeDefaultProps(defaultProps) {
+  return map(n => ({
+    value: n.text,
+  }), defaultProps)
 }

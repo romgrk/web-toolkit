@@ -3597,6 +3597,10 @@ columnview row:not(.selected) cell editablelabel.editing text selection {
   opacity: 0;
   transform: none; }
 
+.Autocomplete__popover .Popover__container {
+  padding: 4px 0;
+  overflow: hidden; }
+
 .Autocomplete__popover .List__item {
   padding-left: 8px;
   padding-right: 8px; }

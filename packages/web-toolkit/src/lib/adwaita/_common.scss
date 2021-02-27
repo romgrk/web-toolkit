@@ -3102,6 +3102,11 @@ columnview row:not(.selected) cell editablelabel.editing text selection {
     transform: none;
   }
 
+  .Popover__container {
+    padding: 4px 0;
+    overflow: hidden;
+  }
+
   .List__item {
     padding-left: $_input_padding;
     padding-right: $_input_padding;

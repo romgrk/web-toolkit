@@ -3,7 +3,7 @@
  */
 
 
-import React, { useState, forwardRef } from 'react'
+import React, { useState, useRef } from 'react'
 import prop from 'prop-types'
 import cx from 'clsx'
 
@@ -45,14 +45,21 @@ function Autocomplete({
   value: valueProp,
   defaultValue,
   enableFilter,
+  ref: refProp,
   onSearch,
   onChange: onChangeProp,
   ...rest
-}, ref) {
+}) {
 
+  const input = useRef()
   const [value, setValue] = useControlled(valueProp, defaultValue, onChangeProp)
-
   const [isFocused, setIsFocused] = useState(false)
+
+  const open = isFocused && options.length > 0
+  const lowerCaseValue = value.toLowerCase()
+  const filteredOptions = enableFilter === false ? options :
+    options.filter(o => o.value.toLowerCase().includes(lowerCaseValue))
+
   const onFocus = () => setIsFocused(true)
   const onBlur = ev => {
     const newValue = ev?.relatedTarget?.getAttribute('data-value')
@@ -67,6 +74,8 @@ function Autocomplete({
 
   const select = option => {
     setValue(option.value)
+    if (input.current)
+      input.current.querySelector('input').blur()
   }
 
   const onChange = newValue => {
@@ -74,10 +83,11 @@ function Autocomplete({
     if (onSearch) onSearch(newValue)
   }
 
-  const open = isFocused && options.length > 0
-  const lowerCaseValue = value.toLowerCase()
-  const filteredOptions = enableFilter === false ? options :
-    options.filter(o => o.value.toLowerCase().includes(lowerCaseValue))
+  const onAccept = () => {
+    if (filteredOptions.length > 0)
+      select(filteredOptions[0])
+  }
+
   const content =
     <Expander open={open} fitContent>
       <List border={false} separators={false}>
@@ -117,14 +127,23 @@ function Autocomplete({
         onBlur={onBlur}
         onFocus={onFocus}
         onChange={onChange}
+        onAccept={onAccept}
         {...rest}
-        ref={ref}
+        ref={ref => {
+          input.current = ref
+          if (refProp) {
+            if (typeof refProp === 'function')
+              refProp(ref)
+            else
+              refProp.current = ref
+          }
+        }}
       />
     </Popover>
   )
 }
 
-const Export = forwardRef(Autocomplete)
+const Export = Autocomplete
 Export.propTypes = propTypes
 Export.defaultProps = defaultProps
 

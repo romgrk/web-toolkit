@@ -179,16 +179,16 @@ pre {
     text-shadow: none;
     --icon-shadow: none; }
 
-.background-light {
+.background-low {
   background-color: #ffffff; }
 
 .background-default {
   background-color: #f6f5f4; }
 
-.background-dark {
+.background-medium {
   background-color: #f1f0ee; }
 
-.background-darker {
+.background-high {
   background-color: #e1dedb; }
 
 /***************
@@ -3657,6 +3657,10 @@ columnview row:not(.selected) cell editablelabel.editing text selection {
   opacity: 0;
   transform: none; }
 
+.Autocomplete__popover .Popover__container {
+  padding: 4px 0;
+  overflow: hidden; }
+
 .Autocomplete__popover .List__item {
   padding-left: 8px;
   padding-right: 8px; }
@@ -4422,12 +4426,8 @@ columnview row:not(.selected) cell editablelabel.editing text selection {
     width: -webkit-min-content;
     width: -moz-min-content;
     width: min-content; }
-  .Frame.light {
-    background-color: #ffffff; }
-  .Frame.dark {
-    background-color: #f1f0ee; }
-  .Frame.darker {
-    background-color: #e1dedb; }
+  .Frame.padded {
+    padding: 1rem; }
   .Frame.scrollable {
     overflow: auto; }
   .Frame.no-border {
@@ -5401,4 +5401,4 @@ html, body, #root {
 }
 
 
-/*# sourceMappingURL=main.c65d1936.chunk.css.map*/
+/*# sourceMappingURL=main.32df55d8.chunk.css.map*/

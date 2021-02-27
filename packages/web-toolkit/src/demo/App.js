@@ -636,12 +636,17 @@ function DemoInput() {
                 <Radio name='radio-two' disabled defaultValue={true} label='Field' />
                 <Radio name='radio-two' disabled defaultValue={false} label='Field' />
               </Box>
-              <Box horizontal>
-                <Radio name='radio-one' defaultValue={true} label='Field' />
-                <Radio name='radio-one' defaultValue={false} label='Field' />
-                <Radio name='radio-two' disabled defaultValue={true} label='Field' />
-                <Radio name='radio-two' disabled defaultValue={false} label='Field' />
-              </Box>
+              <Radio.Group
+                horizontal={true}
+                size='medium'
+                name='gender'
+                options={[
+                  { value: 'M', label: 'Male' },
+                  { value: 'F', label: 'Female' },
+                  { value: 'NB', label: 'Non-binary' },
+                ]}
+                defaultValue={'NB'}
+              />
             </Box>
           </Box>
           <Range defaultValue={5} min={0} max={10} step={2} marks />
@@ -825,7 +830,7 @@ function DemoInputFilter({ column: { filterValue, setFilter, id } }) {
 function DemoDropdown() {
   const [users, setUsers] = useState([])
   useEffect(() => {
-    generateUsers().then(setUsers)
+    generateUsers(10).then(setUsers)
   }, [])
 
   const [value, setValue] = useState(2)

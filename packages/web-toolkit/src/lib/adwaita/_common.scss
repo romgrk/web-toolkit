@@ -420,6 +420,26 @@ $popover_radius: $button_radius + 4;
 }
 
 
+/************
+ * Alerts   *
+ ***********/
+
+.Alert {
+
+  // @include with_sizes {
+  //   height: $height;
+  //   min-height: $height;
+  //   font-size: $font_size;
+  //   --icon-size: #{$icon_size};
+  // }
+
+  @each $type, $color in $colors {
+    &.#{$type} {
+      color: $color;
+    }
+  }
+}
+
 /****************
  * Icons        *
  ****************/
@@ -4157,9 +4177,9 @@ button.List__item {
 }
 
 
-/************
- * Calendar *
- ***********/
+/*************************
+ * Calendar & DatePicker *
+ ************************/
 .Calendar {
   display: inline-flex !important;
   color: $text_color;

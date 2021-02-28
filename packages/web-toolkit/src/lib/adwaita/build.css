@@ -486,6 +486,21 @@ pre {
   text-shadow: 0 1px black;
   --icon-shadow: 0 1px black; }
 
+/************
+ * Alerts   *
+ ***********/
+.Alert.info {
+  color: #3584e4; }
+
+.Alert.success {
+  color: #33d17a; }
+
+.Alert.warning {
+  color: #f57900; }
+
+.Alert.danger {
+  color: #cc0000; }
+
 /****************
  * Icons        *
  ****************/
@@ -4644,9 +4659,9 @@ button.List__item {
   .app-notification border {
     border: none; }
 
-/************
- * Calendar *
- ***********/
+/*************************
+ * Calendar & DatePicker *
+ ************************/
 .Calendar {
   display: inline-flex !important;
   color: black;

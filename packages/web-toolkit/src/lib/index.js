@@ -3,6 +3,7 @@
  */
 
 import Autocomplete from './components/Autocomplete'
+import Alert        from './components/Alert'
 import Box          from './components/Box'
 import Button       from './components/Button'
 import Calendar     from './components/Calendar'
@@ -39,6 +40,7 @@ import Toolbar      from './components/Toolbar'
 
 export {
   Autocomplete,
+  Alert,
   Box,
   Button,
   Calendar,

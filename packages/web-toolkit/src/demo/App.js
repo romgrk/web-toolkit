@@ -4,6 +4,7 @@ import { addDays } from 'date-fns'
 
 import {
   Autocomplete,
+  Alert,
   Box,
   Button,
   Calendar,
@@ -147,6 +148,10 @@ function AppContent() {
       <br/>
 
       <DemoHeaderBar />
+      <br/>
+
+      <DemoAlert />
+      <br/>
 
       <DemoTable />
       <br/>
@@ -159,6 +164,28 @@ function AppContent() {
 
       <IconGrid />
     </div>
+  )
+}
+
+function DemoAlert() {
+  return (
+    <Box vertical>
+      <Alert title='Neutral message' showClose>
+        This is a neutral message :| <a className='link'>Open an issue</a> to report it.
+      </Alert>
+      <Alert title='Information message' info showClose>
+        This is an information message :| <a className='link'>Open an issue</a> to report it.
+      </Alert>
+      <Alert title='Success!' success showClose>
+        This is a success message :) <a className='link'>Open an issue</a> to report it.
+      </Alert>
+      <Alert title='Warning!' warning showClose>
+        This is an error message :/ <a className='link'>Open an issue</a> to report it.
+      </Alert>
+      <Alert title='Error!' danger showClose>
+        This is an error message :( <a className='link'>Open an issue</a> to report it.
+      </Alert>
+    </Box>
   )
 }
 

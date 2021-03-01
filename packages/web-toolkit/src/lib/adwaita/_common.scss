@@ -425,19 +425,87 @@ $popover_radius: $button_radius + 4;
  ***********/
 
 .Alert {
+  border: 1px solid $borders_color;
+  border-left-width: 6px;
+  border-radius: $button_radius;
+  padding: 8px;
 
+  $_colors: map-merge($colors, (
+    "default": $fg_color,
+  ));
+  $_panel_colors:
+    if($variant == 'light',
+      (
+        "default": $background_high,
+        "info":    desaturate(lighten($info_color,    30%), 20%),
+        "success": desaturate(lighten($success_color, 25%), 40%),
+        "warning": desaturate(lighten($warning_color, 35%), 40%),
+        "danger":  desaturate(lighten($danger_color,  40%), 40%),
+      )
+      ,
+      (
+        "default": $background_high,
+        "info":    desaturate(darken($info_color, 10%), 40%),
+        "success": desaturate(darken($success_color, 10%), 40%),
+        "warning": desaturate(darken($warning_color, 10%), 40%),
+        "danger":  desaturate(darken($danger_color, 10%), 40%),
+      )
+  );
+  @debug $_colors;
+
+  @each $type, $color in $_colors {
+    $_current_color: $fg_color;
+    $_background_color: map-get($_panel_colors, $type);
+
+    &#{if($type == "default", "", "." + $type)} {
+      color: $_current_color;
+      --icon-color: #{desaturate($color, 30%)};
+      background-color: $_background_color;
+      // border-color: darken($color, 15%);
+      border-color: darken($_background_color, 8%);
+
+      & a {
+        color: darken($_current_color, 8%);
+        font-weight: bold;
+      }
+      & a:not(:disabled):not(.disabled):hover {
+        color: darken($_current_color, 2%);
+      }
+
+      .Alert__close {
+        @include button('normal', $_background_color);
+        &:not(:disabled):not(.disabled) {
+          &.hover,
+          &:hover {
+            @include button('hover', $_background_color);
+          }
+          &.active,
+          &:active {
+            @include button('active', $_background_color);
+          }
+        }
+      }
+    }
+  }
   // @include with_sizes {
   //   height: $height;
   //   min-height: $height;
   //   font-size: $font_size;
   //   --icon-size: #{$icon_size};
   // }
-
-  @each $type, $color in $colors {
-    &.#{$type} {
-      color: $color;
-    }
-  }
+}
+.Alert__icon {
+  margin-top: 3px;
+  --icon-size: 1.5em;
+  opacity: 0.5;
+}
+// .Alert__content {}
+.Alert__title {
+  font-size: 1.2em;
+  margin-bottom: 0.25rem;
+}
+.Alert__message {
+  font-size: 1rem;
 }
 
 /****************

@@ -489,17 +489,243 @@ pre {
 /************
  * Alerts   *
  ***********/
-.Alert.info {
-  color: #3584e4; }
+.Alert {
+  border: 1px solid #cdc7c2;
+  border-left-width: 6px;
+  border-radius: 5px;
+  padding: 8px; }
+  .Alert.info {
+    color: #2e3436;
+    --icon-color: #5787c2;
+    background-color: #c4d7ee;
+    border-color: #a4c1e6; }
+    .Alert.info a {
+      color: #1b1f20;
+      font-weight: bold; }
+    .Alert.info a:not(:disabled):not(.disabled):hover {
+      color: #292f30; }
+    .Alert.info .Alert__close {
+      color: #2e3436;
+      outline-color: rgba(255, 255, 255, 0.8);
+      border-color: #9cbce3;
+      border-bottom-color: #74a1d8;
+      background-color: #c4d7ee;
+      box-shadow: inset 0 1px rgba(255, 255, 255, 0.5), 0 1px 2px rgba(0, 0, 0, 0.07); }
+      .Alert.info .Alert__close::before {
+        content: ' ';
+        position: absolute;
+        pointer-events: none;
+        width: 100%;
+        height: 100%;
+        top: 0px;
+        left: 0px;
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.03), transparent);
+        transition: all 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+      .Alert.info .Alert__close.hover:not(:disabled):not(.disabled), .Alert.info .Alert__close:not(:disabled):not(.disabled):hover {
+        color: #2e3436;
+        border-color: #9cbce3;
+        border-bottom-color: #74a1d8;
+        background-color: #cadbf0;
+        box-shadow: inset 0 1px #c0d4ed, 0 1px 2px rgba(0, 0, 0, 0.07); }
+        .Alert.info .Alert__close.hover:not(:disabled):not(.disabled)::before, .Alert.info .Alert__close:not(:disabled):not(.disabled):hover::before {
+          opacity: 0; }
+      .Alert.info .Alert__close.active:not(:disabled):not(.disabled), .Alert.info .Alert__close:not(:disabled):not(.disabled):active {
+        color: #2e3436;
+        border-color: #9cbce3;
+        background-color: #8cb1df;
+        box-shadow: inset 0 1px rgba(255, 255, 255, 0);
+        text-shadow: none;
+        --icon-shadow: none; }
+        .Alert.info .Alert__close.active:not(:disabled):not(.disabled)::before, .Alert.info .Alert__close:not(:disabled):not(.disabled):active::before {
+          opacity: 0; }
+  .Alert.success {
+    color: #2e3436;
+    --icon-color: #59ac7e;
+    background-color: #b4d0c0;
+    border-color: #9ac0ab; }
+    .Alert.success a {
+      color: #1b1f20;
+      font-weight: bold; }
+    .Alert.success a:not(:disabled):not(.disabled):hover {
+      color: #292f30; }
+    .Alert.success .Alert__close {
+      color: #2e3436;
+      outline-color: rgba(255, 255, 255, 0.8);
+      border-color: #94bca6;
+      border-bottom-color: #75a98c;
+      background-color: #b4d0c0;
+      box-shadow: inset 0 1px rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.07); }
+      .Alert.success .Alert__close::before {
+        content: ' ';
+        position: absolute;
+        pointer-events: none;
+        width: 100%;
+        height: 100%;
+        top: 0px;
+        left: 0px;
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.03), transparent);
+        transition: all 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+      .Alert.success .Alert__close.hover:not(:disabled):not(.disabled), .Alert.success .Alert__close:not(:disabled):not(.disabled):hover {
+        color: #2e3436;
+        border-color: #94bca6;
+        border-bottom-color: #75a98c;
+        background-color: #b8d3c4;
+        box-shadow: inset 0 1px #b0cebe, 0 1px 2px rgba(0, 0, 0, 0.07); }
+        .Alert.success .Alert__close.hover:not(:disabled):not(.disabled)::before, .Alert.success .Alert__close:not(:disabled):not(.disabled):hover::before {
+          opacity: 0; }
+      .Alert.success .Alert__close.active:not(:disabled):not(.disabled), .Alert.success .Alert__close:not(:disabled):not(.disabled):active {
+        color: #2e3436;
+        border-color: #94bca6;
+        background-color: #88b59c;
+        box-shadow: inset 0 1px rgba(255, 255, 255, 0);
+        text-shadow: none;
+        --icon-shadow: none; }
+        .Alert.success .Alert__close.active:not(:disabled):not(.disabled)::before, .Alert.success .Alert__close:not(:disabled):not(.disabled):active::before {
+          opacity: 0; }
+  .Alert.warning {
+    color: #2e3436;
+    --icon-color: #d07925;
+    background-color: #eed3ba;
+    border-color: #e6bf99; }
+    .Alert.warning a {
+      color: #1b1f20;
+      font-weight: bold; }
+    .Alert.warning a:not(:disabled):not(.disabled):hover {
+      color: #292f30; }
+    .Alert.warning .Alert__close {
+      color: #2e3436;
+      outline-color: rgba(255, 255, 255, 0.8);
+      border-color: #e4ba91;
+      border-bottom-color: #d9a068;
+      background-color: #eed3ba;
+      box-shadow: inset 0 1px rgba(255, 255, 255, 0.5), 0 1px 2px rgba(0, 0, 0, 0.07); }
+      .Alert.warning .Alert__close::before {
+        content: ' ';
+        position: absolute;
+        pointer-events: none;
+        width: 100%;
+        height: 100%;
+        top: 0px;
+        left: 0px;
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.03), transparent);
+        transition: all 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+      .Alert.warning .Alert__close.hover:not(:disabled):not(.disabled), .Alert.warning .Alert__close:not(:disabled):not(.disabled):hover {
+        color: #2e3436;
+        border-color: #e4ba91;
+        border-bottom-color: #d9a068;
+        background-color: #efd7c0;
+        box-shadow: inset 0 1px #edd1b6, 0 1px 2px rgba(0, 0, 0, 0.07); }
+        .Alert.warning .Alert__close.hover:not(:disabled):not(.disabled)::before, .Alert.warning .Alert__close:not(:disabled):not(.disabled):hover::before {
+          opacity: 0; }
+      .Alert.warning .Alert__close.active:not(:disabled):not(.disabled), .Alert.warning .Alert__close:not(:disabled):not(.disabled):active {
+        color: #2e3436;
+        border-color: #e4ba91;
+        background-color: #dfaf81;
+        box-shadow: inset 0 1px rgba(255, 255, 255, 0);
+        text-shadow: none;
+        --icon-shadow: none; }
+        .Alert.warning .Alert__close.active:not(:disabled):not(.disabled)::before, .Alert.warning .Alert__close:not(:disabled):not(.disabled):active::before {
+          opacity: 0; }
+  .Alert.danger {
+    color: #2e3436;
+    --icon-color: #ad1f1f;
+    background-color: #ebadad;
+    border-color: #e28d8d; }
+    .Alert.danger a {
+      color: #1b1f20;
+      font-weight: bold; }
+    .Alert.danger a:not(:disabled):not(.disabled):hover {
+      color: #292f30; }
+    .Alert.danger .Alert__close {
+      color: #2e3436;
+      outline-color: rgba(255, 255, 255, 0.8);
+      border-color: #e08585;
+      border-bottom-color: #d65c5c;
+      background-color: #ebadad;
+      box-shadow: inset 0 1px rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.07); }
+      .Alert.danger .Alert__close::before {
+        content: ' ';
+        position: absolute;
+        pointer-events: none;
+        width: 100%;
+        height: 100%;
+        top: 0px;
+        left: 0px;
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.03), transparent);
+        transition: all 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+      .Alert.danger .Alert__close.hover:not(:disabled):not(.disabled), .Alert.danger .Alert__close:not(:disabled):not(.disabled):hover {
+        color: #2e3436;
+        border-color: #e08585;
+        border-bottom-color: #d65c5c;
+        background-color: #ecb4b4;
+        box-shadow: inset 0 1px #eaa9a9, 0 1px 2px rgba(0, 0, 0, 0.07); }
+        .Alert.danger .Alert__close.hover:not(:disabled):not(.disabled)::before, .Alert.danger .Alert__close:not(:disabled):not(.disabled):hover::before {
+          opacity: 0; }
+      .Alert.danger .Alert__close.active:not(:disabled):not(.disabled), .Alert.danger .Alert__close:not(:disabled):not(.disabled):active {
+        color: #2e3436;
+        border-color: #e08585;
+        background-color: #dc7474;
+        box-shadow: inset 0 1px rgba(255, 255, 255, 0);
+        text-shadow: none;
+        --icon-shadow: none; }
+        .Alert.danger .Alert__close.active:not(:disabled):not(.disabled)::before, .Alert.danger .Alert__close:not(:disabled):not(.disabled):active::before {
+          opacity: 0; }
+  .Alert {
+    color: #2e3436;
+    --icon-color: #323232;
+    background-color: #e1dedb;
+    border-color: #cecac5; }
+    .Alert a {
+      color: #1b1f20;
+      font-weight: bold; }
+    .Alert a:not(:disabled):not(.disabled):hover {
+      color: #292f30; }
+    .Alert .Alert__close {
+      color: #2e3436;
+      outline-color: rgba(255, 255, 255, 0.8);
+      border-color: #cac5bf;
+      border-bottom-color: #b3aba3;
+      background-color: #e1dedb;
+      box-shadow: inset 0 1px rgba(255, 255, 255, 0.5), 0 1px 2px rgba(0, 0, 0, 0.07); }
+      .Alert .Alert__close::before {
+        content: ' ';
+        position: absolute;
+        pointer-events: none;
+        width: 100%;
+        height: 100%;
+        top: 0px;
+        left: 0px;
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.03), transparent);
+        transition: all 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+      .Alert .Alert__close.hover:not(:disabled):not(.disabled), .Alert .Alert__close:not(:disabled):not(.disabled):hover {
+        color: #2e3436;
+        border-color: #cac5bf;
+        border-bottom-color: #b3aba3;
+        background-color: #e4e2df;
+        box-shadow: inset 0 1px #dfdbd8, 0 1px 2px rgba(0, 0, 0, 0.07); }
+        .Alert .Alert__close.hover:not(:disabled):not(.disabled)::before, .Alert .Alert__close:not(:disabled):not(.disabled):hover::before {
+          opacity: 0; }
+      .Alert .Alert__close.active:not(:disabled):not(.disabled), .Alert .Alert__close:not(:disabled):not(.disabled):active {
+        color: #2e3436;
+        border-color: #cac5bf;
+        background-color: #c1bab4;
+        box-shadow: inset 0 1px rgba(255, 255, 255, 0);
+        text-shadow: none;
+        --icon-shadow: none; }
+        .Alert .Alert__close.active:not(:disabled):not(.disabled)::before, .Alert .Alert__close:not(:disabled):not(.disabled):active::before {
+          opacity: 0; }
 
-.Alert.success {
-  color: #33d17a; }
+.Alert__icon {
+  margin-top: 3px;
+  --icon-size: 1.5em;
+  opacity: 0.5; }
 
-.Alert.warning {
-  color: #f57900; }
+.Alert__title {
+  font-size: 1.2em;
+  margin-bottom: 0.25rem; }
 
-.Alert.danger {
-  color: #cc0000; }
+.Alert__message {
+  font-size: 1rem; }
 
 /****************
  * Icons        *

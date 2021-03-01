@@ -4697,8 +4697,8 @@ columnview row:not(.selected) cell editablelabel.editing text selection {
       background-color: #e3a05f;
       border-color: #bb6d21; }
     .LevelBar .LevelBar__rail.info {
-      background-color: #3584e4;
-      border-color: #15539e; }
+      background-color: #67abff;
+      border-color: #0173ff; }
     .LevelBar .LevelBar__rail.success {
       background-color: #5ebf8a;
       border-color: #348358; }

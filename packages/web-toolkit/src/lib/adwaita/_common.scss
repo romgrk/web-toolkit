@@ -3924,7 +3924,7 @@ $levelbar_border_radius: 3px;
         (
           (danger,  desaturate(lighten($danger_color,  10%), 20%)),
           (warning, desaturate(lighten($warning_color, 15%), 30%)),
-          (info,    $selected_bg_color),
+          (info,    lighten(saturate($selected_bg_color, 30%), 15%)),
           (success, desaturate(lighten($success_color, 5%), 20%)),
         )
         ,

@@ -28,83 +28,25 @@ code {
   font-weight: 300;
   font-size: 24pt; }
 
-html, .root {
+h1 {
+  font-weight: 800;
+  font-size: 20pt; }
+
+h2 {
+  font-weight: 800;
+  font-size: 15pt; }
+
+h3 {
+  font-weight: 700;
+  font-size: 15pt; }
+
+h4 {
+  font-weight: 700;
+  font-size: 13pt; }
+
+html, body {
   font-weight: 400;
-  font-size: 15px;
-  line-height: 20px; }
-
-body, .article {
-  font-family: Cantarell;
-  font-size: 1rem;
-  line-height: 1.5rem; }
-
-.article {
-  font-size: 1rem;
-  line-height: 1.5rem;
-  max-width: 560px;
-  margin: auto; }
-
-h1, .h1 {
-  font-weight: 700;
-  font-size: 4.25rem;
-  line-height: 4.5rem;
-  margin-top: 0;
-  margin-bottom: 1rem; }
-
-h2, .h2 {
-  font-weight: 700;
-  font-size: 2.625rem;
-  line-height: 3rem;
-  margin-top: 1.5rem;
-  margin-bottom: 1.5rem; }
-
-h3, .h3 {
-  font-weight: 700;
-  font-size: 1.625rem;
-  line-height: 3rem;
-  margin-top: 1.5rem;
-  margin-bottom: 0rem; }
-
-h4, .h4 {
-  font-weight: 700;
-  font-size: 1rem;
-  line-height: 1.5rem;
-  margin-top: 1.5rem;
-  margin-bottom: 0rem; }
-
-h5, .h5 {
-  font-weight: 700;
-  font-size: 1rem;
-  line-height: 1.5rem;
-  margin-top: 1.5rem;
-  margin-bottom: 0rem; }
-
-p, ul, ol, pre, table, blockquote {
-  margin-top: 0rem;
-  margin-bottom: 1.5rem; }
-
-ul ul, ol ol, ul ol, ol ul {
-  margin-top: 0rem;
-  margin-bottom: 0rem; }
-
-/* Let's make sure all's aligned */
-hr, .hr {
-  border: 1px solid;
-  margin: -1px 0; }
-
-a, b, i, strong, em, small, code {
-  line-height: 0; }
-
-sub, sup {
-  line-height: 0;
-  position: relative;
-  vertical-align: baseline; }
-
-sup {
-  top: -0.5em; }
-
-sub {
-  bottom: -0.25em; }
+  font-size: 11pt; }
 
 .heading {
   font-weight: 700;

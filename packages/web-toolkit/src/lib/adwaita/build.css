@@ -392,9 +392,9 @@ pre {
     color: rgba(53, 132, 228, 0.5); }
 
 .Label.success {
-  color: #33d17a; }
+  color: #2abb6b; }
   .Label.success.disabled {
-    color: rgba(51, 209, 122, 0.5); }
+    color: rgba(42, 187, 107, 0.5); }
 
 .Label.warning {
   color: #f57900; }

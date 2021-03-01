@@ -343,7 +343,23 @@ $popover_radius: $button_radius + 4;
     &::selection { @extend %selected_items_disabled; }
   }
 
-  @each $type, $color in $colors {
+  $_colors:
+    if($variant == 'light',
+      (
+        "info":    map-get($colors, "info"),
+        "success": darken(map-get($colors, "success"), 6%),
+        "warning": map-get($colors, "warning"),
+        "danger":  map-get($colors, "danger"),
+      )
+      ,
+      (
+        "info":    map-get($colors, "info"),
+        "success": map-get($colors, "success"),
+        "warning": map-get($colors, "warning"),
+        "danger":  map-get($colors, "danger"),
+      )
+  );
+  @each $type, $color in $_colors {
     &.#{$type} {
       color: $color;
       &.disabled { color: transparentize($color, 0.5); }

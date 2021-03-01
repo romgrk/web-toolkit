@@ -1075,16 +1075,16 @@ function DemoTypography() {
       <h6>Heading 6</h6>
 
       <Box horizontal>
-        <Label>Label</Label>
-        <Label muted>Label</Label>
-        <Label info>Label</Label>
-        <Label info disabled>Label</Label>
-        <Label success>Label</Label>
-        <Label success disabled>Label</Label>
-        <Label warning>Label</Label>
-        <Label warning disabled>Label</Label>
-        <Label danger>Label</Label>
-        <Label danger disabled>Label</Label>
+        <Label bold>Label</Label>
+        <Label bold muted>Label</Label>
+        <Label bold info>Label</Label>
+        <Label bold info disabled>Label</Label>
+        <Label bold success>Label</Label>
+        <Label bold success disabled>Label</Label>
+        <Label bold warning>Label</Label>
+        <Label bold warning disabled>Label</Label>
+        <Label bold danger>Label</Label>
+        <Label bold danger disabled>Label</Label>
 
         <Spinner />
         <Spinner disabled />

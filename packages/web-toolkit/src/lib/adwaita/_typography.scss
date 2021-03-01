@@ -111,3 +111,9 @@ pre {
 .text-bold {
   font-weight: 700;
 }
+
+@each $w in (100, 200, 300, 400, 500, 600, 700, 800, 900) {
+  .weight-#{$w} {
+    font-weight: $w;
+  }
+}

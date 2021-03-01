@@ -13,6 +13,7 @@ import Dropdown     from './components/Dropdown'
 import Expander     from './components/Expander'
 import Frame        from './components/Frame'
 import HeaderBar    from './components/HeaderBar'
+import Heading      from './components/Heading'
 import Icon, { OptimizedIcon } from './components/Icon'
 import InfoBar      from './components/InfoBar'
 import Input        from './components/Input'
@@ -50,6 +51,7 @@ export {
   Expander,
   Frame,
   HeaderBar,
+  Heading,
   Icon,
   OptimizedIcon,
   InfoBar,

@@ -7,6 +7,7 @@ import prop from 'prop-types'
 import cx from 'clsx'
 
 const propTypes = {
+  as: prop.string,
   size: prop.oneOf(['mini', 'small', 'medium', 'large', 'huge']),
   weight: prop.oneOf([100, 300, 400, 700, 900]),
 }

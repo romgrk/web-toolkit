@@ -312,6 +312,77 @@ $popover_radius: $button_radius + 4;
   background-color: transparentize(darken($selected_bg_color, 10%), 0.8);
 }
 
+/*********
+ * Links *
+ *********/
+
+%link,
+.link {
+  color: $link_color;
+  text-decoration: underline;
+  cursor: pointer;
+  transition: $link_transition;
+  border-radius: $button_radius;
+
+  @include focus-ring($method: 'after');
+
+  &:not(:disabled):not(.disabled) {
+    &:visited {
+      color: $link_visited_color;
+
+      *.selected & { color: mix($selected_fg_color, $link_visited_color, 60%); }
+    }
+
+    &:hover {
+      $_fg: lighten($link_color, 10%);
+      color: $_fg;
+
+      *.selected & { color: mix($selected_fg_color, $_fg, 90%); }
+    }
+
+    &:active {
+      color: $link_color;
+
+      *.selected & { color: mix($selected_fg_color, $link_color, 80%); }
+    }
+  }
+
+  &:disabled { color: transparentize(desaturate($link_color, 100%), 0.2); }
+
+  @at-root %link_selected,
+  &.selected,
+  *.selected & { color: mix($selected_fg_color, $link_color, 80%); }
+}
+
+
+/***********
+ * Heading *
+ **********/
+
+.Heading {
+  position: relative;
+  &:hover {
+    .Heading__anchor {
+      opacity: 0.5;
+    }
+  }
+}
+.Heading__anchor {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translateX(-100%);
+  height: 100%;
+  line-height: 100%;
+  padding-right: 4px;
+  opacity: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: $fg_color !important;
+  text-decoration: none !important;
+}
+
 /*****************
  * Labels & Text *
  ****************/
@@ -412,11 +483,6 @@ $popover_radius: $button_radius + 4;
     font-size: 24px;
     font-weight: 300;
     line-height: 1.4;
-  }
-  @each $w in (100, 300, 400, 700, 900) {
-    &.weight-#{$w} {
-      font-weight: $w;
-    }
   }
 }
 
@@ -637,6 +703,9 @@ $_input_padding: 8px;
       --input-padding: #{$height / 4};
       font-size: $font_size;
       --icon-size: #{$icon_size};
+      > .Input__area {
+        line-height: $height;
+      }
     }
 
     > .Input__area {
@@ -1392,49 +1461,6 @@ button.color {
   &:active,
   &:checked { @include button(active); }
 }
-
-/*********
- * Links *
- *********/
-
-%link,
-.link {
-  color: $link_color;
-  text-decoration: underline;
-  cursor: pointer;
-  transition: $link_transition;
-  border-radius: $button_radius;
-
-  @include focus-ring($method: 'after');
-
-  &:not(:disabled):not(.disabled) {
-    &:visited {
-      color: $link_visited_color;
-
-      *.selected & { color: mix($selected_fg_color, $link_visited_color, 60%); }
-    }
-
-    &:hover {
-      $_fg: lighten($link_color, 10%);
-      color: $_fg;
-
-      *.selected & { color: mix($selected_fg_color, $_fg, 90%); }
-    }
-
-    &:active {
-      color: $link_color;
-
-      *.selected & { color: mix($selected_fg_color, $link_color, 80%); }
-    }
-  }
-
-  &:disabled { color: transparentize(desaturate($link_color, 100%), 0.2); }
-
-  @at-root %link_selected,
-  &.selected,
-  *.selected & { color: mix($selected_fg_color, $link_color, 80%); }
-}
-
 
 /*****************
  * GtkSpinButton *
@@ -3207,7 +3233,7 @@ columnview row:not(.selected) cell editablelabel.editing text selection {
   }
 
   .Popover__container {
-    padding: 4px 0;
+    padding: 4px 0 !important;
     overflow: hidden;
   }
 

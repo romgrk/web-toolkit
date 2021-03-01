@@ -46,6 +46,7 @@
     "date-fns": "^2.17.0",
     "mkdirp": "^1.0.4",
     "rambda": "^6.4.0",
+    "react-children-utilities": "^2.4.1",
     "react-popper": "^2.2.4",
     "react-scripts": "4.0.1",
     "react-table": "^7.6.2",

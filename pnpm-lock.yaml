@@ -13,6 +13,7 @@ importers:
       date-fns: 2.17.0
       mkdirp: 1.0.4
       rambda: 6.5.3
+      react-children-utilities: 2.4.1_react@17.0.1
       react-popper: 2.2.4_3da0a162a96308e0a1fa93a02ed91581
       react-scripts: 4.0.1
       react-table: 7.6.3_react@17.0.1
@@ -149,6 +150,7 @@ importers:
       rambda: ^6.4.0
       react: ^17.0.1
       react-app-polyfill: ^1.0.4
+      react-children-utilities: ^2.4.1
       react-dev-utils: ^9.1.0
       react-dom: ^17.0.1
       react-popper: ^2.2.4
@@ -12752,6 +12754,14 @@ packages:
       node: '>=10'
     resolution:
       integrity: sha512-0sF4ny9v/B7s6aoehwze9vJNWcmCemAUYBVasscVr92+UYiEqDXOxfKjXN685mDaMRNF3WdhHQs76oTODMocFA==
+  /react-children-utilities/2.4.1_react@17.0.1:
+    dependencies:
+      react: 17.0.1
+    dev: false
+    peerDependencies:
+      react: 17.x.x || 16.x.x || 15.x.x
+    resolution:
+      integrity: sha512-zfLSIE7ZrFrOXEA2pEuBvRek2w12xkuR92k/FIPycHb/oWFOpj1rpWJUoII+cGdT0uYiZHpyndXoBzbeDUhj/Q==
   /react-dev-utils/11.0.2:
     dependencies:
       '@babel/code-frame': 7.10.4

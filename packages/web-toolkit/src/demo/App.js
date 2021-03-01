@@ -14,6 +14,7 @@ import {
   Expander,
   Frame,
   HeaderBar,
+  Heading,
   Icon,
   OptimizedIcon,
   InfoBar,
@@ -113,8 +114,6 @@ function AppContent() {
           Go to Github
         </a>
       </div>
-
-      <h1>Demo</h1>
 
       <DemoList />
       <br/>
@@ -1067,12 +1066,12 @@ function DemoMenu() {
 function DemoTypography() {
   return (
     <Box>
-      <h1>Heading 1</h1>
-      <h2>Heading 2</h2>
-      <h3>Heading 3</h3>
-      <h4>Heading 4</h4>
-      <h5>Heading 5</h5>
-      <h6>Heading 6</h6>
+      <Heading as='h1'>Heading 1</Heading>
+      <Heading as='h2'>Heading 2</Heading>
+      <Heading as='h3'>Heading 3</Heading>
+      <Heading as='h4'>Heading 4</Heading>
+      <Heading as='h5'>Heading 5</Heading>
+      <Heading as='h6'>Heading 6</Heading>
 
       <Box horizontal>
         <Label bold>Label</Label>

@@ -21,7 +21,7 @@ class Dropdown extends React.Component {
     /** className of the component's popover */
     className: prop.string,
     triggerClassName: prop.string,
-    size: prop.oneOf(['mini', 'small', 'medium', 'large', 'huge']),
+    size: prop.oneOf(['mini', 'small', 'medium', 'large', 'huge', 'mega', 'mega']),
     align: prop.oneOf(['left', 'right']),
     label: prop.node,
     value: prop.any,

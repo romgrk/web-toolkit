@@ -7,7 +7,7 @@ import prop from 'prop-types'
 import cx from 'clsx'
 
 const propTypes = {
-  size: prop.oneOf(['mini', 'small', 'medium', 'large', 'huge']),
+  size: prop.oneOf(['mini', 'small', 'medium', 'large', 'huge', 'mega']),
 }
 
 function Label({

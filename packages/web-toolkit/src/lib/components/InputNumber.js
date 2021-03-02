@@ -72,7 +72,7 @@ function InputNumber({
 
 InputNumber.propTypes = {
   className: prop.string,
-  size: prop.oneOf(['mini', 'small', 'medium', 'large', 'huge']),
+  size: prop.oneOf(['mini', 'small', 'medium', 'large', 'huge', 'mega']),
   vertical: prop.bool,
   disabled: prop.bool,
   value: prop.number,

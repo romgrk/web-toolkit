@@ -69,7 +69,7 @@ function Alert({
 Alert.propTypes = {
   title: prop.string,
   className: prop.string,
-  size: prop.oneOf(['mini', 'small', 'medium', 'large', 'huge']),
+  size: prop.oneOf(['mini', 'small', 'medium', 'large', 'huge', 'mega']),
   icon: prop.string,
   showClose: prop.bool,
   onClose: prop.func,

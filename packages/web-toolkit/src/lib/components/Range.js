@@ -474,7 +474,7 @@ Range.propTypes = {
   /** A string value that provides a user-friendly name for the current value of the slider. */
   'aria-valuetext': prop.string,
   className: prop.string,
-  size: prop.oneOf(['mini', 'small', 'medium', 'large', 'huge']),
+  size: prop.oneOf(['mini', 'small', 'medium', 'large', 'huge', 'mega']),
   /** The default element value. Use when the component is not controlled. */
   defaultValue: prop.oneOfType([prop.number, prop.arrayOf(prop.number)]),
   /** If `true`, the slider will be disabled. */

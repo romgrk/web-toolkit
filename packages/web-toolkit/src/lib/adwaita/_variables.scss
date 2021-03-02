@@ -116,6 +116,7 @@ $height_small:  22px;
 $height_medium: 28px;
 $height_large:  36px;
 $height_huge:   42px;
+$height_mega:   58px;
 
 $heights: (
   "mini":   $height_mini,
@@ -123,22 +124,25 @@ $heights: (
   "medium": $height_medium,
   "large":  $height_large,
   "huge":   $height_huge,
+  "mega":   $height_mega,
 );
 
 $font_sizes: (
-  "mini":   10px,
+  "mini":   11px,
   "small":  12px,
-  "medium": 13.333333px,
-  "large":  15px,
-  "huge":   18px,
+  "medium": 14px,
+  "large":  18px,
+  "huge":   20px,
+  "mega":   28px,
 );
 
 $icon_sizes: (
-  "mini":   11px,
+  "mini":   12px,
   "small":  13px,
   "medium": 16px,
   "large":  20px,
   "huge":   23px,
+  "mega":   32px,
 );
 
 @function ratio_to_medium($value, $size) {

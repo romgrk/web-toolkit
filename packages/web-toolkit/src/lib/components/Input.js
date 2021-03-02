@@ -26,7 +26,7 @@ const propTypes = {
   defaultValue: prop.string,
   className: prop.string,
   /** Size of the input */
-  size: prop.oneOf(['mini', 'small', 'medium', 'large', 'huge']),
+  size: prop.oneOf(['mini', 'small', 'medium', 'large', 'huge', 'mega']),
   /** Shows a loading indicator */
   loading: prop.bool,
   /** Icon name or node (left) */

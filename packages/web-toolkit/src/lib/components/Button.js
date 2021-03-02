@@ -11,7 +11,7 @@ import Spinner from './Spinner'
 
 const propTypes = {
   className: prop.string,
-  size: prop.oneOf(['mini', 'small', 'medium', 'large', 'huge']),
+  size: prop.oneOf(['mini', 'small', 'medium', 'large', 'huge', 'mega']),
   /** An icon name */
   icon: prop.string,
   /** HTML button type */

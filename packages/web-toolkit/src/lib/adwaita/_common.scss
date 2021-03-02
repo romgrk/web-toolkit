@@ -392,6 +392,7 @@ $popover_radius: $button_radius + 4;
 
   @include with_sizes {
     height: $height;
+    line-height: $height;
     min-height: $height;
     font-size: $font_size;
     --icon-size: #{$icon_size};
@@ -3266,6 +3267,7 @@ columnview row:not(.selected) cell editablelabel.editing text selection {
     "medium": 10px,
     "large":  13px,
     "huge":   16px,
+    "mega":   20px,
   );
   @include with_sizes {
     height: $height;
@@ -3286,7 +3288,7 @@ columnview row:not(.selected) cell editablelabel.editing text selection {
     height: calc(1 * var(--switch-size));
     // similar to the .scale
     border: 1px solid $borders_color;
-    border-radius: 14px;
+    border-radius: 20px;
     color: rgba($fg_color, 0.2);
     background-color: $background_high;
     text-shadow: 0 1px transparentize(black, 0.9);
@@ -3612,6 +3614,16 @@ $_range_border: darken($_range_bg, 15%);
     "medium": 4px,
     "large":  6px,
     "huge":   8px,
+    "mega":   10px,
+  );
+
+  $_thumb_sizes: (
+    "mini":   12px,
+    "small":  12px,
+    "medium": 16px,
+    "large":  18px,
+    "huge":   20px,
+    "mega":   28px,
   );
 
   @at-root body {
@@ -3619,13 +3631,13 @@ $_range_border: darken($_range_bg, 15%);
     --range-track-width: 4px;
     --range-size: #{$height_medium};
     --range-padding: calc(var(--range-size) / 2 - var(--range-track-width));
-    --range-thumb-size: 16px;
+    --range-thumb-size: #{map-get($_thumb_sizes, medium)};
   }
   border-radius: 16px;
   @include with_sizes {
     --range-track-width: #{map-get($_track_sizes, $size)};
     --range-size: #{$height};
-    --range-thumb-size: #{round(ratio_to_medium(16px, $size))};
+    --range-thumb-size: #{map-get($_thumb_sizes, $size)};
     border-radius: round(ratio_to_medium(16px, $size));
   }
 
@@ -3670,7 +3682,7 @@ $_range_border: darken($_range_bg, 15%);
     left: 0;
     width: 100%;
     height: var(--range-track-width);
-    border-radius: 2px;
+    border-radius: var(--range-track-width);
     border: 1px solid $_range_border;
     background-color: $_range_bg;
   }
@@ -3690,7 +3702,7 @@ $_range_border: darken($_range_bg, 15%);
     position: absolute;
     content: '';
     height: var(--range-track-width);
-    border-radius: 2px;
+    border-radius: var(--range-track-width);
     border: 1px solid darken($selected_bg_color, 15%);
     background-color: $selected_bg_color;
     transition: $button_transition;

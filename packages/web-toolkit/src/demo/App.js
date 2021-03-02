@@ -734,13 +734,13 @@ function DemoButtons() {
 }
 
 function DemoSize() {
-  const sizes = ['mini', 'small', 'medium', 'large', 'huge']
+  const sizes = ['mini', 'small', 'medium', 'large', 'huge', 'mega']
   return (
     <>
       <Box vertical>
         {sizes.map(size =>
           <Box horizontal>
-            <Label size={size}>Label</Label>
+            <Label size={size}>{size}</Label>
             <Input.Group>
               <Input
                 size={size}

@@ -21,7 +21,7 @@ class Switch extends React.Component {
     label: prop.string,
     /** On/Off if `true`, or provide your own 2 labels */
     labels: prop.oneOfType([prop.bool, prop.arrayOf(prop.string)]),
-    size: prop.oneOf(['mini', 'small', 'medium', 'large', 'huge']),
+    size: prop.oneOf(['mini', 'small', 'medium', 'large', 'huge', 'mega']),
     onChange: prop.func,
   }
 

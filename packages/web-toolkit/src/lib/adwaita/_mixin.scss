@@ -60,7 +60,7 @@
 
 
 @mixin with_sizes {
-  @each $size in (mini, small, medium, large, huge) {
+  @each $size in (mini, small, medium, large, huge, mega) {
     &.#{$size} {
       $height: map-get($heights, $size) !global;
       $font_size: map-get($font_sizes, $size) !global;

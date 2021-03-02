@@ -65,7 +65,7 @@ function TextArea({
 const ExportedTextArea = forwardRef(TextArea)
 
 ExportedTextArea.propTypes = {
-  size: prop.oneOf(['mini', 'small', 'medium', 'large', 'huge']),
+  size: prop.oneOf(['mini', 'small', 'medium', 'large', 'huge', 'mega']),
 }
 
 ExportedTextArea.defaultProps = {

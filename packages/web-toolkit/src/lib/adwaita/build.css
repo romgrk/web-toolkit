@@ -460,33 +460,45 @@ pre {
 
 .Label.mini {
   height: 18px;
+  line-height: 18px;
   min-height: 18px;
-  font-size: 10px;
-  --icon-size: 11px; }
+  font-size: 11px;
+  --icon-size: 12px; }
 
 .Label.small {
   height: 22px;
+  line-height: 22px;
   min-height: 22px;
   font-size: 12px;
   --icon-size: 13px; }
 
 .Label.medium {
   height: 28px;
+  line-height: 28px;
   min-height: 28px;
-  font-size: 13.333333px;
+  font-size: 14px;
   --icon-size: 16px; }
 
 .Label.large {
   height: 36px;
+  line-height: 36px;
   min-height: 36px;
-  font-size: 15px;
+  font-size: 18px;
   --icon-size: 20px; }
 
 .Label.huge {
   height: 42px;
+  line-height: 42px;
   min-height: 42px;
-  font-size: 18px;
+  font-size: 20px;
   --icon-size: 23px; }
+
+.Label.mega {
+  height: 58px;
+  line-height: 58px;
+  min-height: 58px;
+  font-size: 28px;
+  --icon-size: 32px; }
 
 .Label::selection {
   background-color: #3584e4;
@@ -548,25 +560,29 @@ pre {
 .Text {
   margin: 0; }
   .Text.mini {
-    font-size: 12px;
+    font-size: 13.2px;
     line-height: 1.4;
-    --icon-size: 11px; }
+    --icon-size: 12px; }
   .Text.small {
     font-size: 14.4px;
     line-height: 1.4;
     --icon-size: 13px; }
   .Text.medium {
-    font-size: 15.9999996px;
+    font-size: 16.8px;
     line-height: 1.4;
     --icon-size: 16px; }
   .Text.large {
-    font-size: 18px;
+    font-size: 21.6px;
     line-height: 1.4;
     --icon-size: 20px; }
   .Text.huge {
-    font-size: 21.6px;
+    font-size: 24px;
     line-height: 1.4;
     --icon-size: 23px; }
+  .Text.mega {
+    font-size: 33.6px;
+    line-height: 1.4;
+    --icon-size: 32px; }
   .Text.hero {
     font-size: 24px;
     font-weight: 300;
@@ -938,8 +954,8 @@ pre {
       height: 18px;
       min-height: 18px;
       --input-padding: 4.5px;
-      font-size: 10px;
-      --icon-size: 11px; }
+      font-size: 11px;
+      --icon-size: 12px; }
       .InputNumber.vertical > .Input__area > input.mini > .Input__area, .mini.InputNumber:not(.vertical) > .Input__area,
       .Input.mini > .Input__area {
         line-height: 18px; }
@@ -958,7 +974,7 @@ pre {
       height: 28px;
       min-height: 28px;
       --input-padding: 7px;
-      font-size: 13.333333px;
+      font-size: 14px;
       --icon-size: 16px; }
       .InputNumber.vertical > .Input__area > input.medium > .Input__area, .medium.InputNumber:not(.vertical) > .Input__area,
       .Input.medium > .Input__area {
@@ -968,7 +984,7 @@ pre {
       height: 36px;
       min-height: 36px;
       --input-padding: 9px;
-      font-size: 15px;
+      font-size: 18px;
       --icon-size: 20px; }
       .InputNumber.vertical > .Input__area > input.large > .Input__area, .large.InputNumber:not(.vertical) > .Input__area,
       .Input.large > .Input__area {
@@ -978,11 +994,21 @@ pre {
       height: 42px;
       min-height: 42px;
       --input-padding: 10.5px;
-      font-size: 18px;
+      font-size: 20px;
       --icon-size: 23px; }
       .InputNumber.vertical > .Input__area > input.huge > .Input__area, .huge.InputNumber:not(.vertical) > .Input__area,
       .Input.huge > .Input__area {
         line-height: 42px; }
+    .InputNumber.vertical > .Input__area > input.mega, .mega.InputNumber:not(.vertical),
+    .Input.mega {
+      height: 58px;
+      min-height: 58px;
+      --input-padding: 14.5px;
+      font-size: 28px;
+      --icon-size: 32px; }
+      .InputNumber.vertical > .Input__area > input.mega > .Input__area, .mega.InputNumber:not(.vertical) > .Input__area,
+      .Input.mega > .Input__area {
+        line-height: 58px; }
     .InputNumber.vertical > .Input__area > input > .Input__area, .InputNumber:not(.vertical) > .Input__area,
     .Input > .Input__area {
       position: relative;
@@ -1325,8 +1351,8 @@ editablelabel > stack > text {
     height: 18px;
     min-height: 18px;
     min-width: 18px;
-    font-size: 10px;
-    --icon-size: 11px; }
+    font-size: 11px;
+    --icon-size: 12px; }
   .Notebook .small.Notebook__arrow, .control-buttons button.small,
   .Button.small {
     height: 22px;
@@ -1339,22 +1365,29 @@ editablelabel > stack > text {
     height: 28px;
     min-height: 28px;
     min-width: 28px;
-    font-size: 13.333333px;
+    font-size: 14px;
     --icon-size: 16px; }
   .Notebook .large.Notebook__arrow, .control-buttons button.large,
   .Button.large {
     height: 36px;
     min-height: 36px;
     min-width: 36px;
-    font-size: 15px;
+    font-size: 18px;
     --icon-size: 20px; }
   .Notebook .huge.Notebook__arrow, .control-buttons button.huge,
   .Button.huge {
     height: 42px;
     min-height: 42px;
     min-width: 42px;
-    font-size: 18px;
+    font-size: 20px;
     --icon-size: 23px; }
+  .Notebook .mega.Notebook__arrow, .control-buttons button.mega,
+  .Button.mega {
+    height: 58px;
+    min-height: 58px;
+    min-width: 58px;
+    font-size: 28px;
+    --icon-size: 32px; }
   .Notebook .Notebook__arrow, .control-buttons button, .Notebook .Notebook__arrow > .Label, .control-buttons button > .Label,
   .Button,
   .Button > .Label {
@@ -2349,6 +2382,12 @@ input::-webkit-outer-spin-button {
       .InputNumber.huge:not(.vertical) > button.InputNumber__button.up:not(.flat),
       .InputNumber.huge:not(.vertical) > button.InputNumber__button.down:not(.flat) {
         width: 40px; }
+    .InputNumber.mega:not(.vertical) {
+      width: 174px; }
+      .InputNumber.mega:not(.vertical) > .Input__area > input,
+      .InputNumber.mega:not(.vertical) > button.InputNumber__button.up:not(.flat),
+      .InputNumber.mega:not(.vertical) > button.InputNumber__button.down:not(.flat) {
+        width: 56px; }
     .osd .InputNumber:not(.vertical) > .Input__area > input, .InputNumber:not(.vertical) > .Input__area > input {
       min-width: 28px;
       margin: 0;
@@ -2495,6 +2534,12 @@ input::-webkit-outer-spin-button {
       .InputNumber.vertical.huge > button.InputNumber__button.up:not(.flat),
       .InputNumber.vertical.huge > button.InputNumber__button.down:not(.flat) {
         min-height: 42px; }
+    .InputNumber.vertical.mega {
+      width: 83px; }
+      .InputNumber.vertical.mega > .Input__area > input,
+      .InputNumber.vertical.mega > button.InputNumber__button.up:not(.flat),
+      .InputNumber.vertical.mega > button.InputNumber__button.down:not(.flat) {
+        min-height: 58px; }
     .InputNumber.vertical.dnd-active {
       border-color: transparent;
       box-shadow: none; }
@@ -3938,6 +3983,11 @@ columnview row:not(.selected) cell editablelabel.editing text selection {
     min-height: 42px;
     font-size: 16px;
     --switch-size: 30px; }
+  .Switch.mega {
+    height: 58px;
+    min-height: 58px;
+    font-size: 20px;
+    --switch-size: 41px; }
   .Switch input {
     position: absolute;
     width: 1px;
@@ -3953,7 +4003,7 @@ columnview row:not(.selected) cell editablelabel.editing text selection {
     width: calc(2 * var(--switch-size));
     height: calc(1 * var(--switch-size));
     border: 1px solid #cdc7c2;
-    border-radius: 14px;
+    border-radius: 20px;
     color: rgba(46, 52, 54, 0.2);
     background-color: #e1dedb;
     text-shadow: 0 1px rgba(0, 0, 0, 0.1);
@@ -4078,8 +4128,8 @@ columnview row:not(.selected) cell editablelabel.editing text selection {
   .Radio.mini {
     height: 18px;
     min-height: 18px;
-    font-size: 10px;
-    --icon-size: 11px;
+    font-size: 11px;
+    --icon-size: 12px;
     --element-size: 14.4px; }
     .Checkbox.mini > label > .label__text,
     .Radio.mini > label > .label__text {
@@ -4106,7 +4156,7 @@ columnview row:not(.selected) cell editablelabel.editing text selection {
   .Radio.medium {
     height: 28px;
     min-height: 28px;
-    font-size: 13.333333px;
+    font-size: 14px;
     --icon-size: 16px;
     --element-size: 22.4px; }
     .Checkbox.medium > label > .label__text,
@@ -4120,7 +4170,7 @@ columnview row:not(.selected) cell editablelabel.editing text selection {
   .Radio.large {
     height: 36px;
     min-height: 36px;
-    font-size: 15px;
+    font-size: 18px;
     --icon-size: 20px;
     --element-size: 28.8px; }
     .Checkbox.large > label > .label__text,
@@ -4134,11 +4184,25 @@ columnview row:not(.selected) cell editablelabel.editing text selection {
   .Radio.huge {
     height: 42px;
     min-height: 42px;
-    font-size: 18px;
+    font-size: 20px;
     --icon-size: 23px;
     --element-size: 33.6px; }
     .Checkbox.huge > label > .label__text,
     .Radio.huge > label > .label__text {
+      height: 100%;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center; }
+  .Checkbox.mega,
+  .Radio.mega {
+    height: 58px;
+    min-height: 58px;
+    font-size: 28px;
+    --icon-size: 32px;
+    --element-size: 46.4px; }
+    .Checkbox.mega > label > .label__text,
+    .Radio.mega > label > .label__text {
       height: 100%;
       display: flex;
       flex-direction: row;
@@ -4276,6 +4340,9 @@ columnview row:not(.selected) cell editablelabel.editing text selection {
 .Checkbox.huge {
   --element-stroke-width: 5px; }
 
+.Checkbox.mega {
+  --element-stroke-width: 6px; }
+
 .Checkbox label .element {
   border-radius: 3px; }
   .Checkbox label .element::before {
@@ -4308,6 +4375,9 @@ columnview row:not(.selected) cell editablelabel.editing text selection {
 
 .Checkbox.huge input:checked + label .element::before {
   transform: translate(6px, 0px) rotate(45deg); }
+
+.Checkbox.mega input:checked + label .element::before {
+  transform: translate(8.2857142857px, 0px) rotate(45deg); }
 
 .Radio label .element {
   border-radius: 50%; }
@@ -4388,12 +4458,12 @@ columnview row:not(.selected) cell editablelabel.editing text selection {
   .Range.mini {
     --range-track-width: 4px;
     --range-size: 18px;
-    --range-thumb-size: 10px;
+    --range-thumb-size: 12px;
     border-radius: 10px; }
   .Range.small {
     --range-track-width: 4px;
     --range-size: 22px;
-    --range-thumb-size: 13px;
+    --range-thumb-size: 12px;
     border-radius: 13px; }
   .Range.medium {
     --range-track-width: 4px;
@@ -4403,13 +4473,18 @@ columnview row:not(.selected) cell editablelabel.editing text selection {
   .Range.large {
     --range-track-width: 6px;
     --range-size: 36px;
-    --range-thumb-size: 21px;
+    --range-thumb-size: 18px;
     border-radius: 21px; }
   .Range.huge {
     --range-track-width: 8px;
     --range-size: 42px;
-    --range-thumb-size: 24px;
+    --range-thumb-size: 20px;
     border-radius: 24px; }
+  .Range.mega {
+    --range-track-width: 10px;
+    --range-size: 58px;
+    --range-thumb-size: 28px;
+    border-radius: 33px; }
   .Range.vertical {
     width: var(--range-size);
     height: 100%; }
@@ -4438,7 +4513,7 @@ columnview row:not(.selected) cell editablelabel.editing text selection {
     left: 0;
     width: 100%;
     height: var(--range-track-width);
-    border-radius: 2px;
+    border-radius: var(--range-track-width);
     border: 1px solid #c8c2bc;
     background-color: #ebe8e6; }
   .LevelBar.vertical .LevelBar__rail, .Progress.vertical .Progress__rail, .Range.vertical .Range__rail {
@@ -4460,7 +4535,7 @@ columnview row:not(.selected) cell editablelabel.editing text selection {
     position: absolute;
     content: '';
     height: var(--range-track-width);
-    border-radius: 2px;
+    border-radius: var(--range-track-width);
     border: 1px solid #185fb4;
     background-color: #3584e4;
     transition: all 150ms cubic-bezier(0.25, 0.46, 0.45, 0.94); }

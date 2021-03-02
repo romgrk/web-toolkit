@@ -17,7 +17,7 @@ let nextId = 1
 class Radio extends React.Component {
   static propTypes = {
     label: prop.string,
-    size: prop.oneOf(['mini', 'small', 'medium', 'large', 'huge']),
+    size: prop.oneOf(['mini', 'small', 'medium', 'large', 'huge', 'mega']),
     showLabel: prop.bool,
     value: prop.string,
     checked: prop.bool,
@@ -110,7 +110,7 @@ function Group({ size, compact, horizontal, value: valueProp, defaultValue, onCh
 }
 
 Group.propTypes = {
-  size: prop.oneOf(['mini', 'small', 'medium', 'large', 'huge']),
+  size: prop.oneOf(['mini', 'small', 'medium', 'large', 'huge', 'mega']),
   name: prop.string,
   value: prop.string,
   defaultValue: prop.string,

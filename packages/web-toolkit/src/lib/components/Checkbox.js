@@ -14,7 +14,7 @@ let nextId = 1
 class Checkbox extends React.Component {
   static propTypes = {
     label: prop.string,
-    size: prop.oneOf(['mini', 'small', 'medium', 'large', 'huge']),
+    size: prop.oneOf(['mini', 'small', 'medium', 'large', 'huge', 'mega']),
     showLabel: prop.bool,
     value: prop.bool,
     defaultValue: prop.bool,

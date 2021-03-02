@@ -16,7 +16,6 @@ import {
   HeaderBar,
   Heading,
   Icon,
-  OptimizedIcon,
   InfoBar,
   Input,
   InputNumber,
@@ -57,24 +56,44 @@ function App() {
 
 function AppSidebar() {
   const sections = [
-    { label: 'Paned' },
-    { label: 'Notebook' },
-    { label: 'Expander' },
-    { label: 'Input' },
-    { label: 'Button' },
-    { label: 'Dropdown' },
-    { label: 'Menu' },
-    { label: 'HeaderBar' },
-    { label: 'Table' },
-    { label: 'List' },
+    {
+      name: 'Guides',
+      items: [
+        { label: 'Introduction' },
+        { label: 'Getting started' },
+        { label: 'Advanced concepts' },
+      ]
+    },
+    {
+      name: 'Components',
+      items: [
+        { label: 'Paned' },
+        { label: 'Notebook' },
+        { label: 'Expander' },
+        { label: 'Input' },
+        { label: 'Button' },
+        { label: 'Dropdown' },
+        { label: 'Menu' },
+        { label: 'HeaderBar' },
+        { label: 'Table' },
+        { label: 'List' },
+      ]
+    },
   ]
 
   return (
-    <List border={false} fill sidebar='navigation'>
+    <List border={false} fill sidebar='navigation' size='medium'>
       {sections.map(s =>
-        <List.Item key={s.label} className='align' activatable selected={s.label === 'Notebook'}>
-          <Label>{s.label}</Label>
-        </List.Item>
+        <>
+          <List.Item key={s.name} title>
+            {s.name}
+          </List.Item>
+          {s.items.map(item =>
+            <List.Item key={item.label} className='align' activatable selected={item.label === 'Notebook'}>
+              <Label>{item.label}</Label>
+            </List.Item>
+          )}
+        </>
       )}
     </List>
   )

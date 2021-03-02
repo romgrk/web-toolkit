@@ -2194,12 +2194,12 @@ row.selected button.sidebar-button:not(:active):not(:checked):not(:hover):not(di
 /* menu buttons */
 .ModelItem,
 .ModelButton,
-.navigation-sidebar:not(.increase-specificity) > .List__item {
+.navigation-sidebar:not(.increase-specificity) > .List__item.activatable {
   min-height: 26px;
   padding-left: 5px;
   padding-right: 5px; }
 
-.ModelButton, .navigation-sidebar:not(.increase-specificity) > .List__item {
+.ModelButton, .navigation-sidebar:not(.increase-specificity) > .List__item.activatable {
   color: inherit;
   border-color: transparent;
   background-color: transparent;
@@ -2209,19 +2209,19 @@ row.selected button.sidebar-button:not(:active):not(:checked):not(:hover):not(di
   border: none;
   border-radius: 0;
   text-align: left; }
-  .ModelButton::before, .navigation-sidebar:not(.increase-specificity) > .List__item::before {
+  .ModelButton::before, .navigation-sidebar:not(.increase-specificity) > .List__item.activatable::before {
     opacity: 0; }
-  .ModelButton.focus, .navigation-sidebar:not(.increase-specificity) > .focus.List__item, .ModelButton:focus, .navigation-sidebar:not(.increase-specificity) > .List__item:focus, .ModelButton.hover, .navigation-sidebar:not(.increase-specificity) > .hover.List__item, .ModelButton:hover, .navigation-sidebar:not(.increase-specificity) > .List__item:hover {
+  .ModelButton.focus, .navigation-sidebar:not(.increase-specificity) > .focus.List__item.activatable, .ModelButton:focus, .navigation-sidebar:not(.increase-specificity) > .List__item.activatable:focus, .ModelButton.hover, .navigation-sidebar:not(.increase-specificity) > .hover.List__item.activatable, .ModelButton:hover, .navigation-sidebar:not(.increase-specificity) > .List__item.activatable:hover {
     outline: none;
     background-color: #efedec; }
-  .ModelButton.active, .navigation-sidebar:not(.increase-specificity) > .active.List__item, .ModelButton:active, .navigation-sidebar:not(.increase-specificity) > .List__item:active {
+  .ModelButton.active, .navigation-sidebar:not(.increase-specificity) > .active.List__item.activatable, .ModelButton:active, .navigation-sidebar:not(.increase-specificity) > .List__item.activatable:active {
     border-color: transparent;
     box-shadow: none;
     text-shadow: none;
     background-color: #b1a9a0; }
-    .ModelButton.active::before, .navigation-sidebar:not(.increase-specificity) > .active.List__item::before, .ModelButton:active::before, .navigation-sidebar:not(.increase-specificity) > .List__item:active::before {
+    .ModelButton.active::before, .navigation-sidebar:not(.increase-specificity) > .active.List__item.activatable::before, .ModelButton:active::before, .navigation-sidebar:not(.increase-specificity) > .List__item.activatable:active::before {
       opacity: 0; }
-  .ModelButton.disabled, .navigation-sidebar:not(.increase-specificity) > .disabled.List__item, .ModelButton:disabled, .navigation-sidebar:not(.increase-specificity) > .List__item:disabled {
+  .ModelButton.disabled, .navigation-sidebar:not(.increase-specificity) > .disabled.List__item.activatable, .ModelButton:disabled, .navigation-sidebar:not(.increase-specificity) > .List__item.activatable:disabled {
     color: #929595; }
 
 /* oldstyle toolbar buttons */
@@ -2695,7 +2695,7 @@ input::-webkit-outer-spin-button {
   padding-right: 9px;
   padding: 0 12px; }
 
-.Dropdown__menu.Popover .Popover__container .ModelButton.selected, .Dropdown__menu.Popover .Popover__container .navigation-sidebar:not(.increase-specificity) > .selected.List__item {
+.Dropdown__menu.Popover .Popover__container .ModelButton.selected, .Dropdown__menu.Popover .Popover__container .navigation-sidebar:not(.increase-specificity) > .selected.List__item.activatable {
   font-weight: 700;
   outline-color: rgba(255, 255, 255, 0.8);
   color: black;
@@ -4954,18 +4954,6 @@ button.List__item {
 /***********
  * Sidebar *
  ***********/
-.sidebar {
-  background-color: #fbfafa; }
-  .sidebar:not(separator):dir(ltr), .sidebar.left:not(separator), .sidebar.left:not(separator):dir(rtl) {
-    border-right: 1px solid #cdc7c2;
-    border-left-style: none; }
-  .sidebar:not(separator):dir(rtl), .sidebar.right:not(separator) {
-    border-left: 1px solid #cdc7c2;
-    border-right-style: none; }
-  .sidebar listview.view, .sidebar listview.IconView,
-  .sidebar list {
-    background-color: transparent; }
-
 .stack-sidebar {
   background-color: #fbfafa; }
   .stack-sidebar.separators:not(.horizontal) > .List__item:not(.separator):not(.increase-specificity) {
@@ -4990,17 +4978,29 @@ button.List__item {
   background-color: #fbfafa;
   border-color: #dfdcd8 !important; }
   .navigation-sidebar:not(.increase-specificity) > .separator {
-    margin: 5px; }
+    padding: 0;
+    margin: 0;
+    height: 10px;
+    border: none;
+    border-bottom: 1px solid #dfdcd8 !important; }
   .navigation-sidebar:not(.increase-specificity) > .List__item {
-    min-height: 36px;
-    padding: 0 8px;
+    padding: 5px; }
+  .navigation-sidebar.medium:not(.increase-specificity) > .List__item {
+    min-height: 26px; }
+  .navigation-sidebar.large:not(.increase-specificity) > .List__item {
+    min-height: 36px; }
+  .navigation-sidebar:not(.increase-specificity) > .List__item.activatable {
     align-items: center;
     color: #2e3436;
     border-color: #dfdcd8 !important; }
-    .navigation-sidebar:not(.increase-specificity) > .List__item.selected:not(.increase-specificity) {
+    .navigation-sidebar:not(.increase-specificity) > .List__item.activatable.selected:not(.increase-specificity) {
       color: inherit;
       background-color: #e1dedb;
       text-shadow: none; }
+  .navigation-sidebar:not(.increase-specificity) > .List__item.title {
+    opacity: 0.9;
+    font-weight: 700;
+    padding: 8px 5px; }
 
 /*********************
  * App Notifications *
@@ -5449,13 +5449,13 @@ tooltip.csd {
   box-shadow: none; }
 
 .view.selected:focus, .view.selected, .selected.IconView:focus, .selected.IconView, .Flowbox > .Flowbox__child.selected, .Grid > .Grid__child.selected,
-.Input > .Input__area > input::selection, .ModelButton.selected, .InputNumber:not(.vertical) > .Input__area > input::selection, .InputNumber.vertical > .Input__area > input > .Input__area > input::selection, .InputNumber.vertical > .Input__area > input::selection, .List__item.selected, .navigation-sidebar:not(.increase-specificity) > .selected.List__item, .Calendar .Calendar__day.today:not(.increase-specificity) > .Button {
+.Input > .Input__area > input::selection, .ModelButton.selected, .InputNumber:not(.vertical) > .Input__area > input::selection, .InputNumber.vertical > .Input__area > input > .Input__area > input::selection, .InputNumber.vertical > .Input__area > input::selection, .List__item.selected, .navigation-sidebar:not(.increase-specificity) > .selected.List__item.activatable, .Calendar .Calendar__day.today:not(.increase-specificity) > .Button {
   background-color: #3584e4; }
   .view.selected:focus, .view.selected, .selected.IconView:focus, .selected.IconView, .Flowbox > .Flowbox__child.selected, .Grid > .Grid__child.selected,
-  .Input > .Input__area > input::selection, .ModelButton.selected, .InputNumber:not(.vertical) > .Input__area > input::selection, .InputNumber.vertical > .Input__area > input > .Input__area > input::selection, .InputNumber.vertical > .Input__area > input::selection, .List__item.selected, .navigation-sidebar:not(.increase-specificity) > .selected.List__item, .Calendar .Calendar__day.today:not(.increase-specificity) > .Button {
+  .Input > .Input__area > input::selection, .ModelButton.selected, .InputNumber:not(.vertical) > .Input__area > input::selection, .InputNumber.vertical > .Input__area > input > .Input__area > input::selection, .InputNumber.vertical > .Input__area > input::selection, .List__item.selected, .navigation-sidebar:not(.increase-specificity) > .selected.List__item.activatable, .Calendar .Calendar__day.today:not(.increase-specificity) > .Button {
     color: #ffffff; }
     .Label.disabled::selection, .view.selected:disabled, .selected.IconView:disabled, .Flowbox > .Flowbox__child.selected:disabled, .Grid > .Grid__child.selected:disabled,
-    .Input > .Input__area > input:disabled::selection, .ModelButton.selected:disabled, .InputNumber:not(.vertical) > .Input__area > input:disabled::selection, .InputNumber.vertical > .Input__area > input > .Input__area > input:disabled::selection, .InputNumber.vertical > .Input__area > input:disabled::selection, .List__item.selected:disabled, .Calendar .Calendar__day.today:not(.increase-specificity) > .Button:disabled {
+    .Input > .Input__area > input:disabled::selection, .ModelButton.selected:disabled, .InputNumber:not(.vertical) > .Input__area > input:disabled::selection, .InputNumber.vertical > .Input__area > input > .Input__area > input:disabled::selection, .InputNumber.vertical > .Input__area > input:disabled::selection, .List__item.selected:disabled, .navigation-sidebar:not(.increase-specificity) > .selected.List__item.activatable:disabled, .Calendar .Calendar__day.today:not(.increase-specificity) > .Button:disabled {
       color: #9ac2f2; }
 
 .monospace {

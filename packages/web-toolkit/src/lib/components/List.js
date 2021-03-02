@@ -7,10 +7,12 @@ import cx from 'clsx'
 import prop from 'prop-types'
 
 import Icon from './Icon'
+import Separator from './Separator'
 
 function List({
   children,
   className,
+  size,
   separators,
   horizontal,
   border = true,
@@ -27,6 +29,7 @@ function List({
         cx(
           'List',
           className,
+          size,
           borderClass(border),
           {
             'fill': fill === true,
@@ -54,6 +57,7 @@ function List({
 
 List.propTypes = {
   className: prop.string,
+  size: prop.oneOf(['medium', 'large']),
   separators: prop.bool,
   horizontal: prop.bool,
   rich: prop.bool,
@@ -61,12 +65,14 @@ List.propTypes = {
 
 List.defaultProps = {
   separators: true,
+  size: 'medium',
 }
 
 function Item({
   as,
   children,
   className,
+  title,
   selected,
   expandable,
   activatable,
@@ -81,7 +87,8 @@ function Item({
           'List__item',
           className,
           {
-            activatable: activatable ?? activatable,
+            title,
+            activatable,
             expandable,
             selected,
             'needs-attention': needsAttention,
@@ -102,11 +109,14 @@ function Item({
 
 Item.propTypes = {
   className: prop.string,
+  title: prop.bool,
   selected: prop.bool,
   activatable: prop.bool,
+  expandable: prop.bool,
 }
 
 List.Item = Item
+List.Separator = Separator
 
 export default List
 

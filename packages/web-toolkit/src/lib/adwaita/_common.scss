@@ -4192,31 +4192,6 @@ button.List__item {
 /***********
  * Sidebar *
  ***********/
-// XXX validate this
-.sidebar {
-  background-color: mix($bg_color, $base_color, 50%);
-
-  &:not(separator) {
-    @at-root %sidebar_left,
-    &:dir(ltr),
-    &.left,
-    &.left:dir(rtl) {
-      border-right: 1px solid $borders_color;
-      border-left-style: none;
-    }
-
-    @at-root %sidebar_right,
-    &:dir(rtl),
-    &.right {
-      border-left: 1px solid $borders_color;
-      border-right-style: none;
-    }
-  }
-
-  listview.view,
-  list { background-color: transparent; }
-}
-
 .stack-sidebar { // not a regular list
   background-color: mix($background_low, $background_default, 50%);
 
@@ -4257,12 +4232,20 @@ button.List__item {
   border-color: $_navigation_border_color !important;
 
   > .separator {
-    margin: $menu-margin;
+    padding: 0;
+    margin: 0;
+    height: 2 * $menu-margin;
+    border: none;
+    border-bottom: 1px solid $_navigation_border_color !important;
   }
 
   > .List__item {
-    min-height: 36px;
-    padding: 0 8px;
+    padding: 5px;
+  }
+  &.medium > .List__item { min-height: 26px; }
+  &.large  > .List__item { min-height: 36px; }
+
+  > .List__item.activatable {
     align-items: center;
 
     @extend .ModelButton;
@@ -4275,6 +4258,12 @@ button.List__item {
       background-color: darken($background_default, 9%);
       text-shadow: none;
     }
+  }
+
+  > .List__item.title {
+    opacity: 0.9;
+    font-weight: 700;
+    padding: 8px 5px;
   }
 }
 

@@ -778,7 +778,7 @@ $_input_padding: 8px;
       .window-inactive &:disabled,
       & {
         min-height: 0;
-        padding: 2px;
+        padding: 0 2px;
         background-color: transparent;
         border-color: transparent;
         border-radius: 0;

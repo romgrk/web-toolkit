@@ -1080,7 +1080,7 @@ pre {
     .Input.flat:disabled, .window-inactive .Input.flat:disabled,
     .Input.flat {
       min-height: 0;
-      padding: 2px;
+      padding: 0 2px;
       background-color: transparent;
       border-color: transparent;
       border-radius: 0; }

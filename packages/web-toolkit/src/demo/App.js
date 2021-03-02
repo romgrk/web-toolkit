@@ -130,6 +130,9 @@ function AppContent() {
       <DemoExpander />
       <br/>
 
+      <DemoButtons />
+      <br/>
+
       <DemoInput />
       <br/>
 
@@ -688,7 +691,7 @@ function DemoInput() {
 
 function DemoButtons() {
   return (
-    <Box>
+    <Box vertical>
       <div className='row'>
         <Button text>Normal</Button>
         <Button text hover>Hover</Button>
@@ -702,7 +705,6 @@ function DemoButtons() {
       <div className='row'>
         <Button icon='list-add'>Icon</Button>
         <Button>No Icon</Button>
-        <Button text icon='list-add' circular />
         <Button image icon='list-add' circular />
         <span className='linked'>
           <Button>1</Button>
@@ -738,6 +740,7 @@ function DemoSize() {
       <Box vertical>
         {sizes.map(size =>
           <Box horizontal>
+            <Label size={size}>Label</Label>
             <Input.Group>
               <Input
                 size={size}

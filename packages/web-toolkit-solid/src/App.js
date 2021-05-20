@@ -8,7 +8,7 @@ function App() {
   const [count, setCount] = createSignal(0)
 
   return (
-    <div class="App">
+    <div class="App background">
       <header class="App-header">
         <div>
           <Button onClick={() => setCount(count() + 1)}>

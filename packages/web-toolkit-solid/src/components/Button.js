@@ -21,7 +21,6 @@ export default function Button(props) {
   const rest = unpick(ownProps, props)
   return (
     <button
-      {...props}
       className={cx('Button', props.size, {
         disabled: props.disabled,
         circular: props.circular,

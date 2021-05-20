@@ -1,0 +1,26 @@
+{
+  "name": "web-toolkit-solid",
+  "version": "0.1.0",
+  "private": true,
+  "devDependencies": {
+    "solid-js": "^0.26.5",
+    "solid-scripts": "0.0.55"
+  },
+  "dependencies": {
+    "clsx": "^1.1.1",
+    "node-sass": "4",
+    "rambda": "^6.7.0"
+  },
+  "scripts": {
+    "start": "solid-scripts start",
+    "build": "solid-scripts build",
+    "test": "solid-scripts test"
+  },
+  "browserslist": [
+    "Chrome 74",
+    "Firefox 63",
+    "Safari 11",
+    "Edge 17",
+    "Node 10"
+  ]
+}
